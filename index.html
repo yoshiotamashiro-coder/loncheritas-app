@@ -167,11 +167,67 @@
     .favoritas-empty { text-align: center; padding: 30px 20px; color: #AAA; font-size: 14px; }
     .toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); background: #2D2D2D; color: white; padding: 10px 20px; border-radius: 20px; font-size: 13px; font-weight: 500; z-index: 999; opacity: 0; transition: opacity 0.3s; pointer-events: none; white-space: nowrap; }
     .toast.show { opacity: 1; }
+
+    .logro-banner { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.65); z-index: 1000; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.4s; pointer-events: none; }
+    .logro-banner.show { opacity: 1; pointer-events: all; }
+    .logro-banner-card { background: white; border-radius: 24px; padding: 36px 28px; text-align: center; max-width: 300px; width: 90%; transform: scale(0.8); transition: transform 0.4s; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+    .logro-banner.show .logro-banner-card { transform: scale(1); }
+    @keyframes bounce2 { 0%,100%{transform:scale(1)} 50%{transform:scale(1.25)} }
+    .logro-banner-emoji { font-size: 72px; margin-bottom: 12px; display: block; animation: bounce2 0.5s ease 0.3s both; }
+    .logro-banner-tag { background: #FFF0E8; color: #FF6B35; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; display: inline-block; margin-bottom: 10px; text-transform: uppercase; }
+    .logro-banner h2 { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .logro-banner p { font-size: 14px; color: #888; margin-bottom: 20px; }
+    .logro-banner-btn { background: #FF6B35; color: white; border: none; border-radius: 12px; padding: 13px 32px; font-size: 15px; font-weight: 700; cursor: pointer; }
+    .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 500; display: none; align-items: flex-end; }
+    .modal-overlay.show { display: flex; }
+    .modal-sheet { background: white; border-radius: 20px 20px 0 0; width: 100%; max-height: 82vh; display: flex; flex-direction: column; }
+    .modal-header { padding: 16px 20px; border-bottom: 1px solid #F0E8E0; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+    .modal-header h3 { font-size: 16px; font-weight: 700; }
+    .modal-close { font-size: 24px; cursor: pointer; color: #AAA; border: none; background: transparent; }
+    .modal-search { padding: 12px 16px; border-bottom: 1px solid #F0E8E0; flex-shrink: 0; }
+    .modal-search input { width: 100%; padding: 10px 14px; border: 1.5px solid #F0E8E0; border-radius: 10px; font-size: 14px; outline: none; }
+    .modal-search input:focus { border-color: #FF6B35; }
+    .modal-list { overflow-y: auto; padding: 8px 12px 20px; }
+    .modal-receta-item { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 12px; cursor: pointer; }
+    .modal-receta-item:active { background: #FFF0E8; }
+    .mri-emoji { font-size: 28px; flex-shrink: 0; }
+    .mri-info h4 { font-size: 14px; font-weight: 600; }
+    .mri-info p { font-size: 12px; color: #888; margin-top: 2px; }
+    .mri-cat { font-size: 10px; background: #FFF0E8; color: #FF6B35; padding: 2px 8px; border-radius: 10px; font-weight: 500; display: inline-block; margin-top: 3px; }
+    .mri-cat.salada { background: #E8F5E8; color: #2E7D32; }
+    .mri-cat.gomita { background: #EEF0FB; color: #3F51B5; }
+    .cal-semana-label { font-size: 12px; color: #888; margin-bottom: 14px; background: white; border-radius: 10px; padding: 8px 14px; border: 1px solid #F0E8E0; display: inline-block; }
   </style>
 </head>
 <body>
 
 <div class="toast" id="toast"></div>
+
+<!-- LOGRO BANNER -->
+<div class="logro-banner" id="logro-banner" onclick="cerrarLogroBanner()">
+  <div class="logro-banner-card" onclick="event.stopPropagation()">
+    <span class="logro-banner-emoji" id="lb-emoji">🏆</span>
+    <div class="logro-banner-tag">Logro desbloqueado</div>
+    <h2 id="lb-nombre">Logro</h2>
+    <p id="lb-desc">Descripcion</p>
+    <button class="logro-banner-btn" onclick="cerrarLogroBanner()">¡Genial! 🎉</button>
+  </div>
+</div>
+
+<!-- MODAL SELECTOR RECETA -->
+<div class="modal-overlay" id="modal-receta" onclick="cerrarModalReceta()">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <h3 id="modal-dia-titulo">Elegir receta</h3>
+      <button class="modal-close" onclick="cerrarModalReceta()">×</button>
+    </div>
+    <div class="modal-search">
+      <input type="text" placeholder="🔍 Buscar receta..." oninput="filtrarModalRecetas(this.value)" id="modal-search-input" />
+    </div>
+    <div class="modal-list" id="modal-receta-list"></div>
+  </div>
+</div>
+
 
 <!-- LOGIN -->
 <div id="pantalla-login" class="auth-screen">
@@ -289,7 +345,8 @@
 
   <!-- CALENDARIO -->
   <div class="page" id="page-calendario">
-    <div class="greeting"><h1>📅 Calendario semanal</h1><p>Planifica la semana de tus hijos</p></div>
+    <div class="greeting"><h1>📅 Calendario semanal</h1><p id="cal-semana-desc">Planifica la semana de tus hijos</p></div>
+    <div class="cal-semana-label" id="cal-semana-label">Cargando fechas...</div>
     <div class="hijos-selector">
       <span>Número de hijos:</span>
       <button class="hijos-btn" onclick="cambiarHijos(-1)">−</button>
@@ -422,7 +479,32 @@
   let numHijos = 2, calendarioSemanal = {}, checksLista = {}, paginaAnterior = 'recetas';
   let userFavoritas = [], userPreparadas = 0, userCalendario = {};
   const DIAS_CORTOS = ['LUN','MAR','MIÉ','JUE','VIE'];
+  const DIAS_NOMBRES = ['Lunes','Martes','Miércoles','Jueves','Viernes'];
   const CLAVES_DIAS = ['lunes','martes','miercoles','jueves','viernes'];
+  const MESES = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+
+  function getSemanaActual() {
+    const hoy = new Date();
+    const diaSemana = hoy.getDay(); // 0=dom, 1=lun...6=sab
+    // Sab(6) o Dom(0) -> mostrar semana SIGUIENTE
+    const offset = (diaSemana === 0 || diaSemana === 6) ? 1 : 0;
+    const lunes = new Date(hoy);
+    // Calcular lunes de la semana actual
+    const diffToLunes = (diaSemana === 0 ? -6 : 1 - diaSemana) + (offset * 7);
+    lunes.setDate(hoy.getDate() + diffToLunes);
+    const viernes = new Date(lunes);
+    viernes.setDate(lunes.getDate() + 4);
+    return { lunes, viernes, esProximaSemana: offset === 1 };
+  }
+
+  function getFechasDias() {
+    const { lunes } = getSemanaActual();
+    return CLAVES_DIAS.map((_, i) => {
+      const d = new Date(lunes);
+      d.setDate(lunes.getDate() + i);
+      return d;
+    });
+  }
 
   // NIVELES
   const NIVELES = [
@@ -644,7 +726,7 @@
     renderRecetas(recetasFiltradas);
     await guardarEnFirestore({favoritas:userFavoritas});
     const snap=await window._getDoc(window._doc(window._db,'usuarios',currentUid));
-    if(snap.exists()) actualizarUI(snap.data());
+    if(snap.exists()) { actualizarUI(snap.data()); verificarLogros(snap.data()); }
   }
 
   function renderFavoritas() {
@@ -715,14 +797,39 @@
     showPage('detalle');
   }
 
+  let logrosYaObtenidos = [];
+
+  function mostrarLogroBanner(logro) {
+    document.getElementById('lb-emoji').textContent = logro.emoji;
+    document.getElementById('lb-nombre').textContent = logro.nombre;
+    document.getElementById('lb-desc').textContent = logro.desc;
+    document.getElementById('logro-banner').classList.add('show');
+  }
+
+  function cerrarLogroBanner() {
+    document.getElementById('logro-banner').classList.remove('show');
+  }
+
+  function verificarLogros(data) {
+    LOGROS_DEF.forEach(l => {
+      if(!logrosYaObtenidos.includes(l.id) && l.req(data)) {
+        logrosYaObtenidos.push(l.id);
+        setTimeout(() => mostrarLogroBanner(l), 800);
+      }
+    });
+  }
+
   async function marcarPreparada(id) {
     userPreparadas++;
-    showToast('🎉 ¡+5 XP! Receta preparada');
+    showToast('🎉 +5 XP obtenidos');
     await guardarEnFirestore({recetasPreparadas: userPreparadas});
     document.getElementById('stat-preparadas').textContent=userPreparadas;
     document.getElementById('perfil-stat-prep').textContent=userPreparadas;
     const snap=await window._getDoc(window._doc(window._db,'usuarios',currentUid));
-    if(snap.exists()) actualizarUI(snap.data());
+    if(snap.exists()) {
+      actualizarUI(snap.data());
+      verificarLogros(snap.data());
+    }
   }
 
   async function toggleFavoritaDetalle(id) {
@@ -765,12 +872,31 @@
   }
 
   function renderCalendario() {
-    const hoy=new Date().getDay();
+    const hoy = new Date();
+    const hoyStr = hoy.toDateString();
+    const { lunes, viernes, esProximaSemana } = getSemanaActual();
+    const fechas = getFechasDias();
+
+    // Update semana label
+    const labelEl = document.getElementById('cal-semana-label');
+    const descEl = document.getElementById('cal-semana-desc');
+    if(labelEl) {
+      labelEl.textContent = (esProximaSemana ? 'Proxima semana: ' : 'Semana actual: ') +
+        lunes.getDate() + ' ' + MESES[lunes.getMonth()] + ' - ' +
+        viernes.getDate() + ' ' + MESES[viernes.getMonth()];
+    }
+    if(descEl && esProximaSemana) descEl.textContent = 'Planifica la semana entrante';
+
     document.getElementById('cal-grid').innerHTML=CLAVES_DIAS.map((d,i)=>{
       const r=calendarioSemanal[d];
-      const esHoy=[1,2,3,4,5][i]===hoy;
+      const esHoy = fechas[i].toDateString() === hoyStr;
+      const diaNum = fechas[i].getDate();
+      const mesStr = MESES[fechas[i].getMonth()];
       return `<div class="cal-day-card ${esHoy?'today':''}">
-        <div class="cal-day-name">${DIAS_CORTOS[i]}</div>
+        <div style="display:flex;flex-direction:column;align-items:center;min-width:36px;">
+          <div class="cal-day-name">${DIAS_CORTOS[i]}</div>
+          <div style="font-size:11px;color:#AAA;margin-top:2px;">${diaNum} ${mesStr}</div>
+        </div>
         <div class="cal-emoji">${r?r.emoji:'➕'}</div>
         <div class="cal-receta-info">
           <div class="cal-receta-nombre">${r?r.nombre:'Sin asignar'}</div>
@@ -782,10 +908,51 @@
     renderListaCompras();
   }
 
+  let diaSeleccionado = null;
+  let modalRecetasFiltradas = [];
+
   function cambiarRecetaDia(dia) {
-    calendarioSemanal[dia]=todasLasRecetas[Math.floor(Math.random()*todasLasRecetas.length)];
+    diaSeleccionado = dia;
+    const diaIndex = CLAVES_DIAS.indexOf(dia);
+    document.getElementById('modal-dia-titulo').textContent = 'Receta para el ' + DIAS_NOMBRES[diaIndex];
+    document.getElementById('modal-search-input').value = '';
+    modalRecetasFiltradas = [...todasLasRecetas];
+    renderModalRecetas(modalRecetasFiltradas);
+    document.getElementById('modal-receta').classList.add('show');
+  }
+
+  function renderModalRecetas(lista) {
+    const c = document.getElementById('modal-receta-list');
+    c.innerHTML = lista.map(r => `
+      <div class="modal-receta-item" onclick="seleccionarRecetaCalendario('${r.id}')">
+        <span class="mri-emoji">${r.emoji}</span>
+        <div class="mri-info">
+          <h4>${r.nombre}</h4>
+          <p>${r.metodo} · ${r.tiempo_min} min</p>
+          <span class="mri-cat ${r.categoria==='saladas'?'salada':r.categoria==='gomitas'?'gomita':''}">${r.categoria==='dulces'?'🍰 Dulce':r.categoria==='saladas'?'🥗 Salada':'🍬 Gomita'}</span>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function filtrarModalRecetas(q) {
+    const query = q.toLowerCase();
+    if(!query) { renderModalRecetas(todasLasRecetas); return; }
+    renderModalRecetas(todasLasRecetas.filter(r => r.nombre.toLowerCase().includes(query) || r.ingredientes.some(i => i.toLowerCase().includes(query))));
+  }
+
+  function seleccionarRecetaCalendario(id) {
+    if(!diaSeleccionado) return;
+    calendarioSemanal[diaSeleccionado] = todasLasRecetas.find(r => r.id === id);
     guardarCalendario();
     renderCalendario();
+    cerrarModalReceta();
+    showToast('✅ Receta actualizada');
+  }
+
+  function cerrarModalReceta() {
+    document.getElementById('modal-receta').classList.remove('show');
+    diaSeleccionado = null;
   }
 
   function cambiarHijos(delta) {
