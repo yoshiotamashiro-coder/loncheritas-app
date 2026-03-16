@@ -1,11 +1,32 @@
 {
   "meta": {
     "producto": "Loncheras Inteligentes",
+    "version": "2.0",
     "subtitulo": "Niños de 2 a 5 años",
-    "total_recetas": 48,
-    "categorias": ["dulces", "saladas", "gomitas"],
-    "frutas_recomendadas": ["Manzana caña", "Mandarina", "Fresa", "Arándanos", "Uvas", "Sandía", "Peras cocidas", "Piña", "Tuna", "Aguaymanto", "Kiwi", "Mango", "Melón", "Plátano bizcochito"],
-    "bebidas_naturales": ["Naranjada", "Piñada", "Maracuyá", "Fresada", "Mandarinada", "Chicha", "Cebada", "Agua de manzana con canela", "Agua de uva", "Agua de aguaymanto", "Agua de melocotón con canela", "Limonada", "Limonada de frutos rojos", "Infusión fría de menta", "Infusión fría de manzanilla", "Infusión fría de hierbaluisa", "Agua de sandía"]
+    "total_recetas": 100,
+    "categorias": [
+      "dulces",
+      "saladas",
+      "gomitas",
+      "bebidas"
+    ],
+    "nota": "Todas las recetas son sin gluten, sin azúcar refinada, sin colorantes artificiales",
+    "frutas_recomendadas": [
+      "Manzana caña",
+      "Mandarina",
+      "Fresa",
+      "Arándanos",
+      "Uvas",
+      "Sandía",
+      "Peras cocidas",
+      "Piña",
+      "Tuna",
+      "Aguaymanto",
+      "Kiwi",
+      "Mango",
+      "Melón",
+      "Plátano bizcochito"
+    ]
   },
   "recetas": [
     {
@@ -17,20 +38,26 @@
       "metodo": "Horno o Air Fryer",
       "tiempo_min": 30,
       "dificultad": "fácil",
-      "tags": ["horno", "airfryer", "muffin", "platano", "verduras"],
+      "tags": [
+        "horno",
+        "airfryer",
+        "muffin",
+        "platano",
+        "verduras"
+      ],
       "ingredientes": [
         "3 huevos",
         "2 cdas pasta de dátiles (o 1 plátano triturado)",
-        "2 cdas mantequilla de almendras (o lo que tengas en casa)",
+        "2 cdas mantequilla de almendras",
         "1/4 taza zanahoria rallada",
-        "1/4 taza zucchini",
+        "1/4 taza zucchini rallado",
         "1/4 taza manzana verde rallada",
         "1 taza de harina de avena"
       ],
       "pasos": [
         "Precalentar el horno a 180°",
         "Integrar muy bien los ingredientes húmedos",
-        "Agregar la zanahoria, zucchini y manzana e integrar todo en un bowl",
+        "Agregar la zanahoria, zucchini y manzana e integrar en un bowl",
         "Agregar la harina y volver a integrar",
         "Barnizar el molde y llevar la mezcla a moldes",
         "Llevar al horno o air fryer a 180° por 20 a 25 min"
@@ -47,7 +74,12 @@
       "metodo": "Sartén",
       "tiempo_min": 15,
       "dificultad": "fácil",
-      "tags": ["sartenl", "panqueque", "platano", "rapido"],
+      "tags": [
+        "sartenl",
+        "panqueque",
+        "platano",
+        "rapido"
+      ],
       "ingredientes": [
         "1/2 plátano",
         "1 huevo",
@@ -60,8 +92,9 @@
         "Pisar el plátano hasta que quede puré",
         "Agregar un huevo y la leche",
         "Agregar la harina y volver a integrar",
-        "Calentar la sartén y pincelear con un poco de aceite",
-        "Dejar cocinar por 2 minutos cada lado a fuego medio"
+        "Calentar la sartén y pincelear con aceite",
+        "Cocinar 2 minutos cada lado a fuego medio",
+        "Rellenar y enrollar"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -75,18 +108,23 @@
       "metodo": "Horno o Air Fryer",
       "tiempo_min": 15,
       "dificultad": "fácil",
-      "tags": ["horno", "airfryer", "galletas", "mandarina"],
+      "tags": [
+        "horno",
+        "airfryer",
+        "galletas",
+        "mandarina"
+      ],
       "ingredientes": [
-        "1 taza de harina de almendras (o la harina que tengas)",
-        "1 cucharada de miel (o endulzante de tu preferencia)",
-        "1 cucharada de ralladura de mandarina",
-        "3 cucharadas de mantequilla de almendras (o lo que tengas)"
+        "1 taza de harina de almendras",
+        "1 cda de miel",
+        "1 cda de ralladura de mandarina",
+        "3 cdas de mantequilla de almendras"
       ],
       "pasos": [
-        "En un bowl echar y mezclar la harina y la cucharita de miel",
-        "Echar la ralladura de mandarina y la mantequilla de almendras",
-        "Una vez se forme una masa, hacer bolitas del tamaño de tu preferencia y colocar suavemente un tenedor",
-        "Llevar al horno por 10 min o air fryer 180° por 10 min"
+        "Mezclar la harina y la miel en un bowl",
+        "Agregar la ralladura de mandarina y mantequilla de almendras",
+        "Formar bolitas y aplastar con un tenedor",
+        "Llevar al horno 180° por 10 min o air fryer 10 min"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -100,7 +138,12 @@
       "metodo": "Horno o Air Fryer",
       "tiempo_min": 25,
       "dificultad": "fácil",
-      "tags": ["horno", "airfryer", "platano", "zanahoria"],
+      "tags": [
+        "horno",
+        "airfryer",
+        "platano",
+        "zanahoria"
+      ],
       "ingredientes": [
         "1 plátano grande o 2 medianos",
         "2 huevos",
@@ -109,10 +152,10 @@
         "1 cda polvo de hornear"
       ],
       "pasos": [
-        "Pisar el plátano y echarlo en un bowl",
-        "Echar todos los ingredientes y mezclar muy bien",
+        "Pisar el plátano en un bowl",
+        "Agregar todos los ingredientes y mezclar muy bien",
         "Llevar la mezcla a moldes engrasados",
-        "Llevar al horno o a air fryer por 20 min a 180°"
+        "Hornear a 180° por 20 min"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -126,7 +169,13 @@
       "metodo": "Horno o Air Fryer",
       "tiempo_min": 30,
       "dificultad": "media",
-      "tags": ["horno", "airfryer", "dona", "sinazucar", "espinaca"],
+      "tags": [
+        "horno",
+        "airfryer",
+        "dona",
+        "sinazucar",
+        "espinaca"
+      ],
       "ingredientes": [
         "2 manzanas",
         "8 hojas de espinacas",
@@ -136,14 +185,11 @@
         "Para decorar: chocolate 75%, 2 almendras"
       ],
       "pasos": [
-        "Pelar y procesar las manzanas (como puré)",
-        "Agregar los demás ingredientes y mezclar bien",
-        "Engrasar el molde y echar a los moldes de donas",
-        "Llevar al horno o air fryer a 180° por 20 minutos",
-        "Una vez listas y frías, decorar",
-        "Colocar una almendra de cada lado para que sean las orejas",
-        "Derretir el chocolate en baño maría y pasar las donas",
-        "Enfriar y listo"
+        "Pelar y procesar las manzanas como puré",
+        "Agregar los demás ingredientes y mezclar",
+        "Engrasar moldes de donas y llenar",
+        "Hornear a 180° por 20 min",
+        "Decorar con chocolate derretido y almendras"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -157,7 +203,13 @@
       "metodo": "Horno o Air Fryer",
       "tiempo_min": 25,
       "dificultad": "media",
-      "tags": ["horno", "airfryer", "chocolate", "platano", "relleno"],
+      "tags": [
+        "horno",
+        "airfryer",
+        "chocolate",
+        "platano",
+        "relleno"
+      ],
       "ingredientes": [
         "60 g harina de avena",
         "2 cdas cacao en polvo",
@@ -166,16 +218,14 @@
         "1 plátano",
         "Chocolate 75%",
         "1 cdita polvo para hornear",
-        "Chocolate sin azúcar (para la cobertura)"
+        "Chocolate sin azúcar para cobertura"
       ],
       "pasos": [
-        "Procesar muy bien todos los ingredientes",
-        "Llevar la mezcla al molde de silicona y luego al horno a 180° por 15 minutos",
-        "Una vez listos, dejar enfriar",
-        "Cortar la tapa y retirar el centro",
+        "Procesar todos los ingredientes",
+        "Hornear en molde de silicona a 180° por 15 min",
+        "Dejar enfriar y cortar la tapa",
         "Rellenar con yogurt y tapar",
-        "Agregar la cobertura de chocolate",
-        "Con el yogurt dibujar en caracolito y están listos"
+        "Cubrir con chocolate y decorar"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -189,20 +239,25 @@
       "metodo": "Sartén",
       "tiempo_min": 20,
       "dificultad": "fácil",
-      "tags": ["sartenl", "panqueque", "espinaca", "verde"],
+      "tags": [
+        "sartenl",
+        "panqueque",
+        "espinaca",
+        "verde"
+      ],
       "ingredientes": [
         "2 huevos",
         "1 plátano o manzana",
         "1 taza de harina de avena",
         "8 hojas de espinaca",
         "5 nueces",
-        "3/4 de leche (de tu preferencia)"
+        "3/4 taza de leche"
       ],
       "pasos": [
-        "Pisar el plátano hasta hacerlo puré",
-        "Mezclar todos los ingredientes en un bowl",
-        "Calentar la sartén y engrasarla con un poco de aceite",
-        "Puedes echarle mantequilla de maní o un topping de tu preferencia"
+        "Licuar todos los ingredientes hasta obtener mezcla homogénea",
+        "Calentar la sartén con un poco de aceite",
+        "Cocinar de ambos lados a fuego medio",
+        "Servir con topping de mantequilla de maní"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -216,20 +271,26 @@
       "metodo": "Horno o Air Fryer",
       "tiempo_min": 25,
       "dificultad": "fácil",
-      "tags": ["horno", "airfryer", "muffin", "zanahoria", "manzana"],
+      "tags": [
+        "horno",
+        "airfryer",
+        "muffin",
+        "zanahoria",
+        "manzana"
+      ],
       "ingredientes": [
         "1 manzana",
-        "1/4 de taza de zanahoria rallada",
+        "1/4 taza de zanahoria rallada",
         "1 huevo",
         "1/2 taza avena",
-        "Canela en polvo",
-        "1 cdta. miel"
+        "Canela en polvo al gusto",
+        "1 cdta miel"
       ],
       "pasos": [
-        "Mezclar y triturar todos los ingredientes en la licuadora",
-        "Engrasar el molde y echar la mezcla",
-        "Llevar al horno o air fryer 170° por 20 min",
-        "Opcional: agregar topping de nueces o almendras ralladas encima"
+        "Licuar todos los ingredientes",
+        "Engrasar el molde y verter la mezcla",
+        "Hornear a 170° por 20 min",
+        "Opcional: agregar topping de nueces"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -243,17 +304,23 @@
       "metodo": "Sartén",
       "tiempo_min": 15,
       "dificultad": "fácil",
-      "tags": ["sartenl", "brocoli", "panqueque", "verduras"],
+      "tags": [
+        "sartenl",
+        "brocoli",
+        "panqueque",
+        "verduras"
+      ],
       "ingredientes": [
         "5 cabezas de brócoli",
         "2 huevos",
         "1 plátano o pera",
-        "1/4 de taza de avena"
+        "1/4 taza de avena"
       ],
       "pasos": [
-        "Mezclar y triturar todos los ingredientes en la licuadora",
-        "Engrasar la sartén y echar la mezcla con un dispensador",
-        "Opcional: agregar topping como mantequilla de maní"
+        "Licuar todos los ingredientes",
+        "Engrasar la sartén",
+        "Verter con dispensador en pequeñas porciones",
+        "Cocinar de ambos lados"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -267,18 +334,25 @@
       "metodo": "Wafflera o Sartén",
       "tiempo_min": 15,
       "dificultad": "fácil",
-      "tags": ["wafflera", "sartenl", "beterraga", "fresa", "colorido"],
+      "tags": [
+        "wafflera",
+        "sartenl",
+        "beterraga",
+        "fresa",
+        "colorido"
+      ],
       "ingredientes": [
         "1/2 plátano",
         "10 fresas",
         "1 pedacito de beterraga",
-        "1/2 taza harina de quinua (o lo que tengas)",
+        "1/2 taza harina de quinua",
         "1 huevo"
       ],
       "pasos": [
-        "Mezclar y triturar todos los ingredientes en la licuadora",
-        "Engrasar la wafflera o sartén y echar la mezcla",
-        "Opcional: agregar topping como yogurt y arándanos"
+        "Licuar todos los ingredientes",
+        "Engrasar wafflera o sartén",
+        "Verter la mezcla y cocinar",
+        "Servir con topping de yogurt y arándanos"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -292,20 +366,23 @@
       "metodo": "Air Fryer o Sartén",
       "tiempo_min": 25,
       "dificultad": "media",
-      "tags": ["airfryer", "sartenl", "arandanos", "dona"],
+      "tags": [
+        "airfryer",
+        "sartenl",
+        "arandanos",
+        "dona"
+      ],
       "ingredientes": [
-        "Jugo de arándanos (1 taza de arándanos)",
+        "1 taza de arándanos",
         "2 huevos",
         "1 taza de harina de avena",
         "1/2 taza de yogurt natural sin azúcar"
       ],
       "pasos": [
-        "Verter los arándanos con un poquito de agua en un tazón apto para microondas y llevar por 2 min",
-        "Colar y extraer solo el jugo",
-        "Mezclar el jugo de arándanos, yogurt, huevo e integrar muy bien",
-        "Agregar la harina de avena y mover hasta que no haya grumos",
-        "Engrasar el molde, echar la mezcla al molde y al horno o air fryer 160° por 20 min",
-        "Si no tienes ninguno, puedes hacer panqueques"
+        "Calentar arándanos en microondas 2 min y colar el jugo",
+        "Mezclar jugo, yogurt, huevo e integrar",
+        "Agregar harina y mezclar sin grumos",
+        "Hornear en molde de donas a 160° por 20 min"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -313,26 +390,30 @@
     {
       "id": "d12",
       "numero": 12,
-      "nombre": "Tostada francesa",
+      "nombre": "Tostada francesa saludable",
       "categoria": "dulces",
       "emoji": "🍞",
       "metodo": "Sartén",
       "tiempo_min": 10,
       "dificultad": "fácil",
-      "tags": ["sartenl", "pan", "platano", "rapido"],
+      "tags": [
+        "sartenl",
+        "pan",
+        "platano",
+        "rapido"
+      ],
       "ingredientes": [
         "1 plátano",
         "1 huevo",
         "1 cuchara de leche",
         "Canela al gusto",
-        "2 rebanadas de pan integral"
+        "2 rebanadas de pan integral sin gluten"
       ],
       "pasos": [
-        "Pisar el plátano hasta hacerlo puré",
-        "Mezclar todos los ingredientes menos el pan",
-        "Sacar los bordes al pan",
-        "Rebozar en la mezcla la rebanada de pan",
-        "Llevar a dorar en una sartén con gotitas de aceite"
+        "Pisar el plátano hasta hacer puré",
+        "Mezclar con huevo, leche y canela",
+        "Remojar las rebanadas de pan en la mezcla",
+        "Dorar en sartén con gotitas de aceite"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -340,26 +421,31 @@
     {
       "id": "d13",
       "numero": 13,
-      "nombre": "Bocaditos de plátano",
+      "nombre": "Bocaditos de plátano con chocolate",
       "categoria": "dulces",
       "emoji": "🍫",
       "metodo": "Horno o Air Fryer",
       "tiempo_min": 20,
       "dificultad": "media",
-      "tags": ["horno", "airfryer", "platano", "chocolate", "bocaditos"],
+      "tags": [
+        "horno",
+        "airfryer",
+        "platano",
+        "chocolate",
+        "bocaditos"
+      ],
       "ingredientes": [
         "1 plátano o manzana",
         "2 cdas de mantequilla de almendras",
         "1 cdta canela en polvo y pizca de sal",
         "100 g harina de avena",
-        "100 g harina de trigo (o lo que tengas)"
+        "100 g harina de arroz"
       ],
       "pasos": [
         "Triturar el plátano o manzana",
-        "Agregar los demás ingredientes",
-        "Integrar todo muy bien hasta obtener una masa homogénea",
-        "Formar los bocaditos con forma de erizo, llevar al horno precalentado por 15 minutos a 180°",
-        "Derretir chocolate y pasar cada bocadito"
+        "Agregar los demás ingredientes e integrar",
+        "Formar bolitas con forma de erizo",
+        "Hornear a 180° por 15 min y bañar en chocolate"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -367,26 +453,30 @@
     {
       "id": "d14",
       "numero": 14,
-      "nombre": "Galletitas de manzana",
+      "nombre": "Galletitas de manzana y avena",
       "categoria": "dulces",
       "emoji": "🍎",
       "metodo": "Horno o Air Fryer",
       "tiempo_min": 20,
       "dificultad": "fácil",
-      "tags": ["horno", "airfryer", "manzana", "galletas"],
+      "tags": [
+        "horno",
+        "airfryer",
+        "manzana",
+        "galletas"
+      ],
       "ingredientes": [
-        "1 manzana",
-        "2 cucharadas de mantequilla de maní",
-        "2 cucharadas de avena en hojuelas",
-        "1 cucharada de harina de avena",
-        "Chips de chocolate (opcional)"
+        "1 manzana rallada",
+        "2 cdas de mantequilla de maní",
+        "2 cdas de avena en hojuelas",
+        "1 cda de harina de avena",
+        "Chips de chocolate 75% (opcional)"
       ],
       "pasos": [
-        "Rallar la manzana",
-        "Echar todos los ingredientes",
-        "Combinar súper bien y con las manos húmedas hacer bolitas",
-        "Colocar en una bandeja apta para horno",
-        "Llevar al horno o air fryer 180° por 15 min"
+        "Rallar la manzana y mezclar con los demás ingredientes",
+        "Formar bolitas con manos húmedas",
+        "Colocar en bandeja para horno",
+        "Hornear a 180° por 15 min"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -394,27 +484,32 @@
     {
       "id": "d15",
       "numero": 15,
-      "nombre": "Panqueques de zanahoria rellenos de mantequilla",
+      "nombre": "Panqueques de zanahoria rellenos",
       "categoria": "dulces",
       "emoji": "🥞",
       "metodo": "Sartén",
       "tiempo_min": 15,
       "dificultad": "media",
-      "tags": ["sartenl", "zanahoria", "panqueque", "relleno"],
+      "tags": [
+        "sartenl",
+        "zanahoria",
+        "panqueque",
+        "relleno"
+      ],
       "ingredientes": [
         "1 huevo",
-        "1/3 de taza de yogurt (opcional)",
-        "1/2 taza de harina",
-        "2 cucharas de zanahoria rallada",
+        "1/3 taza de yogurt natural",
+        "1/2 taza de harina de avena",
+        "2 cdas de zanahoria rallada",
         "Polvo de hornear",
-        "Relleno: mantequilla de maní"
+        "Mantequilla de maní para relleno"
       ],
       "pasos": [
         "Licuar todos los ingredientes",
-        "Barnizar la sartén con un poco de aceite y echar cantidades pequeñas",
-        "Dejar 1 minuto y echar una cucharita de mantequilla de maní",
-        "Tapar el panqueque con la primera mezcla",
-        "Dejar 3 min más y listo"
+        "Calentar sartén con aceite",
+        "Cocinar pequeños círculos 1 minuto",
+        "Agregar mantequilla de maní y tapar con más mezcla",
+        "Cocinar 3 min más"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -422,28 +517,32 @@
     {
       "id": "d16",
       "numero": 16,
-      "nombre": "Mini cake de plátano",
+      "nombre": "Mini cake de plátano al microondas",
       "categoria": "dulces",
       "emoji": "🎂",
       "metodo": "Microondas",
       "tiempo_min": 10,
       "dificultad": "fácil",
-      "tags": ["microondas", "platano", "cake", "rapido"],
+      "tags": [
+        "microondas",
+        "platano",
+        "cake",
+        "rapido"
+      ],
       "ingredientes": [
         "1 plátano",
-        "3/4 de taza de harina de almendra (o lo que tengas)",
+        "3/4 taza de harina de almendra",
         "1/2 taza de yogurt natural sin azúcar",
-        "2 cucharas de chocomani",
+        "2 cdas de chocomani",
         "1 huevo",
-        "Vainilla"
+        "Vainilla al gusto"
       ],
       "pasos": [
-        "Pisar el plátano hasta hacerlo puré",
-        "Integrar el huevo, la harina y la vainilla",
-        "Echar en un taper apto para microondas",
-        "Llevar por 3 minutos al microondas",
-        "Para el relleno mezclar el yogurt, el chocomani, la esencia de vainilla y un poco del endulzante",
-        "Esperar que enfríe y decorar con el relleno y los chips de chocolate"
+        "Pisar el plátano e integrar con huevo y vainilla",
+        "Agregar la harina e integrar",
+        "Llevar a taper apto para microondas 3 min",
+        "Preparar relleno con yogurt y chocomani",
+        "Decorar una vez frío"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -451,25 +550,30 @@
     {
       "id": "d17",
       "numero": 17,
-      "nombre": "Mini panquequitos",
+      "nombre": "Mini panquequitos de zanahoria y manzana",
       "categoria": "dulces",
       "emoji": "🥞",
       "metodo": "Sartén",
       "tiempo_min": 10,
       "dificultad": "fácil",
-      "tags": ["sartenl", "zanahoria", "manzana", "rapido"],
+      "tags": [
+        "sartenl",
+        "zanahoria",
+        "manzana",
+        "rapido"
+      ],
       "ingredientes": [
         "1 huevo",
         "1 zanahoria rallada",
         "1 manzana pelada y rallada",
-        "Canela",
-        "1/4 de taza de harina"
+        "Canela al gusto",
+        "1/4 taza de harina de avena"
       ],
       "pasos": [
-        "Mezclar todos los ingredientes en un recipiente",
-        "Mezclar todo muy bien",
-        "Calentar la sartén con un poco de aceite",
-        "Echar 1 cuchara de la preparación y darle forma"
+        "Mezclar todos los ingredientes",
+        "Calentar sartén con un poco de aceite",
+        "Verter por cucharadas y dar forma",
+        "Cocinar de ambos lados"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -483,19 +587,25 @@
       "metodo": "Horno o Air Fryer",
       "tiempo_min": 30,
       "dificultad": "fácil",
-      "tags": ["horno", "airfryer", "frutosrojos", "barrita"],
+      "tags": [
+        "horno",
+        "airfryer",
+        "frutosrojos",
+        "barrita"
+      ],
       "ingredientes": [
         "1/2 plátano de seda",
         "1 huevo",
-        "1 cucharada de kiwicha pop",
-        "3 cucharadas de harina de avena"
+        "1 cda de kiwicha pop",
+        "3 cdas de harina de avena",
+        "Fresas, arándanos y frambuesas al gusto"
       ],
       "pasos": [
-        "Pisar el plátano hasta hacerlo puré, echar el huevo, harina de avena y 1 cuchara de kiwicha pop",
-        "Combinar todo y la masa debe quedar espesa o pastosa",
-        "Barnizar el molde y echar toda la mezcla",
-        "Agregar los frutos rojos (fresas, arándanos, frambuesas)",
-        "Al horno o air fryer 180° por 25 minutos"
+        "Pisar el plátano y mezclar con huevo y harinas",
+        "La masa debe quedar espesa",
+        "Barnizar molde y verter la mezcla",
+        "Agregar los frutos rojos encima",
+        "Hornear a 180° por 25 min"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -503,25 +613,30 @@
     {
       "id": "d19",
       "numero": 19,
-      "nombre": "Panqueque de beterraga",
+      "nombre": "Panqueque rosado de beterraga",
       "categoria": "dulces",
-      "emoji": "🫐",
+      "emoji": "💗",
       "metodo": "Sartén",
       "tiempo_min": 15,
       "dificultad": "fácil",
-      "tags": ["sartenl", "beterraga", "panqueque", "colorido"],
+      "tags": [
+        "sartenl",
+        "beterraga",
+        "panqueque",
+        "colorido"
+      ],
       "ingredientes": [
         "1 huevo",
-        "1 beterraga cocida (o rallada o cortada)",
+        "1 beterraga cocida pequeña",
         "1 plátano o manzana",
-        "1 cuchara de leche",
-        "1/2 taza de harina de almendras (o lo que tengas)"
+        "1 cda de leche",
+        "1/2 taza de harina de almendras"
       ],
       "pasos": [
         "Licuar todos los ingredientes",
-        "Calentar la sartén y barnizar",
-        "Echar cuchara por cuchara o la cantidad que desees",
-        "Opcional: colocar chips de chocolate o ralladura de almendras"
+        "Calentar sartén y barnizar",
+        "Verter y cocinar de ambos lados",
+        "Servir con topping de yogurt"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -529,26 +644,31 @@
     {
       "id": "d20",
       "numero": 20,
-      "nombre": "Muffin de chocolate",
+      "nombre": "Muffin de chocolate saludable",
       "categoria": "dulces",
       "emoji": "🍫",
       "metodo": "Horno o Air Fryer",
       "tiempo_min": 25,
       "dificultad": "fácil",
-      "tags": ["horno", "airfryer", "muffin", "chocolate"],
+      "tags": [
+        "horno",
+        "airfryer",
+        "muffin",
+        "chocolate"
+      ],
       "ingredientes": [
         "1 huevo",
-        "1/4 de taza de leche",
-        "1 cuchara de pasta de dátiles (o endulzante)",
-        "1/2 taza de harina de avena",
-        "1 cuchara de cacao (puedes reemplazarlo por sangrecita)",
-        "1/2 cucharita de polvo de hornear"
+        "1/4 taza de leche",
+        "1 cda pasta de dátiles",
+        "1/2 taza harina de avena",
+        "1 cda cacao en polvo puro",
+        "1/2 cdita polvo de hornear"
       ],
       "pasos": [
         "Integrar todos los ingredientes",
-        "Engrasar los moldes de muffin",
-        "Llevar al horno por 180° por 15 a 20 minutos",
-        "Opcional: rallar chocolate encima de los muffins"
+        "Llenar moldes de muffin engrasados",
+        "Hornear a 180° por 15-20 min",
+        "Opcional: rallar chocolate 75% encima"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -562,20 +682,249 @@
       "metodo": "Sartén",
       "tiempo_min": 15,
       "dificultad": "media",
-      "tags": ["sartenl", "arandanos", "panqueque", "relleno"],
+      "tags": [
+        "sartenl",
+        "arandanos",
+        "panqueque",
+        "relleno"
+      ],
       "ingredientes": [
         "1 huevo",
-        "1 cucharada de yogurt griego",
-        "1/2 cucharadita de miel",
-        "5 cucharadas de harina de avena",
+        "1 cda de yogurt griego",
+        "1/2 cdita de miel",
+        "5 cdas de harina de avena",
         "10 arándanos"
       ],
       "pasos": [
-        "Integrar el huevo, el yogurt, miel y la harina de avena",
-        "Barnizar la sartén con un poquito de aceite",
-        "Echar una cuchara de la mezcla y colocar encima un arándano",
-        "Tapar el arándano con un poquito de mezcla",
-        "Dejar cocinar a fuego bajo"
+        "Integrar huevo, yogurt, miel y harina",
+        "Barnizar sartén con aceite",
+        "Verter una cuchara y colocar un arándano encima",
+        "Tapar con más mezcla y cocinar a fuego bajo"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "d22",
+      "numero": 22,
+      "nombre": "Bolitas de coco y dátiles",
+      "categoria": "dulces",
+      "emoji": "🥥",
+      "metodo": "Sin cocción",
+      "tiempo_min": 10,
+      "dificultad": "fácil",
+      "tags": [
+        "sincococion",
+        "coco",
+        "datiles",
+        "rapido"
+      ],
+      "ingredientes": [
+        "1 taza de coco rallado sin azúcar",
+        "1/2 taza de pasta de dátiles",
+        "2 cdas de mantequilla de maní",
+        "1 cdta de vainilla"
+      ],
+      "pasos": [
+        "Mezclar todos los ingredientes hasta obtener masa",
+        "Formar bolitas con manos húmedas",
+        "Pasar por coco rallado extra",
+        "Refrigerar 30 min antes de servir"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "d23",
+      "numero": 23,
+      "nombre": "Brownies de camote",
+      "categoria": "dulces",
+      "emoji": "🍠",
+      "metodo": "Horno o Air Fryer",
+      "tiempo_min": 35,
+      "dificultad": "media",
+      "tags": [
+        "horno",
+        "airfryer",
+        "camote",
+        "chocolate"
+      ],
+      "ingredientes": [
+        "1 taza de camote cocido y triturado",
+        "2 huevos",
+        "3 cdas de cacao en polvo puro",
+        "3 cdas de pasta de dátiles",
+        "1/4 taza de harina de avena",
+        "1 cdta polvo de hornear"
+      ],
+      "pasos": [
+        "Procesar el camote hasta hacer puré",
+        "Mezclar con huevos, cacao y dátiles",
+        "Agregar harina e integrar",
+        "Verter en molde engrasado",
+        "Hornear a 180° por 25 min"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "d24",
+      "numero": 24,
+      "nombre": "Cookies de avena y plátano",
+      "categoria": "dulces",
+      "emoji": "🍌",
+      "metodo": "Horno o Air Fryer",
+      "tiempo_min": 20,
+      "dificultad": "fácil",
+      "tags": [
+        "horno",
+        "airfryer",
+        "avena",
+        "platano",
+        "galletas"
+      ],
+      "ingredientes": [
+        "2 plátanos maduros",
+        "1 taza de avena en hojuelas",
+        "2 cdas de mantequilla de almendras",
+        "Chips de chocolate 75% al gusto",
+        "Canela al gusto"
+      ],
+      "pasos": [
+        "Pisar los plátanos hasta hacer puré",
+        "Mezclar con avena, mantequilla y canela",
+        "Formar círculos en bandeja",
+        "Agregar chips de chocolate encima",
+        "Hornear a 180° por 15 min"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "d25",
+      "numero": 25,
+      "nombre": "Muffins de espinaca y manzana",
+      "categoria": "dulces",
+      "emoji": "🌿",
+      "metodo": "Horno o Air Fryer",
+      "tiempo_min": 25,
+      "dificultad": "fácil",
+      "tags": [
+        "horno",
+        "airfryer",
+        "espinaca",
+        "manzana",
+        "muffin"
+      ],
+      "ingredientes": [
+        "1 manzana rallada",
+        "8 hojas de espinaca",
+        "2 huevos",
+        "3/4 taza harina de avena",
+        "2 cdas de miel",
+        "1 cdta polvo de hornear"
+      ],
+      "pasos": [
+        "Licuar la espinaca con los huevos",
+        "Agregar manzana, miel y harina",
+        "Mezclar bien y llenar moldes",
+        "Hornear a 180° por 20 min"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "d26",
+      "numero": 26,
+      "nombre": "Trufas de plátano y cacao",
+      "categoria": "dulces",
+      "emoji": "🟤",
+      "metodo": "Sin cocción",
+      "tiempo_min": 15,
+      "dificultad": "fácil",
+      "tags": [
+        "sincococion",
+        "platano",
+        "cacao",
+        "rapido"
+      ],
+      "ingredientes": [
+        "2 plátanos maduros",
+        "3 cdas de cacao en polvo puro",
+        "2 cdas de mantequilla de maní",
+        "1/2 taza avena en hojuelas",
+        "Coco rallado para cubrir"
+      ],
+      "pasos": [
+        "Pisar los plátanos",
+        "Mezclar con cacao, maní y avena",
+        "Refrigerar 15 min para que tome consistencia",
+        "Formar bolitas y cubrir con coco rallado"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "d27",
+      "numero": 27,
+      "nombre": "Panqueques de quinua con frutas",
+      "categoria": "dulces",
+      "emoji": "🍑",
+      "metodo": "Sartén",
+      "tiempo_min": 20,
+      "dificultad": "fácil",
+      "tags": [
+        "sartenl",
+        "quinua",
+        "panqueque",
+        "frutas"
+      ],
+      "ingredientes": [
+        "1/2 taza de quinua cocida",
+        "2 huevos",
+        "1/4 taza leche",
+        "1/2 plátano",
+        "1 cdta vainilla",
+        "Frutas de temporada para acompañar"
+      ],
+      "pasos": [
+        "Licuar la quinua con huevos, leche y plátano",
+        "Agregar vainilla y mezclar",
+        "Cocinar en sartén de ambos lados",
+        "Servir con frutas frescas de temporada"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "d28",
+      "numero": 28,
+      "nombre": "Barritas energéticas de semillas",
+      "categoria": "dulces",
+      "emoji": "🌻",
+      "metodo": "Horno",
+      "tiempo_min": 25,
+      "dificultad": "fácil",
+      "tags": [
+        "horno",
+        "semillas",
+        "barrita",
+        "energia"
+      ],
+      "ingredientes": [
+        "1 taza avena en hojuelas",
+        "2 cdas semillas de chía",
+        "2 cdas semillas de girasol",
+        "3 cdas pasta de dátiles",
+        "2 cdas mantequilla de almendras",
+        "1 plátano maduro"
+      ],
+      "pasos": [
+        "Pisar el plátano y mezclar con dátiles y mantequilla",
+        "Agregar avena y semillas e integrar bien",
+        "Presionar en molde rectangular",
+        "Hornear a 170° por 20 min",
+        "Dejar enfriar y cortar en barritas"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -589,20 +938,24 @@
       "metodo": "Sartén",
       "tiempo_min": 15,
       "dificultad": "media",
-      "tags": ["sartenl", "espinaca", "queso", "creppe"],
+      "tags": [
+        "sartenl",
+        "espinaca",
+        "queso",
+        "creppe"
+      ],
       "ingredientes": [
         "8 a 10 hojas de espinaca",
         "3 huevos",
-        "Queso fresco rallado",
-        "1/4 cucharita orégano y una pizca de sal"
+        "Queso fresco rallado al gusto",
+        "1/4 cdita orégano y pizca de sal"
       ],
       "pasos": [
-        "Licuar todo menos el queso hasta que quede sin grumos",
-        "Barnizar la sartén con un poco de aceite",
-        "Echar mitad de la mezcla (hasta donde permita la sartén)",
-        "Cuando salgan burbujitas echar el queso rallado",
-        "Poco a poco ir despegando de la sartén y enrollar",
-        "Cortar en el tamaño que desees y listo"
+        "Licuar espinaca y huevos hasta que quede sin grumos",
+        "Barnizar sartén con aceite",
+        "Verter la mezcla y cocinar hasta que salgan burbujas",
+        "Agregar queso rallado y enrollar",
+        "Cortar en el tamaño deseado"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -616,19 +969,25 @@
       "metodo": "Horno o Air Fryer",
       "tiempo_min": 35,
       "dificultad": "media",
-      "tags": ["horno", "airfryer", "lentejas", "pan", "proteina"],
+      "tags": [
+        "horno",
+        "airfryer",
+        "lentejas",
+        "pan",
+        "proteina"
+      ],
       "ingredientes": [
         "4 huevos",
         "5 cdas de aceite de oliva",
         "2 tazas de lentejas cocidas",
-        "6 cdas de harina de 7 semillas (o la que tengas)",
+        "6 cdas de harina de 7 semillas",
         "Pizca de sal"
       ],
       "pasos": [
-        "En un colador escurrir las lentejas",
-        "Echar todos los ingredientes en un procesador o licuadora",
-        "Engrasar el molde y llevar al horno o air fryer 180° por 20 a 30 min",
-        "De topping puedes echarle semilla de ajonjolí (opcional)"
+        "Escurrir bien las lentejas",
+        "Procesar todos los ingredientes en licuadora",
+        "Engrasar molde y hornear a 180° por 20-30 min",
+        "Opcional: agregar semillas de ajonjolí encima"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -636,24 +995,29 @@
     {
       "id": "s03",
       "numero": 3,
-      "nombre": "Hamburguesita de verduras",
+      "nombre": "Hamburguesita de pollo y verduras",
       "categoria": "saladas",
       "emoji": "🍔",
       "metodo": "Sartén",
       "tiempo_min": 20,
       "dificultad": "media",
-      "tags": ["sartenl", "verduras", "pollo", "hamburguesa"],
+      "tags": [
+        "sartenl",
+        "verduras",
+        "pollo",
+        "hamburguesa"
+      ],
       "ingredientes": [
-        "500 gr molida de pollo (o la proteína que prefieras)",
-        "2 tazas de vegetales picados o rallados (brócoli, cebolla, tomate, zanahoria)",
-        "2-3 cdas colmadas de harina",
-        "Ajos y sal"
+        "500 g molida de pollo",
+        "2 tazas de vegetales rallados (brócoli, cebolla, tomate, zanahoria)",
+        "2-3 cdas de harina de quinua",
+        "Ajos y sal al gusto"
       ],
       "pasos": [
-        "Saltear los vegetales en un sartén con unas gotitas de aceite de oliva",
-        "Llevar a un bowl junto con el pollo molido y la harina",
-        "Integrar muy bien",
-        "Armar las hamburguesitas y al sartén hasta que estén doraditas por ambos lados",
+        "Saltear los vegetales con aceite de oliva",
+        "Mezclar con pollo molido y harina",
+        "Integrar bien y formar hamburguesitas",
+        "Dorar en sartén por ambos lados",
         "Acompañar con frutas"
       ],
       "bloqueado": false,
@@ -668,18 +1032,24 @@
       "metodo": "Wafflera o Sartén",
       "tiempo_min": 15,
       "dificultad": "fácil",
-      "tags": ["wafflera", "sartenl", "brocoli", "waffle", "salado"],
+      "tags": [
+        "wafflera",
+        "sartenl",
+        "brocoli",
+        "waffle",
+        "salado"
+      ],
       "ingredientes": [
         "3 cdas arroz cocido",
         "3 cdas brócoli cocido picado",
         "2 cdas queso rallado (opcional)",
-        "1 huevo y una pizca de sal"
+        "1 huevo y pizca de sal"
       ],
       "pasos": [
-        "Mezclar todos los ingredientes en un bowl",
-        "Barnizar la wafflera o sartén para que no se peguen",
-        "Echar una cuchara y listo",
-        "Alcanza para 4 o 5 waffles"
+        "Mezclar todos los ingredientes",
+        "Barnizar wafflera o sartén",
+        "Verter la mezcla y cocinar",
+        "Rinde 4-5 waffles"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -693,20 +1063,26 @@
       "metodo": "Air Fryer o Sartén",
       "tiempo_min": 25,
       "dificultad": "media",
-      "tags": ["airfryer", "sartenl", "pollo", "nuggets", "zanahoria"],
+      "tags": [
+        "airfryer",
+        "sartenl",
+        "pollo",
+        "nuggets",
+        "zanahoria"
+      ],
       "ingredientes": [
-        "2 tazas de pollo cocido y deshilachado",
+        "2 tazas de pollo cocido deshilachado",
         "1 papa mediana cocida",
         "1 huevo",
         "1 taza zanahoria rallada",
-        "3 cdas harina (de yuca preferiblemente)",
+        "3 cdas harina de yuca",
         "Pimienta, ajo en polvo y sal"
       ],
       "pasos": [
-        "Procesar o licuar el pollo, la papa y el huevo hasta formar una masa",
-        "Agregar la zanahoria rallada, la harina y mezclar muy bien hasta integrar",
-        "Con las manos húmedas formar bolitas y dar formas de nuggets",
-        "Empanizar y al air fryer 180° por 15min o freír en la sartén"
+        "Procesar pollo, papa y huevo hasta formar masa",
+        "Agregar zanahoria y harina e integrar",
+        "Formar bolitas y dar forma de nuggets",
+        "Empanizar y cocinar en air fryer o sartén"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -714,26 +1090,31 @@
     {
       "id": "s06",
       "numero": 6,
-      "nombre": "Waffle de quinua",
+      "nombre": "Waffle de quinua y papa",
       "categoria": "saladas",
       "emoji": "🧇",
       "metodo": "Wafflera o Sartén",
       "tiempo_min": 15,
       "dificultad": "fácil",
-      "tags": ["wafflera", "sartenl", "quinua", "papa", "salado"],
+      "tags": [
+        "wafflera",
+        "sartenl",
+        "quinua",
+        "papa",
+        "salado"
+      ],
       "ingredientes": [
         "1 huevo",
-        "2 a 3 cucharas de quinua cocida",
-        "1 papa blanca",
-        "Perejil",
+        "2-3 cdas de quinua cocida",
+        "1 papa blanca rallada",
+        "Perejil fresco picado",
         "Sal al gusto"
       ],
       "pasos": [
-        "Rallar la papa cruda y con las manos apretar para sacar el exceso de líquido",
-        "Picar el perejil bien pequeñito",
-        "Integrar la papa y la quinua y el resto de ingredientes",
-        "Mezclar bien la masa",
-        "Barnizar la wafflera o sartén en forma de hamburguesas"
+        "Rallar la papa y exprimir el exceso de líquido",
+        "Picar el perejil fino",
+        "Mezclar todos los ingredientes",
+        "Cocinar en wafflera o sartén engrasada"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -747,19 +1128,25 @@
       "metodo": "Air Fryer o Sartén",
       "tiempo_min": 15,
       "dificultad": "fácil",
-      "tags": ["airfryer", "sartenl", "espinaca", "queso", "divertido"],
+      "tags": [
+        "airfryer",
+        "sartenl",
+        "espinaca",
+        "queso",
+        "divertido"
+      ],
       "ingredientes": [
-        "1 pan de molde",
+        "1 pan de molde sin gluten",
         "1 pedacito de queso",
         "1 huevo",
         "4 hojas de espinaca"
       ],
       "pasos": [
-        "Quitar los bordes al pan molde y con un rodillo aplastarlo",
-        "Colocar un pedazo de queso y doblar en forma de triángulo",
-        "Licuar el huevo y espinaca hasta que quede líquido",
-        "Colocar los triangulitos en esta mezcla por ambas partes",
-        "Llevar al air fryer 180° por 10 minutos o terminar en la sartén con aceite"
+        "Quitar bordes al pan y aplastar con rodillo",
+        "Colocar queso y doblar en triángulo",
+        "Licuar huevo con espinaca",
+        "Bañar los triángulos en la mezcla",
+        "Cocinar en air fryer o sartén"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -773,21 +1160,26 @@
       "metodo": "Horno o Air Fryer",
       "tiempo_min": 40,
       "dificultad": "media",
-      "tags": ["horno", "airfryer", "brocoli", "quinua", "muffin"],
+      "tags": [
+        "horno",
+        "airfryer",
+        "brocoli",
+        "quinua",
+        "muffin"
+      ],
       "ingredientes": [
         "1 huevo",
-        "3 brócoli ya cocinados al vapor",
-        "3 cucharadas de quinua ya cocinada",
-        "3 cucharadas de avena",
-        "1 cucharadita de semillas de ajonjolí (opcional)",
-        "1 cucharadita de mantequilla de maní",
-        "Para la crema: 1 cucharada de queso crema, colorante vegano (opcional)"
+        "3 flores de brócoli cocidas al vapor",
+        "3 cdas de quinua cocida",
+        "3 cdas de avena",
+        "1 cdita de mantequilla de maní",
+        "1 cdita semillas de ajonjolí (opcional)"
       ],
       "pasos": [
-        "Procesar o licuar todos los ingredientes",
-        "Llevar a los moldes previamente barnizados con aceite",
-        "Llevar al horno o air fryer por 35 minutos a 180°",
-        "Una vez listos, dejar enfriar y decorar (opcional)"
+        "Procesar todos los ingredientes",
+        "Llenar moldes engrasados",
+        "Hornear a 180° por 35 min",
+        "Decorar con queso crema (opcional)"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -795,24 +1187,31 @@
     {
       "id": "s09",
       "numero": 9,
-      "nombre": "Muffin de pizza",
+      "nombre": "Muffin de pizza saludable",
       "categoria": "saladas",
       "emoji": "🍕",
       "metodo": "Horno o Air Fryer",
       "tiempo_min": 20,
       "dificultad": "fácil",
-      "tags": ["horno", "airfryer", "pizza", "muffin", "ninos"],
+      "tags": [
+        "horno",
+        "airfryer",
+        "pizza",
+        "muffin",
+        "ninos"
+      ],
       "ingredientes": [
         "1 huevo",
-        "1 cuchara de tomate picado",
-        "1 cuchara de queso",
-        "1/4 de taza de harina de avena o quinua",
-        "Orégano al gusto",
-        "Una pizca de sal"
+        "1 cda de tomate picado",
+        "1 cda de queso rallado",
+        "1/4 taza de harina de avena o quinua",
+        "Orégano y sal al gusto"
       ],
       "pasos": [
-        "Integrar todos los ingredientes en un recipiente, mezclar y verter en moldes muffins",
-        "Llevar al horno o air fryer 180° por 15 min o microondas por 2 minutos"
+        "Integrar todos los ingredientes",
+        "Verter en moldes de muffin",
+        "Hornear a 180° por 15 min",
+        "Opcional: agregar más queso encima"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -820,25 +1219,29 @@
     {
       "id": "s10",
       "numero": 10,
-      "nombre": "Sándwich de pollo",
+      "nombre": "Sándwich de pollo y palta",
       "categoria": "saladas",
       "emoji": "🥪",
       "metodo": "Sin cocción",
       "tiempo_min": 5,
       "dificultad": "fácil",
-      "tags": ["sincococion", "pollo", "sandwich", "rapido"],
+      "tags": [
+        "sincococion",
+        "pollo",
+        "sandwich",
+        "rapido"
+      ],
       "ingredientes": [
-        "2 cucharas de pollo cocido",
-        "2 rebanadas de pan molde integral",
-        "Pepino y apio picado en trozos muy pequeñitos",
+        "2 cdas de pollo cocido desmenuzado",
+        "2 rebanadas de pan sin gluten",
+        "Pepino y apio picado fino",
         "1/4 de palta"
       ],
       "pasos": [
-        "Cocinar el pollo; una vez frío combinarlo con el pepino, el apio y la palta",
-        "Opcional: echar 2 gotitas de limón para que no se oxide la palta",
-        "Añadir sal al gusto",
-        "Untar en la rebanada de pan",
-        "Tapar el sándwich con otra rebanada, partir por la mitad y listo"
+        "Mezclar pollo con pepino, apio y palta",
+        "Agregar sal al gusto y gotitas de limón",
+        "Untar en una rebanada de pan",
+        "Tapar y partir por la mitad"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -846,27 +1249,30 @@
     {
       "id": "s11",
       "numero": 11,
-      "nombre": "Waffle de papa y quinua",
+      "nombre": "Tortitas de brócoli y proteína",
       "categoria": "saladas",
-      "emoji": "🧇",
+      "emoji": "🥦",
       "metodo": "Sartén",
       "tiempo_min": 20,
       "dificultad": "media",
-      "tags": ["sartenl", "brocoli", "quinua", "salado"],
+      "tags": [
+        "sartenl",
+        "brocoli",
+        "proteina",
+        "salado"
+      ],
       "ingredientes": [
         "1 taza de brócoli picado",
         "1 huevo",
-        "1 cuchara de pollito, pavita o carne cocido",
+        "1 cda de pollo o pavo cocido",
         "1/4 taza de queso (opcional)",
-        "3 cucharas de harina de avena",
+        "3 cdas de harina de avena",
         "Sal y orégano al gusto"
       ],
       "pasos": [
-        "Integrar todos los ingredientes en un recipiente",
-        "Combinar muy bien hasta obtener una masa consistente",
-        "Con las manos humedecidas armar las hamburguesitas",
-        "Si necesita más harina ir echando de a pocos",
-        "Calentar la sartén con un poco de aceite e ir dorando"
+        "Integrar todos los ingredientes",
+        "Formar tortitas con manos húmedas",
+        "Dorar en sartén con aceite por ambos lados"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -880,19 +1286,24 @@
       "metodo": "Horno o Air Fryer",
       "tiempo_min": 25,
       "dificultad": "fácil",
-      "tags": ["horno", "airfryer", "lentejas", "palta", "pan"],
+      "tags": [
+        "horno",
+        "airfryer",
+        "lentejas",
+        "palta",
+        "pan"
+      ],
       "ingredientes": [
-        "1 taza de lentejas cocida",
+        "1 taza de lentejas cocidas",
         "1/2 taza de agua",
         "1 huevo",
         "Polvo de hornear",
         "Sal al gusto"
       ],
       "pasos": [
-        "Integrar todos los ingredientes en un recipiente",
-        "Combinar muy bien y agregar sal al gusto",
-        "Llevar a un molde engrasado al horno 180° por 20 min o microondas por 3 min",
-        "Acompañar con palta pisada (echar gotitas de limón para que no se oxide)"
+        "Integrar todos los ingredientes",
+        "Llevar a molde engrasado al horno 180° por 20 min",
+        "Acompañar con palta pisada y limón"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -900,27 +1311,32 @@
     {
       "id": "s13",
       "numero": 13,
-      "nombre": "Jamón saludable",
+      "nombre": "Jamón saludable de pollo",
       "categoria": "saladas",
       "emoji": "🍖",
       "metodo": "Olla",
       "tiempo_min": 45,
       "dificultad": "media",
-      "tags": ["olla", "pollo", "jamon", "preparacion"],
+      "tags": [
+        "olla",
+        "pollo",
+        "jamon",
+        "preparacion"
+      ],
       "ingredientes": [
         "400 g pechuga de pollo",
         "50 g zanahoria",
         "50 g cebolla roja",
         "3 ajos",
         "50 g remolacha (opcional)",
-        "3 cdas aceite de oliva, sal, pimienta y orégano al gusto"
+        "Aceite de oliva, sal y orégano al gusto"
       ],
       "pasos": [
         "Procesar todos los ingredientes",
-        "En papel de cocina formar un rollo",
-        "Llevar el rollo a una olla con agua hirviendo y dejar cocinar por 30 minutos",
-        "Una vez cocinado retirar el papel, dejar enfriar y cortar en rodajas delgadas",
-        "Puede durar en la refrigeradora por 5 días"
+        "Enrollar en papel de cocina formando un rollo",
+        "Cocinar en agua hirviendo 30 min",
+        "Enfriar, retirar el papel y cortar en rodajas",
+        "Dura 5 días en refrigerador"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -928,26 +1344,31 @@
     {
       "id": "s14",
       "numero": 14,
-      "nombre": "Salchicha saludable",
+      "nombre": "Salchicha saludable de pollo",
       "categoria": "saladas",
       "emoji": "🌭",
       "metodo": "Olla",
       "tiempo_min": 30,
       "dificultad": "media",
-      "tags": ["olla", "pollo", "salchicha", "preparacion"],
+      "tags": [
+        "olla",
+        "pollo",
+        "salchicha",
+        "preparacion"
+      ],
       "ingredientes": [
         "200 g pechuga de pollo",
         "50 g zanahoria",
         "50 g cebolla roja",
         "2 ajos",
         "30 g remolacha (opcional)",
-        "2 cdas aceite de oliva, sal, pimienta y orégano al gusto"
+        "Aceite de oliva, sal y pimienta al gusto"
       ],
       "pasos": [
         "Procesar todos los ingredientes",
-        "En papel de cocina formar un rollo",
-        "Llevar a una olla con agua hirviendo por 20 minutos o freír en la sartén",
-        "Lo que no utilizas puedes congelarlo por 3 meses"
+        "Enrollar en papel de cocina",
+        "Cocinar en agua hirviendo 20 min o freír en sartén",
+        "Congelar lo que no se use hasta 3 meses"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -955,25 +1376,30 @@
     {
       "id": "s15",
       "numero": 15,
-      "nombre": "Cheetos saludables",
+      "nombre": "Cheetos saludables de papa",
       "categoria": "saladas",
       "emoji": "🧀",
       "metodo": "Air Fryer",
       "tiempo_min": 25,
       "dificultad": "media",
-      "tags": ["airfryer", "papa", "snack", "queso"],
+      "tags": [
+        "airfryer",
+        "papa",
+        "snack",
+        "queso"
+      ],
       "ingredientes": [
         "300 g papa sancochada",
-        "5 cdas fécula de maíz o harina de maíz",
+        "5 cdas fécula de maíz",
         "Achiote, sal y pimienta al gusto",
-        "Perejil",
+        "Perejil fresco",
         "250 g queso campesino"
       ],
       "pasos": [
         "Triturar la papa",
-        "Agregar los demás ingredientes y armar hasta obtener una masa",
-        "Formar los cheetos o la forma que desees y rociar aceite de oliva",
-        "Llevar al horno o air fryer 17 minutos a 300°"
+        "Mezclar con todos los ingredientes",
+        "Formar palitos o la forma deseada y rociar aceite",
+        "Hornear a 300° por 17 min"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -981,23 +1407,27 @@
     {
       "id": "s16",
       "numero": 16,
-      "nombre": "Arepas saludables",
+      "nombre": "Arepas saludables de queso",
       "categoria": "saladas",
       "emoji": "🫓",
-      "metodo": "Air Fryer",
+      "metodo": "Sartén",
       "tiempo_min": 15,
       "dificultad": "fácil",
-      "tags": ["airfryer", "sartenl", "arepa", "queso"],
+      "tags": [
+        "sartenl",
+        "arepa",
+        "queso"
+      ],
       "ingredientes": [
-        "200 g de queso mozzarella o pera",
-        "5 cdas maicena (fécula de maíz)",
-        "3 cdas pasta de tomate"
+        "200 g queso mozzarella o pera rallado",
+        "5 cdas maicena",
+        "3 cdas pasta de tomate natural"
       ],
       "pasos": [
-        "Integrar muy bien los ingredientes y armar con la mano hasta obtener una masa",
+        "Integrar bien todos los ingredientes con la mano",
         "Formar las arepitas",
-        "Llevar a una sartén y dorar por los dos lados",
-        "Decorar (opcional)"
+        "Dorar en sartén por ambos lados",
+        "Decorar al gusto"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -1005,25 +1435,285 @@
     {
       "id": "s17",
       "numero": 17,
-      "nombre": "Pizza saludable",
+      "nombre": "Pizza en tortilla saludable",
       "categoria": "saladas",
       "emoji": "🍕",
       "metodo": "Sartén",
       "tiempo_min": 10,
       "dificultad": "fácil",
-      "tags": ["sartenl", "pizza", "pollo", "rapido", "ninos"],
+      "tags": [
+        "sartenl",
+        "pizza",
+        "pollo",
+        "rapido",
+        "ninos"
+      ],
       "ingredientes": [
-        "2 tortillas",
-        "Queso",
-        "Pasta de tomate",
-        "Pechuga de pollo",
-        "Maicitos",
+        "2 tortillas de maíz o arroz",
+        "Queso fresco al gusto",
+        "Pasta de tomate natural",
+        "Pechuga de pollo cocida",
+        "Maíz dulce natural",
         "Piña sin almíbar (opcional)"
       ],
       "pasos": [
-        "En la sartén agregar la tortilla, encima la pasta de tomate, encima el queso, el pollo y maicitos",
-        "Opcional: agregar almíbar de piña",
-        "Listo"
+        "Colocar tortilla en sartén caliente",
+        "Agregar pasta de tomate, queso, pollo y maíz",
+        "Calentar hasta que el queso se derrita",
+        "Opcional: agregar piña"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "s18",
+      "numero": 18,
+      "nombre": "Arepas de papa rellenas",
+      "categoria": "saladas",
+      "emoji": "🥔",
+      "metodo": "Horno o Air Fryer",
+      "tiempo_min": 30,
+      "dificultad": "media",
+      "tags": [
+        "horno",
+        "airfryer",
+        "papa",
+        "arepa",
+        "relleno"
+      ],
+      "ingredientes": [
+        "250 g puré de papa",
+        "3 cdas de maicena",
+        "2 huevos de codorniz",
+        "1 cdita de mantequilla",
+        "Queso pera al gusto",
+        "Pollo desmenuzado (opcional)"
+      ],
+      "pasos": [
+        "Mezclar puré, maicena, huevos y mantequilla",
+        "Obtener masa moldeable",
+        "Rellenar con queso y pollo",
+        "Dorar en sartén y terminar en horno"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "s19",
+      "numero": 19,
+      "nombre": "Rollitos de pavo y espinaca",
+      "categoria": "saladas",
+      "emoji": "🌿",
+      "metodo": "Sin cocción",
+      "tiempo_min": 5,
+      "dificultad": "fácil",
+      "tags": [
+        "sincococion",
+        "pavo",
+        "espinaca",
+        "rapido"
+      ],
+      "ingredientes": [
+        "2 fetas de pavo natural sin conservantes",
+        "4 hojas de espinaca fresca",
+        "1/4 palta",
+        "Gotitas de limón",
+        "Pizca de sal"
+      ],
+      "pasos": [
+        "Extender las fetas de pavo",
+        "Colocar espinaca y palta machacada con limón",
+        "Enrollar bien y fijar con un palito",
+        "Servir frío en la lonchera"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "s20",
+      "numero": 20,
+      "nombre": "Bolitas de quinua y verduras",
+      "categoria": "saladas",
+      "emoji": "🟡",
+      "metodo": "Horno o Air Fryer",
+      "tiempo_min": 25,
+      "dificultad": "fácil",
+      "tags": [
+        "horno",
+        "airfryer",
+        "quinua",
+        "verduras",
+        "snack"
+      ],
+      "ingredientes": [
+        "1 taza quinua cocida",
+        "1/2 taza zanahoria rallada",
+        "1 huevo",
+        "2 cdas queso rallado",
+        "Sal, orégano y ajo en polvo"
+      ],
+      "pasos": [
+        "Mezclar todos los ingredientes bien",
+        "Formar bolitas compactas",
+        "Colocar en bandeja engrasada",
+        "Hornear a 200° por 20 min hasta dorar"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "s21",
+      "numero": 21,
+      "nombre": "Empanadas de yuca sin gluten",
+      "categoria": "saladas",
+      "emoji": "🫔",
+      "metodo": "Horno o Air Fryer",
+      "tiempo_min": 35,
+      "dificultad": "media",
+      "tags": [
+        "horno",
+        "airfryer",
+        "yuca",
+        "singluten",
+        "empanada"
+      ],
+      "ingredientes": [
+        "2 tazas yuca cocida y triturada",
+        "1 huevo",
+        "Pizca de sal",
+        "Relleno: pollo desmenuzado con queso y orégano"
+      ],
+      "pasos": [
+        "Amasar la yuca con huevo y sal",
+        "Extender y cortar en círculos",
+        "Rellenar y cerrar las empanadas",
+        "Hornear a 180° por 20 min hasta dorar"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "s22",
+      "numero": 22,
+      "nombre": "Mini omelette de vegetales",
+      "categoria": "saladas",
+      "emoji": "🍳",
+      "metodo": "Sartén",
+      "tiempo_min": 10,
+      "dificultad": "fácil",
+      "tags": [
+        "sartenl",
+        "huevo",
+        "vegetales",
+        "rapido"
+      ],
+      "ingredientes": [
+        "2 huevos",
+        "2 cdas de pimiento picado",
+        "2 cdas de tomate picado",
+        "1 cda de cebolla picada fina",
+        "Sal y orégano al gusto"
+      ],
+      "pasos": [
+        "Batir los huevos con sal y orégano",
+        "Saltear los vegetales 2 min",
+        "Agregar los huevos encima",
+        "Doblar y servir caliente o frío"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "s23",
+      "numero": 23,
+      "nombre": "Croquetas de atún y papa",
+      "categoria": "saladas",
+      "emoji": "🐟",
+      "metodo": "Air Fryer o Sartén",
+      "tiempo_min": 25,
+      "dificultad": "media",
+      "tags": [
+        "airfryer",
+        "sartenl",
+        "atun",
+        "papa",
+        "croqueta"
+      ],
+      "ingredientes": [
+        "1 lata de atún en agua",
+        "1 papa mediana cocida",
+        "1 huevo",
+        "2 cdas zanahoria rallada",
+        "Sal y perejil al gusto"
+      ],
+      "pasos": [
+        "Escurrir el atún y triturar la papa",
+        "Mezclar todos los ingredientes",
+        "Formar croquetas ovales",
+        "Cocinar en air fryer 180° por 12 min o dorar en sartén"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "s24",
+      "numero": 24,
+      "nombre": "Tortilla española saludable",
+      "categoria": "saladas",
+      "emoji": "🫕",
+      "metodo": "Sartén",
+      "tiempo_min": 20,
+      "dificultad": "media",
+      "tags": [
+        "sartenl",
+        "huevo",
+        "papa",
+        "tortilla"
+      ],
+      "ingredientes": [
+        "3 huevos",
+        "1 papa mediana cocida en cubitos",
+        "1/4 cebolla picada",
+        "Sal al gusto",
+        "Aceite de oliva"
+      ],
+      "pasos": [
+        "Saltear cebolla en aceite de oliva",
+        "Agregar la papa y dorar",
+        "Batir huevos con sal y verter sobre la papa",
+        "Cocinar tapado a fuego bajo",
+        "Dar vuelta con un plato y cocinar el otro lado"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "s25",
+      "numero": 25,
+      "nombre": "Taquitos de pollo y aguacate",
+      "categoria": "saladas",
+      "emoji": "🌮",
+      "metodo": "Sin cocción",
+      "tiempo_min": 8,
+      "dificultad": "fácil",
+      "tags": [
+        "sincococion",
+        "pollo",
+        "palta",
+        "rapido"
+      ],
+      "ingredientes": [
+        "2 tortillas de maíz pequeñas",
+        "3 cdas pollo cocido desmenuzado",
+        "1/4 palta machacada",
+        "Limón y sal al gusto",
+        "Tomate picado fino"
+      ],
+      "pasos": [
+        "Calentar las tortillas en sartén sin aceite",
+        "Mezclar pollo con palta, limón y tomate",
+        "Rellenar las tortillas",
+        "Enrollar y fijar con palito si es necesario"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -1031,26 +1721,30 @@
     {
       "id": "g01",
       "numero": 1,
-      "nombre": "Gomitas de quinua",
+      "nombre": "Gomitas de quinua y mango",
       "categoria": "gomitas",
       "emoji": "🍬",
       "metodo": "Refrigerador",
       "tiempo_min": 70,
       "dificultad": "media",
-      "tags": ["refrigerador", "gomitas", "quinua", "mango"],
+      "tags": [
+        "refrigerador",
+        "gomitas",
+        "quinua",
+        "mango"
+      ],
       "ingredientes": [
         "1 mango",
         "1/2 zanahoria",
-        "2 cucharadas de quinua",
+        "2 cdas de quinua cocida",
         "1/2 taza de agua",
-        "20 gr de gelatina sin sabor"
+        "20 g de gelatina sin sabor"
       ],
       "pasos": [
-        "Pelar el mango y la zanahoria, licuar a potencia máxima hasta hacer puré",
-        "Colar, sacar todo el jugo, echar la quinua y agregar media taza de agua",
-        "Verter todo en una ollita con el sobre de gelatina sin sabor (calentar hasta que se disuelva)",
-        "Echar al molde",
-        "Dejar 1 hora en la refrigeradora"
+        "Licuar mango y zanahoria hasta hacer puré",
+        "Colar y agregar quinua y agua",
+        "Calentar con gelatina hasta que se disuelva",
+        "Verter en moldes y refrigerar 1 hora"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -1058,25 +1752,29 @@
     {
       "id": "g02",
       "numero": 2,
-      "nombre": "Gomitas de yogurt",
+      "nombre": "Gomitas de yogurt y fresa",
       "categoria": "gomitas",
       "emoji": "🐻",
       "metodo": "Refrigerador",
       "tiempo_min": 130,
       "dificultad": "fácil",
-      "tags": ["refrigerador", "gomitas", "yogurt", "fresa"],
+      "tags": [
+        "refrigerador",
+        "gomitas",
+        "yogurt",
+        "fresa"
+      ],
       "ingredientes": [
-        "20 g gelatina sabor fresa sin azúcar",
         "20 g gelatina sin sabor",
-        "150 ml agua hervida (tibia)",
+        "150 ml agua hervida tibia",
         "250 ml yogurt natural sin azúcar",
-        "2 cucharadas de pasta de dátiles",
+        "2 cdas de pasta de dátiles",
         "3 fresas picadas"
       ],
       "pasos": [
-        "Disolver muy bien las gelatinas con el agua",
-        "Integrar todo muy bien y llevar la mezcla a los moldes",
-        "Refrigerar por 2 horas y listo"
+        "Disolver la gelatina en el agua tibia",
+        "Integrar con yogurt, dátiles y fresas",
+        "Verter en moldes y refrigerar 2 horas"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -1090,19 +1788,24 @@
       "metodo": "Refrigerador",
       "tiempo_min": 190,
       "dificultad": "fácil",
-      "tags": ["refrigerador", "gomitas", "beterraga", "fresa", "arandano"],
+      "tags": [
+        "refrigerador",
+        "gomitas",
+        "beterraga",
+        "fresa"
+      ],
       "ingredientes": [
         "20 g gelatina sin sabor",
-        "150 ml agua hervida (tibia)",
-        "1/4 de beterraga",
+        "150 ml agua hervida tibia",
+        "1/4 beterraga cocida",
         "5 fresas",
         "10 arándanos",
-        "1 cucharada de pasta de dátiles"
+        "1 cda pasta de dátiles"
       ],
       "pasos": [
-        "Licuar las frutas y beterraga con agua",
-        "Llevar a una ollita y verter la gelatina sin sabor, dejar que se disuelva",
-        "Llevar la mezcla a los moldes y refrigerar por 3 horas",
+        "Licuar frutas y beterraga con agua",
+        "Calentar con gelatina hasta disolver",
+        "Verter en moldes y refrigerar 3 horas",
         "Duran más de 5 horas fuera de la refrigeradora"
       ],
       "bloqueado": false,
@@ -1117,19 +1820,23 @@
       "metodo": "Refrigerador",
       "tiempo_min": 190,
       "dificultad": "fácil",
-      "tags": ["refrigerador", "gomitas", "naranja", "limon"],
+      "tags": [
+        "refrigerador",
+        "gomitas",
+        "naranja",
+        "limon"
+      ],
       "ingredientes": [
-        "2 naranjas dulces y jugosas",
+        "2 naranjas dulces",
         "2 limones",
-        "1 sobre de gelatina sin sabor (20 gramos)",
-        "1/4 de taza de agua hervida"
+        "20 g gelatina sin sabor",
+        "1/4 taza de agua hervida"
       ],
       "pasos": [
-        "Sacar el jugo bien colado de las naranjas y limones",
-        "Hidratar la gelatina sin azúcar con el agua caliente hasta que quede sin grumos",
-        "Agregar la gelatina hidratada al jugo",
-        "Llevar a los moldes",
-        "Refrigerar por 3 horas y listo. Duran más de 5 horas"
+        "Exprimir y colar el jugo de naranjas y limones",
+        "Hidratar gelatina en agua caliente",
+        "Mezclar gelatina con el jugo",
+        "Verter en moldes y refrigerar 3 horas"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -1137,13 +1844,19 @@
     {
       "id": "g05",
       "numero": 5,
-      "nombre": "Gomitas de espinaca y zanahoria",
+      "nombre": "Gomitas bicolor espinaca y zanahoria",
       "categoria": "gomitas",
       "emoji": "🦕",
       "metodo": "Refrigerador",
       "tiempo_min": 190,
       "dificultad": "media",
-      "tags": ["refrigerador", "gomitas", "espinaca", "zanahoria", "doscolores"],
+      "tags": [
+        "refrigerador",
+        "gomitas",
+        "espinaca",
+        "zanahoria",
+        "doscolores"
+      ],
       "ingredientes": [
         "1 manzana verde",
         "2 hojas grandes de espinaca",
@@ -1152,12 +1865,11 @@
         "2 sobres de gelatina sin sabor (40 g)"
       ],
       "pasos": [
-        "Licuar la manzana y la espinaca con una taza de agua y colar",
-        "Licuar la zanahoria y naranja con 1/2 taza de agua y colar",
+        "Licuar manzana y espinaca con agua y colar",
+        "Licuar zanahoria y naranja con agua y colar",
         "Hidratar cada sobre de gelatina por separado",
-        "Agregar cada zumo de gelatina en cada concentrado de fruta",
-        "Usar jeringas sin aguja para echarlas al molde",
-        "En cada molde echar 50% de cada mezcla para que queden de 2 colores"
+        "Mezclar cada gelatina con su concentrado",
+        "Llenar moldes 50% de cada color"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -1171,19 +1883,22 @@
       "metodo": "Refrigerador",
       "tiempo_min": 190,
       "dificultad": "fácil",
-      "tags": ["refrigerador", "gomitas", "sandia"],
+      "tags": [
+        "refrigerador",
+        "gomitas",
+        "sandia"
+      ],
       "ingredientes": [
-        "300 g de sandía (1 taza de jugo)",
-        "1/4 de jugo de limón fresco",
-        "1 sobre de 20 gr de gelatina sin sabor",
-        "1 cda de miel (para niños mayores a 2 años) o pasta de dátiles"
+        "300 g sandía (1 taza de jugo)",
+        "1/4 jugo de limón fresco",
+        "20 g gelatina sin sabor",
+        "1 cda de miel o pasta de dátiles"
       ],
       "pasos": [
-        "Licuar la sandía y echar el jugo de limón",
-        "Echar la gelatina sin sabor y dejar hidratar por 5 minutos",
-        "Llevar a calentar",
-        "Echar a los moldes",
-        "Duran hasta 5 horas aprox"
+        "Licuar la sandía y agregar el limón",
+        "Hidratar la gelatina y calentar",
+        "Mezclar con el jugo de sandía",
+        "Verter en moldes y refrigerar"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -1197,18 +1912,21 @@
       "metodo": "Refrigerador",
       "tiempo_min": 200,
       "dificultad": "fácil",
-      "tags": ["refrigerador", "gomitas", "mango"],
+      "tags": [
+        "refrigerador",
+        "gomitas",
+        "mango"
+      ],
       "ingredientes": [
-        "100 g de puré de mango (triturado en licuadora)",
-        "200 ml de leche vegetal",
-        "2 cucharadas de fécula de maíz"
+        "100 g puré de mango",
+        "200 ml leche vegetal",
+        "2 cdas fécula de maíz"
       ],
       "pasos": [
-        "Llevar la leche con la fécula de maíz a hervir por 2 minutos revolviendo constantemente",
-        "Agregar el puré de mango e integrar todo muy bien",
-        "Dejar hervir un minuto más",
-        "Agregar de inmediato la mezcla a los moldes de silicona y dejar enfriar",
-        "Refrigerar aproximadamente por 3 horas"
+        "Hervir la leche con la fécula 2 min revolviendo",
+        "Agregar el puré de mango e integrar",
+        "Verter en moldes de silicona y dejar enfriar",
+        "Refrigerar 3 horas"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -1222,18 +1940,21 @@
       "metodo": "Refrigerador",
       "tiempo_min": 200,
       "dificultad": "fácil",
-      "tags": ["refrigerador", "gomitas", "melocoton"],
+      "tags": [
+        "refrigerador",
+        "gomitas",
+        "melocoton"
+      ],
       "ingredientes": [
-        "100 g de puré de melocotón (4 melocotones triturados)",
-        "200 ml de leche vegetal",
-        "2 cucharadas de fécula de maíz"
+        "100 g puré de melocotón",
+        "200 ml leche vegetal",
+        "2 cdas fécula de maíz"
       ],
       "pasos": [
-        "Llevar la leche con la fécula de maíz a hervir por 2 minutos revolviendo constantemente",
-        "Agregar el puré de melocotón e integrar todo muy bien",
-        "Dejar hervir un minuto más",
-        "Agregar de inmediato a los moldes de silicona y dejar enfriar",
-        "Refrigerar aproximadamente por 3 horas"
+        "Hervir leche con fécula 2 min revolviendo constantemente",
+        "Agregar puré de melocotón e integrar",
+        "Verter en moldes y dejar enfriar",
+        "Refrigerar 3 horas"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -1247,19 +1968,25 @@
       "metodo": "Refrigerador",
       "tiempo_min": 130,
       "dificultad": "fácil",
-      "tags": ["refrigerador", "gomitas", "zanahoria", "naranja"],
+      "tags": [
+        "refrigerador",
+        "gomitas",
+        "zanahoria",
+        "naranja"
+      ],
       "ingredientes": [
         "Jugo de 3 naranjas",
-        "150 g zanahoria",
+        "150 g zanahoria cocida",
         "80 g apio (opcional)",
         "2 dátiles",
-        "20 gr de gelatina sin sabor",
+        "20 g gelatina sin sabor",
         "30 ml agua hervida caliente"
       ],
       "pasos": [
-        "Llevar el jugo de naranja junto con la zanahoria, el apio y los dátiles a licuar muy bien",
-        "Hidratar la gelatina en 30 ml de agua hervida caliente y agregar a la mezcla",
-        "Llevar a un molde de silicona y refrigerar por 2 horas"
+        "Licuar naranja, zanahoria, apio y dátiles",
+        "Hidratar gelatina en agua caliente",
+        "Mezclar e integrar bien",
+        "Refrigerar en moldes 2 horas"
       ],
       "bloqueado": false,
       "pack": "base"
@@ -1273,19 +2000,1182 @@
       "metodo": "Refrigerador",
       "tiempo_min": 190,
       "dificultad": "media",
-      "tags": ["refrigerador", "gomitas", "uva", "espinaca"],
+      "tags": [
+        "refrigerador",
+        "gomitas",
+        "uva",
+        "espinaca"
+      ],
       "ingredientes": [
-        "1/2 taza de yogurt griego",
-        "Un poquito de endulzante natural",
-        "Colorante vegetal color azul",
-        "1/4 de taza de maizena"
+        "1/2 taza yogurt griego",
+        "Endulzante natural al gusto",
+        "Colorante vegetal azul natural",
+        "1/4 taza de maizena",
+        "1 sobre de gelatina sin azúcar"
       ],
       "pasos": [
-        "Licuar los ingredientes",
-        "Colar",
-        "Llevar a la olla para mezclar con un sobre de gelatina sin azúcar",
-        "Cuando noten que salen burbujas y empieza a hervir, apagar el fuego y colocar en el molde",
-        "Dejar enfriar y refrigerar por 3 horas"
+        "Licuar todos los ingredientes",
+        "Colar la mezcla",
+        "Calentar con gelatina hasta que hierva",
+        "Verter en moldes y refrigerar 3 horas"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "g11",
+      "numero": 11,
+      "nombre": "Gomitas de kiwi y espinaca",
+      "categoria": "gomitas",
+      "emoji": "🥝",
+      "metodo": "Refrigerador",
+      "tiempo_min": 130,
+      "dificultad": "fácil",
+      "tags": [
+        "refrigerador",
+        "gomitas",
+        "kiwi",
+        "espinaca",
+        "verde"
+      ],
+      "ingredientes": [
+        "3 kiwis pelados",
+        "4 hojas de espinaca",
+        "20 g gelatina sin sabor",
+        "1/4 taza agua tibia",
+        "1 cda miel"
+      ],
+      "pasos": [
+        "Licuar kiwi y espinaca hasta obtener jugo verde",
+        "Hidratar gelatina en agua y agregar miel",
+        "Mezclar todo bien",
+        "Llenar moldes y refrigerar 2 horas"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "g12",
+      "numero": 12,
+      "nombre": "Gomitas de fresa y remolacha",
+      "categoria": "gomitas",
+      "emoji": "🍓",
+      "metodo": "Refrigerador",
+      "tiempo_min": 130,
+      "dificultad": "fácil",
+      "tags": [
+        "refrigerador",
+        "gomitas",
+        "fresa",
+        "beterraga"
+      ],
+      "ingredientes": [
+        "10 fresas",
+        "1 trozo pequeño de remolacha cocida",
+        "20 g gelatina sin sabor",
+        "1/4 taza agua tibia",
+        "1 cda pasta de dátiles"
+      ],
+      "pasos": [
+        "Licuar fresas y remolacha hasta obtener jugo rosado intenso",
+        "Disolver gelatina en agua tibia",
+        "Agregar dátiles y mezclar",
+        "Verter en moldes y refrigerar 2 horas"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "b01",
+      "numero": 1,
+      "nombre": "Agua fresca de sandía y limón",
+      "categoria": "bebidas",
+      "emoji": "🍉",
+      "metodo": "Licuadora",
+      "tiempo_min": 5,
+      "dificultad": "fácil",
+      "tags": [
+        "bebida",
+        "sandia",
+        "limon",
+        "hidratacion"
+      ],
+      "ingredientes": [
+        "2 tazas de sandía en cubos sin semillas",
+        "Jugo de 1/2 limón",
+        "1 taza de agua fría",
+        "Hielo al gusto"
+      ],
+      "pasos": [
+        "Licuar la sandía con el agua",
+        "Colar para retirar la pulpa",
+        "Agregar limón y mezclar",
+        "Servir con hielo en termo"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "b02",
+      "numero": 2,
+      "nombre": "Agua de manzana y canela",
+      "categoria": "bebidas",
+      "emoji": "🍎",
+      "metodo": "Olla",
+      "tiempo_min": 15,
+      "dificultad": "fácil",
+      "tags": [
+        "bebida",
+        "manzana",
+        "canela",
+        "caliente",
+        "frio"
+      ],
+      "ingredientes": [
+        "2 manzanas en rodajas",
+        "1 rama de canela",
+        "4 tazas de agua",
+        "1 cda de miel (opcional)"
+      ],
+      "pasos": [
+        "Hervir el agua con las manzanas y la canela 10 min",
+        "Dejar enfriar completamente",
+        "Colar y agregar miel si se desea",
+        "Servir frío en la lonchera"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "b03",
+      "numero": 3,
+      "nombre": "Limonada de frutos rojos",
+      "categoria": "bebidas",
+      "emoji": "🍋",
+      "metodo": "Licuadora",
+      "tiempo_min": 5,
+      "dificultad": "fácil",
+      "tags": [
+        "bebida",
+        "limonada",
+        "frutosrojos",
+        "vitaminas"
+      ],
+      "ingredientes": [
+        "Jugo de 2 limones",
+        "1/2 taza de fresas",
+        "1/4 taza de arándanos",
+        "2 tazas de agua",
+        "1 cda de miel"
+      ],
+      "pasos": [
+        "Licuar las fresas y arándanos con un poco de agua",
+        "Colar el jugo",
+        "Mezclar con agua, limón y miel",
+        "Servir frío"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "b04",
+      "numero": 4,
+      "nombre": "Agua de aguaymanto",
+      "categoria": "bebidas",
+      "emoji": "🟡",
+      "metodo": "Licuadora",
+      "tiempo_min": 5,
+      "dificultad": "fácil",
+      "tags": [
+        "bebida",
+        "aguaymanto",
+        "antioxidante",
+        "vitaminas"
+      ],
+      "ingredientes": [
+        "1/2 taza de aguaymantos frescos",
+        "3 tazas de agua fría",
+        "1 cda de miel o pasta de dátiles",
+        "Jugo de 1/4 limón"
+      ],
+      "pasos": [
+        "Licuar aguaymantos con un poco de agua",
+        "Colar bien",
+        "Mezclar con el resto del agua y miel",
+        "Agregar limón y servir frío"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "b05",
+      "numero": 5,
+      "nombre": "Infusión fría de menta y limón",
+      "categoria": "bebidas",
+      "emoji": "🌿",
+      "metodo": "Olla",
+      "tiempo_min": 10,
+      "dificultad": "fácil",
+      "tags": [
+        "bebida",
+        "menta",
+        "limon",
+        "infusion",
+        "digestiva"
+      ],
+      "ingredientes": [
+        "8 hojas de menta fresca",
+        "Jugo de 1 limón",
+        "3 tazas de agua",
+        "1 cdita de miel"
+      ],
+      "pasos": [
+        "Hervir el agua y apagar el fuego",
+        "Agregar las hojas de menta y reposar 5 min",
+        "Colar y agregar limón y miel",
+        "Enfriar completamente antes de servir"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "b06",
+      "numero": 6,
+      "nombre": "Agua de uva natural",
+      "categoria": "bebidas",
+      "emoji": "🍇",
+      "metodo": "Licuadora",
+      "tiempo_min": 5,
+      "dificultad": "fácil",
+      "tags": [
+        "bebida",
+        "uva",
+        "antioxidante",
+        "natural"
+      ],
+      "ingredientes": [
+        "2 tazas de uvas sin semillas (rojas o verdes)",
+        "2 tazas de agua fría",
+        "Jugo de 1/4 limón",
+        "Hielo al gusto"
+      ],
+      "pasos": [
+        "Licuar las uvas con el agua",
+        "Colar bien para retirar piel y semillas",
+        "Agregar limón y mezclar",
+        "Servir con hielo en termo"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "b07",
+      "numero": 7,
+      "nombre": "Chicha morada casera",
+      "categoria": "bebidas",
+      "emoji": "🫐",
+      "metodo": "Olla",
+      "tiempo_min": 30,
+      "dificultad": "media",
+      "tags": [
+        "bebida",
+        "chicha",
+        "maizmorado",
+        "tradicional",
+        "latam"
+      ],
+      "ingredientes": [
+        "100 g maíz morado",
+        "1 manzana pequeña",
+        "1 rama de canela",
+        "4 clavos de olor",
+        "4 tazas de agua",
+        "Jugo de limón al gusto",
+        "1 cda de miel (opcional)"
+      ],
+      "pasos": [
+        "Hervir el maíz con la manzana, canela y clavo 20 min",
+        "Colar bien la preparación",
+        "Dejar enfriar completamente",
+        "Agregar limón y miel al gusto",
+        "Servir frío"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "b08",
+      "numero": 8,
+      "nombre": "Agua de maracuyá natural",
+      "categoria": "bebidas",
+      "emoji": "🟠",
+      "metodo": "Licuadora",
+      "tiempo_min": 5,
+      "dificultad": "fácil",
+      "tags": [
+        "bebida",
+        "maracuya",
+        "vitaminas",
+        "latam"
+      ],
+      "ingredientes": [
+        "3 maracuyás (solo la pulpa)",
+        "3 tazas de agua fría",
+        "1 cda de miel",
+        "Hielo al gusto"
+      ],
+      "pasos": [
+        "Licuar la pulpa de maracuyá con el agua 30 segundos",
+        "Colar muy bien",
+        "Agregar miel y mezclar",
+        "Servir con hielo"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "b09",
+      "numero": 9,
+      "nombre": "Infusión fría de manzanilla y miel",
+      "categoria": "bebidas",
+      "emoji": "🌼",
+      "metodo": "Olla",
+      "tiempo_min": 10,
+      "dificultad": "fácil",
+      "tags": [
+        "bebida",
+        "manzanilla",
+        "miel",
+        "digestiva",
+        "calmate"
+      ],
+      "ingredientes": [
+        "2 sobres de manzanilla",
+        "3 tazas de agua",
+        "1 cda de miel",
+        "Rodajas de manzana para decorar (opcional)"
+      ],
+      "pasos": [
+        "Hervir el agua y apagar",
+        "Agregar la manzanilla y reposar 5 min",
+        "Retirar los sobres y agregar miel",
+        "Enfriar totalmente antes de servir"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "b10",
+      "numero": 10,
+      "nombre": "Agua fresca de piña y menta",
+      "categoria": "bebidas",
+      "emoji": "🍍",
+      "metodo": "Licuadora",
+      "tiempo_min": 5,
+      "dificultad": "fácil",
+      "tags": [
+        "bebida",
+        "pina",
+        "menta",
+        "digestiva",
+        "tropical"
+      ],
+      "ingredientes": [
+        "2 rodajas de piña natural",
+        "6 hojas de menta fresca",
+        "3 tazas de agua fría",
+        "Jugo de 1/4 limón",
+        "Hielo"
+      ],
+      "pasos": [
+        "Licuar la piña con el agua",
+        "Colar el jugo",
+        "Agregar hojas de menta, limón y hielo",
+        "Servir bien frío en termo"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "b11",
+      "numero": 11,
+      "nombre": "Smoothie de plátano y espinaca",
+      "categoria": "bebidas",
+      "emoji": "💚",
+      "metodo": "Licuadora",
+      "tiempo_min": 5,
+      "dificultad": "fácil",
+      "tags": [
+        "bebida",
+        "smoothie",
+        "platano",
+        "espinaca",
+        "energia"
+      ],
+      "ingredientes": [
+        "1 plátano maduro",
+        "1 puñado de espinaca",
+        "1 taza de leche (o vegetal)",
+        "1 cdita de miel",
+        "Hielo al gusto"
+      ],
+      "pasos": [
+        "Licuar todos los ingredientes hasta obtener textura suave",
+        "Probar dulzor y ajustar con miel",
+        "Servir inmediatamente o bien frío",
+        "Ideal para el desayuno antes de la lonchera"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "b12",
+      "numero": 12,
+      "nombre": "Agua de coco y piña",
+      "categoria": "bebidas",
+      "emoji": "🥥",
+      "metodo": "Licuadora",
+      "tiempo_min": 5,
+      "dificultad": "fácil",
+      "tags": [
+        "bebida",
+        "coco",
+        "pina",
+        "tropical",
+        "hidratacion"
+      ],
+      "ingredientes": [
+        "1 taza de agua de coco natural",
+        "1 rodaja de piña fresca",
+        "1/2 taza de agua fría",
+        "Hielo al gusto"
+      ],
+      "pasos": [
+        "Licuar la piña con el agua de coco y agua fría",
+        "Colar si se desea textura más suave",
+        "Servir con hielo",
+        "Ideal para días calurosos"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "d29",
+      "numero": 29,
+      "nombre": "Muffins de arándanos sin azúcar",
+      "categoria": "dulces",
+      "emoji": "🫐",
+      "metodo": "Horno o Air Fryer",
+      "tiempo_min": 25,
+      "dificultad": "fácil",
+      "tags": [
+        "horno",
+        "airfryer",
+        "muffin",
+        "arandanos"
+      ],
+      "ingredientes": [
+        "1 taza harina de avena",
+        "2 huevos",
+        "1/2 taza yogurt natural",
+        "1/2 taza arándanos frescos",
+        "2 cdas pasta de dátiles",
+        "1 cdita polvo de hornear"
+      ],
+      "pasos": [
+        "Mezclar ingredientes húmedos",
+        "Agregar harina y polvo de hornear",
+        "Incorporar los arándanos con cuidado",
+        "Llenar moldes y hornear a 180° por 20 min"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "d30",
+      "numero": 30,
+      "nombre": "Tortitas de camote y coco",
+      "categoria": "dulces",
+      "emoji": "🍠",
+      "metodo": "Sartén",
+      "tiempo_min": 15,
+      "dificultad": "fácil",
+      "tags": [
+        "sartenl",
+        "camote",
+        "coco",
+        "dulce"
+      ],
+      "ingredientes": [
+        "1 taza de camote cocido triturado",
+        "2 cdas de coco rallado sin azúcar",
+        "1 huevo",
+        "1 cdita de vainilla",
+        "Canela al gusto"
+      ],
+      "pasos": [
+        "Mezclar todos los ingredientes hasta integrar",
+        "Formar tortitas pequeñas",
+        "Cocinar en sartén con un poco de aceite de coco",
+        "Dorar de ambos lados"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "d31",
+      "numero": 31,
+      "nombre": "Helado de plátano y cacao",
+      "categoria": "dulces",
+      "emoji": "🍦",
+      "metodo": "Congelador",
+      "tiempo_min": 120,
+      "dificultad": "fácil",
+      "tags": [
+        "congelador",
+        "platano",
+        "cacao",
+        "helado",
+        "sinazucar"
+      ],
+      "ingredientes": [
+        "3 plátanos maduros congelados",
+        "2 cdas cacao en polvo puro",
+        "2 cdas mantequilla de almendras",
+        "Chips de chocolate 75% (opcional)"
+      ],
+      "pasos": [
+        "Procesar los plátanos congelados hasta cremoso",
+        "Agregar cacao y mantequilla e integrar",
+        "Llevar al congelador 1 hora si se desea más firme",
+        "Servir con chips de chocolate"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "d32",
+      "numero": 32,
+      "nombre": "Paletas de yogurt y frutas",
+      "categoria": "dulces",
+      "emoji": "🧊",
+      "metodo": "Congelador",
+      "tiempo_min": 240,
+      "dificultad": "fácil",
+      "tags": [
+        "congelador",
+        "yogurt",
+        "frutas",
+        "paleta"
+      ],
+      "ingredientes": [
+        "1 taza yogurt natural sin azúcar",
+        "1/2 taza fresas en trozos",
+        "1/4 taza arándanos",
+        "1 cda miel",
+        "Palitos para paleta"
+      ],
+      "pasos": [
+        "Mezclar yogurt con miel",
+        "Agregar las frutas y mezclar suavemente",
+        "Verter en moldes de paleta",
+        "Insertar palitos y congelar 4 horas mínimo"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "s26",
+      "numero": 26,
+      "nombre": "Palitos de verdura con hummus",
+      "categoria": "saladas",
+      "emoji": "🥕",
+      "metodo": "Sin cocción",
+      "tiempo_min": 5,
+      "dificultad": "fácil",
+      "tags": [
+        "sincococion",
+        "verduras",
+        "hummus",
+        "snack",
+        "rapido"
+      ],
+      "ingredientes": [
+        "1 zanahoria en palitos",
+        "1 pepino en palitos",
+        "2 cdas de hummus casero",
+        "Sal y limón al gusto"
+      ],
+      "pasos": [
+        "Lavar y cortar las verduras en palitos",
+        "Preparar hummus (garbanzos, tahini, limón, ajo)",
+        "Colocar los palitos en la lonchera",
+        "Poner el hummus en recipiente aparte"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "s27",
+      "numero": 27,
+      "nombre": "Mini ensalada de quinua",
+      "categoria": "saladas",
+      "emoji": "🥗",
+      "metodo": "Sin cocción",
+      "tiempo_min": 10,
+      "dificultad": "fácil",
+      "tags": [
+        "sincococion",
+        "quinua",
+        "ensalada",
+        "proteina"
+      ],
+      "ingredientes": [
+        "1/2 taza quinua cocida y fría",
+        "1/4 palta en cubos",
+        "1/4 tomate cherry en mitades",
+        "Jugo de limón",
+        "Aceite de oliva y sal"
+      ],
+      "pasos": [
+        "Mezclar la quinua fría con los demás ingredientes",
+        "Aliñar con limón, aceite y sal",
+        "Servir en recipiente con tapa hermética",
+        "Preparar la víspera para mejores sabores"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "s28",
+      "numero": 28,
+      "nombre": "Deditos de pollo horneados",
+      "categoria": "saladas",
+      "emoji": "🍗",
+      "metodo": "Horno",
+      "tiempo_min": 25,
+      "dificultad": "fácil",
+      "tags": [
+        "horno",
+        "pollo",
+        "deditos",
+        "ninos"
+      ],
+      "ingredientes": [
+        "300 g pechuga de pollo en tiras",
+        "1 huevo batido",
+        "3 cdas harina de quinua",
+        "Ajo en polvo, orégano y sal",
+        "Aceite de oliva en spray"
+      ],
+      "pasos": [
+        "Cortar el pollo en tiras tipo dedito",
+        "Pasar por huevo batido y luego por harina condimentada",
+        "Colocar en bandeja con spray de aceite",
+        "Hornear a 200° por 20 min hasta dorar"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "s29",
+      "numero": 29,
+      "nombre": "Hummus casero",
+      "categoria": "saladas",
+      "emoji": "🟡",
+      "metodo": "Licuadora",
+      "tiempo_min": 10,
+      "dificultad": "fácil",
+      "tags": [
+        "licuadora",
+        "hummus",
+        "garbanzo",
+        "proteina",
+        "dip"
+      ],
+      "ingredientes": [
+        "1 lata de garbanzos cocidos",
+        "2 cdas de tahini",
+        "Jugo de 1 limón",
+        "1 diente de ajo",
+        "Sal al gusto",
+        "Aceite de oliva"
+      ],
+      "pasos": [
+        "Escurrir y enjuagar los garbanzos",
+        "Procesar todos los ingredientes hasta obtener crema",
+        "Ajustar sal y limón al gusto",
+        "Refrigerar hasta usar como dip o untable"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "s30",
+      "numero": 30,
+      "nombre": "Wrap de pavo y vegetales",
+      "categoria": "saladas",
+      "emoji": "🌯",
+      "metodo": "Sin cocción",
+      "tiempo_min": 5,
+      "dificultad": "fácil",
+      "tags": [
+        "sincococion",
+        "pavo",
+        "wrap",
+        "rapido",
+        "vegetales"
+      ],
+      "ingredientes": [
+        "1 tortilla de maíz o arroz",
+        "2 fetas de pavo natural",
+        "Lechuga fresca",
+        "1/4 palta",
+        "Zanahoria rallada",
+        "Sal y limón"
+      ],
+      "pasos": [
+        "Extender la tortilla",
+        "Colocar pavo, lechuga, palta y zanahoria",
+        "Sazonar con sal y limón",
+        "Enrollar bien apretado y cortar por la mitad"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "d33",
+      "numero": 33,
+      "nombre": "Bizcochuelo de plátano y coco",
+      "categoria": "dulces",
+      "emoji": "🎂",
+      "metodo": "Horno",
+      "tiempo_min": 35,
+      "dificultad": "media",
+      "tags": [
+        "horno",
+        "platano",
+        "coco",
+        "bizcochuelo"
+      ],
+      "ingredientes": [
+        "3 plátanos maduros",
+        "3 huevos",
+        "1/2 taza coco rallado sin azúcar",
+        "3/4 taza harina de avena",
+        "1 cdita polvo de hornear",
+        "1 cdita vainilla"
+      ],
+      "pasos": [
+        "Pisar los plátanos hasta hacer puré",
+        "Batir con los huevos y vainilla",
+        "Agregar coco, harina y polvo de hornear",
+        "Verter en molde engrasado",
+        "Hornear a 180° por 25-30 min"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "d34",
+      "numero": 34,
+      "nombre": "Tortitas de avena y plátano",
+      "categoria": "dulces",
+      "emoji": "🥞",
+      "metodo": "Sartén",
+      "tiempo_min": 10,
+      "dificultad": "fácil",
+      "tags": [
+        "sartenl",
+        "avena",
+        "platano",
+        "rapido"
+      ],
+      "ingredientes": [
+        "1 plátano maduro",
+        "1 huevo",
+        "4 cdas avena en hojuelas",
+        "1 cdita vainilla",
+        "Canela al gusto"
+      ],
+      "pasos": [
+        "Pisar el plátano y mezclar con huevo y vainilla",
+        "Agregar avena y canela",
+        "Cocinar en sartén de ambos lados",
+        "Servir con frutas frescas"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "s31",
+      "numero": 31,
+      "nombre": "Ensalada tibia de lentejas",
+      "categoria": "saladas",
+      "emoji": "🫘",
+      "metodo": "Sin cocción",
+      "tiempo_min": 5,
+      "dificultad": "fácil",
+      "tags": [
+        "sincococion",
+        "lentejas",
+        "ensalada",
+        "proteina"
+      ],
+      "ingredientes": [
+        "1/2 taza lentejas cocidas y frías",
+        "1/4 tomate cherry",
+        "1/4 pepino en cubos",
+        "Perejil picado",
+        "Aceite de oliva y limón",
+        "Sal al gusto"
+      ],
+      "pasos": [
+        "Mezclar las lentejas con los vegetales",
+        "Aliñar con aceite, limón y sal",
+        "Agregar perejil picado",
+        "Servir en recipiente hermético"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "s32",
+      "numero": 32,
+      "nombre": "Mini frittatas de espinaca",
+      "categoria": "saladas",
+      "emoji": "🍳",
+      "metodo": "Horno",
+      "tiempo_min": 20,
+      "dificultad": "fácil",
+      "tags": [
+        "horno",
+        "huevo",
+        "espinaca",
+        "frittata"
+      ],
+      "ingredientes": [
+        "4 huevos",
+        "1 taza espinaca picada",
+        "1/4 taza queso rallado",
+        "Sal y pimienta",
+        "1/4 pimiento rojo picado"
+      ],
+      "pasos": [
+        "Batir los huevos con sal y pimienta",
+        "Agregar espinaca, queso y pimiento",
+        "Verter en moldes de muffin engrasados",
+        "Hornear a 180° por 15 min"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "s33",
+      "numero": 33,
+      "nombre": "Tostadas de palta y huevo",
+      "categoria": "saladas",
+      "emoji": "🥑",
+      "metodo": "Sin cocción",
+      "tiempo_min": 5,
+      "dificultad": "fácil",
+      "tags": [
+        "sincococion",
+        "palta",
+        "huevo",
+        "rapido"
+      ],
+      "ingredientes": [
+        "2 rebanadas pan sin gluten",
+        "1/2 palta madura",
+        "1 huevo duro en rodajas",
+        "Sal, limón y semillas de ajonjolí"
+      ],
+      "pasos": [
+        "Machacar la palta con limón y sal",
+        "Untar en las rebanadas de pan",
+        "Colocar rodajas de huevo duro encima",
+        "Agregar semillas de ajonjolí"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "s34",
+      "numero": 34,
+      "nombre": "Arroz chaufa saludable",
+      "categoria": "saladas",
+      "emoji": "🍳",
+      "metodo": "Sartén",
+      "tiempo_min": 15,
+      "dificultad": "fácil",
+      "tags": [
+        "sartenl",
+        "arroz",
+        "huevo",
+        "latam"
+      ],
+      "ingredientes": [
+        "1 taza arroz cocido y frío",
+        "1 huevo",
+        "2 cdas cebolla china picada",
+        "1 cda de salsa de soya reducida en sodio",
+        "Aceite de ajonjolí (unas gotas)"
+      ],
+      "pasos": [
+        "Calentar aceite en sartén o wok",
+        "Revolver el huevo en el aceite",
+        "Agregar el arroz y saltear",
+        "Incorporar cebolla china y salsa de soya",
+        "Agregar gotas de aceite de ajonjolí al final"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "b13",
+      "numero": 13,
+      "nombre": "Té frío de frutos rojos",
+      "categoria": "bebidas",
+      "emoji": "🍓",
+      "metodo": "Olla",
+      "tiempo_min": 10,
+      "dificultad": "fácil",
+      "tags": [
+        "bebida",
+        "te",
+        "frutosrojos",
+        "antioxidante"
+      ],
+      "ingredientes": [
+        "2 sobres de té de frutos rojos sin azúcar",
+        "3 tazas de agua",
+        "1 cda de miel",
+        "Rodajas de limón",
+        "Hielo"
+      ],
+      "pasos": [
+        "Hervir el agua y apagar",
+        "Infusionar los sobres de té 4 min",
+        "Retirar los sobres y agregar miel",
+        "Enfriar y servir con limón y hielo"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "b14",
+      "numero": 14,
+      "nombre": "Agua de pepino y limón",
+      "categoria": "bebidas",
+      "emoji": "🥒",
+      "metodo": "Licuadora",
+      "tiempo_min": 5,
+      "dificultad": "fácil",
+      "tags": [
+        "bebida",
+        "pepino",
+        "limon",
+        "hidratacion",
+        "detox"
+      ],
+      "ingredientes": [
+        "1/2 pepino pelado",
+        "Jugo de 1 limón",
+        "3 tazas de agua fría",
+        "Hojas de menta (opcional)",
+        "Hielo"
+      ],
+      "pasos": [
+        "Licuar el pepino con el agua",
+        "Colar bien",
+        "Agregar limón y menta",
+        "Servir con hielo bien frío"
+      ]
+    },
+    {
+      "id": "d35",
+      "numero": 35,
+      "nombre": "Cupcakes de zanahoria y naranja",
+      "categoria": "dulces",
+      "emoji": "🧁",
+      "metodo": "Horno",
+      "tiempo_min": 25,
+      "dificultad": "fácil",
+      "tags": [
+        "horno",
+        "zanahoria",
+        "naranja",
+        "cupcake"
+      ],
+      "ingredientes": [
+        "1 taza zanahoria rallada",
+        "Ralladura de 1 naranja",
+        "2 huevos",
+        "1/2 taza harina de avena",
+        "2 cdas pasta de dátiles",
+        "1 cdita polvo de hornear"
+      ],
+      "pasos": [
+        "Mezclar zanahoria rallada con ralladura de naranja",
+        "Batir huevos con dátiles",
+        "Integrar todo con harina y polvo de hornear",
+        "Llenar moldes y hornear a 180° por 20 min"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "d36",
+      "numero": 36,
+      "nombre": "Bolitas de quinua y cacao",
+      "categoria": "dulces",
+      "emoji": "🍫",
+      "metodo": "Sin cocción",
+      "tiempo_min": 15,
+      "dificultad": "fácil",
+      "tags": [
+        "sincococion",
+        "quinua",
+        "cacao",
+        "energetico"
+      ],
+      "ingredientes": [
+        "1 taza quinua cocida y fría",
+        "3 cdas cacao en polvo",
+        "2 cdas mantequilla de maní",
+        "2 cdas pasta de dátiles",
+        "Coco rallado para cubrir"
+      ],
+      "pasos": [
+        "Mezclar quinua, cacao, maní y dátiles",
+        "Refrigerar 10 min",
+        "Formar bolitas y cubrir con coco rallado",
+        "Refrigerar hasta servir"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "s35",
+      "numero": 35,
+      "nombre": "Tacos de pescado saludables",
+      "categoria": "saladas",
+      "emoji": "🐟",
+      "metodo": "Sartén",
+      "tiempo_min": 15,
+      "dificultad": "fácil",
+      "tags": [
+        "sartenl",
+        "pescado",
+        "taco",
+        "proteina"
+      ],
+      "ingredientes": [
+        "150 g filete de pescado blanco",
+        "2 tortillas de maíz pequeñas",
+        "1/4 palta",
+        "Repollo morado rallado",
+        "Limón y sal"
+      ],
+      "pasos": [
+        "Sazonar el pescado con sal y limón",
+        "Cocinar en sartén con aceite hasta dorar",
+        "Desmenuzar en trozos",
+        "Armar los tacos con palta y repollo"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "s36",
+      "numero": 36,
+      "nombre": "Bolitas de garbanzo y espinaca",
+      "categoria": "saladas",
+      "emoji": "🟢",
+      "metodo": "Horno",
+      "tiempo_min": 25,
+      "dificultad": "fácil",
+      "tags": [
+        "horno",
+        "garbanzo",
+        "espinaca",
+        "snack"
+      ],
+      "ingredientes": [
+        "1 lata garbanzos cocidos",
+        "1 taza espinaca blanqueada",
+        "1 huevo",
+        "2 cdas harina de quinua",
+        "Sal, comino y ajo en polvo"
+      ],
+      "pasos": [
+        "Procesar garbanzos y espinaca hasta integrar",
+        "Agregar huevo, harina y condimentos",
+        "Formar bolitas compactas",
+        "Hornear a 200° por 20 min hasta dorar"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "b15",
+      "numero": 15,
+      "nombre": "Smoothie de mango y cúrcuma",
+      "categoria": "bebidas",
+      "emoji": "🥭",
+      "metodo": "Licuadora",
+      "tiempo_min": 5,
+      "dificultad": "fácil",
+      "tags": [
+        "bebida",
+        "smoothie",
+        "mango",
+        "curcuma",
+        "antiinflamatorio"
+      ],
+      "ingredientes": [
+        "1 mango maduro en trozos",
+        "1 taza leche de coco o vegetal",
+        "1 pizca de cúrcuma",
+        "1 cdita miel",
+        "Hielo al gusto"
+      ],
+      "pasos": [
+        "Licuar todos los ingredientes",
+        "Probar dulzor y ajustar",
+        "Servir inmediatamente bien frío",
+        "La cúrcuma le da color dorado y propiedades antiinflamatorias"
+      ],
+      "bloqueado": false,
+      "pack": "base"
+    },
+    {
+      "id": "b16",
+      "numero": 16,
+      "nombre": "Agua fresca de tamarindo natural",
+      "categoria": "bebidas",
+      "emoji": "🟤",
+      "metodo": "Olla",
+      "tiempo_min": 10,
+      "dificultad": "fácil",
+      "tags": [
+        "bebida",
+        "tamarindo",
+        "natural",
+        "latam"
+      ],
+      "ingredientes": [
+        "50 g pulpa de tamarindo natural",
+        "3 tazas de agua",
+        "1 cda de miel o pasta de dátiles",
+        "Hielo"
+      ],
+      "pasos": [
+        "Disolver la pulpa de tamarindo en agua tibia",
+        "Colar bien para retirar semillas y fibras",
+        "Agregar miel y mezclar",
+        "Enfriar con hielo y servir"
       ],
       "bloqueado": false,
       "pack": "base"
