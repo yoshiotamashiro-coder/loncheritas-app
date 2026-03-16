@@ -502,5 +502,70 @@
 
   cargarRecetas();
 </script>
+</div>
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCBgGw5NkDF68jOZG6s941v8glpUTJ03rA",
+  authDomain: "loncheritas-app.firebaseapp.com",
+  projectId: "loncheritas-app",
+  storageBucket: "loncheritas-app.firebasestorage.app",
+  messagingSenderId: "745464448000",
+  appId: "1:745464448000:web:4a6945a25cd896776004e5"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+window.login = function(){
+
+  const email=document.getElementById("login-email").value;
+  const pass=document.getElementById("login-pass").value;
+
+  signInWithEmailAndPassword(auth,email,pass)
+  .catch(()=>{
+    document.getElementById("login-error").innerText="Credenciales incorrectas";
+  });
+
+};
+
+onAuthStateChanged(auth,(user)=>{
+
+  if(user){
+
+    document.getElementById("login-screen").style.display="none";
+    document.getElementById("app").style.display="block";
+
+  }
+
+});
+
+</script>  
 </body>
+  <div id="login-screen" style="display:flex;align-items:center;justify-content:center;height:100vh;background:#FFF8F0;">
+  <div style="background:white;padding:30px;border-radius:16px;width:300px;border:1px solid #F0E8E0;text-align:center;">
+    <h2>🍱 Acceso Loncheritas</h2>
+
+    <input id="login-email" type="email" placeholder="Correo electrónico"
+    style="width:100%;padding:10px;margin-bottom:10px;border:1px solid #ddd;border-radius:8px;">
+
+    <input id="login-pass" type="password" placeholder="Contraseña"
+    style="width:100%;padding:10px;margin-bottom:15px;border:1px solid #ddd;border-radius:8px;">
+
+    <button onclick="login()"
+    style="width:100%;background:#FF6B35;color:white;border:none;padding:12px;border-radius:10px;font-weight:600;">
+    Entrar
+    </button>
+
+    <p id="login-error" style="color:red;font-size:12px;margin-top:10px;"></p>
+</div>
+</div>
+<div id="app" style="display:none;">
 </html>
