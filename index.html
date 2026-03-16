@@ -8,8 +8,8 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFF8F0; color: #2D2D2D; min-height: 100vh; }
 
-    /* LOGIN */
-    #pantalla-login {
+    /* ===== AUTH SCREENS ===== */
+    .auth-screen {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -18,46 +18,50 @@
       padding: 24px;
       background: linear-gradient(160deg, #FFF0E8 0%, #FFF8F0 60%);
     }
-    .login-logo { font-size: 64px; margin-bottom: 8px; }
-    .login-titulo { font-size: 28px; font-weight: 700; color: #2D2D2D; margin-bottom: 4px; }
-    .login-sub { font-size: 14px; color: #888; margin-bottom: 36px; text-align: center; }
-    .login-card { background: white; border-radius: 20px; padding: 28px 24px; width: 100%; max-width: 360px; box-shadow: 0 4px 24px rgba(255,107,53,0.1); border: 1px solid #F0E8E0; }
-    .login-card h2 { font-size: 18px; font-weight: 700; margin-bottom: 20px; color: #2D2D2D; }
-    .input-group { margin-bottom: 16px; }
-    .input-group label { font-size: 12px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 6px; }
-    .input-group input { width: 100%; padding: 13px 16px; border: 1.5px solid #F0E8E0; border-radius: 12px; font-size: 15px; outline: none; transition: border-color 0.2s; background: #FAFAFA; }
+    .auth-screen.hidden { display: none; }
+    .auth-logo { font-size: 60px; margin-bottom: 6px; }
+    .auth-titulo { font-size: 26px; font-weight: 700; color: #2D2D2D; margin-bottom: 4px; }
+    .auth-sub { font-size: 13px; color: #999; margin-bottom: 28px; text-align: center; line-height: 1.5; }
+    .auth-card { background: white; border-radius: 20px; padding: 24px 20px; width: 100%; max-width: 380px; box-shadow: 0 4px 24px rgba(255,107,53,0.1); border: 1px solid #F0E8E0; }
+    .auth-card h2 { font-size: 18px; font-weight: 700; margin-bottom: 18px; color: #2D2D2D; }
+    .input-group { margin-bottom: 14px; }
+    .input-group label { font-size: 11px; font-weight: 600; color: #999; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 5px; }
+    .input-group input { width: 100%; padding: 12px 14px; border: 1.5px solid #F0E8E0; border-radius: 10px; font-size: 15px; outline: none; transition: border-color 0.2s; background: #FAFAFA; }
     .input-group input:focus { border-color: #FF6B35; background: white; }
-    .btn-login { width: 100%; background: #FF6B35; color: white; border: none; border-radius: 12px; padding: 15px; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 8px; transition: opacity 0.2s; }
-    .btn-login:active { opacity: 0.85; }
-    .btn-login:disabled { opacity: 0.5; cursor: not-allowed; }
-    .login-error { background: #FFF0F0; border: 1px solid #FFD0D0; border-radius: 10px; padding: 12px; font-size: 13px; color: #C0392B; margin-top: 12px; text-align: center; display: none; }
-    .login-loading { text-align: center; font-size: 13px; color: #888; margin-top: 12px; display: none; }
-    .login-footer { margin-top: 24px; font-size: 12px; color: #BBB; text-align: center; }
+    .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .btn-primary { width: 100%; background: #FF6B35; color: white; border: none; border-radius: 12px; padding: 14px; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 6px; transition: opacity 0.2s; }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-secondary { width: 100%; background: white; color: #FF6B35; border: 1.5px solid #FF6B35; border-radius: 12px; padding: 13px; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 10px; }
+    .auth-msg { border-radius: 10px; padding: 12px; font-size: 13px; margin-top: 12px; text-align: center; display: none; line-height: 1.5; }
+    .auth-msg.error { background: #FFF0F0; border: 1px solid #FFD0D0; color: #C0392B; }
+    .auth-msg.success { background: #F0FFF4; border: 1px solid #C3E6CB; color: #276749; }
+    .auth-msg.info { background: #FFF8F0; border: 1px solid #FFD4B8; color: #B45309; }
+    .auth-footer { margin-top: 20px; font-size: 12px; color: #BBB; text-align: center; max-width: 320px; line-height: 1.5; }
+    .divider { display: flex; align-items: center; gap: 10px; margin: 16px 0; }
+    .divider hr { flex: 1; border: none; border-top: 1px solid #F0E8E0; }
+    .divider span { font-size: 12px; color: #CCC; }
 
-    /* APP (oculta hasta login) */
+    /* Pantalla pendiente */
+    .pendiente-icon { font-size: 72px; margin-bottom: 16px; }
+    .pendiente-titulo { font-size: 22px; font-weight: 700; margin-bottom: 8px; text-align: center; }
+    .pendiente-texto { font-size: 14px; color: #666; text-align: center; line-height: 1.6; max-width: 320px; margin-bottom: 24px; }
+    .pendiente-email { background: #FFF0E8; border: 1px solid #FFD4B8; border-radius: 10px; padding: 12px 16px; font-size: 14px; font-weight: 600; color: #FF6B35; margin-bottom: 20px; }
+
+    /* ===== APP ===== */
     #pantalla-app { display: none; }
-
-    /* NAV */
     .nav { background: #FF6B35; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(255,107,53,0.3); }
     .nav-logo { font-size: 20px; font-weight: 700; color: white; }
     .nav-user { background: white; color: #FF6B35; border-radius: 20px; padding: 6px 14px; font-size: 13px; font-weight: 600; cursor: pointer; border: none; }
-
-    /* BOTTOM NAV */
     .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; border-top: 1px solid #F0E8E0; z-index: 100; box-shadow: 0 -2px 12px rgba(0,0,0,0.08); }
     .bn-item { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 10px 0 8px; cursor: pointer; border: none; background: transparent; gap: 3px; }
     .bn-item .icon { font-size: 22px; }
     .bn-item .label { font-size: 10px; font-weight: 500; color: #B0A098; }
     .bn-item.active .label { color: #FF6B35; }
-
-    /* PAGES */
     .page { display: none; padding: 20px 16px 90px; }
     .page.active { display: block; }
-
-    /* LOADING */
     .loading { text-align: center; padding: 40px 20px; color: #888; font-size: 14px; }
     .loading-spinner { width: 32px; height: 32px; border: 3px solid #F0E8E0; border-top-color: #FF6B35; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 12px; }
     @keyframes spin { to { transform: rotate(360deg); } }
-
     .greeting { margin-bottom: 20px; }
     .greeting h1 { font-size: 22px; font-weight: 700; }
     .greeting p { font-size: 14px; color: #888; margin-top: 4px; }
@@ -89,8 +93,7 @@
     .filtro-btn { background: white; border: 1.5px solid #F0E8E0; border-radius: 20px; padding: 6px 14px; font-size: 12px; font-weight: 500; white-space: nowrap; cursor: pointer; color: #666; }
     .filtro-btn.active { background: #FF6B35; border-color: #FF6B35; color: white; }
     .receta-list { display: flex; flex-direction: column; gap: 12px; }
-    .receta-card { background: white; border-radius: 14px; padding: 14px; border: 1.5px solid #F0E8E0; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: transform 0.15s; }
-    .receta-card:active { transform: scale(0.98); }
+    .receta-card { background: white; border-radius: 14px; padding: 14px; border: 1.5px solid #F0E8E0; display: flex; align-items: center; gap: 12px; cursor: pointer; }
     .rc-emoji { font-size: 36px; flex-shrink: 0; }
     .rc-info { flex: 1; }
     .rc-info h4 { font-size: 15px; font-weight: 600; }
@@ -145,10 +148,11 @@
     .exp-btn { background: white; border: 1.5px solid #F0E8E0; border-radius: 12px; padding: 14px 16px; display: flex; align-items: center; gap: 12px; cursor: pointer; font-size: 14px; font-weight: 500; }
     .exp-btn .eb-icon { font-size: 22px; }
     .exp-btn.primary { background: #FF6B35; border-color: #FF6B35; color: white; }
-    .perfil-header { text-align: center; padding: 20px 0; margin-bottom: 20px; }
-    .avatar { font-size: 64px; margin-bottom: 10px; }
-    .perfil-email { font-size: 13px; color: #888; margin-top: 4px; }
-    .btn-salir { width: 100%; background: white; color: #FF6B35; border: 1.5px solid #FF6B35; border-radius: 12px; padding: 14px; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 8px; }
+    .perfil-header { text-align: center; padding: 20px 0; margin-bottom: 16px; }
+    .avatar { font-size: 56px; margin-bottom: 8px; }
+    .perfil-nombre { font-size: 20px; font-weight: 700; }
+    .perfil-email-txt { font-size: 13px; color: #888; margin-top: 4px; }
+    .btn-salir { width: 100%; background: white; color: #FF6B35; border: 1.5px solid #FF6B35; border-radius: 12px; padding: 13px; font-size: 14px; font-weight: 600; cursor: pointer; margin-bottom: 20px; }
     .nivel-grande { background: linear-gradient(135deg, #FF6B35, #FF8C5A); border-radius: 20px; padding: 20px; color: white; text-align: center; margin-bottom: 20px; }
     .nivel-grande h3 { font-size: 18px; font-weight: 700; margin-top: 8px; }
     .nivel-grande p { font-size: 13px; opacity: 0.85; margin-top: 4px; }
@@ -165,19 +169,16 @@
     .logro .l-nombre { font-size: 11px; font-weight: 600; margin-top: 4px; }
     .logro .l-desc { font-size: 10px; color: #AAA; margin-top: 2px; }
     .logro.bloqueado { opacity: 0.4; filter: grayscale(1); }
-    .empty-state { text-align: center; padding: 40px 20px; color: #AAA; }
-    .empty-state .es-icon { font-size: 48px; margin-bottom: 12px; }
   </style>
 </head>
 <body>
 
-<!-- ============ PANTALLA LOGIN ============ -->
-<div id="pantalla-login">
-  <div class="login-logo">🍱</div>
-  <div class="login-titulo">Loncheritas</div>
-  <div class="login-sub">Loncheras inteligentes para tus hijos</div>
-
-  <div class="login-card">
+<!-- ===== PANTALLA LOGIN ===== -->
+<div id="pantalla-login" class="auth-screen">
+  <div class="auth-logo">🍱</div>
+  <div class="auth-titulo">Loncheritas</div>
+  <div class="auth-sub">Loncheras inteligentes para tus hijos</div>
+  <div class="auth-card">
     <h2>Iniciar sesión</h2>
     <div class="input-group">
       <label>Correo electrónico</label>
@@ -187,26 +188,72 @@
       <label>Contraseña</label>
       <input type="password" id="login-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')iniciarSesion()" />
     </div>
-    <button class="btn-login" id="btn-login" onclick="iniciarSesion()">Entrar a la app →</button>
-    <div class="login-error" id="login-error">Email o contraseña incorrectos. Verifica tus datos.</div>
-    <div class="login-loading" id="login-loading">Verificando...</div>
+    <button class="btn-primary" id="btn-login" onclick="iniciarSesion()">Entrar a la app →</button>
+    <div class="divider"><hr/><span>¿Primera vez?</span><hr/></div>
+    <button class="btn-secondary" onclick="mostrarRegistro()">🌟 ¡Soy nueva mamita! Registrarme</button>
+    <div class="auth-msg error" id="login-error"></div>
   </div>
-
-  <div class="login-footer">¿Compraste el producto? Revisa tu email para tus credenciales de acceso.</div>
+  <div class="auth-footer">¿Olvidaste tu contraseña? Escríbenos a soporte@loncheritas.com</div>
 </div>
 
-<!-- ============ PANTALLA APP ============ -->
-<div id="pantalla-app">
+<!-- ===== PANTALLA REGISTRO ===== -->
+<div id="pantalla-registro" class="auth-screen hidden">
+  <div class="auth-logo">🌟</div>
+  <div class="auth-titulo">¡Bienvenida!</div>
+  <div class="auth-sub">Crea tu cuenta con el correo con el que compraste en Hotmart</div>
+  <div class="auth-card">
+    <h2>Crear mi cuenta</h2>
+    <div class="input-row">
+      <div class="input-group">
+        <label>Nombre</label>
+        <input type="text" id="reg-nombre" placeholder="María" />
+      </div>
+      <div class="input-group">
+        <label>Apellido</label>
+        <input type="text" id="reg-apellido" placeholder="García" />
+      </div>
+    </div>
+    <div class="input-group">
+      <label>Correo electrónico (el mismo de tu compra en Hotmart)</label>
+      <input type="email" id="reg-email" placeholder="tu@email.com" />
+    </div>
+    <div class="input-group">
+      <label>Confirmar correo electrónico</label>
+      <input type="email" id="reg-email2" placeholder="tu@email.com" />
+    </div>
+    <div class="input-group">
+      <label>Crear contraseña (mínimo 6 caracteres)</label>
+      <input type="password" id="reg-pass" placeholder="••••••••" />
+    </div>
+    <button class="btn-primary" id="btn-registro" onclick="registrarUsuario()">Crear mi cuenta</button>
+    <button class="btn-secondary" onclick="mostrarLogin()">← Ya tengo cuenta, iniciar sesión</button>
+    <div class="auth-msg error" id="reg-error"></div>
+    <div class="auth-msg success" id="reg-success"></div>
+  </div>
+  <div class="auth-footer">Tu acceso será activado luego de verificar tu compra en Hotmart. Recibirás un email de confirmación.</div>
+</div>
 
+<!-- ===== PANTALLA PENDIENTE ===== -->
+<div id="pantalla-pendiente" class="auth-screen hidden">
+  <div class="pendiente-icon">⏳</div>
+  <div class="pendiente-titulo">¡Registro recibido!</div>
+  <div class="pendiente-texto">Estamos validando tu acceso con el registro de tu compra en Hotmart. En breve recibirás un email de confirmación en:</div>
+  <div class="pendiente-email" id="pendiente-email-txt"></div>
+  <div class="pendiente-texto">Una vez aprobada tu cuenta, podrás ingresar con tu email y contraseña.<br><br>Si tienes dudas escríbenos a <strong>soporte@loncheritas.com</strong></div>
+  <button class="btn-secondary" style="max-width:320px;width:100%;" onclick="mostrarLogin()">← Volver al inicio de sesión</button>
+</div>
+
+<!-- ===== APP ===== -->
+<div id="pantalla-app">
   <nav class="nav">
     <div class="nav-logo">🍱 Loncheritas</div>
-    <button class="nav-user" onclick="showPage('perfil')">👤 Mamá</button>
+    <button class="nav-user" onclick="showPage('perfil')">👤 <span id="nav-nombre">Mamá</span></button>
   </nav>
 
   <!-- INICIO -->
   <div class="page active" id="page-inicio">
     <div class="greeting">
-      <h1>¡Hola, Mamá! 👋</h1>
+      <h1 id="saludo-nombre">¡Hola, Mamá! 👋</h1>
       <p id="fecha-texto">Cargando...</p>
     </div>
     <div class="nivel-card">
@@ -230,7 +277,7 @@
       <div class="quick-card" onclick="showPage('perfil')"><span class="q-icon">⭐</span><span class="q-title">Mi progreso</span><span class="q-sub">Logros y nivel</span></div>
     </div>
     <p class="section-title">Lonchera sugerida para hoy</p>
-    <div class="receta-hoy" id="receta-hoy-card"><div class="loading"><div class="loading-spinner"></div>Cargando receta...</div></div>
+    <div class="receta-hoy" id="receta-hoy-card"><div class="loading"><div class="loading-spinner"></div>Cargando...</div></div>
   </div>
 
   <!-- RECETAS -->
@@ -294,11 +341,10 @@
   <div class="page" id="page-perfil">
     <div class="perfil-header">
       <div class="avatar">👩</div>
-      <h2>Mamá Loncherita</h2>
-      <p class="perfil-email" id="perfil-email"></p>
+      <div class="perfil-nombre" id="perfil-nombre-txt">Mamá Loncherita</div>
+      <div class="perfil-email-txt" id="perfil-email-txt"></div>
     </div>
     <button class="btn-salir" onclick="cerrarSesion()">🚪 Cerrar sesión</button>
-    <br><br>
     <div class="nivel-grande">
       <div style="font-size:48px">🌱</div>
       <h3>Nivel 1 — Principiante</h3>
@@ -330,13 +376,13 @@
     <button class="bn-item" id="bn-lista" onclick="showPage('lista')"><span class="icon">🛒</span><span class="label">Compras</span></button>
     <button class="bn-item" id="bn-perfil" onclick="showPage('perfil')"><span class="icon">⭐</span><span class="label">Perfil</span></button>
   </nav>
+</div>
 
-</div><!-- fin pantalla-app -->
-
-<!-- Firebase SDK -->
+<!-- Firebase -->
 <script type="module">
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-  import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+  import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+  import { getFirestore, doc, setDoc, getDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
   const firebaseConfig = {
     apiKey: "AIzaSyCBgGw5NkDF68jOZG6s941v8glpUTJ03rA",
@@ -349,83 +395,164 @@
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
+  const db = getFirestore(app);
 
-  // Exponer funciones globalmente
   window._auth = auth;
+  window._db = db;
   window._signIn = signInWithEmailAndPassword;
+  window._createUser = createUserWithEmailAndPassword;
   window._signOut = signOut;
+  window._updateProfile = updateProfile;
+  window._doc = doc;
+  window._setDoc = setDoc;
+  window._getDoc = getDoc;
 
-  // Verificar si ya hay sesión activa
-  onAuthStateChanged(auth, (user) => {
+  onAuthStateChanged(auth, async (user) => {
     if (user) {
-      mostrarApp(user);
+      // Verificar si está aprobado en Firestore
+      try {
+        const snap = await getDoc(doc(db, 'usuarios', user.uid));
+        if (snap.exists()) {
+          const data = snap.data();
+          if (data.aprobado === true) {
+            mostrarApp(user, data);
+          } else {
+            // Cuenta pendiente
+            document.getElementById('pendiente-email-txt').textContent = user.email;
+            ocultarTodo();
+            document.getElementById('pantalla-pendiente').classList.remove('hidden');
+          }
+        } else {
+          // Usuario sin perfil en Firestore (creado manualmente)
+          mostrarApp(user, { nombre: 'Mamá', apellido: '' });
+        }
+      } catch(e) {
+        mostrarApp(user, { nombre: 'Mamá', apellido: '' });
+      }
     } else {
-      mostrarLogin();
+      ocultarTodo();
+      document.getElementById('pantalla-login').classList.remove('hidden');
     }
   });
 </script>
 
 <script>
-  // ============================================================
-  // AUTH
-  // ============================================================
-  function mostrarLogin() {
-    document.getElementById('pantalla-login').style.display = 'flex';
+  // ===== NAVEGACIÓN AUTH =====
+  function ocultarTodo() {
+    ['pantalla-login','pantalla-registro','pantalla-pendiente'].forEach(id => {
+      document.getElementById(id).classList.add('hidden');
+    });
     document.getElementById('pantalla-app').style.display = 'none';
   }
 
-  function mostrarApp(user) {
-    document.getElementById('pantalla-login').style.display = 'none';
+  function mostrarLogin() {
+    ocultarTodo();
+    document.getElementById('pantalla-login').classList.remove('hidden');
+  }
+
+  function mostrarRegistro() {
+    ocultarTodo();
+    document.getElementById('pantalla-registro').classList.remove('hidden');
+  }
+
+  function mostrarApp(user, perfil) {
+    ocultarTodo();
     document.getElementById('pantalla-app').style.display = 'block';
-    if (user && user.email) {
-      document.getElementById('perfil-email').textContent = user.email;
-    }
+    const nombre = perfil.nombre || 'Mamá';
+    document.getElementById('saludo-nombre').textContent = '¡Hola, ' + nombre + '! 👋';
+    document.getElementById('nav-nombre').textContent = nombre;
+    document.getElementById('perfil-nombre-txt').textContent = nombre + ' ' + (perfil.apellido || '');
+    document.getElementById('perfil-email-txt').textContent = user.email;
     cargarRecetas();
   }
 
+  // ===== LOGIN =====
   async function iniciarSesion() {
     const email = document.getElementById('login-email').value.trim();
     const pass = document.getElementById('login-pass').value;
-    const btnLogin = document.getElementById('btn-login');
-    const errorEl = document.getElementById('login-error');
-    const loadingEl = document.getElementById('login-loading');
+    const errEl = document.getElementById('login-error');
+    const btn = document.getElementById('btn-login');
 
-    if (!email || !pass) {
-      errorEl.textContent = 'Por favor ingresa tu email y contraseña.';
-      errorEl.style.display = 'block';
-      return;
-    }
+    errEl.style.display = 'none';
+    if (!email || !pass) { errEl.textContent = 'Ingresa tu email y contraseña.'; errEl.style.display = 'block'; return; }
 
-    errorEl.style.display = 'none';
-    loadingEl.style.display = 'block';
-    btnLogin.disabled = true;
-
+    btn.disabled = true;
+    btn.textContent = 'Verificando...';
     try {
       await window._signIn(window._auth, email, pass);
-      // onAuthStateChanged se encarga de mostrar la app
-    } catch (e) {
-      loadingEl.style.display = 'none';
-      btnLogin.disabled = false;
-      errorEl.textContent = 'Email o contraseña incorrectos. Verifica tus datos.';
-      errorEl.style.display = 'block';
+    } catch(e) {
+      errEl.textContent = 'Email o contraseña incorrectos. Verifica tus datos.';
+      errEl.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Entrar a la app →';
     }
   }
 
+  // ===== REGISTRO =====
+  async function registrarUsuario() {
+    const nombre = document.getElementById('reg-nombre').value.trim();
+    const apellido = document.getElementById('reg-apellido').value.trim();
+    const email = document.getElementById('reg-email').value.trim().toLowerCase();
+    const email2 = document.getElementById('reg-email2').value.trim().toLowerCase();
+    const pass = document.getElementById('reg-pass').value;
+    const errEl = document.getElementById('reg-error');
+    const succEl = document.getElementById('reg-success');
+    const btn = document.getElementById('btn-registro');
+
+    errEl.style.display = 'none';
+    succEl.style.display = 'none';
+
+    if (!nombre || !apellido) { errEl.textContent = 'Ingresa tu nombre y apellido.'; errEl.style.display = 'block'; return; }
+    if (!email) { errEl.textContent = 'Ingresa tu correo electrónico.'; errEl.style.display = 'block'; return; }
+    if (email !== email2) { errEl.textContent = 'Los correos no coinciden. Verifica que sean iguales.'; errEl.style.display = 'block'; return; }
+    if (pass.length < 6) { errEl.textContent = 'La contraseña debe tener al menos 6 caracteres.'; errEl.style.display = 'block'; return; }
+
+    btn.disabled = true;
+    btn.textContent = 'Creando tu cuenta...';
+
+    try {
+      const cred = await window._createUser(window._auth, email, pass);
+      await window._updateProfile(cred.user, { displayName: nombre + ' ' + apellido });
+
+      // Guardar en Firestore con aprobado: false
+      await window._setDoc(window._doc(window._db, 'usuarios', cred.user.uid), {
+        nombre: nombre,
+        apellido: apellido,
+        email: email,
+        aprobado: false,
+        fechaRegistro: new Date().toISOString(),
+        uid: cred.user.uid
+      });
+
+      // Cerrar sesión hasta que sea aprobada
+      await window._signOut(window._auth);
+
+      // Mostrar pantalla pendiente
+      document.getElementById('pendiente-email-txt').textContent = email;
+      ocultarTodo();
+      document.getElementById('pantalla-pendiente').classList.remove('hidden');
+
+    } catch(e) {
+      btn.disabled = false;
+      btn.textContent = 'Crear mi cuenta';
+      if (e.code === 'auth/email-already-in-use') {
+        errEl.textContent = 'Este email ya tiene una cuenta. ¿Ya te registraste? Inicia sesión.';
+      } else {
+        errEl.textContent = 'Error al crear la cuenta. Intenta nuevamente.';
+      }
+      errEl.style.display = 'block';
+    }
+  }
+
+  // ===== CERRAR SESIÓN =====
   async function cerrarSesion() {
     await window._signOut(window._auth);
     mostrarLogin();
   }
 
-  // ============================================================
-  // APP
-  // ============================================================
-  let todasLasRecetas = [];
-  let recetasFiltradas = [];
-  let filtroActivo = 'todas';
-  let numHijos = 2;
-  let calendarioSemanal = {};
-  let checksLista = {};
-  let paginaAnterior = 'recetas';
+  // ===== APP =====
+  let todasLasRecetas = [], recetasFiltradas = [], numHijos = 2;
+  let calendarioSemanal = {}, checksLista = {}, paginaAnterior = 'recetas';
   const DIAS_CORTOS = ['LUN','MAR','MIÉ','JUE','VIE'];
   const CLAVES_DIAS = ['lunes','martes','miercoles','jueves','viernes'];
 
@@ -436,9 +563,7 @@
       todasLasRecetas = data.recetas;
       recetasFiltradas = [...todasLasRecetas];
       inicializar();
-    } catch(e) {
-      console.error('Error cargando recetas', e);
-    }
+    } catch(e) { console.error(e); }
   }
 
   function inicializar() {
@@ -451,8 +576,8 @@
     document.getElementById('sub-recetas').textContent = total + ' disponibles';
     document.getElementById('sub-total-recetas').textContent = total + ' recetas disponibles';
     const ahora = new Date();
-    const fechaStr = ahora.toLocaleDateString('es-PE',{weekday:'long',day:'numeric',month:'long'});
-    document.getElementById('fecha-texto').textContent = fechaStr.charAt(0).toUpperCase()+fechaStr.slice(1)+' · Lima';
+    const f = ahora.toLocaleDateString('es-PE',{weekday:'long',day:'numeric',month:'long'});
+    document.getElementById('fecha-texto').textContent = f.charAt(0).toUpperCase()+f.slice(1)+' · Lima';
     renderRecetaHoy(todasLasRecetas[ahora.getDay() % total]);
     renderRecetas(todasLasRecetas);
     generarCalendarioDefault();
@@ -480,7 +605,7 @@
 
   function renderRecetas(lista) {
     const c = document.getElementById('lista-recetas');
-    if(!lista.length){c.innerHTML='<div class="empty-state"><div class="es-icon">🔍</div><p>No se encontraron recetas</p></div>';return;}
+    if(!lista.length){c.innerHTML='<div style="text-align:center;padding:40px;color:#AAA">🔍 No se encontraron recetas</div>';return;}
     c.innerHTML = lista.map(r=>`
       <div class="receta-card" onclick="verDetalle('${r.id}','recetas')">
         <span class="rc-emoji">${r.emoji}</span>
@@ -500,7 +625,6 @@
   function filtrar(btn,tipo) {
     document.querySelectorAll('.filtro-btn').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
-    filtroActivo=tipo;
     document.getElementById('search-input').value='';
     if(tipo==='todas') recetasFiltradas=[...todasLasRecetas];
     else if(tipo==='rapidas') recetasFiltradas=todasLasRecetas.filter(r=>r.tiempo_min<=15);
@@ -549,11 +673,7 @@
 
   function agregarAlCalendario(id) {
     const diaLibre=CLAVES_DIAS.find(d=>!calendarioSemanal[d]);
-    if(diaLibre){
-      calendarioSemanal[diaLibre]=todasLasRecetas.find(r=>r.id===id);
-      renderCalendario();
-      renderListaCompras();
-    }
+    if(diaLibre){ calendarioSemanal[diaLibre]=todasLasRecetas.find(r=>r.id===id); renderCalendario(); renderListaCompras(); }
     showPage('calendario');
   }
 
@@ -581,10 +701,8 @@
   }
 
   function cambiarRecetaDia(dia) {
-    const idx=Math.floor(Math.random()*todasLasRecetas.length);
-    calendarioSemanal[dia]=todasLasRecetas[idx];
-    renderCalendario();
-    renderListaCompras();
+    calendarioSemanal[dia]=todasLasRecetas[Math.floor(Math.random()*todasLasRecetas.length)];
+    renderCalendario(); renderListaCompras();
   }
 
   function cambiarHijos(delta) {
@@ -600,10 +718,7 @@
     const map={};
     Object.values(calendarioSemanal).forEach(r=>{
       if(!r)return;
-      r.ingredientes.forEach(ing=>{
-        const k=ing.toLowerCase().trim();
-        if(!map[k])map[k]={nombre:ing};
-      });
+      r.ingredientes.forEach(ing=>{ const k=ing.toLowerCase().trim(); if(!map[k])map[k]={nombre:ing}; });
     });
     const grupos={'🥩 Proteínas':[],'🥦 Verduras y frutas':[],'🌾 Harinas y cereales':[],'🥚 Huevos y lácteos':[],'🍯 Otros':[]};
     const kw={proteinas:['pollo','carne','pavo','atún','lentejas','pescado'],verduras:['zanahoria','espinaca','brócoli','brocoli','manzana','plátano','platano','fresa','mango','beterraga','papa','palta','tomate','apio','cebolla'],harinas:['harina','avena','arroz','pan','tortilla','maicena','fécula','quinua','kiwicha'],lacteos:['leche','yogurt','queso','mantequilla']};
@@ -618,9 +733,7 @@
     document.getElementById('lista-ingredientes').innerHTML=Object.entries(grupos).filter(([,v])=>v.length>0).map(([cat,items])=>`
       <div class="categoria-lista">
         <div class="cat-titulo">${cat}</div>
-        ${items.map((item,i)=>{
-          const k=cat+i;
-          const ch=checksLista[k];
+        ${items.map((item,i)=>{ const k=cat+i; const ch=checksLista[k];
           return `<div class="item-compra">
             <div class="item-check ${ch?'checked':''}" onclick="toggleCheck('${k}',this,document.getElementById('ing-${k}'))">${ch?'✓':''}</div>
             <span class="item-nombre ${ch?'tachado':''}" id="ing-${k}">${item.nombre}</span>
@@ -630,31 +743,18 @@
     `).join('');
   }
 
-  function toggleCheck(k,el,nEl){
-    checksLista[k]=!checksLista[k];
-    el.classList.toggle('checked',checksLista[k]);
-    el.innerHTML=checksLista[k]?'✓':'';
-    if(nEl)nEl.classList.toggle('tachado',checksLista[k]);
-  }
+  function toggleCheck(k,el,nEl){ checksLista[k]=!checksLista[k]; el.classList.toggle('checked',checksLista[k]); el.innerHTML=checksLista[k]?'✓':''; if(nEl)nEl.classList.toggle('tachado',checksLista[k]); }
 
   function exportarWhatsApp(){
     let t='🍱 *Lista de compras Loncheritas*\n👧 '+numHijos+' hijos\n\n';
-    document.querySelectorAll('.categoria-lista').forEach(c=>{
-      t+='*'+c.querySelector('.cat-titulo').textContent+'*\n';
-      c.querySelectorAll('.item-nombre').forEach(i=>{t+='• '+i.textContent+'\n';});
-      t+='\n';
-    });
+    document.querySelectorAll('.categoria-lista').forEach(c=>{ t+='*'+c.querySelector('.cat-titulo').textContent+'*\n'; c.querySelectorAll('.item-nombre').forEach(i=>{t+='• '+i.textContent+'\n';}); t+='\n'; });
     t+='_Generado con Loncheritas App 🍱_';
     window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank');
   }
 
   function copiarLista(){
     let t='🍱 Lista de compras Loncheritas\n\n';
-    document.querySelectorAll('.categoria-lista').forEach(c=>{
-      t+=c.querySelector('.cat-titulo').textContent+'\n';
-      c.querySelectorAll('.item-nombre').forEach(i=>{t+='☐ '+i.textContent+'\n';});
-      t+='\n';
-    });
+    document.querySelectorAll('.categoria-lista').forEach(c=>{ t+=c.querySelector('.cat-titulo').textContent+'\n'; c.querySelectorAll('.item-nombre').forEach(i=>{t+='☐ '+i.textContent+'\n';}); t+='\n'; });
     navigator.clipboard.writeText(t).then(()=>alert('✅ Lista copiada'));
   }
 </script>
