@@ -9,15 +9,7 @@
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFF8F0; color: #2D2D2D; min-height: 100vh; }
 
     /* ===== AUTH SCREENS ===== */
-    .auth-screen {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      background: linear-gradient(160deg, #FFF0E8 0%, #FFF8F0 60%);
-    }
+    .auth-screen { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; background: linear-gradient(160deg, #FFF0E8 0%, #FFF8F0 60%); }
     .auth-screen.hidden { display: none; }
     .auth-logo { font-size: 60px; margin-bottom: 6px; }
     .auth-titulo { font-size: 26px; font-weight: 700; color: #2D2D2D; margin-bottom: 4px; }
@@ -35,17 +27,25 @@
     .auth-msg { border-radius: 10px; padding: 12px; font-size: 13px; margin-top: 12px; text-align: center; display: none; line-height: 1.5; }
     .auth-msg.error { background: #FFF0F0; border: 1px solid #FFD0D0; color: #C0392B; }
     .auth-msg.success { background: #F0FFF4; border: 1px solid #C3E6CB; color: #276749; }
-    .auth-msg.info { background: #FFF8F0; border: 1px solid #FFD4B8; color: #B45309; }
-    .auth-footer { margin-top: 20px; font-size: 12px; color: #BBB; text-align: center; max-width: 320px; line-height: 1.5; }
     .divider { display: flex; align-items: center; gap: 10px; margin: 16px 0; }
     .divider hr { flex: 1; border: none; border-top: 1px solid #F0E8E0; }
     .divider span { font-size: 12px; color: #CCC; }
+    .auth-footer { margin-top: 20px; font-size: 12px; color: #BBB; text-align: center; max-width: 320px; line-height: 1.5; }
 
-    /* Pantalla pendiente */
-    .pendiente-icon { font-size: 72px; margin-bottom: 16px; }
-    .pendiente-titulo { font-size: 22px; font-weight: 700; margin-bottom: 8px; text-align: center; }
-    .pendiente-texto { font-size: 14px; color: #666; text-align: center; line-height: 1.6; max-width: 320px; margin-bottom: 24px; }
-    .pendiente-email { background: #FFF0E8; border: 1px solid #FFD4B8; border-radius: 10px; padding: 12px 16px; font-size: 14px; font-weight: 600; color: #FF6B35; margin-bottom: 20px; }
+    /* ===== PANTALLA PENDIENTE ===== */
+    .pendiente-container { max-width: 340px; width: 100%; text-align: center; }
+    .pendiente-steps { background: white; border-radius: 20px; padding: 28px 24px; box-shadow: 0 4px 24px rgba(255,107,53,0.1); border: 1px solid #F0E8E0; margin-bottom: 20px; }
+    .step { display: flex; align-items: center; gap: 14px; padding: 14px 0; border-bottom: 1px solid #F5EDE8; text-align: left; }
+    .step:last-child { border-bottom: none; padding-bottom: 0; }
+    .step-icon { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .step-icon.done { background: #F0FFF4; }
+    .step-icon.active { background: #FFF0E8; animation: pulse 1.5s ease-in-out infinite; }
+    .step-icon.waiting { background: #F5F5F5; }
+    @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.1)} }
+    .step-info h4 { font-size: 14px; font-weight: 600; color: #2D2D2D; }
+    .step-info p { font-size: 12px; color: #888; margin-top: 2px; }
+    .pendiente-email-box { background: #FFF0E8; border: 1px solid #FFD4B8; border-radius: 12px; padding: 12px 16px; font-size: 13px; font-weight: 600; color: #FF6B35; margin-bottom: 16px; word-break: break-all; }
+    .pendiente-nota { font-size: 12px; color: #AAA; line-height: 1.6; margin-bottom: 20px; }
 
     /* ===== APP ===== */
     #pantalla-app { display: none; }
@@ -173,7 +173,7 @@
 </head>
 <body>
 
-<!-- ===== PANTALLA LOGIN ===== -->
+<!-- ===== LOGIN ===== -->
 <div id="pantalla-login" class="auth-screen">
   <div class="auth-logo">🍱</div>
   <div class="auth-titulo">Loncheritas</div>
@@ -193,25 +193,19 @@
     <button class="btn-secondary" onclick="mostrarRegistro()">🌟 ¡Soy nueva mamita! Registrarme</button>
     <div class="auth-msg error" id="login-error"></div>
   </div>
-  <div class="auth-footer">¿Olvidaste tu contraseña? Escríbenos a soporte@loncheritas.com</div>
+  <div class="auth-footer">¿Problemas para ingresar? Escríbenos a soporte@loncheritas.com</div>
 </div>
 
-<!-- ===== PANTALLA REGISTRO ===== -->
+<!-- ===== REGISTRO ===== -->
 <div id="pantalla-registro" class="auth-screen hidden">
   <div class="auth-logo">🌟</div>
   <div class="auth-titulo">¡Bienvenida!</div>
-  <div class="auth-sub">Crea tu cuenta con el correo con el que compraste en Hotmart</div>
+  <div class="auth-sub">Usa el mismo correo con el que compraste en Hotmart</div>
   <div class="auth-card">
     <h2>Crear mi cuenta</h2>
     <div class="input-row">
-      <div class="input-group">
-        <label>Nombre</label>
-        <input type="text" id="reg-nombre" placeholder="María" />
-      </div>
-      <div class="input-group">
-        <label>Apellido</label>
-        <input type="text" id="reg-apellido" placeholder="García" />
-      </div>
+      <div class="input-group"><label>Nombre</label><input type="text" id="reg-nombre" placeholder="María" /></div>
+      <div class="input-group"><label>Apellido</label><input type="text" id="reg-apellido" placeholder="García" /></div>
     </div>
     <div class="input-group">
       <label>Correo electrónico (el mismo de tu compra en Hotmart)</label>
@@ -222,25 +216,48 @@
       <input type="email" id="reg-email2" placeholder="tu@email.com" />
     </div>
     <div class="input-group">
-      <label>Crear contraseña (mínimo 6 caracteres)</label>
+      <label>Contraseña (mínimo 6 caracteres)</label>
       <input type="password" id="reg-pass" placeholder="••••••••" />
     </div>
     <button class="btn-primary" id="btn-registro" onclick="registrarUsuario()">Crear mi cuenta</button>
-    <button class="btn-secondary" onclick="mostrarLogin()">← Ya tengo cuenta, iniciar sesión</button>
+    <button class="btn-secondary" onclick="mostrarLogin()">← Ya tengo cuenta</button>
     <div class="auth-msg error" id="reg-error"></div>
-    <div class="auth-msg success" id="reg-success"></div>
   </div>
-  <div class="auth-footer">Tu acceso será activado luego de verificar tu compra en Hotmart. Recibirás un email de confirmación.</div>
+  <div class="auth-footer">Tu acceso será activado luego de verificar tu compra en Hotmart.</div>
 </div>
 
-<!-- ===== PANTALLA PENDIENTE ===== -->
+<!-- ===== PENDIENTE (con listener en tiempo real) ===== -->
 <div id="pantalla-pendiente" class="auth-screen hidden">
-  <div class="pendiente-icon">⏳</div>
-  <div class="pendiente-titulo">¡Registro recibido!</div>
-  <div class="pendiente-texto">Estamos validando tu acceso con el registro de tu compra en Hotmart. En breve recibirás un email de confirmación en:</div>
-  <div class="pendiente-email" id="pendiente-email-txt"></div>
-  <div class="pendiente-texto">Una vez aprobada tu cuenta, podrás ingresar con tu email y contraseña.<br><br>Si tienes dudas escríbenos a <strong>soporte@loncheritas.com</strong></div>
-  <button class="btn-secondary" style="max-width:320px;width:100%;" onclick="mostrarLogin()">← Volver al inicio de sesión</button>
+  <div class="auth-logo">⏳</div>
+  <div class="auth-titulo">¡Registro recibido!</div>
+  <div class="auth-sub">Estamos validando tu acceso</div>
+  <div class="pendiente-container">
+    <div class="pendiente-steps">
+      <div class="step">
+        <div class="step-icon done">✅</div>
+        <div class="step-info">
+          <h4>Registro completado</h4>
+          <p>Tu cuenta fue creada exitosamente</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-icon active">🔍</div>
+        <div class="step-info">
+          <h4>Validando tu compra en Hotmart</h4>
+          <p id="pendiente-email-txt" style="word-break:break-all;color:#FF6B35;font-weight:600;"></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-icon waiting" id="step-acceso-icon">🔒</div>
+        <div class="step-info">
+          <h4 id="step-acceso-titulo">Acceso pendiente</h4>
+          <p id="step-acceso-desc">Te notificaremos cuando esté listo</p>
+        </div>
+      </div>
+    </div>
+    <div class="pendiente-nota">Esta pantalla se actualizará automáticamente cuando tu acceso sea aprobado. No necesitas recargar la página. 🙌</div>
+    <button class="btn-secondary" onclick="cerrarSesionPendiente()">← Volver al inicio de sesión</button>
+  </div>
 </div>
 
 <!-- ===== APP ===== -->
@@ -250,7 +267,6 @@
     <button class="nav-user" onclick="showPage('perfil')">👤 <span id="nav-nombre">Mamá</span></button>
   </nav>
 
-  <!-- INICIO -->
   <div class="page active" id="page-inicio">
     <div class="greeting">
       <h1 id="saludo-nombre">¡Hola, Mamá! 👋</h1>
@@ -280,7 +296,6 @@
     <div class="receta-hoy" id="receta-hoy-card"><div class="loading"><div class="loading-spinner"></div>Cargando...</div></div>
   </div>
 
-  <!-- RECETAS -->
   <div class="page" id="page-recetas">
     <div class="greeting"><h1>🥗 Recetas</h1><p id="sub-total-recetas">Cargando...</p></div>
     <input class="search-bar" type="text" placeholder="🔍  Buscar receta o ingrediente..." oninput="buscarRecetas(this.value)" id="search-input" />
@@ -294,13 +309,11 @@
     <div class="receta-list" id="lista-recetas"><div class="loading"><div class="loading-spinner"></div>Cargando recetas...</div></div>
   </div>
 
-  <!-- DETALLE -->
   <div class="page" id="page-detalle">
     <div class="detalle-back" onclick="volverDeDetalle()">← Volver</div>
     <div id="detalle-contenido"></div>
   </div>
 
-  <!-- CALENDARIO -->
   <div class="page" id="page-calendario">
     <div class="greeting"><h1>📅 Calendario semanal</h1><p>Planifica la semana de tus hijos</p></div>
     <div class="hijos-selector">
@@ -315,7 +328,6 @@
     <button class="btn-generar-lista" onclick="showPage('lista')">🛒 Generar lista de compras</button>
   </div>
 
-  <!-- LISTA -->
   <div class="page" id="page-lista">
     <div class="greeting"><h1>🛒 Lista de compras</h1><p>Ingredientes para toda la semana</p></div>
     <div class="lista-header">
@@ -337,7 +349,6 @@
     </div>
   </div>
 
-  <!-- PERFIL -->
   <div class="page" id="page-perfil">
     <div class="perfil-header">
       <div class="avatar">👩</div>
@@ -378,11 +389,10 @@
   </nav>
 </div>
 
-<!-- Firebase -->
 <script type="module">
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
   import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
-  import { getFirestore, doc, setDoc, getDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+  import { getFirestore, doc, setDoc, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
   const firebaseConfig = {
     apiKey: "AIzaSyCBgGw5NkDF68jOZG6s941v8glpUTJ03rA",
@@ -405,31 +415,33 @@
   window._updateProfile = updateProfile;
   window._doc = doc;
   window._setDoc = setDoc;
-  window._getDoc = getDoc;
+  window._onSnapshot = onSnapshot;
 
-  onAuthStateChanged(auth, async (user) => {
+  let unsubscribeListener = null;
+
+  onAuthStateChanged(auth, (user) => {
     if (user) {
-      // Verificar si está aprobado en Firestore
-      try {
-        const snap = await getDoc(doc(db, 'usuarios', user.uid));
+      // Escuchar en tiempo real el documento del usuario
+      if (unsubscribeListener) unsubscribeListener();
+      unsubscribeListener = onSnapshot(doc(db, 'usuarios', user.uid), (snap) => {
         if (snap.exists()) {
           const data = snap.data();
           if (data.aprobado === true) {
+            // ¡Aprobado! Entrar a la app automáticamente
             mostrarApp(user, data);
           } else {
-            // Cuenta pendiente
-            document.getElementById('pendiente-email-txt').textContent = user.email;
+            // Pendiente — mostrar pantalla de espera
             ocultarTodo();
             document.getElementById('pantalla-pendiente').classList.remove('hidden');
+            document.getElementById('pendiente-email-txt').textContent = user.email;
           }
         } else {
-          // Usuario sin perfil en Firestore (creado manualmente)
+          // Usuario sin perfil Firestore (creado manualmente) — dar acceso directo
           mostrarApp(user, { nombre: 'Mamá', apellido: '' });
         }
-      } catch(e) {
-        mostrarApp(user, { nombre: 'Mamá', apellido: '' });
-      }
+      });
     } else {
+      if (unsubscribeListener) { unsubscribeListener(); unsubscribeListener = null; }
       ocultarTodo();
       document.getElementById('pantalla-login').classList.remove('hidden');
     }
@@ -437,7 +449,6 @@
 </script>
 
 <script>
-  // ===== NAVEGACIÓN AUTH =====
   function ocultarTodo() {
     ['pantalla-login','pantalla-registro','pantalla-pendiente'].forEach(id => {
       document.getElementById(id).classList.add('hidden');
@@ -466,29 +477,23 @@
     cargarRecetas();
   }
 
-  // ===== LOGIN =====
   async function iniciarSesion() {
     const email = document.getElementById('login-email').value.trim();
     const pass = document.getElementById('login-pass').value;
     const errEl = document.getElementById('login-error');
     const btn = document.getElementById('btn-login');
-
     errEl.style.display = 'none';
     if (!email || !pass) { errEl.textContent = 'Ingresa tu email y contraseña.'; errEl.style.display = 'block'; return; }
-
-    btn.disabled = true;
-    btn.textContent = 'Verificando...';
+    btn.disabled = true; btn.textContent = 'Verificando...';
     try {
       await window._signIn(window._auth, email, pass);
     } catch(e) {
-      errEl.textContent = 'Email o contraseña incorrectos. Verifica tus datos.';
+      errEl.textContent = 'Email o contraseña incorrectos.';
       errEl.style.display = 'block';
-      btn.disabled = false;
-      btn.textContent = 'Entrar a la app →';
+      btn.disabled = false; btn.textContent = 'Entrar a la app →';
     }
   }
 
-  // ===== REGISTRO =====
   async function registrarUsuario() {
     const nombre = document.getElementById('reg-nombre').value.trim();
     const apellido = document.getElementById('reg-apellido').value.trim();
@@ -496,47 +501,27 @@
     const email2 = document.getElementById('reg-email2').value.trim().toLowerCase();
     const pass = document.getElementById('reg-pass').value;
     const errEl = document.getElementById('reg-error');
-    const succEl = document.getElementById('reg-success');
     const btn = document.getElementById('btn-registro');
-
     errEl.style.display = 'none';
-    succEl.style.display = 'none';
-
     if (!nombre || !apellido) { errEl.textContent = 'Ingresa tu nombre y apellido.'; errEl.style.display = 'block'; return; }
     if (!email) { errEl.textContent = 'Ingresa tu correo electrónico.'; errEl.style.display = 'block'; return; }
     if (email !== email2) { errEl.textContent = 'Los correos no coinciden. Verifica que sean iguales.'; errEl.style.display = 'block'; return; }
     if (pass.length < 6) { errEl.textContent = 'La contraseña debe tener al menos 6 caracteres.'; errEl.style.display = 'block'; return; }
-
-    btn.disabled = true;
-    btn.textContent = 'Creando tu cuenta...';
-
+    btn.disabled = true; btn.textContent = 'Creando tu cuenta...';
     try {
       const cred = await window._createUser(window._auth, email, pass);
       await window._updateProfile(cred.user, { displayName: nombre + ' ' + apellido });
-
-      // Guardar en Firestore con aprobado: false
       await window._setDoc(window._doc(window._db, 'usuarios', cred.user.uid), {
-        nombre: nombre,
-        apellido: apellido,
-        email: email,
+        nombre, apellido, email,
         aprobado: false,
         fechaRegistro: new Date().toISOString(),
         uid: cred.user.uid
       });
-
-      // Cerrar sesión hasta que sea aprobada
-      await window._signOut(window._auth);
-
-      // Mostrar pantalla pendiente
-      document.getElementById('pendiente-email-txt').textContent = email;
-      ocultarTodo();
-      document.getElementById('pantalla-pendiente').classList.remove('hidden');
-
+      // El onSnapshot se activa automáticamente y muestra pantalla pendiente
     } catch(e) {
-      btn.disabled = false;
-      btn.textContent = 'Crear mi cuenta';
+      btn.disabled = false; btn.textContent = 'Crear mi cuenta';
       if (e.code === 'auth/email-already-in-use') {
-        errEl.textContent = 'Este email ya tiene una cuenta. ¿Ya te registraste? Inicia sesión.';
+        errEl.textContent = 'Este email ya tiene una cuenta. Inicia sesión.';
       } else {
         errEl.textContent = 'Error al crear la cuenta. Intenta nuevamente.';
       }
@@ -544,10 +529,12 @@
     }
   }
 
-  // ===== CERRAR SESIÓN =====
   async function cerrarSesion() {
     await window._signOut(window._auth);
-    mostrarLogin();
+  }
+
+  async function cerrarSesionPendiente() {
+    await window._signOut(window._auth);
   }
 
   // ===== APP =====
