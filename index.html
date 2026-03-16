@@ -7,32 +7,27 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFF8F0; color: #2D2D2D; min-height: 100vh; }
-
-    /* ===== AUTH SCREENS ===== */
     .auth-screen { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; background: linear-gradient(160deg, #FFF0E8 0%, #FFF8F0 60%); }
     .auth-screen.hidden { display: none; }
     .auth-logo { font-size: 60px; margin-bottom: 6px; }
     .auth-titulo { font-size: 26px; font-weight: 700; color: #2D2D2D; margin-bottom: 4px; }
     .auth-sub { font-size: 13px; color: #999; margin-bottom: 28px; text-align: center; line-height: 1.5; }
     .auth-card { background: white; border-radius: 20px; padding: 24px 20px; width: 100%; max-width: 380px; box-shadow: 0 4px 24px rgba(255,107,53,0.1); border: 1px solid #F0E8E0; }
-    .auth-card h2 { font-size: 18px; font-weight: 700; margin-bottom: 18px; color: #2D2D2D; }
+    .auth-card h2 { font-size: 18px; font-weight: 700; margin-bottom: 18px; }
     .input-group { margin-bottom: 14px; }
     .input-group label { font-size: 11px; font-weight: 600; color: #999; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 5px; }
     .input-group input { width: 100%; padding: 12px 14px; border: 1.5px solid #F0E8E0; border-radius: 10px; font-size: 15px; outline: none; transition: border-color 0.2s; background: #FAFAFA; }
     .input-group input:focus { border-color: #FF6B35; background: white; }
     .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .btn-primary { width: 100%; background: #FF6B35; color: white; border: none; border-radius: 12px; padding: 14px; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 6px; transition: opacity 0.2s; }
+    .btn-primary { width: 100%; background: #FF6B35; color: white; border: none; border-radius: 12px; padding: 14px; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 6px; }
     .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
     .btn-secondary { width: 100%; background: white; color: #FF6B35; border: 1.5px solid #FF6B35; border-radius: 12px; padding: 13px; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 10px; }
     .auth-msg { border-radius: 10px; padding: 12px; font-size: 13px; margin-top: 12px; text-align: center; display: none; line-height: 1.5; }
     .auth-msg.error { background: #FFF0F0; border: 1px solid #FFD0D0; color: #C0392B; }
-    .auth-msg.success { background: #F0FFF4; border: 1px solid #C3E6CB; color: #276749; }
     .divider { display: flex; align-items: center; gap: 10px; margin: 16px 0; }
     .divider hr { flex: 1; border: none; border-top: 1px solid #F0E8E0; }
     .divider span { font-size: 12px; color: #CCC; }
     .auth-footer { margin-top: 20px; font-size: 12px; color: #BBB; text-align: center; max-width: 320px; line-height: 1.5; }
-
-    /* ===== PANTALLA PENDIENTE ===== */
     .pendiente-container { max-width: 340px; width: 100%; text-align: center; }
     .pendiente-steps { background: white; border-radius: 20px; padding: 28px 24px; box-shadow: 0 4px 24px rgba(255,107,53,0.1); border: 1px solid #F0E8E0; margin-bottom: 20px; }
     .step { display: flex; align-items: center; gap: 14px; padding: 14px 0; border-bottom: 1px solid #F5EDE8; text-align: left; }
@@ -42,12 +37,10 @@
     .step-icon.active { background: #FFF0E8; animation: pulse 1.5s ease-in-out infinite; }
     .step-icon.waiting { background: #F5F5F5; }
     @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.1)} }
-    .step-info h4 { font-size: 14px; font-weight: 600; color: #2D2D2D; }
+    .step-info h4 { font-size: 14px; font-weight: 600; }
     .step-info p { font-size: 12px; color: #888; margin-top: 2px; }
-    .pendiente-email-box { background: #FFF0E8; border: 1px solid #FFD4B8; border-radius: 12px; padding: 12px 16px; font-size: 13px; font-weight: 600; color: #FF6B35; margin-bottom: 16px; word-break: break-all; }
     .pendiente-nota { font-size: 12px; color: #AAA; line-height: 1.6; margin-bottom: 20px; }
 
-    /* ===== APP ===== */
     #pantalla-app { display: none; }
     .nav { background: #FF6B35; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(255,107,53,0.3); }
     .nav-logo { font-size: 20px; font-weight: 700; color: white; }
@@ -70,7 +63,7 @@
     .nivel-info h3 { font-size: 16px; font-weight: 700; }
     .nivel-info p { font-size: 12px; opacity: 0.85; margin-top: 2px; }
     .nivel-bar-wrap { margin-top: 8px; background: rgba(255,255,255,0.3); border-radius: 10px; height: 6px; width: 140px; }
-    .nivel-bar { background: white; border-radius: 10px; height: 6px; width: 30%; }
+    .nivel-bar { background: white; border-radius: 10px; height: 6px; transition: width 0.5s; }
     .section-title { font-size: 13px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; }
     .quick-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
     .quick-card { background: white; border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 6px; cursor: pointer; border: 1.5px solid #F0E8E0; transition: transform 0.15s; }
@@ -93,7 +86,7 @@
     .filtro-btn { background: white; border: 1.5px solid #F0E8E0; border-radius: 20px; padding: 6px 14px; font-size: 12px; font-weight: 500; white-space: nowrap; cursor: pointer; color: #666; }
     .filtro-btn.active { background: #FF6B35; border-color: #FF6B35; color: white; }
     .receta-list { display: flex; flex-direction: column; gap: 12px; }
-    .receta-card { background: white; border-radius: 14px; padding: 14px; border: 1.5px solid #F0E8E0; display: flex; align-items: center; gap: 12px; cursor: pointer; }
+    .receta-card { background: white; border-radius: 14px; padding: 14px; border: 1.5px solid #F0E8E0; display: flex; align-items: center; gap: 12px; cursor: pointer; position: relative; }
     .rc-emoji { font-size: 36px; flex-shrink: 0; }
     .rc-info { flex: 1; }
     .rc-info h4 { font-size: 15px; font-weight: 600; }
@@ -102,7 +95,7 @@
     .rc-tag { font-size: 10px; background: #FFF0E8; color: #FF6B35; padding: 2px 8px; border-radius: 10px; font-weight: 500; }
     .rc-tag.salada { background: #E8F5E8; color: #2E7D32; }
     .rc-tag.gomita { background: #EEF0FB; color: #3F51B5; }
-    .rc-arrow { font-size: 18px; color: #CCC; flex-shrink: 0; }
+    .rc-fav { font-size: 20px; cursor: pointer; padding: 4px; flex-shrink: 0; }
     .detalle-back { display: flex; align-items: center; gap: 8px; cursor: pointer; color: #FF6B35; font-size: 14px; font-weight: 600; margin-bottom: 20px; }
     .detalle-header { background: white; border-radius: 16px; padding: 20px; margin-bottom: 16px; border: 1.5px solid #F0E8E0; text-align: center; }
     .detalle-emoji { font-size: 64px; margin-bottom: 12px; }
@@ -118,7 +111,9 @@
     .paso-item:last-child { border-bottom: none; }
     .paso-num { width: 24px; height: 24px; background: #FF6B35; color: white; border-radius: 50%; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .paso-text { font-size: 14px; line-height: 1.5; padding-top: 3px; }
-    .btn-agregar-cal { width: 100%; background: #FF6B35; color: white; border: none; border-radius: 14px; padding: 16px; font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 4px; }
+    .detalle-acciones { display: flex; gap: 10px; margin-top: 4px; }
+    .btn-preparar { flex: 1; background: #FF6B35; color: white; border: none; border-radius: 14px; padding: 15px; font-size: 15px; font-weight: 600; cursor: pointer; }
+    .btn-fav-detalle { background: white; border: 1.5px solid #F0E8E0; border-radius: 14px; padding: 15px 18px; font-size: 20px; cursor: pointer; }
     .hijos-selector { display: flex; align-items: center; gap: 12px; background: white; padding: 14px 16px; border-radius: 14px; border: 1.5px solid #F0E8E0; margin-bottom: 16px; }
     .hijos-selector span { font-size: 13px; color: #666; }
     .hijos-btn { background: #FF6B35; color: white; border: none; border-radius: 8px; width: 30px; height: 30px; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
@@ -157,46 +152,45 @@
     .nivel-grande h3 { font-size: 18px; font-weight: 700; margin-top: 8px; }
     .nivel-grande p { font-size: 13px; opacity: 0.85; margin-top: 4px; }
     .xp-bar-wrap { background: rgba(255,255,255,0.3); border-radius: 10px; height: 8px; margin-top: 12px; }
-    .xp-bar-fill { background: white; border-radius: 10px; height: 8px; width: 30%; }
+    .xp-bar-fill { background: white; border-radius: 10px; height: 8px; transition: width 0.5s; }
     .xp-label { font-size: 11px; opacity: 0.8; margin-top: 6px; }
     .stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 20px; }
     .stat-card { background: white; border-radius: 14px; padding: 14px; text-align: center; border: 1.5px solid #F0E8E0; }
     .stat-card .s-num { font-size: 24px; font-weight: 700; color: #FF6B35; }
     .stat-card .s-label { font-size: 11px; color: #888; margin-top: 2px; }
-    .logros-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+    .logros-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 20px; }
     .logro { background: white; border-radius: 14px; padding: 14px 10px; text-align: center; border: 1.5px solid #F0E8E0; }
     .logro .l-emoji { font-size: 28px; }
     .logro .l-nombre { font-size: 11px; font-weight: 600; margin-top: 4px; }
     .logro .l-desc { font-size: 10px; color: #AAA; margin-top: 2px; }
     .logro.bloqueado { opacity: 0.4; filter: grayscale(1); }
+    .favoritas-empty { text-align: center; padding: 30px 20px; color: #AAA; font-size: 14px; }
+    .toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); background: #2D2D2D; color: white; padding: 10px 20px; border-radius: 20px; font-size: 13px; font-weight: 500; z-index: 999; opacity: 0; transition: opacity 0.3s; pointer-events: none; white-space: nowrap; }
+    .toast.show { opacity: 1; }
   </style>
 </head>
 <body>
 
-<!-- ===== LOGIN ===== -->
+<div class="toast" id="toast"></div>
+
+<!-- LOGIN -->
 <div id="pantalla-login" class="auth-screen">
   <div class="auth-logo">🍱</div>
   <div class="auth-titulo">Loncheritas</div>
   <div class="auth-sub">Loncheras inteligentes para tus hijos</div>
   <div class="auth-card">
     <h2>Iniciar sesión</h2>
-    <div class="input-group">
-      <label>Correo electrónico</label>
-      <input type="email" id="login-email" placeholder="tu@email.com" />
-    </div>
-    <div class="input-group">
-      <label>Contraseña</label>
-      <input type="password" id="login-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')iniciarSesion()" />
-    </div>
+    <div class="input-group"><label>Correo electrónico</label><input type="email" id="login-email" placeholder="tu@email.com" /></div>
+    <div class="input-group"><label>Contraseña</label><input type="password" id="login-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')iniciarSesion()" /></div>
     <button class="btn-primary" id="btn-login" onclick="iniciarSesion()">Entrar a la app →</button>
     <div class="divider"><hr/><span>¿Primera vez?</span><hr/></div>
     <button class="btn-secondary" onclick="mostrarRegistro()">🌟 ¡Soy nueva mamita! Registrarme</button>
     <div class="auth-msg error" id="login-error"></div>
   </div>
-  <div class="auth-footer">¿Problemas para ingresar? Escríbenos a soporte@loncheritas.com</div>
+  <div class="auth-footer">¿Problemas? Escríbenos a soporte@loncheritas.com</div>
 </div>
 
-<!-- ===== REGISTRO ===== -->
+<!-- REGISTRO -->
 <div id="pantalla-registro" class="auth-screen hidden">
   <div class="auth-logo">🌟</div>
   <div class="auth-titulo">¡Bienvenida!</div>
@@ -207,18 +201,9 @@
       <div class="input-group"><label>Nombre</label><input type="text" id="reg-nombre" placeholder="María" /></div>
       <div class="input-group"><label>Apellido</label><input type="text" id="reg-apellido" placeholder="García" /></div>
     </div>
-    <div class="input-group">
-      <label>Correo electrónico (el mismo de tu compra en Hotmart)</label>
-      <input type="email" id="reg-email" placeholder="tu@email.com" />
-    </div>
-    <div class="input-group">
-      <label>Confirmar correo electrónico</label>
-      <input type="email" id="reg-email2" placeholder="tu@email.com" />
-    </div>
-    <div class="input-group">
-      <label>Contraseña (mínimo 6 caracteres)</label>
-      <input type="password" id="reg-pass" placeholder="••••••••" />
-    </div>
+    <div class="input-group"><label>Correo (el mismo de tu compra en Hotmart)</label><input type="email" id="reg-email" placeholder="tu@email.com" /></div>
+    <div class="input-group"><label>Confirmar correo</label><input type="email" id="reg-email2" placeholder="tu@email.com" /></div>
+    <div class="input-group"><label>Contraseña (mínimo 6 caracteres)</label><input type="password" id="reg-pass" placeholder="••••••••" /></div>
     <button class="btn-primary" id="btn-registro" onclick="registrarUsuario()">Crear mi cuenta</button>
     <button class="btn-secondary" onclick="mostrarLogin()">← Ya tengo cuenta</button>
     <div class="auth-msg error" id="reg-error"></div>
@@ -226,76 +211,57 @@
   <div class="auth-footer">Tu acceso será activado luego de verificar tu compra en Hotmart.</div>
 </div>
 
-<!-- ===== PENDIENTE (con listener en tiempo real) ===== -->
+<!-- PENDIENTE -->
 <div id="pantalla-pendiente" class="auth-screen hidden">
   <div class="auth-logo">⏳</div>
   <div class="auth-titulo">¡Registro recibido!</div>
   <div class="auth-sub">Estamos validando tu acceso</div>
   <div class="pendiente-container">
     <div class="pendiente-steps">
-      <div class="step">
-        <div class="step-icon done">✅</div>
-        <div class="step-info">
-          <h4>Registro completado</h4>
-          <p>Tu cuenta fue creada exitosamente</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-icon active">🔍</div>
-        <div class="step-info">
-          <h4>Validando tu compra en Hotmart</h4>
-          <p id="pendiente-email-txt" style="word-break:break-all;color:#FF6B35;font-weight:600;"></p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-icon waiting" id="step-acceso-icon">🔒</div>
-        <div class="step-info">
-          <h4 id="step-acceso-titulo">Acceso pendiente</h4>
-          <p id="step-acceso-desc">Te notificaremos cuando esté listo</p>
-        </div>
-      </div>
+      <div class="step"><div class="step-icon done">✅</div><div class="step-info"><h4>Registro completado</h4><p>Tu cuenta fue creada exitosamente</p></div></div>
+      <div class="step"><div class="step-icon active">🔍</div><div class="step-info"><h4>Validando tu compra en Hotmart</h4><p id="pendiente-email-txt" style="word-break:break-all;color:#FF6B35;font-weight:600;"></p></div></div>
+      <div class="step"><div class="step-icon waiting">🔒</div><div class="step-info"><h4>Acceso pendiente</h4><p>Te notificaremos cuando esté listo</p></div></div>
     </div>
     <div class="pendiente-nota">Esta pantalla se actualizará automáticamente cuando tu acceso sea aprobado. No necesitas recargar la página. 🙌</div>
     <button class="btn-secondary" onclick="cerrarSesionPendiente()">← Volver al inicio de sesión</button>
   </div>
 </div>
 
-<!-- ===== APP ===== -->
+<!-- APP -->
 <div id="pantalla-app">
   <nav class="nav">
     <div class="nav-logo">🍱 Loncheritas</div>
     <button class="nav-user" onclick="showPage('perfil')">👤 <span id="nav-nombre">Mamá</span></button>
   </nav>
 
+  <!-- INICIO -->
   <div class="page active" id="page-inicio">
-    <div class="greeting">
-      <h1 id="saludo-nombre">¡Hola, Mamá! 👋</h1>
-      <p id="fecha-texto">Cargando...</p>
-    </div>
+    <div class="greeting"><h1 id="saludo-nombre">¡Hola! 👋</h1><p id="fecha-texto">Cargando...</p></div>
     <div class="nivel-card">
-      <div class="nivel-emoji">🌱</div>
+      <div class="nivel-emoji" id="nivel-emoji">🌱</div>
       <div class="nivel-info">
-        <h3>Nivel 1 — Mamá Principiante</h3>
-        <p>15 XP de 50 para subir de nivel</p>
-        <div class="nivel-bar-wrap"><div class="nivel-bar"></div></div>
+        <h3 id="nivel-titulo">Nivel 1 — Mamá Principiante</h3>
+        <p id="nivel-xp-txt">0 XP</p>
+        <div class="nivel-bar-wrap"><div class="nivel-bar" id="nivel-bar" style="width:0%"></div></div>
       </div>
     </div>
     <div class="stats-mini">
       <div class="stat-mini"><div class="sn" id="total-recetas">...</div><div class="sl">Recetas totales</div></div>
-      <div class="stat-mini"><div class="sn" id="total-dulces">...</div><div class="sl">Dulces</div></div>
-      <div class="stat-mini"><div class="sn" id="total-saladas">...</div><div class="sl">Saladas</div></div>
+      <div class="stat-mini"><div class="sn" id="stat-preparadas">0</div><div class="sl">Preparadas</div></div>
+      <div class="stat-mini"><div class="sn" id="stat-favoritas">0</div><div class="sl">Favoritas</div></div>
     </div>
     <p class="section-title">Accesos rápidos</p>
     <div class="quick-grid">
       <div class="quick-card" onclick="showPage('calendario')"><span class="q-icon">📅</span><span class="q-title">Calendario</span><span class="q-sub">Plan semanal</span></div>
       <div class="quick-card" onclick="showPage('recetas')"><span class="q-icon">🥗</span><span class="q-title">Recetas</span><span class="q-sub" id="sub-recetas">Ver todas</span></div>
       <div class="quick-card" onclick="showPage('lista')"><span class="q-icon">🛒</span><span class="q-title">Lista de compras</span><span class="q-sub">Generar lista</span></div>
-      <div class="quick-card" onclick="showPage('perfil')"><span class="q-icon">⭐</span><span class="q-title">Mi progreso</span><span class="q-sub">Logros y nivel</span></div>
+      <div class="quick-card" onclick="showPage('favoritas')"><span class="q-icon">❤️</span><span class="q-title">Mis favoritas</span><span class="q-sub" id="sub-favoritas">0 guardadas</span></div>
     </div>
     <p class="section-title">Lonchera sugerida para hoy</p>
     <div class="receta-hoy" id="receta-hoy-card"><div class="loading"><div class="loading-spinner"></div>Cargando...</div></div>
   </div>
 
+  <!-- RECETAS -->
   <div class="page" id="page-recetas">
     <div class="greeting"><h1>🥗 Recetas</h1><p id="sub-total-recetas">Cargando...</p></div>
     <input class="search-bar" type="text" placeholder="🔍  Buscar receta o ingrediente..." oninput="buscarRecetas(this.value)" id="search-input" />
@@ -309,11 +275,19 @@
     <div class="receta-list" id="lista-recetas"><div class="loading"><div class="loading-spinner"></div>Cargando recetas...</div></div>
   </div>
 
+  <!-- DETALLE -->
   <div class="page" id="page-detalle">
     <div class="detalle-back" onclick="volverDeDetalle()">← Volver</div>
     <div id="detalle-contenido"></div>
   </div>
 
+  <!-- FAVORITAS -->
+  <div class="page" id="page-favoritas">
+    <div class="greeting"><h1>❤️ Mis favoritas</h1><p id="sub-favoritas-page">0 recetas guardadas</p></div>
+    <div class="receta-list" id="lista-favoritas"><div class="favoritas-empty">Aún no tienes favoritas.<br>Toca ❤️ en cualquier receta para guardarla.</div></div>
+  </div>
+
+  <!-- CALENDARIO -->
   <div class="page" id="page-calendario">
     <div class="greeting"><h1>📅 Calendario semanal</h1><p>Planifica la semana de tus hijos</p></div>
     <div class="hijos-selector">
@@ -328,6 +302,7 @@
     <button class="btn-generar-lista" onclick="showPage('lista')">🛒 Generar lista de compras</button>
   </div>
 
+  <!-- LISTA -->
   <div class="page" id="page-lista">
     <div class="greeting"><h1>🛒 Lista de compras</h1><p>Ingredientes para toda la semana</p></div>
     <div class="lista-header">
@@ -349,6 +324,7 @@
     </div>
   </div>
 
+  <!-- PERFIL -->
   <div class="page" id="page-perfil">
     <div class="perfil-header">
       <div class="avatar">👩</div>
@@ -357,27 +333,20 @@
     </div>
     <button class="btn-salir" onclick="cerrarSesion()">🚪 Cerrar sesión</button>
     <div class="nivel-grande">
-      <div style="font-size:48px">🌱</div>
-      <h3>Nivel 1 — Principiante</h3>
-      <p>15 de 50 XP para el siguiente nivel</p>
-      <div class="xp-bar-wrap"><div class="xp-bar-fill"></div></div>
-      <p class="xp-label">+5 XP por cada lonchera preparada</p>
+      <div style="font-size:48px" id="perfil-nivel-emoji">🌱</div>
+      <h3 id="perfil-nivel-titulo">Nivel 1 — Principiante</h3>
+      <p id="perfil-xp-txt">0 de 50 XP para el siguiente nivel</p>
+      <div class="xp-bar-wrap"><div class="xp-bar-fill" id="perfil-xp-bar" style="width:0%"></div></div>
+      <p class="xp-label">+5 XP por cada receta preparada</p>
     </div>
     <p class="section-title">Mis estadísticas</p>
     <div class="stats-row">
-      <div class="stat-card"><div class="s-num">3</div><div class="s-label">Loncheras preparadas</div></div>
-      <div class="stat-card"><div class="s-num">1</div><div class="s-label">Semanas activa</div></div>
-      <div class="stat-card"><div class="s-num">15</div><div class="s-label">XP total</div></div>
+      <div class="stat-card"><div class="s-num" id="perfil-stat-prep">0</div><div class="s-label">Recetas preparadas</div></div>
+      <div class="stat-card"><div class="s-num" id="perfil-stat-fav">0</div><div class="s-label">Favoritas</div></div>
+      <div class="stat-card"><div class="s-num" id="perfil-stat-xp">0</div><div class="s-label">XP total</div></div>
     </div>
     <p class="section-title">Mis logros</p>
-    <div class="logros-grid">
-      <div class="logro"><div class="l-emoji">🥇</div><div class="l-nombre">Primera lonchera</div><div class="l-desc">Preparaste tu primera receta</div></div>
-      <div class="logro"><div class="l-emoji">📅</div><div class="l-nombre">Semana completa</div><div class="l-desc">5 días seguidos</div></div>
-      <div class="logro bloqueado"><div class="l-emoji">🔥</div><div class="l-nombre">En racha</div><div class="l-desc">2 semanas seguidas</div></div>
-      <div class="logro bloqueado"><div class="l-emoji">👩‍🍳</div><div class="l-nombre">Chef Loncherita</div><div class="l-desc">10 recetas distintas</div></div>
-      <div class="logro bloqueado"><div class="l-emoji">💪</div><div class="l-nombre">Súper Mamá</div><div class="l-desc">Nivel 5 alcanzado</div></div>
-      <div class="logro bloqueado"><div class="l-emoji">⭐</div><div class="l-nombre">Experta</div><div class="l-desc">50 loncheras preparadas</div></div>
-    </div>
+    <div class="logros-grid" id="logros-grid"></div>
   </div>
 
   <nav class="bottom-nav">
@@ -385,14 +354,14 @@
     <button class="bn-item" id="bn-calendario" onclick="showPage('calendario')"><span class="icon">📅</span><span class="label">Calendario</span></button>
     <button class="bn-item" id="bn-recetas" onclick="showPage('recetas')"><span class="icon">🥗</span><span class="label">Recetas</span></button>
     <button class="bn-item" id="bn-lista" onclick="showPage('lista')"><span class="icon">🛒</span><span class="label">Compras</span></button>
-    <button class="bn-item" id="bn-perfil" onclick="showPage('perfil')"><span class="icon">⭐</span><span class="label">Perfil</span></button>
+    <button class="bn-item" id="bn-favoritas" onclick="showPage('favoritas')"><span class="icon">❤️</span><span class="label">Favoritas</span></button>
   </nav>
 </div>
 
 <script type="module">
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
   import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
-  import { getFirestore, doc, setDoc, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+  import { getFirestore, doc, setDoc, updateDoc, onSnapshot, getDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
   const firebaseConfig = {
     apiKey: "AIzaSyCBgGw5NkDF68jOZG6s941v8glpUTJ03rA",
@@ -415,33 +384,31 @@
   window._updateProfile = updateProfile;
   window._doc = doc;
   window._setDoc = setDoc;
+  window._updateDoc = updateDoc;
   window._onSnapshot = onSnapshot;
+  window._getDoc = getDoc;
 
-  let unsubscribeListener = null;
+  let unsubscribeAuth = null;
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      // Escuchar en tiempo real el documento del usuario
-      if (unsubscribeListener) unsubscribeListener();
-      unsubscribeListener = onSnapshot(doc(db, 'usuarios', user.uid), (snap) => {
+      if (unsubscribeAuth) unsubscribeAuth();
+      unsubscribeAuth = onSnapshot(doc(db, 'usuarios', user.uid), (snap) => {
         if (snap.exists()) {
           const data = snap.data();
           if (data.aprobado === true) {
-            // ¡Aprobado! Entrar a la app automáticamente
             mostrarApp(user, data);
           } else {
-            // Pendiente — mostrar pantalla de espera
             ocultarTodo();
             document.getElementById('pantalla-pendiente').classList.remove('hidden');
             document.getElementById('pendiente-email-txt').textContent = user.email;
           }
         } else {
-          // Usuario sin perfil Firestore (creado manualmente) — dar acceso directo
-          mostrarApp(user, { nombre: 'Mamá', apellido: '' });
+          mostrarApp(user, { nombre: 'Mamá', apellido: '', favoritas: [], recetasPreparadas: 0, calendario: {} });
         }
       });
     } else {
-      if (unsubscribeListener) { unsubscribeListener(); unsubscribeListener = null; }
+      if (unsubscribeAuth) { unsubscribeAuth(); unsubscribeAuth = null; }
       ocultarTodo();
       document.getElementById('pantalla-login').classList.remove('hidden');
     }
@@ -449,32 +416,104 @@
 </script>
 
 <script>
+  let currentUser = null;
+  let currentUid = null;
+  let todasLasRecetas = [], recetasFiltradas = [];
+  let numHijos = 2, calendarioSemanal = {}, checksLista = {}, paginaAnterior = 'recetas';
+  let userFavoritas = [], userPreparadas = 0, userCalendario = {};
+  const DIAS_CORTOS = ['LUN','MAR','MIÉ','JUE','VIE'];
+  const CLAVES_DIAS = ['lunes','martes','miercoles','jueves','viernes'];
+
+  // NIVELES
+  const NIVELES = [
+    { min:0, max:49, nivel:1, titulo:'Mamá Principiante', emoji:'🌱' },
+    { min:50, max:149, nivel:2, titulo:'Mamá Cocinera', emoji:'👩‍🍳' },
+    { min:150, max:299, nivel:3, titulo:'Mamá Experta', emoji:'⭐' },
+    { min:300, max:499, nivel:4, titulo:'Mamá Chef', emoji:'🏆' },
+    { min:500, max:99999, nivel:5, titulo:'Súper Mamá', emoji:'👑' }
+  ];
+
+  const LOGROS_DEF = [
+    { id:'primera', emoji:'🥇', nombre:'Primera receta', desc:'Preparaste tu primera receta', req: d => d.recetasPreparadas >= 1 },
+    { id:'cinco', emoji:'🍽️', nombre:'5 recetas', desc:'Preparaste 5 recetas', req: d => d.recetasPreparadas >= 5 },
+    { id:'diez', emoji:'👩‍🍳', nombre:'Chef Loncherita', desc:'Preparaste 10 recetas', req: d => d.recetasPreparadas >= 10 },
+    { id:'fav1', emoji:'❤️', nombre:'Primera favorita', desc:'Guardaste tu primera favorita', req: d => (d.favoritas||[]).length >= 1 },
+    { id:'fav5', emoji:'💕', nombre:'Colección', desc:'5 recetas favoritas', req: d => (d.favoritas||[]).length >= 5 },
+    { id:'nivel2', emoji:'🌟', nombre:'Nivel 2', desc:'Alcanzaste nivel 2', req: d => calcXP(d) >= 50 },
+  ];
+
+  function calcXP(data) { return (data.recetasPreparadas || 0) * 5 + ((data.favoritas||[]).length) * 2; }
+
+  function getNivel(xp) { return NIVELES.find(n => xp >= n.min && xp <= n.max) || NIVELES[0]; }
+
   function ocultarTodo() {
-    ['pantalla-login','pantalla-registro','pantalla-pendiente'].forEach(id => {
-      document.getElementById(id).classList.add('hidden');
-    });
+    ['pantalla-login','pantalla-registro','pantalla-pendiente'].forEach(id => document.getElementById(id).classList.add('hidden'));
     document.getElementById('pantalla-app').style.display = 'none';
   }
 
-  function mostrarLogin() {
-    ocultarTodo();
-    document.getElementById('pantalla-login').classList.remove('hidden');
-  }
-
-  function mostrarRegistro() {
-    ocultarTodo();
-    document.getElementById('pantalla-registro').classList.remove('hidden');
-  }
+  function mostrarLogin() { ocultarTodo(); document.getElementById('pantalla-login').classList.remove('hidden'); }
+  function mostrarRegistro() { ocultarTodo(); document.getElementById('pantalla-registro').classList.remove('hidden'); }
 
   function mostrarApp(user, perfil) {
+    currentUser = user;
+    currentUid = user.uid;
+    userFavoritas = perfil.favoritas || [];
+    userPreparadas = perfil.recetasPreparadas || 0;
+    userCalendario = perfil.calendario || {};
+
     ocultarTodo();
     document.getElementById('pantalla-app').style.display = 'block';
+
     const nombre = perfil.nombre || 'Mamá';
     document.getElementById('saludo-nombre').textContent = '¡Hola, ' + nombre + '! 👋';
     document.getElementById('nav-nombre').textContent = nombre;
     document.getElementById('perfil-nombre-txt').textContent = nombre + ' ' + (perfil.apellido || '');
     document.getElementById('perfil-email-txt').textContent = user.email;
+
+    actualizarUI(perfil);
     cargarRecetas();
+  }
+
+  function actualizarUI(data) {
+    const xp = calcXP(data);
+    const nivel = getNivel(xp);
+    const pct = Math.min(100, Math.round(((xp - nivel.min) / (nivel.max - nivel.min + 1)) * 100));
+
+    // Nivel card inicio
+    document.getElementById('nivel-emoji').textContent = nivel.emoji;
+    document.getElementById('nivel-titulo').textContent = 'Nivel ' + nivel.nivel + ' — ' + nivel.titulo;
+    document.getElementById('nivel-xp-txt').textContent = xp + ' XP';
+    document.getElementById('nivel-bar').style.width = pct + '%';
+
+    // Stats inicio
+    document.getElementById('stat-preparadas').textContent = data.recetasPreparadas || 0;
+    document.getElementById('stat-favoritas').textContent = (data.favoritas||[]).length;
+    document.getElementById('sub-favoritas').textContent = (data.favoritas||[]).length + ' guardadas';
+
+    // Perfil
+    document.getElementById('perfil-nivel-emoji').textContent = nivel.emoji;
+    document.getElementById('perfil-nivel-titulo').textContent = 'Nivel ' + nivel.nivel + ' — ' + nivel.titulo;
+    document.getElementById('perfil-xp-txt').textContent = xp + ' de ' + (nivel.max+1) + ' XP para el siguiente nivel';
+    document.getElementById('perfil-xp-bar').style.width = pct + '%';
+    document.getElementById('perfil-stat-prep').textContent = data.recetasPreparadas || 0;
+    document.getElementById('perfil-stat-fav').textContent = (data.favoritas||[]).length;
+    document.getElementById('perfil-stat-xp').textContent = xp;
+
+    // Logros
+    const logrosGrid = document.getElementById('logros-grid');
+    logrosGrid.innerHTML = LOGROS_DEF.map(l => {
+      const desbloqueado = l.req(data);
+      return `<div class="logro ${desbloqueado?'':'bloqueado'}">
+        <div class="l-emoji">${l.emoji}</div>
+        <div class="l-nombre">${l.nombre}</div>
+        <div class="l-desc">${l.desc}</div>
+      </div>`;
+    }).join('');
+  }
+
+  async function guardarEnFirestore(campos) {
+    if(!currentUid) return;
+    try { await window._updateDoc(window._doc(window._db,'usuarios',currentUid), campos); } catch(e) { console.error(e); }
   }
 
   async function iniciarSesion() {
@@ -483,105 +522,89 @@
     const errEl = document.getElementById('login-error');
     const btn = document.getElementById('btn-login');
     errEl.style.display = 'none';
-    if (!email || !pass) { errEl.textContent = 'Ingresa tu email y contraseña.'; errEl.style.display = 'block'; return; }
-    btn.disabled = true; btn.textContent = 'Verificando...';
-    try {
-      await window._signIn(window._auth, email, pass);
-    } catch(e) {
-      errEl.textContent = 'Email o contraseña incorrectos.';
-      errEl.style.display = 'block';
-      btn.disabled = false; btn.textContent = 'Entrar a la app →';
-    }
+    if(!email||!pass){errEl.textContent='Ingresa tu email y contraseña.';errEl.style.display='block';return;}
+    btn.disabled=true; btn.textContent='Verificando...';
+    try { await window._signIn(window._auth,email,pass); }
+    catch(e) { errEl.textContent='Email o contraseña incorrectos.'; errEl.style.display='block'; btn.disabled=false; btn.textContent='Entrar a la app →'; }
   }
 
   async function registrarUsuario() {
-    const nombre = document.getElementById('reg-nombre').value.trim();
-    const apellido = document.getElementById('reg-apellido').value.trim();
-    const email = document.getElementById('reg-email').value.trim().toLowerCase();
-    const email2 = document.getElementById('reg-email2').value.trim().toLowerCase();
-    const pass = document.getElementById('reg-pass').value;
-    const errEl = document.getElementById('reg-error');
-    const btn = document.getElementById('btn-registro');
-    errEl.style.display = 'none';
-    if (!nombre || !apellido) { errEl.textContent = 'Ingresa tu nombre y apellido.'; errEl.style.display = 'block'; return; }
-    if (!email) { errEl.textContent = 'Ingresa tu correo electrónico.'; errEl.style.display = 'block'; return; }
-    if (email !== email2) { errEl.textContent = 'Los correos no coinciden. Verifica que sean iguales.'; errEl.style.display = 'block'; return; }
-    if (pass.length < 6) { errEl.textContent = 'La contraseña debe tener al menos 6 caracteres.'; errEl.style.display = 'block'; return; }
-    btn.disabled = true; btn.textContent = 'Creando tu cuenta...';
+    const nombre=document.getElementById('reg-nombre').value.trim();
+    const apellido=document.getElementById('reg-apellido').value.trim();
+    const email=document.getElementById('reg-email').value.trim().toLowerCase();
+    const email2=document.getElementById('reg-email2').value.trim().toLowerCase();
+    const pass=document.getElementById('reg-pass').value;
+    const errEl=document.getElementById('reg-error');
+    const btn=document.getElementById('btn-registro');
+    errEl.style.display='none';
+    if(!nombre||!apellido){errEl.textContent='Ingresa tu nombre y apellido.';errEl.style.display='block';return;}
+    if(!email){errEl.textContent='Ingresa tu correo.';errEl.style.display='block';return;}
+    if(email!==email2){errEl.textContent='Los correos no coinciden.';errEl.style.display='block';return;}
+    if(pass.length<6){errEl.textContent='La contraseña debe tener al menos 6 caracteres.';errEl.style.display='block';return;}
+    btn.disabled=true; btn.textContent='Creando tu cuenta...';
     try {
-      const cred = await window._createUser(window._auth, email, pass);
-      await window._updateProfile(cred.user, { displayName: nombre + ' ' + apellido });
-      await window._setDoc(window._doc(window._db, 'usuarios', cred.user.uid), {
-        nombre, apellido, email,
-        aprobado: false,
-        fechaRegistro: new Date().toISOString(),
-        uid: cred.user.uid
+      const cred=await window._createUser(window._auth,email,pass);
+      await window._updateProfile(cred.user,{displayName:nombre+' '+apellido});
+      await window._setDoc(window._doc(window._db,'usuarios',cred.user.uid),{
+        nombre,apellido,email,aprobado:false,
+        fechaRegistro:new Date().toISOString(),
+        uid:cred.user.uid,
+        favoritas:[],recetasPreparadas:0,calendario:{}
       });
-      // El onSnapshot se activa automáticamente y muestra pantalla pendiente
     } catch(e) {
-      btn.disabled = false; btn.textContent = 'Crear mi cuenta';
-      if (e.code === 'auth/email-already-in-use') {
-        errEl.textContent = 'Este email ya tiene una cuenta. Inicia sesión.';
-      } else {
-        errEl.textContent = 'Error al crear la cuenta. Intenta nuevamente.';
-      }
-      errEl.style.display = 'block';
+      btn.disabled=false; btn.textContent='Crear mi cuenta';
+      errEl.textContent=e.code==='auth/email-already-in-use'?'Este email ya tiene cuenta. Inicia sesión.':'Error al crear la cuenta.';
+      errEl.style.display='block';
     }
   }
 
-  async function cerrarSesion() {
-    await window._signOut(window._auth);
-  }
+  async function cerrarSesion() { await window._signOut(window._auth); }
+  async function cerrarSesionPendiente() { await window._signOut(window._auth); }
 
-  async function cerrarSesionPendiente() {
-    await window._signOut(window._auth);
-  }
-
-  // ===== APP =====
-  let todasLasRecetas = [], recetasFiltradas = [], numHijos = 2;
-  let calendarioSemanal = {}, checksLista = {}, paginaAnterior = 'recetas';
-  const DIAS_CORTOS = ['LUN','MAR','MIÉ','JUE','VIE'];
-  const CLAVES_DIAS = ['lunes','martes','miercoles','jueves','viernes'];
-
+  // APP
   async function cargarRecetas() {
     try {
-      const resp = await fetch('recetas.json');
-      const data = await resp.json();
-      todasLasRecetas = data.recetas;
-      recetasFiltradas = [...todasLasRecetas];
+      const resp=await fetch('recetas.json');
+      const data=await resp.json();
+      todasLasRecetas=data.recetas;
+      recetasFiltradas=[...todasLasRecetas];
       inicializar();
-    } catch(e) { console.error(e); }
+    } catch(e){console.error(e);}
   }
 
   function inicializar() {
-    const total = todasLasRecetas.length;
-    const dulces = todasLasRecetas.filter(r=>r.categoria==='dulces').length;
-    const saladas = todasLasRecetas.filter(r=>r.categoria==='saladas').length;
-    document.getElementById('total-recetas').textContent = total;
-    document.getElementById('total-dulces').textContent = dulces;
-    document.getElementById('total-saladas').textContent = saladas;
-    document.getElementById('sub-recetas').textContent = total + ' disponibles';
-    document.getElementById('sub-total-recetas').textContent = total + ' recetas disponibles';
-    const ahora = new Date();
-    const f = ahora.toLocaleDateString('es-PE',{weekday:'long',day:'numeric',month:'long'});
-    document.getElementById('fecha-texto').textContent = f.charAt(0).toUpperCase()+f.slice(1)+' · Lima';
-    renderRecetaHoy(todasLasRecetas[ahora.getDay() % total]);
+    const total=todasLasRecetas.length;
+    document.getElementById('total-recetas').textContent=total;
+    document.getElementById('sub-recetas').textContent=total+' disponibles';
+    document.getElementById('sub-total-recetas').textContent=total+' recetas disponibles';
+    const ahora=new Date();
+    const f=ahora.toLocaleDateString('es-PE',{weekday:'long',day:'numeric',month:'long'});
+    document.getElementById('fecha-texto').textContent=f.charAt(0).toUpperCase()+f.slice(1)+' · Lima';
+    renderRecetaHoy(todasLasRecetas[ahora.getDay()%total]);
     renderRecetas(todasLasRecetas);
-    generarCalendarioDefault();
+    cargarCalendario();
     renderListaCompras();
+    renderFavoritas();
   }
 
   function showPage(name) {
     document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
     document.querySelectorAll('.bn-item').forEach(b=>b.classList.remove('active'));
     document.getElementById('page-'+name).classList.add('active');
-    const bn = document.getElementById('bn-'+name);
+    const bn=document.getElementById('bn-'+name);
     if(bn) bn.classList.add('active');
     window.scrollTo(0,0);
+    if(name==='favoritas') renderFavoritas();
+  }
+
+  function showToast(msg) {
+    const t=document.getElementById('toast');
+    t.textContent=msg; t.classList.add('show');
+    setTimeout(()=>t.classList.remove('show'),2500);
   }
 
   function renderRecetaHoy(r) {
-    document.getElementById('receta-hoy-card').innerHTML = `
+    document.getElementById('receta-hoy-card').innerHTML=`
       <span class="rh-tag">✨ Sugerida para hoy</span>
       <h3>${r.emoji} ${r.nombre}</h3>
       <p>${r.ingredientes.slice(0,3).join(', ')}...</p>
@@ -590,13 +613,15 @@
     `;
   }
 
+  function esFavorita(id) { return userFavoritas.includes(id); }
+
   function renderRecetas(lista) {
-    const c = document.getElementById('lista-recetas');
+    const c=document.getElementById('lista-recetas');
     if(!lista.length){c.innerHTML='<div style="text-align:center;padding:40px;color:#AAA">🔍 No se encontraron recetas</div>';return;}
-    c.innerHTML = lista.map(r=>`
-      <div class="receta-card" onclick="verDetalle('${r.id}','recetas')">
-        <span class="rc-emoji">${r.emoji}</span>
-        <div class="rc-info">
+    c.innerHTML=lista.map(r=>`
+      <div class="receta-card">
+        <span class="rc-emoji" onclick="verDetalle('${r.id}','recetas')">${r.emoji}</span>
+        <div class="rc-info" onclick="verDetalle('${r.id}','recetas')" style="cursor:pointer">
           <h4>${r.nombre}</h4>
           <p>${r.metodo} · ${r.tiempo_min} min</p>
           <div class="rc-meta">
@@ -604,7 +629,40 @@
             ${r.tiempo_min<=15?'<span class="rc-tag">⚡ Rápida</span>':''}
           </div>
         </div>
-        <span class="rc-arrow">›</span>
+        <span class="rc-fav" onclick="toggleFavorita('${r.id}')">${esFavorita(r.id)?'❤️':'🤍'}</span>
+      </div>
+    `).join('');
+  }
+
+  async function toggleFavorita(id) {
+    const idx=userFavoritas.indexOf(id);
+    if(idx>=0) { userFavoritas.splice(idx,1); showToast('Eliminada de favoritas'); }
+    else { userFavoritas.push(id); showToast('❤️ Añadida a favoritas'); }
+    document.getElementById('stat-favoritas').textContent=userFavoritas.length;
+    document.getElementById('sub-favoritas').textContent=userFavoritas.length+' guardadas';
+    document.getElementById('perfil-stat-fav').textContent=userFavoritas.length;
+    renderRecetas(recetasFiltradas);
+    await guardarEnFirestore({favoritas:userFavoritas});
+    const snap=await window._getDoc(window._doc(window._db,'usuarios',currentUid));
+    if(snap.exists()) actualizarUI(snap.data());
+  }
+
+  function renderFavoritas() {
+    const c=document.getElementById('lista-favoritas');
+    const lista=todasLasRecetas.filter(r=>userFavoritas.includes(r.id));
+    document.getElementById('sub-favoritas-page').textContent=lista.length+' recetas guardadas';
+    if(!lista.length){c.innerHTML='<div class="favoritas-empty">Aún no tienes favoritas.<br>Toca ❤️ en cualquier receta para guardarla.</div>';return;}
+    c.innerHTML=lista.map(r=>`
+      <div class="receta-card">
+        <span class="rc-emoji" onclick="verDetalle('${r.id}','favoritas')">${r.emoji}</span>
+        <div class="rc-info" onclick="verDetalle('${r.id}','favoritas')" style="cursor:pointer">
+          <h4>${r.nombre}</h4>
+          <p>${r.metodo} · ${r.tiempo_min} min</p>
+          <div class="rc-meta">
+            <span class="rc-tag ${r.categoria==='saladas'?'salada':r.categoria==='gomitas'?'gomita':''}">${r.categoria==='dulces'?'🍰 Dulce':r.categoria==='saladas'?'🥗 Salada':'🍬 Gomita'}</span>
+          </div>
+        </div>
+        <span class="rc-fav" onclick="toggleFavorita('${r.id}')">❤️</span>
       </div>
     `).join('');
   }
@@ -622,16 +680,14 @@
   function buscarRecetas(q) {
     const query=q.toLowerCase();
     if(!query){renderRecetas(recetasFiltradas);return;}
-    renderRecetas(recetasFiltradas.filter(r=>
-      r.nombre.toLowerCase().includes(query)||
-      r.ingredientes.some(i=>i.toLowerCase().includes(query))
-    ));
+    renderRecetas(recetasFiltradas.filter(r=>r.nombre.toLowerCase().includes(query)||r.ingredientes.some(i=>i.toLowerCase().includes(query))));
   }
 
   function verDetalle(id,desde) {
     paginaAnterior=desde;
     const r=todasLasRecetas.find(r=>r.id===id);
     if(!r)return;
+    const fav=esFavorita(r.id);
     document.getElementById('detalle-contenido').innerHTML=`
       <div class="detalle-header">
         <div class="detalle-emoji">${r.emoji}</div>
@@ -651,23 +707,61 @@
         <h3>👩‍🍳 Preparación paso a paso</h3>
         ${r.pasos.map((p,i)=>`<div class="paso-item"><div class="paso-num">${i+1}</div><div class="paso-text">${p}</div></div>`).join('')}
       </div>
-      <button class="btn-agregar-cal" onclick="agregarAlCalendario('${r.id}')">📅 Agregar al calendario</button>
+      <div class="detalle-acciones">
+        <button class="btn-preparar" onclick="marcarPreparada('${r.id}')">✅ ¡La preparé!</button>
+        <button class="btn-fav-detalle" id="btn-fav-det" onclick="toggleFavoritaDetalle('${r.id}')">${fav?'❤️':'🤍'}</button>
+      </div>
     `;
     showPage('detalle');
   }
 
+  async function marcarPreparada(id) {
+    userPreparadas++;
+    showToast('🎉 ¡+5 XP! Receta preparada');
+    await guardarEnFirestore({recetasPreparadas: userPreparadas});
+    document.getElementById('stat-preparadas').textContent=userPreparadas;
+    document.getElementById('perfil-stat-prep').textContent=userPreparadas;
+    const snap=await window._getDoc(window._doc(window._db,'usuarios',currentUid));
+    if(snap.exists()) actualizarUI(snap.data());
+  }
+
+  async function toggleFavoritaDetalle(id) {
+    await toggleFavorita(id);
+    const fav=esFavorita(id);
+    const btn=document.getElementById('btn-fav-det');
+    if(btn) btn.textContent=fav?'❤️':'🤍';
+  }
+
   function volverDeDetalle(){showPage(paginaAnterior);}
 
-  function agregarAlCalendario(id) {
-    const diaLibre=CLAVES_DIAS.find(d=>!calendarioSemanal[d]);
-    if(diaLibre){ calendarioSemanal[diaLibre]=todasLasRecetas.find(r=>r.id===id); renderCalendario(); renderListaCompras(); }
-    showPage('calendario');
+  // CALENDARIO
+  function cargarCalendario() {
+    if(Object.keys(userCalendario).length > 0) {
+      CLAVES_DIAS.forEach(d=>{
+        if(userCalendario[d]) {
+          const r=todasLasRecetas.find(r=>r.id===userCalendario[d]);
+          if(r) calendarioSemanal[d]=r;
+        }
+      });
+    } else {
+      generarCalendarioDefault();
+      return;
+    }
+    renderCalendario();
   }
 
   function generarCalendarioDefault() {
     const saladas=todasLasRecetas.filter(r=>r.categoria==='saladas');
     CLAVES_DIAS.forEach((d,i)=>{calendarioSemanal[d]=saladas[i%saladas.length];});
+    guardarCalendario();
     renderCalendario();
+  }
+
+  function guardarCalendario() {
+    const cal={};
+    CLAVES_DIAS.forEach(d=>{ if(calendarioSemanal[d]) cal[d]=calendarioSemanal[d].id; });
+    guardarEnFirestore({calendario:cal});
+    userCalendario=cal;
   }
 
   function renderCalendario() {
@@ -685,11 +779,13 @@
         <button class="cal-change-btn" onclick="cambiarRecetaDia('${d}')">Cambiar</button>
       </div>`;
     }).join('');
+    renderListaCompras();
   }
 
   function cambiarRecetaDia(dia) {
     calendarioSemanal[dia]=todasLasRecetas[Math.floor(Math.random()*todasLasRecetas.length)];
-    renderCalendario(); renderListaCompras();
+    guardarCalendario();
+    renderCalendario();
   }
 
   function cambiarHijos(delta) {
@@ -742,7 +838,7 @@
   function copiarLista(){
     let t='🍱 Lista de compras Loncheritas\n\n';
     document.querySelectorAll('.categoria-lista').forEach(c=>{ t+=c.querySelector('.cat-titulo').textContent+'\n'; c.querySelectorAll('.item-nombre').forEach(i=>{t+='☐ '+i.textContent+'\n';}); t+='\n'; });
-    navigator.clipboard.writeText(t).then(()=>alert('✅ Lista copiada'));
+    navigator.clipboard.writeText(t).then(()=>showToast('✅ Lista copiada'));
   }
 </script>
 </body>
