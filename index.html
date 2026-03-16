@@ -7,19 +7,57 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFF8F0; color: #2D2D2D; min-height: 100vh; }
+
+    /* LOGIN */
+    #pantalla-login {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: linear-gradient(160deg, #FFF0E8 0%, #FFF8F0 60%);
+    }
+    .login-logo { font-size: 64px; margin-bottom: 8px; }
+    .login-titulo { font-size: 28px; font-weight: 700; color: #2D2D2D; margin-bottom: 4px; }
+    .login-sub { font-size: 14px; color: #888; margin-bottom: 36px; text-align: center; }
+    .login-card { background: white; border-radius: 20px; padding: 28px 24px; width: 100%; max-width: 360px; box-shadow: 0 4px 24px rgba(255,107,53,0.1); border: 1px solid #F0E8E0; }
+    .login-card h2 { font-size: 18px; font-weight: 700; margin-bottom: 20px; color: #2D2D2D; }
+    .input-group { margin-bottom: 16px; }
+    .input-group label { font-size: 12px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 6px; }
+    .input-group input { width: 100%; padding: 13px 16px; border: 1.5px solid #F0E8E0; border-radius: 12px; font-size: 15px; outline: none; transition: border-color 0.2s; background: #FAFAFA; }
+    .input-group input:focus { border-color: #FF6B35; background: white; }
+    .btn-login { width: 100%; background: #FF6B35; color: white; border: none; border-radius: 12px; padding: 15px; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 8px; transition: opacity 0.2s; }
+    .btn-login:active { opacity: 0.85; }
+    .btn-login:disabled { opacity: 0.5; cursor: not-allowed; }
+    .login-error { background: #FFF0F0; border: 1px solid #FFD0D0; border-radius: 10px; padding: 12px; font-size: 13px; color: #C0392B; margin-top: 12px; text-align: center; display: none; }
+    .login-loading { text-align: center; font-size: 13px; color: #888; margin-top: 12px; display: none; }
+    .login-footer { margin-top: 24px; font-size: 12px; color: #BBB; text-align: center; }
+
+    /* APP (oculta hasta login) */
+    #pantalla-app { display: none; }
+
+    /* NAV */
     .nav { background: #FF6B35; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(255,107,53,0.3); }
     .nav-logo { font-size: 20px; font-weight: 700; color: white; }
     .nav-user { background: white; color: #FF6B35; border-radius: 20px; padding: 6px 14px; font-size: 13px; font-weight: 600; cursor: pointer; border: none; }
+
+    /* BOTTOM NAV */
     .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; border-top: 1px solid #F0E8E0; z-index: 100; box-shadow: 0 -2px 12px rgba(0,0,0,0.08); }
     .bn-item { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 10px 0 8px; cursor: pointer; border: none; background: transparent; gap: 3px; }
     .bn-item .icon { font-size: 22px; }
     .bn-item .label { font-size: 10px; font-weight: 500; color: #B0A098; }
     .bn-item.active .label { color: #FF6B35; }
+
+    /* PAGES */
     .page { display: none; padding: 20px 16px 90px; }
     .page.active { display: block; }
+
+    /* LOADING */
     .loading { text-align: center; padding: 40px 20px; color: #888; font-size: 14px; }
     .loading-spinner { width: 32px; height: 32px; border: 3px solid #F0E8E0; border-top-color: #FF6B35; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 12px; }
     @keyframes spin { to { transform: rotate(360deg); } }
+
     .greeting { margin-bottom: 20px; }
     .greeting h1 { font-size: 22px; font-weight: 700; }
     .greeting p { font-size: 14px; color: #888; margin-top: 4px; }
@@ -109,6 +147,8 @@
     .exp-btn.primary { background: #FF6B35; border-color: #FF6B35; color: white; }
     .perfil-header { text-align: center; padding: 20px 0; margin-bottom: 20px; }
     .avatar { font-size: 64px; margin-bottom: 10px; }
+    .perfil-email { font-size: 13px; color: #888; margin-top: 4px; }
+    .btn-salir { width: 100%; background: white; color: #FF6B35; border: 1.5px solid #FF6B35; border-radius: 12px; padding: 14px; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 8px; }
     .nivel-grande { background: linear-gradient(135deg, #FF6B35, #FF8C5A); border-radius: 20px; padding: 20px; color: white; text-align: center; margin-bottom: 20px; }
     .nivel-grande h3 { font-size: 18px; font-weight: 700; margin-top: 8px; }
     .nivel-grande p { font-size: 13px; opacity: 0.85; margin-top: 4px; }
@@ -131,134 +171,254 @@
 </head>
 <body>
 
-<nav class="nav">
-  <div class="nav-logo">🍱 Loncheritas</div>
-  <button class="nav-user" onclick="showPage('perfil')">👤 Mamá</button>
-</nav>
+<!-- ============ PANTALLA LOGIN ============ -->
+<div id="pantalla-login">
+  <div class="login-logo">🍱</div>
+  <div class="login-titulo">Loncheritas</div>
+  <div class="login-sub">Loncheras inteligentes para tus hijos</div>
 
-<!-- INICIO -->
-<div class="page active" id="page-inicio">
-  <div class="greeting">
-    <h1>¡Hola, Mamá! 👋</h1>
-    <p id="fecha-texto">Cargando...</p>
-  </div>
-  <div class="nivel-card">
-    <div class="nivel-emoji">🌱</div>
-    <div class="nivel-info">
-      <h3>Nivel 1 — Mamá Principiante</h3>
-      <p>15 XP de 50 para subir de nivel</p>
-      <div class="nivel-bar-wrap"><div class="nivel-bar"></div></div>
+  <div class="login-card">
+    <h2>Iniciar sesión</h2>
+    <div class="input-group">
+      <label>Correo electrónico</label>
+      <input type="email" id="login-email" placeholder="tu@email.com" />
     </div>
+    <div class="input-group">
+      <label>Contraseña</label>
+      <input type="password" id="login-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')iniciarSesion()" />
+    </div>
+    <button class="btn-login" id="btn-login" onclick="iniciarSesion()">Entrar a la app →</button>
+    <div class="login-error" id="login-error">Email o contraseña incorrectos. Verifica tus datos.</div>
+    <div class="login-loading" id="login-loading">Verificando...</div>
   </div>
-  <div class="stats-mini">
-    <div class="stat-mini"><div class="sn" id="total-recetas">...</div><div class="sl">Recetas totales</div></div>
-    <div class="stat-mini"><div class="sn" id="total-dulces">...</div><div class="sl">Dulces</div></div>
-    <div class="stat-mini"><div class="sn" id="total-saladas">...</div><div class="sl">Saladas</div></div>
-  </div>
-  <p class="section-title">Accesos rápidos</p>
-  <div class="quick-grid">
-    <div class="quick-card" onclick="showPage('calendario')"><span class="q-icon">📅</span><span class="q-title">Calendario</span><span class="q-sub">Plan semanal</span></div>
-    <div class="quick-card" onclick="showPage('recetas')"><span class="q-icon">🥗</span><span class="q-title">Recetas</span><span class="q-sub" id="sub-recetas">Ver todas</span></div>
-    <div class="quick-card" onclick="showPage('lista')"><span class="q-icon">🛒</span><span class="q-title">Lista de compras</span><span class="q-sub">Generar lista</span></div>
-    <div class="quick-card" onclick="showPage('perfil')"><span class="q-icon">⭐</span><span class="q-title">Mi progreso</span><span class="q-sub">Logros y nivel</span></div>
-  </div>
-  <p class="section-title">Lonchera sugerida para hoy</p>
-  <div class="receta-hoy" id="receta-hoy-card"><div class="loading"><div class="loading-spinner"></div>Cargando receta...</div></div>
+
+  <div class="login-footer">¿Compraste el producto? Revisa tu email para tus credenciales de acceso.</div>
 </div>
 
-<!-- RECETAS -->
-<div class="page" id="page-recetas">
-  <div class="greeting"><h1>🥗 Recetas</h1><p id="sub-total-recetas">Cargando...</p></div>
-  <input class="search-bar" type="text" placeholder="🔍  Buscar receta o ingrediente..." oninput="buscarRecetas(this.value)" id="search-input" />
-  <div class="filtros">
-    <button class="filtro-btn active" onclick="filtrar(this,'todas')">Todas</button>
-    <button class="filtro-btn" onclick="filtrar(this,'dulces')">🍰 Dulces</button>
-    <button class="filtro-btn" onclick="filtrar(this,'saladas')">🥗 Saladas</button>
-    <button class="filtro-btn" onclick="filtrar(this,'gomitas')">🍬 Gomitas</button>
-    <button class="filtro-btn" onclick="filtrar(this,'rapidas')">⚡ Rápidas</button>
+<!-- ============ PANTALLA APP ============ -->
+<div id="pantalla-app">
+
+  <nav class="nav">
+    <div class="nav-logo">🍱 Loncheritas</div>
+    <button class="nav-user" onclick="showPage('perfil')">👤 Mamá</button>
+  </nav>
+
+  <!-- INICIO -->
+  <div class="page active" id="page-inicio">
+    <div class="greeting">
+      <h1>¡Hola, Mamá! 👋</h1>
+      <p id="fecha-texto">Cargando...</p>
+    </div>
+    <div class="nivel-card">
+      <div class="nivel-emoji">🌱</div>
+      <div class="nivel-info">
+        <h3>Nivel 1 — Mamá Principiante</h3>
+        <p>15 XP de 50 para subir de nivel</p>
+        <div class="nivel-bar-wrap"><div class="nivel-bar"></div></div>
+      </div>
+    </div>
+    <div class="stats-mini">
+      <div class="stat-mini"><div class="sn" id="total-recetas">...</div><div class="sl">Recetas totales</div></div>
+      <div class="stat-mini"><div class="sn" id="total-dulces">...</div><div class="sl">Dulces</div></div>
+      <div class="stat-mini"><div class="sn" id="total-saladas">...</div><div class="sl">Saladas</div></div>
+    </div>
+    <p class="section-title">Accesos rápidos</p>
+    <div class="quick-grid">
+      <div class="quick-card" onclick="showPage('calendario')"><span class="q-icon">📅</span><span class="q-title">Calendario</span><span class="q-sub">Plan semanal</span></div>
+      <div class="quick-card" onclick="showPage('recetas')"><span class="q-icon">🥗</span><span class="q-title">Recetas</span><span class="q-sub" id="sub-recetas">Ver todas</span></div>
+      <div class="quick-card" onclick="showPage('lista')"><span class="q-icon">🛒</span><span class="q-title">Lista de compras</span><span class="q-sub">Generar lista</span></div>
+      <div class="quick-card" onclick="showPage('perfil')"><span class="q-icon">⭐</span><span class="q-title">Mi progreso</span><span class="q-sub">Logros y nivel</span></div>
+    </div>
+    <p class="section-title">Lonchera sugerida para hoy</p>
+    <div class="receta-hoy" id="receta-hoy-card"><div class="loading"><div class="loading-spinner"></div>Cargando receta...</div></div>
   </div>
-  <div class="receta-list" id="lista-recetas"><div class="loading"><div class="loading-spinner"></div>Cargando recetas...</div></div>
-</div>
 
-<!-- DETALLE -->
-<div class="page" id="page-detalle">
-  <div class="detalle-back" onclick="volverDeDetalle()">← Volver</div>
-  <div id="detalle-contenido"></div>
-</div>
-
-<!-- CALENDARIO -->
-<div class="page" id="page-calendario">
-  <div class="greeting"><h1>📅 Calendario semanal</h1><p>Planifica la semana de tus hijos</p></div>
-  <div class="hijos-selector">
-    <span>Número de hijos:</span>
-    <button class="hijos-btn" onclick="cambiarHijos(-1)">−</button>
-    <span class="hijos-num" id="num-hijos">2</span>
-    <button class="hijos-btn" onclick="cambiarHijos(1)">+</button>
-    <span style="font-size:12px;color:#888;" id="txt-loncheras">= 10 loncheras/semana</span>
+  <!-- RECETAS -->
+  <div class="page" id="page-recetas">
+    <div class="greeting"><h1>🥗 Recetas</h1><p id="sub-total-recetas">Cargando...</p></div>
+    <input class="search-bar" type="text" placeholder="🔍  Buscar receta o ingrediente..." oninput="buscarRecetas(this.value)" id="search-input" />
+    <div class="filtros">
+      <button class="filtro-btn active" onclick="filtrar(this,'todas')">Todas</button>
+      <button class="filtro-btn" onclick="filtrar(this,'dulces')">🍰 Dulces</button>
+      <button class="filtro-btn" onclick="filtrar(this,'saladas')">🥗 Saladas</button>
+      <button class="filtro-btn" onclick="filtrar(this,'gomitas')">🍬 Gomitas</button>
+      <button class="filtro-btn" onclick="filtrar(this,'rapidas')">⚡ Rápidas</button>
+    </div>
+    <div class="receta-list" id="lista-recetas"><div class="loading"><div class="loading-spinner"></div>Cargando recetas...</div></div>
   </div>
-  <p class="section-title">Esta semana</p>
-  <div class="cal-grid" id="cal-grid"><div class="loading"><div class="loading-spinner"></div>Cargando...</div></div>
-  <button class="btn-generar-lista" onclick="showPage('lista')">🛒 Generar lista de compras</button>
-</div>
 
-<!-- LISTA -->
-<div class="page" id="page-lista">
-  <div class="greeting"><h1>🛒 Lista de compras</h1><p>Ingredientes para toda la semana</p></div>
-  <div class="lista-header">
-    <h3>Semana completa</h3>
-    <p>Basada en tu calendario semanal</p>
-    <div class="hijos-selector" style="margin-top:12px;padding:0;border:none;background:transparent;">
-      <span>Hijos:</span>
+  <!-- DETALLE -->
+  <div class="page" id="page-detalle">
+    <div class="detalle-back" onclick="volverDeDetalle()">← Volver</div>
+    <div id="detalle-contenido"></div>
+  </div>
+
+  <!-- CALENDARIO -->
+  <div class="page" id="page-calendario">
+    <div class="greeting"><h1>📅 Calendario semanal</h1><p>Planifica la semana de tus hijos</p></div>
+    <div class="hijos-selector">
+      <span>Número de hijos:</span>
       <button class="hijos-btn" onclick="cambiarHijos(-1)">−</button>
-      <span class="hijos-num" id="num-hijos2">2</span>
+      <span class="hijos-num" id="num-hijos">2</span>
       <button class="hijos-btn" onclick="cambiarHijos(1)">+</button>
-      <span style="font-size:12px;color:#888;" id="txt-total-lista">= 10 loncheras</span>
+      <span style="font-size:12px;color:#888;" id="txt-loncheras">= 10 loncheras/semana</span>
+    </div>
+    <p class="section-title">Esta semana</p>
+    <div class="cal-grid" id="cal-grid"><div class="loading"><div class="loading-spinner"></div>Cargando...</div></div>
+    <button class="btn-generar-lista" onclick="showPage('lista')">🛒 Generar lista de compras</button>
+  </div>
+
+  <!-- LISTA -->
+  <div class="page" id="page-lista">
+    <div class="greeting"><h1>🛒 Lista de compras</h1><p>Ingredientes para toda la semana</p></div>
+    <div class="lista-header">
+      <h3>Semana completa</h3>
+      <p>Basada en tu calendario semanal</p>
+      <div class="hijos-selector" style="margin-top:12px;padding:0;border:none;background:transparent;">
+        <span>Hijos:</span>
+        <button class="hijos-btn" onclick="cambiarHijos(-1)">−</button>
+        <span class="hijos-num" id="num-hijos2">2</span>
+        <button class="hijos-btn" onclick="cambiarHijos(1)">+</button>
+        <span style="font-size:12px;color:#888;" id="txt-total-lista">= 10 loncheras</span>
+      </div>
+    </div>
+    <div id="lista-ingredientes"><div class="loading"><div class="loading-spinner"></div>Generando lista...</div></div>
+    <div class="export-btns">
+      <button class="exp-btn primary" onclick="exportarWhatsApp()"><span class="eb-icon">💬</span> Compartir por WhatsApp</button>
+      <button class="exp-btn" onclick="copiarLista()"><span class="eb-icon">📋</span> Copiar como notas</button>
+      <button class="exp-btn" onclick="alert('PDF próximamente')"><span class="eb-icon">📄</span> Exportar como PDF</button>
     </div>
   </div>
-  <div id="lista-ingredientes"><div class="loading"><div class="loading-spinner"></div>Generando lista...</div></div>
-  <div class="export-btns">
-    <button class="exp-btn primary" onclick="exportarWhatsApp()"><span class="eb-icon">💬</span> Compartir por WhatsApp</button>
-    <button class="exp-btn" onclick="copiarLista()"><span class="eb-icon">📋</span> Copiar como notas</button>
-    <button class="exp-btn" onclick="alert('PDF próximamente')"><span class="eb-icon">📄</span> Exportar como PDF</button>
-  </div>
-</div>
 
-<!-- PERFIL -->
-<div class="page" id="page-perfil">
-  <div class="perfil-header"><div class="avatar">👩</div><h2>Mamá Loncherita</h2><p>Miembro desde hoy 🎉</p></div>
-  <div class="nivel-grande">
-    <div style="font-size:48px">🌱</div>
-    <h3>Nivel 1 — Principiante</h3>
-    <p>15 de 50 XP para el siguiente nivel</p>
-    <div class="xp-bar-wrap"><div class="xp-bar-fill"></div></div>
-    <p class="xp-label">+5 XP por cada lonchera preparada</p>
+  <!-- PERFIL -->
+  <div class="page" id="page-perfil">
+    <div class="perfil-header">
+      <div class="avatar">👩</div>
+      <h2>Mamá Loncherita</h2>
+      <p class="perfil-email" id="perfil-email"></p>
+    </div>
+    <button class="btn-salir" onclick="cerrarSesion()">🚪 Cerrar sesión</button>
+    <br><br>
+    <div class="nivel-grande">
+      <div style="font-size:48px">🌱</div>
+      <h3>Nivel 1 — Principiante</h3>
+      <p>15 de 50 XP para el siguiente nivel</p>
+      <div class="xp-bar-wrap"><div class="xp-bar-fill"></div></div>
+      <p class="xp-label">+5 XP por cada lonchera preparada</p>
+    </div>
+    <p class="section-title">Mis estadísticas</p>
+    <div class="stats-row">
+      <div class="stat-card"><div class="s-num">3</div><div class="s-label">Loncheras preparadas</div></div>
+      <div class="stat-card"><div class="s-num">1</div><div class="s-label">Semanas activa</div></div>
+      <div class="stat-card"><div class="s-num">15</div><div class="s-label">XP total</div></div>
+    </div>
+    <p class="section-title">Mis logros</p>
+    <div class="logros-grid">
+      <div class="logro"><div class="l-emoji">🥇</div><div class="l-nombre">Primera lonchera</div><div class="l-desc">Preparaste tu primera receta</div></div>
+      <div class="logro"><div class="l-emoji">📅</div><div class="l-nombre">Semana completa</div><div class="l-desc">5 días seguidos</div></div>
+      <div class="logro bloqueado"><div class="l-emoji">🔥</div><div class="l-nombre">En racha</div><div class="l-desc">2 semanas seguidas</div></div>
+      <div class="logro bloqueado"><div class="l-emoji">👩‍🍳</div><div class="l-nombre">Chef Loncherita</div><div class="l-desc">10 recetas distintas</div></div>
+      <div class="logro bloqueado"><div class="l-emoji">💪</div><div class="l-nombre">Súper Mamá</div><div class="l-desc">Nivel 5 alcanzado</div></div>
+      <div class="logro bloqueado"><div class="l-emoji">⭐</div><div class="l-nombre">Experta</div><div class="l-desc">50 loncheras preparadas</div></div>
+    </div>
   </div>
-  <p class="section-title">Mis estadísticas</p>
-  <div class="stats-row">
-    <div class="stat-card"><div class="s-num">3</div><div class="s-label">Loncheras preparadas</div></div>
-    <div class="stat-card"><div class="s-num">1</div><div class="s-label">Semanas activa</div></div>
-    <div class="stat-card"><div class="s-num">15</div><div class="s-label">XP total</div></div>
-  </div>
-  <p class="section-title">Mis logros</p>
-  <div class="logros-grid">
-    <div class="logro"><div class="l-emoji">🥇</div><div class="l-nombre">Primera lonchera</div><div class="l-desc">Preparaste tu primera receta</div></div>
-    <div class="logro"><div class="l-emoji">📅</div><div class="l-nombre">Semana completa</div><div class="l-desc">5 días seguidos</div></div>
-    <div class="logro bloqueado"><div class="l-emoji">🔥</div><div class="l-nombre">En racha</div><div class="l-desc">2 semanas seguidas</div></div>
-    <div class="logro bloqueado"><div class="l-emoji">👩‍🍳</div><div class="l-nombre">Chef Loncherita</div><div class="l-desc">10 recetas distintas</div></div>
-    <div class="logro bloqueado"><div class="l-emoji">💪</div><div class="l-nombre">Súper Mamá</div><div class="l-desc">Nivel 5 alcanzado</div></div>
-    <div class="logro bloqueado"><div class="l-emoji">⭐</div><div class="l-nombre">Experta</div><div class="l-desc">50 loncheras preparadas</div></div>
-  </div>
-</div>
 
-<nav class="bottom-nav">
-  <button class="bn-item active" id="bn-inicio" onclick="showPage('inicio')"><span class="icon">🏠</span><span class="label">Inicio</span></button>
-  <button class="bn-item" id="bn-calendario" onclick="showPage('calendario')"><span class="icon">📅</span><span class="label">Calendario</span></button>
-  <button class="bn-item" id="bn-recetas" onclick="showPage('recetas')"><span class="icon">🥗</span><span class="label">Recetas</span></button>
-  <button class="bn-item" id="bn-lista" onclick="showPage('lista')"><span class="icon">🛒</span><span class="label">Compras</span></button>
-  <button class="bn-item" id="bn-perfil" onclick="showPage('perfil')"><span class="icon">⭐</span><span class="label">Perfil</span></button>
-</nav>
+  <nav class="bottom-nav">
+    <button class="bn-item active" id="bn-inicio" onclick="showPage('inicio')"><span class="icon">🏠</span><span class="label">Inicio</span></button>
+    <button class="bn-item" id="bn-calendario" onclick="showPage('calendario')"><span class="icon">📅</span><span class="label">Calendario</span></button>
+    <button class="bn-item" id="bn-recetas" onclick="showPage('recetas')"><span class="icon">🥗</span><span class="label">Recetas</span></button>
+    <button class="bn-item" id="bn-lista" onclick="showPage('lista')"><span class="icon">🛒</span><span class="label">Compras</span></button>
+    <button class="bn-item" id="bn-perfil" onclick="showPage('perfil')"><span class="icon">⭐</span><span class="label">Perfil</span></button>
+  </nav>
+
+</div><!-- fin pantalla-app -->
+
+<!-- Firebase SDK -->
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+  import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCBgGw5NkDF68jOZG6s941v8glpUTJ03rA",
+    authDomain: "loncheritas-app.firebaseapp.com",
+    projectId: "loncheritas-app",
+    storageBucket: "loncheritas-app.firebasestorage.app",
+    messagingSenderId: "745464448000",
+    appId: "1:745464448000:web:4a6945a25cd896776004e5"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  // Exponer funciones globalmente
+  window._auth = auth;
+  window._signIn = signInWithEmailAndPassword;
+  window._signOut = signOut;
+
+  // Verificar si ya hay sesión activa
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      mostrarApp(user);
+    } else {
+      mostrarLogin();
+    }
+  });
+</script>
 
 <script>
+  // ============================================================
+  // AUTH
+  // ============================================================
+  function mostrarLogin() {
+    document.getElementById('pantalla-login').style.display = 'flex';
+    document.getElementById('pantalla-app').style.display = 'none';
+  }
+
+  function mostrarApp(user) {
+    document.getElementById('pantalla-login').style.display = 'none';
+    document.getElementById('pantalla-app').style.display = 'block';
+    if (user && user.email) {
+      document.getElementById('perfil-email').textContent = user.email;
+    }
+    cargarRecetas();
+  }
+
+  async function iniciarSesion() {
+    const email = document.getElementById('login-email').value.trim();
+    const pass = document.getElementById('login-pass').value;
+    const btnLogin = document.getElementById('btn-login');
+    const errorEl = document.getElementById('login-error');
+    const loadingEl = document.getElementById('login-loading');
+
+    if (!email || !pass) {
+      errorEl.textContent = 'Por favor ingresa tu email y contraseña.';
+      errorEl.style.display = 'block';
+      return;
+    }
+
+    errorEl.style.display = 'none';
+    loadingEl.style.display = 'block';
+    btnLogin.disabled = true;
+
+    try {
+      await window._signIn(window._auth, email, pass);
+      // onAuthStateChanged se encarga de mostrar la app
+    } catch (e) {
+      loadingEl.style.display = 'none';
+      btnLogin.disabled = false;
+      errorEl.textContent = 'Email o contraseña incorrectos. Verifica tus datos.';
+      errorEl.style.display = 'block';
+    }
+  }
+
+  async function cerrarSesion() {
+    await window._signOut(window._auth);
+    mostrarLogin();
+  }
+
+  // ============================================================
+  // APP
+  // ============================================================
   let todasLasRecetas = [];
   let recetasFiltradas = [];
   let filtroActivo = 'todas';
@@ -275,13 +435,13 @@
       const data = await resp.json();
       todasLasRecetas = data.recetas;
       recetasFiltradas = [...todasLasRecetas];
-      inicializar(data);
+      inicializar();
     } catch(e) {
-      document.getElementById('lista-recetas').innerHTML = '<div class="empty-state"><div class="es-icon">⚠️</div><p>Error cargando recetas. Recarga la página.</p></div>';
+      console.error('Error cargando recetas', e);
     }
   }
 
-  function inicializar(data) {
+  function inicializar() {
     const total = todasLasRecetas.length;
     const dulces = todasLasRecetas.filter(r=>r.categoria==='dulces').length;
     const saladas = todasLasRecetas.filter(r=>r.categoria==='saladas').length;
@@ -293,8 +453,7 @@
     const ahora = new Date();
     const fechaStr = ahora.toLocaleDateString('es-PE',{weekday:'long',day:'numeric',month:'long'});
     document.getElementById('fecha-texto').textContent = fechaStr.charAt(0).toUpperCase()+fechaStr.slice(1)+' · Lima';
-    const recetaHoy = todasLasRecetas[ahora.getDay() % total];
-    renderRecetaHoy(recetaHoy);
+    renderRecetaHoy(todasLasRecetas[ahora.getDay() % total]);
     renderRecetas(todasLasRecetas);
     generarCalendarioDefault();
     renderListaCompras();
@@ -341,7 +500,7 @@
   function filtrar(btn,tipo) {
     document.querySelectorAll('.filtro-btn').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
-    filtroActivo = tipo;
+    filtroActivo=tipo;
     document.getElementById('search-input').value='';
     if(tipo==='todas') recetasFiltradas=[...todasLasRecetas];
     else if(tipo==='rapidas') recetasFiltradas=todasLasRecetas.filter(r=>r.tiempo_min<=15);
@@ -352,11 +511,10 @@
   function buscarRecetas(q) {
     const query=q.toLowerCase();
     if(!query){renderRecetas(recetasFiltradas);return;}
-    const f=recetasFiltradas.filter(r=>
+    renderRecetas(recetasFiltradas.filter(r=>
       r.nombre.toLowerCase().includes(query)||
       r.ingredientes.some(i=>i.toLowerCase().includes(query))
-    );
-    renderRecetas(f);
+    ));
   }
 
   function verDetalle(id,desde) {
@@ -395,8 +553,8 @@
       calendarioSemanal[diaLibre]=todasLasRecetas.find(r=>r.id===id);
       renderCalendario();
       renderListaCompras();
-      showPage('calendario');
-    } else {showPage('calendario');}
+    }
+    showPage('calendario');
   }
 
   function generarCalendarioDefault() {
@@ -499,73 +657,6 @@
     });
     navigator.clipboard.writeText(t).then(()=>alert('✅ Lista copiada'));
   }
-
-  cargarRecetas();
 </script>
-</div>
-<script type="module">
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyCBgGw5NkDF68jOZG6s941v8glpUTJ03rA",
-  authDomain: "loncheritas-app.firebaseapp.com",
-  projectId: "loncheritas-app",
-  storageBucket: "loncheritas-app.firebasestorage.app",
-  messagingSenderId: "745464448000",
-  appId: "1:745464448000:web:4a6945a25cd896776004e5"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-window.login = function(){
-
-  const email=document.getElementById("login-email").value;
-  const pass=document.getElementById("login-pass").value;
-
-  signInWithEmailAndPassword(auth,email,pass)
-  .catch(()=>{
-    document.getElementById("login-error").innerText="Credenciales incorrectas";
-  });
-
-};
-
-onAuthStateChanged(auth,(user)=>{
-
-  if(user){
-
-    document.getElementById("login-screen").style.display="none";
-    document.getElementById("app").style.display="block";
-
-  }
-
-});
-
-</script>  
 </body>
-  <div id="login-screen" style="display:flex;align-items:center;justify-content:center;height:100vh;background:#FFF8F0;">
-  <div style="background:white;padding:30px;border-radius:16px;width:300px;border:1px solid #F0E8E0;text-align:center;">
-    <h2>🍱 Acceso Loncheritas</h2>
-
-    <input id="login-email" type="email" placeholder="Correo electrónico"
-    style="width:100%;padding:10px;margin-bottom:10px;border:1px solid #ddd;border-radius:8px;">
-
-    <input id="login-pass" type="password" placeholder="Contraseña"
-    style="width:100%;padding:10px;margin-bottom:15px;border:1px solid #ddd;border-radius:8px;">
-
-    <button onclick="login()"
-    style="width:100%;background:#FF6B35;color:white;border:none;padding:12px;border-radius:10px;font-weight:600;">
-    Entrar
-    </button>
-
-    <p id="login-error" style="color:red;font-size:12px;margin-top:10px;"></p>
-</div>
-</div>
-<div id="app" style="display:none;">
 </html>
