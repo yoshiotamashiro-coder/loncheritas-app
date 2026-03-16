@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loncheritas 🍱</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #FFF8F0;
+      color: #2D2D2D;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    .nav {
+      background: #FF6B35;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(255,107,53,0.3);
+    }
+    .nav-logo { font-size: 20px; font-weight: 700; color: white; letter-spacing: -0.5px; }
+    .nav-logo span { font-size: 22px; }
+    .nav-user { background: white; color: #FF6B35; border-radius: 20px; padding: 6px 14px; font-size: 13px; font-weight: 600; cursor: pointer; border: none; }
+
+    /* BOTTOM NAV */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: white;
+      display: flex;
+      border-top: 1px solid #F0E8E0;
+      z-index: 100;
+      box-shadow: 0 -2px 12px rgba(0,0,0,0.08);
+    }
+    .bn-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px 0 8px;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      gap: 3px;
+      transition: color 0.2s;
+    }
+    .bn-item .icon { font-size: 22px; }
+    .bn-item .label { font-size: 10px; font-weight: 500; color: #B0A098; }
+    .bn-item.active .label { color: #FF6B35; }
+    .bn-item.active .icon { filter: saturate(2); }
+
+    /* PAGES */
+    .page { display: none; padding: 20px 16px 90px; }
+    .page.active { display: block; }
+
+    /* HOME */
+    .greeting { margin-bottom: 20px; }
+    .greeting h1 { font-size: 22px; font-weight: 700; color: #2D2D2D; }
+    .greeting p { font-size: 14px; color: #888; margin-top: 4px; }
+
+    /* NIVEL BADGE */
+    .nivel-card {
+      background: linear-gradient(135deg, #FF6B35, #FF8C5A);
+      border-radius: 16px;
+      padding: 16px;
+      color: white;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .nivel-emoji { font-size: 40px; }
+    .nivel-info h3 { font-size: 16px; font-weight: 700; }
+    .nivel-info p { font-size: 12px; opacity: 0.85; margin-top: 2px; }
+    .nivel-bar-wrap { margin-top: 8px; background: rgba(255,255,255,0.3); border-radius: 10px; height: 6px; width: 140px; }
+    .nivel-bar { background: white; border-radius: 10px; height: 6px; width: 30%; }
+
+    /* QUICK ACTIONS */
+    .section-title { font-size: 13px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; }
+    .quick-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
+    .quick-card {
+      background: white;
+      border-radius: 14px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      border: 1.5px solid #F0E8E0;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .quick-card:active { transform: scale(0.97); }
+    .quick-card .q-icon { font-size: 28px; }
+    .quick-card .q-title { font-size: 14px; font-weight: 600; color: #2D2D2D; }
+    .quick-card .q-sub { font-size: 11px; color: #AAA; }
+
+    /* RECETA DEL DIA */
+    .receta-hoy {
+      background: white;
+      border-radius: 16px;
+      padding: 16px;
+      border: 1.5px solid #F0E8E0;
+      margin-bottom: 20px;
+    }
+    .receta-hoy .rh-tag { display: inline-block; background: #FFF0E8; color: #FF6B35; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-bottom: 10px; }
+    .receta-hoy h3 { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+    .receta-hoy p { font-size: 13px; color: #888; }
+    .receta-hoy .rh-meta { display: flex; gap: 12px; margin-top: 10px; }
+    .rh-meta span { font-size: 12px; color: #666; display: flex; align-items: center; gap: 4px; }
+
+    /* CALENDARIO */
+    .cal-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 20px; }
+    .cal-day {
+      background: white;
+      border-radius: 12px;
+      padding: 10px 6px;
+      text-align: center;
+      border: 1.5px solid #F0E8E0;
+      cursor: pointer;
+    }
+    .cal-day.today { border-color: #FF6B35; background: #FFF0E8; }
+    .cal-day .cd-name { font-size: 10px; font-weight: 600; color: #AAA; text-transform: uppercase; }
+    .cal-day.today .cd-name { color: #FF6B35; }
+    .cal-day .cd-emoji { font-size: 22px; margin: 4px 0; }
+    .cal-day .cd-label { font-size: 9px; color: #888; line-height: 1.2; }
+
+    /* RECETAS */
+    .search-bar {
+      background: white;
+      border: 1.5px solid #F0E8E0;
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-size: 14px;
+      width: 100%;
+      margin-bottom: 16px;
+      outline: none;
+    }
+    .filtros { display: flex; gap: 8px; margin-bottom: 16px; overflow-x: auto; padding-bottom: 4px; }
+    .filtro-btn {
+      background: white;
+      border: 1.5px solid #F0E8E0;
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 500;
+      white-space: nowrap;
+      cursor: pointer;
+      color: #666;
+    }
+    .filtro-btn.active { background: #FF6B35; border-color: #FF6B35; color: white; }
+
+    .receta-list { display: flex; flex-direction: column; gap: 12px; }
+    .receta-card {
+      background: white;
+      border-radius: 14px;
+      padding: 14px;
+      border: 1.5px solid #F0E8E0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+    }
+    .rc-emoji { font-size: 36px; }
+    .rc-info { flex: 1; }
+    .rc-info h4 { font-size: 15px; font-weight: 600; }
+    .rc-info p { font-size: 12px; color: #888; margin-top: 2px; }
+    .rc-meta { display: flex; gap: 8px; margin-top: 6px; }
+    .rc-tag { font-size: 10px; background: #FFF0E8; color: #FF6B35; padding: 2px 8px; border-radius: 10px; font-weight: 500; }
+    .rc-arrow { font-size: 18px; color: #CCC; }
+
+    /* LISTA DE COMPRAS */
+    .lista-header {
+      background: white;
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 16px;
+      border: 1.5px solid #F0E8E0;
+    }
+    .lista-header h3 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+    .lista-header p { font-size: 13px; color: #888; }
+    .hijos-selector { display: flex; align-items: center; gap: 12px; margin-top: 12px; }
+    .hijos-selector span { font-size: 13px; color: #666; }
+    .hijos-btn { background: #FF6B35; color: white; border: none; border-radius: 8px; width: 30px; height: 30px; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .hijos-num { font-size: 20px; font-weight: 700; color: #2D2D2D; min-width: 24px; text-align: center; }
+
+    .categoria-lista { margin-bottom: 16px; }
+    .cat-titulo { font-size: 12px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; padding-left: 4px; }
+    .item-compra {
+      background: white;
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+      border: 1.5px solid #F0E8E0;
+    }
+    .item-check { width: 20px; height: 20px; border-radius: 6px; border: 2px solid #DDD; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .item-check.checked { background: #FF6B35; border-color: #FF6B35; color: white; font-size: 12px; }
+    .item-nombre { flex: 1; font-size: 14px; }
+    .item-nombre.tachado { text-decoration: line-through; color: #CCC; }
+    .item-cantidad { font-size: 12px; color: #888; font-weight: 500; }
+
+    .export-btns { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+    .exp-btn {
+      background: white;
+      border: 1.5px solid #F0E8E0;
+      border-radius: 12px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      color: #2D2D2D;
+    }
+    .exp-btn .eb-icon { font-size: 22px; }
+    .exp-btn.primary { background: #FF6B35; border-color: #FF6B35; color: white; }
+
+    /* PERFIL */
+    .perfil-header {
+      text-align: center;
+      padding: 20px 0;
+      margin-bottom: 20px;
+    }
+    .avatar { font-size: 64px; margin-bottom: 10px; }
+    .perfil-header h2 { font-size: 20px; font-weight: 700; }
+    .perfil-header p { font-size: 13px; color: #888; margin-top: 4px; }
+
+    .nivel-grande {
+      background: linear-gradient(135deg, #FF6B35, #FF8C5A);
+      border-radius: 20px;
+      padding: 20px;
+      color: white;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .nivel-grande .ng-emoji { font-size: 48px; }
+    .nivel-grande h3 { font-size: 18px; font-weight: 700; margin-top: 8px; }
+    .nivel-grande p { font-size: 13px; opacity: 0.85; margin-top: 4px; }
+    .xp-bar-wrap { background: rgba(255,255,255,0.3); border-radius: 10px; height: 8px; margin-top: 12px; }
+    .xp-bar { background: white; border-radius: 10px; height: 8px; width: 30%; transition: width 0.5s; }
+    .xp-label { font-size: 11px; opacity: 0.8; margin-top: 6px; }
+
+    .logros-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+    .logro {
+      background: white;
+      border-radius: 14px;
+      padding: 14px 10px;
+      text-align: center;
+      border: 1.5px solid #F0E8E0;
+    }
+    .logro .l-emoji { font-size: 28px; }
+    .logro .l-nombre { font-size: 11px; font-weight: 600; color: #2D2D2D; margin-top: 4px; }
+    .logro .l-desc { font-size: 10px; color: #AAA; margin-top: 2px; }
+    .logro.bloqueado { opacity: 0.4; filter: grayscale(1); }
+
+    .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+    .stat-card { background: white; border-radius: 14px; padding: 14px; text-align: center; border: 1.5px solid #F0E8E0; }
+    .stat-card .s-num { font-size: 24px; font-weight: 700; color: #FF6B35; }
+    .stat-card .s-label { font-size: 11px; color: #888; margin-top: 2px; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV SUPERIOR -->
+  <nav class="nav">
+    <div class="nav-logo"><span>🍱</span> Loncheritas</div>
+    <button class="nav-user" onclick="showPage('perfil')">👤 Mamá</button>
+  </nav>
+
+  <!-- PÁGINA: INICIO -->
+  <div class="page active" id="page-inicio">
+    <div class="greeting">
+      <h1>¡Hola, Mamá! 👋</h1>
+      <p>Lunes · Semana 1 · Lima</p>
+    </div>
+
+    <div class="nivel-card">
+      <div class="nivel-emoji">🌱</div>
+      <div class="nivel-info">
+        <h3>Nivel 1 — Mamá Principiante</h3>
+        <p>15 XP de 50 para subir de nivel</p>
+        <div class="nivel-bar-wrap"><div class="nivel-bar"></div></div>
+      </div>
+    </div>
+
+    <p class="section-title">Accesos rápidos</p>
+    <div class="quick-grid">
+      <div class="quick-card" onclick="showPage('calendario')">
+        <span class="q-icon">📅</span>
+        <span class="q-title">Calendario</span>
+        <span class="q-sub">Plan semanal</span>
+      </div>
+      <div class="quick-card" onclick="showPage('recetas')">
+        <span class="q-icon">🥗</span>
+        <span class="q-title">Recetas</span>
+        <span class="q-sub">Ver todas</span>
+      </div>
+      <div class="quick-card" onclick="showPage('lista')">
+        <span class="q-icon">🛒</span>
+        <span class="q-title">Lista de compras</span>
+        <span class="q-sub">Generar lista</span>
+      </div>
+      <div class="quick-card" onclick="showPage('perfil')">
+        <span class="q-icon">⭐</span>
+        <span class="q-title">Mi progreso</span>
+        <span class="q-sub">Logros y nivel</span>
+      </div>
+    </div>
+
+    <p class="section-title">Lonchera de hoy</p>
+    <div class="receta-hoy">
+      <span class="rh-tag">✨ Sugerida para hoy</span>
+      <h3>🥪 Sándwich de pollo con verduras</h3>
+      <p>Nutritiva, rápida y lista en 10 minutos</p>
+      <div class="rh-meta">
+        <span>⏱️ 10 min</span>
+        <span>👧 2 hijos</span>
+        <span>🥦 Saludable</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PÁGINA: CALENDARIO -->
+  <div class="page" id="page-calendario">
+    <div class="greeting">
+      <h1>📅 Calendario semanal</h1>
+      <p>Semana del 10 al 14 de marzo</p>
+    </div>
+
+    <div class="hijos-selector" style="margin-bottom:20px; background:white; padding:14px 16px; border-radius:14px; border:1.5px solid #F0E8E0;">
+      <span>Número de hijos:</span>
+      <button class="hijos-btn" onclick="cambiarHijos(-1)">−</button>
+      <span class="hijos-num" id="num-hijos">2</span>
+      <button class="hijos-btn" onclick="cambiarHijos(1)">+</button>
+      <span id="txt-hijos" style="font-size:12px;color:#888;">loncheras/día</span>
+    </div>
+
+    <p class="section-title">Esta semana</p>
+    <div class="cal-grid">
+      <div class="cal-day today">
+        <div class="cd-name">LUN</div>
+        <div class="cd-emoji">🥪</div>
+        <div class="cd-label">Sándwich pollo</div>
+      </div>
+      <div class="cal-day">
+        <div class="cd-name">MAR</div>
+        <div class="cd-emoji">🍳</div>
+        <div class="cd-label">Tortilla vegetal</div>
+      </div>
+      <div class="cal-day">
+        <div class="cd-name">MIÉ</div>
+        <div class="cd-emoji">🍚</div>
+        <div class="cd-label">Arroz con atún</div>
+      </div>
+      <div class="cal-day">
+        <div class="cd-name">JUE</div>
+        <div class="cd-emoji">🥙</div>
+        <div class="cd-label">Wrap de pavo</div>
+      </div>
+      <div class="cal-day">
+        <div class="cd-name">VIE</div>
+        <div class="cd-emoji">🧆</div>
+        <div class="cd-label">Bolitas de quinua</div>
+      </div>
+    </div>
+
+    <button onclick="showPage('lista')" style="width:100%;background:#FF6B35;color:white;border:none;border-radius:14px;padding:16px;font-size:15px;font-weight:600;cursor:pointer;margin-top:8px;">
+      🛒 Generar lista de compras para esta semana
+    </button>
+  </div>
+
+  <!-- PÁGINA: RECETAS -->
+  <div class="page" id="page-recetas">
+    <div class="greeting">
+      <h1>🥗 Recetas</h1>
+      <p>Todas las loncheras disponibles</p>
+    </div>
+
+    <input class="search-bar" type="text" placeholder="🔍  Buscar receta..." oninput="buscarRecetas(this.value)" />
+
+    <div class="filtros">
+      <button class="filtro-btn active" onclick="filtrar(this, 'todas')">Todas</button>
+      <button class="filtro-btn" onclick="filtrar(this, 'rapidas')">⚡ Rápidas</button>
+      <button class="filtro-btn" onclick="filtrar(this, 'saludables')">🥦 Saludables</button>
+      <button class="filtro-btn" onclick="filtrar(this, 'economicas')">💰 Económicas</button>
+      <button class="filtro-btn" onclick="filtrar(this, 'sin-gluten')">🌾 Sin gluten</button>
+    </div>
+
+    <div class="receta-list" id="lista-recetas">
+      <!-- Generado por JS -->
+    </div>
+  </div>
+
+  <!-- PÁGINA: LISTA DE COMPRAS -->
+  <div class="page" id="page-lista">
+    <div class="greeting">
+      <h1>🛒 Lista de compras</h1>
+      <p>Ingredientes para toda la semana</p>
+    </div>
+
+    <div class="lista-header">
+      <h3>Semana del 10 al 14 de marzo</h3>
+      <p>Basada en tu calendario semanal</p>
+      <div class="hijos-selector">
+        <span>Hijos:</span>
+        <button class="hijos-btn" onclick="cambiarHijos2(-1)">−</button>
+        <span class="hijos-num" id="num-hijos2">2</span>
+        <button class="hijos-btn" onclick="cambiarHijos2(1)">+</button>
+        <span style="font-size:12px;color:#888;" id="txt-total">= 10 loncheras esta semana</span>
+      </div>
+    </div>
+
+    <div id="lista-ingredientes">
+      <!-- Generado por JS -->
+    </div>
+
+    <div class="export-btns">
+      <button class="exp-btn primary" onclick="exportarWhatsApp()">
+        <span class="eb-icon">💬</span> Compartir por WhatsApp
+      </button>
+      <button class="exp-btn" onclick="copiarLista()">
+        <span class="eb-icon">📋</span> Copiar como lista de notas
+      </button>
+      <button class="exp-btn" onclick="alert('Función PDF próximamente')">
+        <span class="eb-icon">📄</span> Exportar como PDF
+      </button>
+    </div>
+  </div>
+
+  <!-- PÁGINA: PERFIL -->
+  <div class="page" id="page-perfil">
+    <div class="perfil-header">
+      <div class="avatar">👩</div>
+      <h2>Mamá Loncherita</h2>
+      <p>Miembro desde marzo 2025</p>
+    </div>
+
+    <div class="nivel-grande">
+      <div class="ng-emoji">🌱</div>
+      <h3>Nivel 1 — Principiante</h3>
+      <p>15 de 50 XP para el siguiente nivel</p>
+      <div class="xp-bar-wrap"><div class="xp-bar" id="xp-bar"></div></div>
+      <p class="xp-label">+5 XP por cada lonchera preparada</p>
+    </div>
+
+    <p class="section-title">Mis estadísticas</p>
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="s-num">3</div>
+        <div class="s-label">Loncheras preparadas</div>
+      </div>
+      <div class="stat-card">
+        <div class="s-num">1</div>
+        <div class="s-label">Semanas activa</div>
+      </div>
+      <div class="stat-card">
+        <div class="s-num">15</div>
+        <div class="s-label">XP total</div>
+      </div>
+    </div>
+
+    <p class="section-title">Mis logros</p>
+    <div class="logros-grid">
+      <div class="logro">
+        <div class="l-emoji">🥇</div>
+        <div class="l-nombre">Primera lonchera</div>
+        <div class="l-desc">Preparaste tu primera receta</div>
+      </div>
+      <div class="logro">
+        <div class="l-emoji">📅</div>
+        <div class="l-nombre">Semana completa</div>
+        <div class="l-desc">5 días seguidos</div>
+      </div>
+      <div class="logro bloqueado">
+        <div class="l-emoji">🔥</div>
+        <div class="l-nombre">En racha</div>
+        <div class="l-desc">2 semanas seguidas</div>
+      </div>
+      <div class="logro bloqueado">
+        <div class="l-emoji">👩‍🍳</div>
+        <div class="l-nombre">Chef Loncherita</div>
+        <div class="l-desc">10 recetas distintas</div>
+      </div>
+      <div class="logro bloqueado">
+        <div class="l-emoji">💪</div>
+        <div class="l-nombre">Súper Mamá</div>
+        <div class="l-desc">Nivel 5 alcanzado</div>
+      </div>
+      <div class="logro bloqueado">
+        <div class="l-emoji">⭐</div>
+        <div class="l-nombre">Experta</div>
+        <div class="l-desc">50 loncheras preparadas</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <nav class="bottom-nav">
+    <button class="bn-item active" id="bn-inicio" onclick="showPage('inicio')">
+      <span class="icon">🏠</span>
+      <span class="label">Inicio</span>
+    </button>
+    <button class="bn-item" id="bn-calendario" onclick="showPage('calendario')">
+      <span class="icon">📅</span>
+      <span class="label">Calendario</span>
+    </button>
+    <button class="bn-item" id="bn-recetas" onclick="showPage('recetas')">
+      <span class="icon">🥗</span>
+      <span class="label">Recetas</span>
+    </button>
+    <button class="bn-item" id="bn-lista" onclick="showPage('lista')">
+      <span class="icon">🛒</span>
+      <span class="label">Compras</span>
+    </button>
+    <button class="bn-item" id="bn-perfil" onclick="showPage('perfil')">
+      <span class="icon">⭐</span>
+      <span class="label">Perfil</span>
+    </button>
+  </nav>
+
+  <script>
+    // NAVEGACIÓN
+    function showPage(name) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.bn-item').forEach(b => b.classList.remove('active'));
+      document.getElementById('page-' + name).classList.add('active');
+      const bn = document.getElementById('bn-' + name);
+      if (bn) bn.classList.add('active');
+      window.scrollTo(0, 0);
+    }
+
+    // HIJOS
+    let numHijos = 2;
+    function cambiarHijos(delta) {
+      numHijos = Math.max(1, Math.min(6, numHijos + delta));
+      document.getElementById('num-hijos').textContent = numHijos;
+      document.getElementById('num-hijos2').textContent = numHijos;
+      actualizarTotal();
+    }
+    function cambiarHijos2(delta) {
+      cambiarHijos(delta);
+    }
+    function actualizarTotal() {
+      const total = numHijos * 5;
+      document.getElementById('txt-total').textContent = '= ' + total + ' loncheras esta semana';
+    }
+
+    // RECETAS DATA
+    const recetas = [
+      { emoji: '🥪', nombre: 'Sándwich de pollo con verduras', desc: 'Pan integral, pollo, tomate, lechuga', tiempo: '10 min', tags: ['rapidas', 'saludables'] },
+      { emoji: '🍳', nombre: 'Tortilla de vegetales', desc: 'Huevo, pimiento, zanahoria, cebolla', tiempo: '15 min', tags: ['saludables', 'economicas'] },
+      { emoji: '🍚', nombre: 'Arroz con atún y maíz', desc: 'Arroz integral, atún en agua, maíz', tiempo: '20 min', tags: ['economicas', 'saludables'] },
+      { emoji: '🥙', nombre: 'Wrap de pavo y queso', desc: 'Tortilla de trigo, pavo, queso, espinaca', tiempo: '8 min', tags: ['rapidas'] },
+      { emoji: '🧆', nombre: 'Bolitas de quinua', desc: 'Quinua, zanahoria rallada, avena', tiempo: '25 min', tags: ['saludables', 'sin-gluten'] },
+      { emoji: '🥕', nombre: 'Bastones con hummus', desc: 'Zanahoria, pepino, hummus casero', tiempo: '5 min', tags: ['rapidas', 'saludables', 'sin-gluten'] },
+      { emoji: '🍱', nombre: 'Mini arroz chaufa', desc: 'Arroz, huevo, cebolla china, sillao', tiempo: '20 min', tags: ['economicas'] },
+      { emoji: '🥗', nombre: 'Ensalada de pasta fría', desc: 'Pasta, atún, maíz, mayonesa light', tiempo: '15 min', tags: ['economicas'] },
+    ];
+
+    let filtroActivo = 'todas';
+
+    function renderRecetas(lista) {
+      const container = document.getElementById('lista-recetas');
+      container.innerHTML = lista.map(r => `
+        <div class="receta-card">
+          <span class="rc-emoji">${r.emoji}</span>
+          <div class="rc-info">
+            <h4>${r.nombre}</h4>
+            <p>${r.desc}</p>
+            <div class="rc-meta">
+              <span class="rc-tag">⏱️ ${r.tiempo}</span>
+              ${r.tags.includes('saludables') ? '<span class="rc-tag">🥦 Saludable</span>' : ''}
+            </div>
+          </div>
+          <span class="rc-arrow">›</span>
+        </div>
+      `).join('');
+    }
+
+    function filtrar(btn, tipo) {
+      document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filtroActivo = tipo;
+      const filtradas = tipo === 'todas' ? recetas : recetas.filter(r => r.tags.includes(tipo));
+      renderRecetas(filtradas);
+    }
+
+    function buscarRecetas(query) {
+      const q = query.toLowerCase();
+      const filtradas = recetas.filter(r => r.nombre.toLowerCase().includes(q) || r.desc.toLowerCase().includes(q));
+      renderRecetas(filtradas);
+    }
+
+    // LISTA DE COMPRAS
+    const ingredientes = {
+      'Proteínas': [
+        { nombre: 'Pechuga de pollo', cantidad: '500g' },
+        { nombre: 'Atún en agua (lata)', cantidad: '3 latas' },
+        { nombre: 'Pavo en fetas', cantidad: '200g' },
+        { nombre: 'Huevos', cantidad: '6 unidades' },
+      ],
+      'Verduras y frutas': [
+        { nombre: 'Lechuga', cantidad: '1 unidad' },
+        { nombre: 'Tomate', cantidad: '4 unidades' },
+        { nombre: 'Zanahoria', cantidad: '4 unidades' },
+        { nombre: 'Pimiento rojo', cantidad: '2 unidades' },
+        { nombre: 'Espinaca', cantidad: '1 bolsa' },
+      ],
+      'Cereales y granos': [
+        { nombre: 'Pan integral', cantidad: '1 bolsa' },
+        { nombre: 'Tortillas de trigo', cantidad: '8 unidades' },
+        { nombre: 'Arroz integral', cantidad: '500g' },
+        { nombre: 'Quinua', cantidad: '250g' },
+      ],
+      'Otros': [
+        { nombre: 'Queso fresco', cantidad: '200g' },
+        { nombre: 'Maíz dulce (lata)', cantidad: '2 latas' },
+        { nombre: 'Hummus', cantidad: '1 tarro' },
+      ]
+    };
+
+    let checks = {};
+
+    function renderLista() {
+      const container = document.getElementById('lista-ingredientes');
+      container.innerHTML = Object.entries(ingredientes).map(([cat, items]) => `
+        <div class="categoria-lista">
+          <div class="cat-titulo">${cat}</div>
+          ${items.map((item, i) => {
+            const key = cat + i;
+            const checked = checks[key];
+            return `
+              <div class="item-compra">
+                <div class="item-check ${checked ? 'checked' : ''}" onclick="toggleCheck('${key}', this, document.getElementById('nombre-${key}'))">
+                  ${checked ? '✓' : ''}
+                </div>
+                <span class="item-nombre ${checked ? 'tachado' : ''}" id="nombre-${key}">${item.nombre}</span>
+                <span class="item-cantidad">${item.cantidad}</span>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `).join('');
+    }
+
+    function toggleCheck(key, checkEl, nombreEl) {
+      checks[key] = !checks[key];
+      checkEl.classList.toggle('checked', checks[key]);
+      checkEl.innerHTML = checks[key] ? '✓' : '';
+      nombreEl.classList.toggle('tachado', checks[key]);
+    }
+
+    function exportarWhatsApp() {
+      let texto = '🍱 *Lista de compras Loncheritas*\n';
+      texto += `📅 Semana del 10 al 14 de marzo\n👧 ${numHijos} hijos\n\n`;
+      Object.entries(ingredientes).forEach(([cat, items]) => {
+        texto += `*${cat}*\n`;
+        items.forEach(item => { texto += `• ${item.nombre} — ${item.cantidad}\n`; });
+        texto += '\n';
+      });
+      texto += '_Generado con Loncheritas App 🍱_';
+      const url = 'https://wa.me/?text=' + encodeURIComponent(texto);
+      window.open(url, '_blank');
+    }
+
+    function copiarLista() {
+      let texto = '🍱 Lista de compras Loncheritas\n\n';
+      Object.entries(ingredientes).forEach(([cat, items]) => {
+        texto += `${cat}:\n`;
+        items.forEach(item => { texto += `☐ ${item.nombre} — ${item.cantidad}\n`; });
+        texto += '\n';
+      });
+      navigator.clipboard.writeText(texto).then(() => {
+        alert('✅ Lista copiada al portapapeles');
+      });
+    }
+
+    // INIT
+    renderRecetas(recetas);
+    renderLista();
+    actualizarTotal();
+  </script>
+</body>
+</html>
