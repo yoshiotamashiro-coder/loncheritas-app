@@ -536,11 +536,9 @@
     userPreparadas = perfil.recetasPreparadas || 0;
     userCalendario = perfil.calendario || {};
     // Cargar logros ya obtenidos para no mostrar el banner de nuevo
-    console.log('mostrarApp - perfil.recetasPreparadas:', perfil.recetasPreparadas, '| perfil.favoritas:', perfil.favoritas);
     // Solo marcar como obtenidos los logros que YA tenía ANTES de esta sesión
     // Guardamos en Firestore los logros obtenidos para no perderlos
     logrosYaObtenidos = perfil.logrosObtenidos || LOGROS_DEF.filter(l => l.req(perfil)).map(l => l.id);
-    console.log('logrosYaObtenidos iniciales:', logrosYaObtenidos);
     // Guardar nivel actual para detectar subidas
     nivelAnterior = getNivel(calcXP(perfil)).nivel;
 
@@ -803,15 +801,12 @@
   }
 
   function mostrarLogroBanner(logro) {
-    console.log('mostrarLogroBanner llamado con:', logro);
     try {
       const bannerEl = document.getElementById('logro-banner');
-      console.log('Banner element encontrado:', bannerEl);
       document.getElementById('lb-emoji').textContent = logro.emoji;
       document.getElementById('lb-nombre').textContent = logro.nombre;
       document.getElementById('lb-desc').textContent = logro.desc;
       bannerEl.style.display = 'flex';
-      console.log('Banner display seteado a flex. Style actual:', bannerEl.style.display);
     } catch(e) { console.error('Banner error:', e); }
   }
 
@@ -835,14 +830,11 @@
   }
 
   function verificarLogros(data) {
-    console.log('verificarLogros. recetasPreparadas:', data.recetasPreparadas, '| logrosYaObtenidos:', logrosYaObtenidos);
     const nuevosLogros = LOGROS_DEF.filter(l => {
       const cumple = l.req(data);
       const yaObtenido = logrosYaObtenidos.includes(l.id);
-      console.log('Logro:', l.id, '| cumple:', cumple, '| yaObtenido:', yaObtenido);
       return !yaObtenido && cumple;
     });
-    console.log('Nuevos logros:', nuevosLogros.map(l => l.id));
     if(nuevosLogros.length > 0) {
       nuevosLogros.forEach((l, i) => {
         logrosYaObtenidos.push(l.id);
@@ -854,7 +846,6 @@
     // Verificar subida de nivel
     const xp = calcXP(data);
     const nivelActual = getNivel(xp).nivel;
-    console.log('XP:', xp, '| nivelActual:', nivelActual, '| nivelAnterior:', nivelAnterior);
     if(nivelActual > nivelAnterior) {
       nivelAnterior = nivelActual;
       const delay = 500 + (nuevosLogros.length * 3000);
