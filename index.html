@@ -302,7 +302,7 @@
       <div class="quick-card" onclick="showPage('calendario')"><span class="q-icon">📅</span><span class="q-title">Calendario</span><span class="q-sub">Plan semanal</span></div>
       <div class="quick-card" onclick="showPage('recetas')"><span class="q-icon">🥗</span><span class="q-title">Recetas</span><span class="q-sub" id="sub-recetas">Ver todas</span></div>
       <div class="quick-card" onclick="showPage('lista')"><span class="q-icon">🛒</span><span class="q-title">Lista de compras</span><span class="q-sub">Generar lista</span></div>
-      <div class="quick-card" onclick="showPage('favoritas')"><span class="q-icon">❤️</span><span class="q-title">Mis favoritas</span><span class="q-sub" id="sub-favoritas">0 guardadas</span></div>
+      <div class="quick-card" onclick="showPage('buscador')"><span class="q-icon">🔎</span><span class="q-title">¿Qué preparo?</span><span class="q-sub">Busca por ingredientes</span></div>
     </div>
     <p class="section-title">Lonchera sugerida para hoy</p>
     <div class="receta-hoy" id="receta-hoy-card"><div class="loading"><div class="loading-spinner"></div>Cargando...</div></div>
@@ -332,6 +332,22 @@
   <div class="page" id="page-favoritas">
     <div class="greeting"><h1>❤️ Mis favoritas</h1><p id="sub-favoritas-page">0 recetas guardadas</p></div>
     <div class="receta-list" id="lista-favoritas"><div class="favoritas-empty">Aún no tienes favoritas.<br>Toca ❤️ en cualquier receta para guardarla.</div></div>
+  </div>
+
+  <!-- BUSCADOR POR INGREDIENTES -->
+  <div class="page" id="page-buscador">
+    <div class="greeting"><h1>🔎 ¿Qué preparo hoy?</h1><p>Ingresa los ingredientes que tienes disponibles</p></div>
+    <div style="background:white;border-radius:16px;padding:16px;border:1.5px solid #F0E8E0;margin-bottom:16px;">
+      <p style="font-size:13px;color:#888;margin-bottom:12px;">Ingresa hasta 5 ingredientes que tienes en casa:</p>
+      <div id="ingredientes-tags" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;min-height:36px;"></div>
+      <div style="display:flex;gap:8px;">
+        <input type="text" id="ing-input" placeholder="ej: pollo, zanahoria..." style="flex:1;padding:11px 14px;border:1.5px solid #F0E8E0;border-radius:10px;font-size:14px;outline:none;" onkeydown="if(event.key==='Enter'||event.key===',')agregarIngrediente()" />
+        <button onclick="agregarIngrediente()" style="background:#FF6B35;color:white;border:none;border-radius:10px;padding:11px 16px;font-size:14px;font-weight:600;cursor:pointer;">+</button>
+      </div>
+      <button onclick="buscarPorIngredientes()" id="btn-buscar-ing" style="width:100%;background:#FF6B35;color:white;border:none;border-radius:12px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;margin-top:12px;display:none;">🔍 Ver recetas posibles</button>
+      <button onclick="limpiarBuscador()" style="width:100%;background:white;color:#888;border:1.5px solid #F0E8E0;border-radius:12px;padding:11px;font-size:13px;cursor:pointer;margin-top:8px;display:none;" id="btn-limpiar-ing">Limpiar búsqueda</button>
+    </div>
+    <div id="resultados-buscador"></div>
   </div>
 
   <!-- CALENDARIO -->
@@ -401,8 +417,8 @@
     <button class="bn-item active" id="bn-inicio" onclick="showPage('inicio')"><span class="icon">🏠</span><span class="label">Inicio</span></button>
     <button class="bn-item" id="bn-calendario" onclick="showPage('calendario')"><span class="icon">📅</span><span class="label">Calendario</span></button>
     <button class="bn-item" id="bn-recetas" onclick="showPage('recetas')"><span class="icon">🥗</span><span class="label">Recetas</span></button>
+    <button class="bn-item" id="bn-buscador" onclick="showPage('buscador')"><span class="icon">🔎</span><span class="label">¿Qué preparo?</span></button>
     <button class="bn-item" id="bn-lista" onclick="showPage('lista')"><span class="icon">🛒</span><span class="label">Compras</span></button>
-    <button class="bn-item" id="bn-favoritas" onclick="showPage('favoritas')"><span class="icon">❤️</span><span class="label">Favoritas</span></button>
   </nav>
 </div>
 
@@ -1100,6 +1116,109 @@
   }
 
   function toggleCheck(k,el,nEl){ checksLista[k]=!checksLista[k]; el.classList.toggle('checked',checksLista[k]); el.innerHTML=checksLista[k]?'✓':''; if(nEl)nEl.classList.toggle('tachado',checksLista[k]); }
+
+  // ===== BUSCADOR POR INGREDIENTES =====
+  let ingredientesSeleccionados = [];
+
+  function agregarIngrediente() {
+    if(ingredientesSeleccionados.length >= 5) { showToast('Máximo 5 ingredientes'); return; }
+    const input = document.getElementById('ing-input');
+    const valor = input.value.trim().toLowerCase().replace(',','');
+    if(!valor) return;
+    if(ingredientesSeleccionados.includes(valor)) { input.value=''; return; }
+    ingredientesSeleccionados.push(valor);
+    input.value = '';
+    input.focus();
+    renderTags();
+  }
+
+  function renderTags() {
+    const c = document.getElementById('ingredientes-tags');
+    c.innerHTML = ingredientesSeleccionados.map((ing, i) => `
+      <div style="background:#FFF0E8;color:#FF6B35;border:1px solid #FFD4B8;border-radius:20px;padding:6px 12px;font-size:13px;font-weight:500;display:flex;align-items:center;gap:6px;">
+        ${ing}
+        <span onclick="quitarIngrediente(${i})" style="cursor:pointer;font-size:16px;line-height:1;color:#FF6B35;">×</span>
+      </div>
+    `).join('');
+    const btnBuscar = document.getElementById('btn-buscar-ing');
+    const btnLimpiar = document.getElementById('btn-limpiar-ing');
+    if(btnBuscar) btnBuscar.style.display = ingredientesSeleccionados.length > 0 ? 'block' : 'none';
+    if(btnLimpiar) btnLimpiar.style.display = ingredientesSeleccionados.length > 0 ? 'block' : 'none';
+  }
+
+  function quitarIngrediente(i) {
+    ingredientesSeleccionados.splice(i, 1);
+    renderTags();
+    if(ingredientesSeleccionados.length === 0) {
+      document.getElementById('resultados-buscador').innerHTML = '';
+    }
+  }
+
+  function limpiarBuscador() {
+    ingredientesSeleccionados = [];
+    renderTags();
+    document.getElementById('resultados-buscador').innerHTML = '';
+    document.getElementById('ing-input').value = '';
+  }
+
+  function buscarPorIngredientes() {
+    if(!ingredientesSeleccionados.length) return;
+    const c = document.getElementById('resultados-buscador');
+
+    // Para cada receta calcular coincidencias
+    const resultados = todasLasRecetas.map(r => {
+      const ingReceta = r.ingredientes.map(i => i.toLowerCase());
+      const tienes = ingredientesSeleccionados.filter(ing =>
+        ingReceta.some(ir => ir.includes(ing))
+      );
+      const falta = r.ingredientes.filter(ir =>
+        !ingredientesSeleccionados.some(ing => ir.toLowerCase().includes(ing))
+      );
+      return { receta: r, tienes, falta, score: tienes.length };
+    })
+    .filter(r => r.score > 0)
+    .sort((a, b) => b.score - a.score);
+
+    if(!resultados.length) {
+      c.innerHTML = `<div style="text-align:center;padding:40px 20px;color:#AAA;">
+        <div style="font-size:48px;margin-bottom:12px;">🤔</div>
+        <p style="font-size:14px;">No encontramos recetas con esos ingredientes.<br>Prueba con otros ingredientes.</p>
+      </div>`;
+      return;
+    }
+
+    c.innerHTML = `
+      <p style="font-size:13px;color:#888;margin-bottom:12px;font-weight:500;">${resultados.length} recetas posibles con tus ingredientes:</p>
+      ${resultados.map(({receta: r, tienes, falta}) => `
+        <div style="background:white;border-radius:14px;padding:16px;margin-bottom:12px;border:1.5px solid #F0E8E0;" onclick="verDetalle('${r.id}','buscador')" >
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;cursor:pointer;">
+            <span style="font-size:36px;">${r.emoji}</span>
+            <div style="flex:1;">
+              <h4 style="font-size:15px;font-weight:600;">${r.nombre}</h4>
+              <p style="font-size:12px;color:#888;margin-top:2px;">${r.metodo} · ${r.tiempo_min} min</p>
+            </div>
+            <div style="background:${tienes.length === ingredientesSeleccionados.length ? '#F0FFF4' : '#FFF0E8'};color:${tienes.length === ingredientesSeleccionados.length ? '#2E7D32' : '#FF6B35'};border-radius:20px;padding:4px 10px;font-size:12px;font-weight:700;white-space:nowrap;">
+              ${tienes.length}/${ingredientesSeleccionados.length} ✓
+            </div>
+          </div>
+          ${tienes.length > 0 ? `
+          <div style="margin-bottom:8px;">
+            <p style="font-size:11px;font-weight:700;color:#2E7D32;margin-bottom:4px;">✅ Ya tienes:</p>
+            <div style="display:flex;flex-wrap:wrap;gap:4px;">
+              ${tienes.map(t => `<span style="background:#F0FFF4;color:#2E7D32;border-radius:10px;padding:2px 8px;font-size:11px;">${t}</span>`).join('')}
+            </div>
+          </div>` : ''}
+          ${falta.length > 0 ? `
+          <div>
+            <p style="font-size:11px;font-weight:700;color:#FF6B35;margin-bottom:4px;">🛒 Te falta comprar:</p>
+            <div style="display:flex;flex-wrap:wrap;gap:4px;">
+              ${falta.map(f => `<span style="background:#FFF0E8;color:#FF6B35;border-radius:10px;padding:2px 8px;font-size:11px;">${f}</span>`).join('')}
+            </div>
+          </div>` : '<p style="font-size:12px;color:#2E7D32;font-weight:600;">🎉 ¡Tienes todo para prepararla!</p>'}
+        </div>
+      `).join('')}
+    `;
+  }
 
   function exportarWhatsApp(){
     let t='🍱 *Lista de compras Loncheritas*\n👧 '+numHijos+' hijos\n\n';
