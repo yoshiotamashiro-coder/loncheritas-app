@@ -585,7 +585,8 @@
     // Stats inicio
     document.getElementById('stat-preparadas').textContent = data.recetasPreparadas || 0;
     document.getElementById('stat-favoritas').textContent = (data.favoritas||[]).length;
-    document.getElementById('sub-favoritas').textContent = (data.favoritas||[]).length + ' guardadas';
+    const subFavEl = document.getElementById('sub-favoritas');
+    if(subFavEl) subFavEl.textContent = (data.favoritas||[]).length + ' guardadas';
 
     // Perfil
     document.getElementById('perfil-nivel-emoji').textContent = nivel.emoji;
