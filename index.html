@@ -469,6 +469,8 @@
   let todasLasRecetas = [], recetasFiltradas = [];
   let numHijos = 2, calendarioSemanal = {}, checksLista = {}, paginaAnterior = 'recetas';
   let userFavoritas = [], userPreparadas = 0, userCalendario = {};
+  let logrosYaObtenidos = [];
+  let nivelAnterior = 1;
   const DIAS_CORTOS = ['LUN','MAR','MIÉ','JUE','VIE'];
   const DIAS_NOMBRES = ['Lunes','Martes','Miércoles','Jueves','Viernes'];
   const CLAVES_DIAS = ['lunes','martes','miercoles','jueves','viernes'];
@@ -796,15 +798,13 @@
     showPage('detalle');
   }
 
-  let logrosYaObtenidos = [];
-
   function mostrarLogroBanner(logro) {
-    const bannerEl = document.getElementById('logro-banner');
-    if(!bannerEl) return;
-    document.getElementById('lb-emoji').textContent = logro.emoji;
-    document.getElementById('lb-nombre').textContent = logro.nombre;
-    document.getElementById('lb-desc').textContent = logro.desc;
-    bannerEl.style.display = 'flex';
+    try {
+      document.getElementById('lb-emoji').textContent = logro.emoji;
+      document.getElementById('lb-nombre').textContent = logro.nombre;
+      document.getElementById('lb-desc').textContent = logro.desc;
+      document.getElementById('logro-banner').style.display = 'flex';
+    } catch(e) { console.error('Banner error:', e); }
   }
 
   function mostrarNivelBanner(nivel) {
@@ -826,25 +826,20 @@
     if(bannerEl) bannerEl.style.display = 'none';
   }
 
-  let nivelAnterior = 1;
-
   function verificarLogros(data) {
-    let delay = 800;
-    // Verificar logros
-    LOGROS_DEF.forEach(l => {
-      if(!logrosYaObtenidos.includes(l.id) && l.req(data)) {
-        logrosYaObtenidos.push(l.id);
-        setTimeout(() => mostrarLogroBanner(l), delay);
-        delay += 3000;
-      }
+    // Verificar logros nuevos
+    const nuevosLogros = LOGROS_DEF.filter(l => !logrosYaObtenidos.includes(l.id) && l.req(data));
+    nuevosLogros.forEach((l, i) => {
+      logrosYaObtenidos.push(l.id);
+      setTimeout(() => mostrarLogroBanner(l), 500 + (i * 3000));
     });
     // Verificar subida de nivel
     const xp = calcXP(data);
     const nivelActual = getNivel(xp).nivel;
     if(nivelActual > nivelAnterior) {
-      const nivel = getNivel(xp);
-      setTimeout(() => mostrarNivelBanner(nivel), delay);
       nivelAnterior = nivelActual;
+      const delay = 500 + (nuevosLogros.length * 3000);
+      setTimeout(() => mostrarNivelBanner(getNivel(xp)), delay);
     }
   }
 
