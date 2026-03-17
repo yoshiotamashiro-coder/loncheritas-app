@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Loncheritas 🍱</title>
+  <title>Loncheritas Inteligentes 🍱</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFF8F0; color: #2D2D2D; min-height: 100vh; }
@@ -64,7 +64,7 @@
     .nivel-info p { font-size: 12px; opacity: 0.85; margin-top: 2px; }
     .nivel-bar-wrap { margin-top: 8px; background: rgba(255,255,255,0.3); border-radius: 10px; height: 6px; width: 140px; }
     .nivel-bar { background: white; border-radius: 10px; height: 6px; transition: width 0.5s; }
-    .section-title { font-size: 13px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; }
+    .section-title { font-size: 11px; font-weight: 700; color: #999; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; }
     .quick-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
     .quick-card { background: white; border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 6px; cursor: pointer; border: 1.5px solid #F0E8E0; transition: transform 0.15s; }
     .quick-card:active { transform: scale(0.97); }
@@ -79,7 +79,7 @@
     .rh-meta span { font-size: 12px; color: #666; }
     .stats-mini { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 20px; }
     .stat-mini { background: white; border-radius: 12px; padding: 12px 8px; text-align: center; border: 1.5px solid #F0E8E0; }
-    .stat-mini .sn { font-size: 22px; font-weight: 700; color: #FF6B35; }
+    .stat-mini .sn { font-size: 22px; font-weight: 700; color: #2D2D2D; }
     .stat-mini .sl { font-size: 10px; color: #888; margin-top: 2px; }
     .search-bar { background: white; border: 1.5px solid #F0E8E0; border-radius: 12px; padding: 12px 16px; font-size: 14px; width: 100%; margin-bottom: 16px; outline: none; }
     .filtros { display: flex; gap: 8px; margin-bottom: 16px; overflow-x: auto; padding-bottom: 4px; }
@@ -92,7 +92,7 @@
     .rc-info h4 { font-size: 15px; font-weight: 600; }
     .rc-info p { font-size: 12px; color: #888; margin-top: 2px; }
     .rc-meta { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; }
-    .rc-tag { font-size: 10px; background: #FFF0E8; color: #FF6B35; padding: 2px 8px; border-radius: 10px; font-weight: 500; }
+    .rc-tag { font-size: 10px; background: #F5F0FF; color: #6B35FF; padding: 2px 8px; border-radius: 10px; font-weight: 500; }
     .rc-tag.salada { background: #E8F5E8; color: #2E7D32; }
     .rc-tag.gomita { background: #EEF0FB; color: #3F51B5; }
     .rc-fav { font-size: 20px; cursor: pointer; padding: 4px; flex-shrink: 0; }
@@ -101,7 +101,7 @@
     .detalle-emoji { font-size: 64px; margin-bottom: 12px; }
     .detalle-header h2 { font-size: 20px; font-weight: 700; }
     .detalle-badges { display: flex; justify-content: center; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
-    .detalle-badge { font-size: 12px; background: #FFF0E8; color: #FF6B35; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .detalle-badge { font-size: 12px; background: #F5F5F5; color: #555; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
     .detalle-section { background: white; border-radius: 14px; padding: 16px; margin-bottom: 12px; border: 1.5px solid #F0E8E0; }
     .detalle-section h3 { font-size: 14px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; }
     .ingrediente-item { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 0.5px solid #F5EDE8; font-size: 14px; }
@@ -156,7 +156,7 @@
     .xp-label { font-size: 11px; opacity: 0.8; margin-top: 6px; }
     .stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 20px; }
     .stat-card { background: white; border-radius: 14px; padding: 14px; text-align: center; border: 1.5px solid #F0E8E0; }
-    .stat-card .s-num { font-size: 24px; font-weight: 700; color: #FF6B35; }
+    .stat-card .s-num { font-size: 24px; font-weight: 700; color: #2D2D2D; }
     .stat-card .s-label { font-size: 11px; color: #888; margin-top: 2px; }
     .logros-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 20px; }
     .logro { background: white; border-radius: 14px; padding: 14px 10px; text-align: center; border: 1.5px solid #F0E8E0; }
@@ -197,9 +197,116 @@
     .mri-cat.salada { background: #E8F5E8; color: #2E7D32; }
     .mri-cat.gomita { background: #EEF0FB; color: #3F51B5; }
     .cal-semana-label { font-size: 12px; color: #888; margin-bottom: 14px; background: white; border-radius: 10px; padding: 8px 14px; border: 1px solid #F0E8E0; display: inline-block; }
+
+    /* SPLASH SCREEN */
+    #splash-screen { position:fixed; top:0; left:0; right:0; bottom:0; background:linear-gradient(160deg,#FF6B35,#FF8C5A); z-index:99999; display:flex; flex-direction:column; align-items:center; justify-content:center; transition:opacity 0.6s; }
+    #splash-screen.fade-out { opacity:0; pointer-events:none; }
+    .splash-logo { font-size:80px; margin-bottom:16px; animation: splashBounce 0.8s ease; }
+    @keyframes splashBounce { 0%{transform:scale(0.5);opacity:0} 70%{transform:scale(1.1)} 100%{transform:scale(1);opacity:1} }
+    .splash-titulo { font-size:26px; font-weight:700; color:white; margin-bottom:8px; }
+    .splash-sub { font-size:14px; color:rgba(255,255,255,0.85); margin-bottom:40px; }
+    .splash-bar-wrap { width:160px; height:4px; background:rgba(255,255,255,0.3); border-radius:4px; overflow:hidden; }
+    .splash-bar { height:4px; background:white; border-radius:4px; animation:splashLoad 1.8s ease forwards; }
+    @keyframes splashLoad { 0%{width:0%} 100%{width:100%} }
+
+    /* SKELETON LOADING */
+    .skeleton { background:linear-gradient(90deg,#F0E8E0 25%,#FFF0E8 50%,#F0E8E0 75%); background-size:200% 100%; animation:shimmer 1.2s infinite; border-radius:8px; }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+    .skeleton-card { background:white; border-radius:14px; padding:14px; border:1.5px solid #F0E8E0; display:flex; align-items:center; gap:12px; margin-bottom:12px; }
+    .skeleton-emoji { width:44px; height:44px; border-radius:8px; flex-shrink:0; }
+    .skeleton-info { flex:1; display:flex; flex-direction:column; gap:8px; }
+    .skeleton-line { height:12px; }
+    .skeleton-line.short { width:60%; }
+
+    /* ONBOARDING */
+    #onboarding-screen { position:fixed; top:0; left:0; right:0; bottom:0; background:#FFF8F0; z-index:9998; display:none; flex-direction:column; }
+    #onboarding-screen.show { display:flex; }
+    .ob-slides { flex:1; display:flex; overflow:hidden; }
+    .ob-slide { min-width:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:40px 32px; text-align:center; transition:transform 0.4s ease; }
+    .ob-icon { font-size:80px; margin-bottom:20px; }
+    .ob-titulo { font-size:24px; font-weight:700; color:#2D2D2D; margin-bottom:12px; line-height:1.3; }
+    .ob-desc { font-size:15px; color:#666; line-height:1.6; max-width:320px; }
+    .ob-footer { padding:24px 32px 40px; display:flex; flex-direction:column; align-items:center; gap:16px; }
+    .ob-dots { display:flex; gap:8px; }
+    .ob-dot { width:8px; height:8px; border-radius:50%; background:#F0E8E0; transition:background 0.3s,width 0.3s; }
+    .ob-dot.active { background:#FF6B35; width:24px; border-radius:4px; }
+    .ob-btn-next { background:#FF6B35; color:white; border:none; border-radius:14px; padding:15px 40px; font-size:16px; font-weight:700; cursor:pointer; width:100%; max-width:320px; }
+    .ob-btn-skip { background:transparent; border:none; color:#AAA; font-size:13px; cursor:pointer; }
+
+    /* REDUCED ORANGE - new accent colors */
+    .badge-dulce { background:#FFF0E8; color:#E8621A; }
+    .badge-salada { background:#E8F5E8; color:#2E7D32; }
+    .badge-gomita { background:#EEF0FB; color:#3F51B5; }
+    .badge-bebida { background:#E3F2FD; color:#1565C0; }
+
+    /* COMING SOON */
+    .coming-soon-card { background:white; border-radius:16px; padding:20px; border:1.5px dashed #F0E8E0; margin-bottom:12px; text-align:center; cursor:pointer; }
+    .coming-soon-lock { font-size:36px; margin-bottom:8px; }
+    .coming-soon-titulo { font-size:16px; font-weight:700; color:#2D2D2D; margin-bottom:4px; }
+    .coming-soon-desc { font-size:13px; color:#AAA; margin-bottom:12px; }
+    .coming-soon-badge { display:inline-block; background:#F5F5F5; color:#888; font-size:11px; font-weight:600; padding:4px 12px; border-radius:20px; }
   </style>
 </head>
 <body>
+
+
+<!-- SPLASH SCREEN -->
+<div id="splash-screen">
+  <div class="splash-logo">🍱</div>
+  <div class="splash-titulo">Loncheritas Inteligentes</div>
+  <div class="splash-sub">Loncheras saludables para tus hijos</div>
+  <div class="splash-bar-wrap"><div class="splash-bar"></div></div>
+</div>
+
+<!-- ONBOARDING -->
+<div id="onboarding-screen">
+  <div style="display:flex;justify-content:flex-end;padding:16px 20px 0;">
+    <button class="ob-btn-skip" onclick="saltarOnboarding()">Saltar</button>
+  </div>
+  <div class="ob-slides" id="ob-slides">
+    <div class="ob-slide">
+      <div class="ob-icon">🍱</div>
+      <div class="ob-titulo">¡Bienvenida a Loncheritas Inteligentes!</div>
+      <div class="ob-desc">Tu asistente de loncheras saludables. Te ayudamos a planificar, preparar y organizar las loncheras de tus hijos de forma fácil y nutritiva.</div>
+    </div>
+    <div class="ob-slide">
+      <div class="ob-icon">🥗</div>
+      <div class="ob-titulo">100 recetas saludables</div>
+      <div class="ob-desc">Sin gluten, sin azúcar refinada, sin colorantes artificiales. Dulces, saladas, gomitas y bebidas — todas pensadas para niños de 2 a 5 años.</div>
+    </div>
+    <div class="ob-slide">
+      <div class="ob-icon">📅</div>
+      <div class="ob-titulo">Planifica tu semana</div>
+      <div class="ob-desc">Asigna una receta a cada día de la semana. Toca "Cambiar" para elegir de la lista completa de recetas y organiza toda la semana en minutos.</div>
+    </div>
+    <div class="ob-slide">
+      <div class="ob-icon">🔎</div>
+      <div class="ob-titulo">Búsqueda Inteligente</div>
+      <div class="ob-desc">Dinos qué tienes en casa y te decimos qué lonchera puedes preparar — y qué te falta comprar. Hasta 5 ingredientes disponibles.</div>
+    </div>
+    <div class="ob-slide">
+      <div class="ob-icon">🛒</div>
+      <div class="ob-titulo">Lista de compras automática</div>
+      <div class="ob-desc">Basada en tu calendario semanal. Las cantidades se ajustan automáticamente al número de hijos. Compártela por WhatsApp en un toque.</div>
+    </div>
+    <div class="ob-slide">
+      <div class="ob-icon">⭐</div>
+      <div class="ob-titulo">Sube de nivel y gana logros</div>
+      <div class="ob-desc">Cada receta preparada te da +5 XP. Sube de nivel, desbloquea logros y accede a contenido exclusivo. ¡A por el nivel Súper Mamá! 👑</div>
+    </div>
+  </div>
+  <div class="ob-footer">
+    <div class="ob-dots" id="ob-dots">
+      <div class="ob-dot active"></div>
+      <div class="ob-dot"></div>
+      <div class="ob-dot"></div>
+      <div class="ob-dot"></div>
+      <div class="ob-dot"></div>
+      <div class="ob-dot"></div>
+    </div>
+    <button class="ob-btn-next" id="ob-btn-next" onclick="siguienteSlide()">Siguiente →</button>
+  </div>
+</div>
 
 <div class="toast" id="toast"></div>
 
@@ -223,7 +330,7 @@
 <!-- LOGIN -->
 <div id="pantalla-login" class="auth-screen">
   <div class="auth-logo">🍱</div>
-  <div class="auth-titulo">Loncheritas</div>
+  <div class="auth-titulo">Loncheritas Inteligentes</div>
   <div class="auth-sub">Loncheras inteligentes para tus hijos</div>
   <div class="auth-card">
     <h2>Iniciar sesión</h2>
@@ -233,6 +340,10 @@
     <div class="divider"><hr/><span>¿Primera vez?</span><hr/></div>
     <button class="btn-secondary" onclick="mostrarRegistro()">🌟 ¡Soy nueva mamita! Registrarme</button>
     <div class="auth-msg error" id="login-error"></div>
+  </div>
+  <div style="margin-top:16px;text-align:center;max-width:320px;">
+    <p style="font-size:12px;color:#AAA;margin-bottom:8px;">¿Aún no tienes acceso? Adquiere el producto en Hotmart y luego regístrate arriba.</p>
+    <button onclick="window.open('https://hotmart.com/tu-link-aqui','_blank')" style="background:white;color:#FF6B35;border:1.5px solid #FF6B35;border-radius:12px;padding:11px 20px;font-size:13px;font-weight:600;cursor:pointer;width:100%;">🛒 Comprar acceso en Hotmart →</button>
   </div>
   <div class="auth-footer">¿Problemas? Escríbenos a soporte@loncheritas.com</div>
 </div>
@@ -277,7 +388,7 @@
 <!-- APP -->
 <div id="pantalla-app">
   <nav class="nav">
-    <div class="nav-logo">🍱 Loncheritas</div>
+    <div class="nav-logo">🍱 Loncheritas Inteligentes</div>
     <button class="nav-user" onclick="showPage('perfil')">👤 <span id="nav-nombre">Mamá</span></button>
   </nav>
 
@@ -319,7 +430,12 @@
       <button class="filtro-btn" onclick="filtrar(this,'gomitas')">🍬 Gomitas</button>
       <button class="filtro-btn" onclick="filtrar(this,'rapidas')">⚡ Rápidas</button>
     </div>
-    <div class="receta-list" id="lista-recetas"><div class="loading"><div class="loading-spinner"></div>Cargando recetas...</div></div>
+    <div class="receta-list" id="lista-recetas">
+  <div class="skeleton-card"><div class="skeleton skeleton-emoji"></div><div class="skeleton-info"><div class="skeleton skeleton-line"></div><div class="skeleton skeleton-line short"></div></div></div>
+  <div class="skeleton-card"><div class="skeleton skeleton-emoji"></div><div class="skeleton-info"><div class="skeleton skeleton-line"></div><div class="skeleton skeleton-line short"></div></div></div>
+  <div class="skeleton-card"><div class="skeleton skeleton-emoji"></div><div class="skeleton-info"><div class="skeleton skeleton-line"></div><div class="skeleton skeleton-line short"></div></div></div>
+  <div class="skeleton-card"><div class="skeleton skeleton-emoji"></div><div class="skeleton-info"><div class="skeleton skeleton-line"></div><div class="skeleton skeleton-line short"></div></div></div>
+</div>
   </div>
 
   <!-- DETALLE -->
@@ -411,6 +527,26 @@
     </div>
     <p class="section-title">Mis logros</p>
     <div class="logros-grid" id="logros-grid"></div>
+    <br>
+    <p class="section-title">Contenido exclusivo</p>
+    <div class="coming-soon-card" onclick="showToast('¡Próximamente disponible! 🔜')">
+      <div class="coming-soon-lock">🎉</div>
+      <div class="coming-soon-titulo">Loncheras Especiales</div>
+      <div class="coming-soon-desc">Día del niño, Navidad, Pascuas, Fiestas Patrias y más fechas especiales</div>
+      <div class="coming-soon-badge">✨ Próximamente</div>
+    </div>
+    <div class="coming-soon-card" onclick="showToast('¡Próximamente disponible! 🔜')">
+      <div class="coming-soon-lock">🥩</div>
+      <div class="coming-soon-titulo">Loncheras Proteicas</div>
+      <div class="coming-soon-desc">Recetas especialmente diseñadas para el desarrollo y crecimiento de tus hijos</div>
+      <div class="coming-soon-badge">✨ Próximamente</div>
+    </div>
+    <div class="coming-soon-card" onclick="showToast('¡Próximamente disponible! 🔜')">
+      <div class="coming-soon-lock">🌿</div>
+      <div class="coming-soon-titulo">Loncheras Estacionales</div>
+      <div class="coming-soon-desc">Recetas adaptadas a cada estación del año — verano, otoño, invierno y primavera</div>
+      <div class="coming-soon-badge">✨ Próximamente</div>
+    </div>
   </div>
 
   <nav class="bottom-nav">
@@ -450,6 +586,7 @@
   window._setDoc = setDoc;
   window._updateDoc = updateDoc;
   window._onSnapshot = onSnapshot;
+  iniciarSplash();
   window._getDoc = getDoc;
 
   let unsubscribeAuth = null;
@@ -480,6 +617,50 @@
 </script>
 
 <script>
+  // ===== SPLASH & ONBOARDING =====
+  let obSlideActual = 0;
+  const OB_TOTAL = 6;
+
+  function iniciarSplash() {
+    setTimeout(() => {
+      const splash = document.getElementById('splash-screen');
+      splash.classList.add('fade-out');
+      setTimeout(() => { splash.style.display = 'none'; }, 600);
+    }, 2200);
+  }
+
+  function siguienteSlide() {
+    if(obSlideActual < OB_TOTAL - 1) {
+      obSlideActual++;
+      actualizarOnboarding();
+    } else {
+      finalizarOnboarding();
+    }
+  }
+
+  function saltarOnboarding() { finalizarOnboarding(); }
+
+  function actualizarOnboarding() {
+    const slides = document.getElementById('ob-slides');
+    slides.style.transform = `translateX(-${obSlideActual * 100}%)`;
+    document.querySelectorAll('.ob-dot').forEach((d,i) => d.classList.toggle('active', i === obSlideActual));
+    const btn = document.getElementById('ob-btn-next');
+    btn.textContent = obSlideActual === OB_TOTAL - 1 ? '¡Empezar ahora! 🚀' : 'Siguiente →';
+  }
+
+  async function finalizarOnboarding() {
+    document.getElementById('onboarding-screen').classList.remove('show');
+    if(currentUid) await guardarEnFirestore({ onboardingVisto: true });
+  }
+
+  function mostrarOnboardingSeNecesario(perfil) {
+    if(!perfil.onboardingVisto) {
+      setTimeout(() => {
+        document.getElementById('onboarding-screen').classList.add('show');
+      }, 300);
+    }
+  }
+
   let currentUser = null;
   let currentUid = null;
   let todasLasRecetas = [], recetasFiltradas = [];
@@ -568,6 +749,7 @@
     document.getElementById('perfil-email-txt').textContent = user.email;
 
     actualizarUI(perfil);
+    mostrarOnboardingSeNecesario(perfil);
     cargarRecetas();
   }
 
@@ -678,7 +860,10 @@
     const ahora=new Date();
     const f=ahora.toLocaleDateString('es-PE',{weekday:'long',day:'numeric',month:'long'});
     document.getElementById('fecha-texto').textContent=f.charAt(0).toUpperCase()+f.slice(1)+' · Lima';
-    renderRecetaHoy(todasLasRecetas[ahora.getDay()%total]);
+    // Sugerencia del día — cambia cada día del año
+    const seed = ahora.getFullYear() * 10000 + (ahora.getMonth()+1) * 100 + ahora.getDate();
+    const idxHoy = seed % total;
+    renderRecetaHoy(todasLasRecetas[idxHoy]);
     renderRecetas(todasLasRecetas);
     cargarCalendario();
     renderListaCompras();
@@ -1245,9 +1430,9 @@
   }
 
   function exportarWhatsApp(){
-    let t='🍱 *Lista de compras Loncheritas*\n👧 '+numHijos+' hijos\n\n';
+    let t='🍱 *Lista de compras Loncheritas Inteligentes*\n👧 '+numHijos+' hijos\n\n';
     document.querySelectorAll('.categoria-lista').forEach(c=>{ t+='*'+c.querySelector('.cat-titulo').textContent+'*\n'; c.querySelectorAll('.item-nombre').forEach(i=>{t+='• '+i.textContent+'\n';}); t+='\n'; });
-    t+='_Generado con Loncheritas App 🍱_';
+    t+='_Generado con Loncheritas Inteligentes 🍱_';
     window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank');
   }
 
