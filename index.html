@@ -203,16 +203,7 @@
 
 <div class="toast" id="toast"></div>
 
-<!-- LOGRO BANNER -->
-<div class="logro-banner" id="logro-banner" onclick="cerrarLogroBanner()">
-  <div class="logro-banner-card" onclick="event.stopPropagation()">
-    <span class="logro-banner-emoji" id="lb-emoji">🏆</span>
-    <div class="logro-banner-tag">Logro desbloqueado</div>
-    <h2 id="lb-nombre">Logro</h2>
-    <p id="lb-desc">Descripcion</p>
-    <button class="logro-banner-btn" onclick="cerrarLogroBanner()">¡Genial! 🎉</button>
-  </div>
-</div>
+
 
 <!-- MODAL SELECTOR RECETA -->
 <div class="modal-overlay" id="modal-receta" onclick="cerrarModalReceta()">
@@ -544,6 +535,8 @@
     userCalendario = perfil.calendario || {};
     // Cargar logros ya obtenidos para no mostrar el banner de nuevo
     logrosYaObtenidos = LOGROS_DEF.filter(l => l.req(perfil)).map(l => l.id);
+    // Guardar nivel actual para detectar subidas
+    nivelAnterior = getNivel(calcXP(perfil)).nivel;
 
     ocultarTodo();
     document.getElementById('pantalla-app').style.display = 'block';
@@ -812,26 +805,47 @@
     document.getElementById('lb-nombre').textContent = logro.nombre;
     document.getElementById('lb-desc').textContent = logro.desc;
     bannerEl.style.display = 'flex';
-    bannerEl.style.opacity = '0';
-    setTimeout(() => { bannerEl.style.opacity = '1'; }, 50);
-    bannerEl.style.pointerEvents = 'all';
+  }
+
+  function mostrarNivelBanner(nivel) {
+    const bannerEl = document.getElementById('nivel-banner');
+    if(!bannerEl) return;
+    document.getElementById('nb-emoji').textContent = nivel.emoji;
+    document.getElementById('nb-titulo').textContent = 'Nivel ' + nivel.nivel + ' — ' + nivel.titulo;
+    document.getElementById('nb-desc').textContent = '¡Felicitaciones! Has alcanzado un nuevo nivel.';
+    bannerEl.style.display = 'flex';
+  }
+
+  function cerrarNivelBanner() {
+    const bannerEl = document.getElementById('nivel-banner');
+    if(bannerEl) bannerEl.style.display = 'none';
   }
 
   function cerrarLogroBanner() {
     const bannerEl = document.getElementById('logro-banner');
-    if(!bannerEl) return;
-    bannerEl.style.opacity = '0';
-    bannerEl.style.pointerEvents = 'none';
-    setTimeout(() => { bannerEl.style.display = 'none'; }, 400);
+    if(bannerEl) bannerEl.style.display = 'none';
   }
 
+  let nivelAnterior = 1;
+
   function verificarLogros(data) {
+    let delay = 800;
+    // Verificar logros
     LOGROS_DEF.forEach(l => {
       if(!logrosYaObtenidos.includes(l.id) && l.req(data)) {
         logrosYaObtenidos.push(l.id);
-        setTimeout(() => mostrarLogroBanner(l), 800);
+        setTimeout(() => mostrarLogroBanner(l), delay);
+        delay += 3000;
       }
     });
+    // Verificar subida de nivel
+    const xp = calcXP(data);
+    const nivelActual = getNivel(xp).nivel;
+    if(nivelActual > nivelAnterior) {
+      const nivel = getNivel(xp);
+      setTimeout(() => mostrarNivelBanner(nivel), delay);
+      nivelAnterior = nivelActual;
+    }
   }
 
   async function marcarPreparada(id) {
@@ -1095,5 +1109,27 @@
     navigator.clipboard.writeText(t).then(()=>showToast('✅ Lista copiada'));
   }
 </script>
+
+<!-- LOGRO BANNER - fuera de todo, al final del body -->
+<div id="logro-banner" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);z-index:99999;align-items:center;justify-content:center;" onclick="cerrarLogroBanner()">
+  <div onclick="event.stopPropagation()" style="background:white;border-radius:24px;padding:36px 28px;text-align:center;max-width:300px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.4);">
+    <div id="lb-emoji" style="font-size:72px;margin-bottom:12px;">🏆</div>
+    <div style="background:#FFF0E8;color:#FF6B35;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;display:inline-block;margin-bottom:10px;text-transform:uppercase;">Logro desbloqueado</div>
+    <h2 id="lb-nombre" style="font-size:20px;font-weight:700;margin-bottom:6px;color:#2D2D2D;"></h2>
+    <p id="lb-desc" style="font-size:14px;color:#888;margin-bottom:20px;"></p>
+    <button onclick="cerrarLogroBanner()" style="background:#FF6B35;color:white;border:none;border-radius:12px;padding:13px 32px;font-size:15px;font-weight:700;cursor:pointer;">¡Genial! 🎉</button>
+  </div>
+</div>
+
+<!-- NIVEL BANNER -->
+<div id="nivel-banner" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);z-index:99999;align-items:center;justify-content:center;" onclick="cerrarNivelBanner()">
+  <div onclick="event.stopPropagation()" style="background:linear-gradient(135deg,#FF6B35,#FF8C5A);border-radius:24px;padding:36px 28px;text-align:center;max-width:300px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.4);">
+    <div id="nb-emoji" style="font-size:72px;margin-bottom:12px;">⭐</div>
+    <div style="background:rgba(255,255,255,0.25);color:white;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;display:inline-block;margin-bottom:10px;text-transform:uppercase;">¡Subiste de nivel!</div>
+    <h2 id="nb-titulo" style="font-size:22px;font-weight:700;margin-bottom:6px;color:white;"></h2>
+    <p id="nb-desc" style="font-size:14px;color:rgba(255,255,255,0.85);margin-bottom:20px;"></p>
+    <button onclick="cerrarNivelBanner()" style="background:white;color:#FF6B35;border:none;border-radius:12px;padding:13px 32px;font-size:15px;font-weight:700;cursor:pointer;">¡Vamos! 💪</button>
+  </div>
+</div>
 </body>
 </html>
