@@ -302,7 +302,7 @@
       <div class="quick-card" onclick="showPage('calendario')"><span class="q-icon">📅</span><span class="q-title">Calendario</span><span class="q-sub">Plan semanal</span></div>
       <div class="quick-card" onclick="showPage('recetas')"><span class="q-icon">🥗</span><span class="q-title">Recetas</span><span class="q-sub" id="sub-recetas">Ver todas</span></div>
       <div class="quick-card" onclick="showPage('lista')"><span class="q-icon">🛒</span><span class="q-title">Lista de compras</span><span class="q-sub">Generar lista</span></div>
-      <div class="quick-card" onclick="showPage('buscador')"><span class="q-icon">🔎</span><span class="q-title">¿Qué preparo?</span><span class="q-sub">Busca por ingredientes</span></div>
+      <div class="quick-card" onclick="showPage('buscador')"><span class="q-icon">🔎</span><span class="q-title">Búsqueda Inteligente</span><span class="q-sub">Busca por ingredientes</span></div>
     </div>
     <p class="section-title">Lonchera sugerida para hoy</p>
     <div class="receta-hoy" id="receta-hoy-card"><div class="loading"><div class="loading-spinner"></div>Cargando...</div></div>
@@ -336,9 +336,9 @@
 
   <!-- BUSCADOR POR INGREDIENTES -->
   <div class="page" id="page-buscador">
-    <div class="greeting"><h1>🔎 ¿Qué preparo hoy?</h1><p>Ingresa los ingredientes que tienes disponibles</p></div>
+    <div class="greeting"><h1>🔎 Búsqueda Inteligente</h1><p>Dinos qué tienes en casa y te decimos qué preparar</p></div>
     <div style="background:white;border-radius:16px;padding:16px;border:1.5px solid #F0E8E0;margin-bottom:16px;">
-      <p style="font-size:13px;color:#888;margin-bottom:12px;">Ingresa hasta 5 ingredientes que tienes en casa:</p>
+      <p style="font-size:13px;color:#888;margin-bottom:12px;">Ingresa hasta 5 ingredientes que tienes disponibles:</p>
       <div id="ingredientes-tags" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;min-height:36px;"></div>
       <div style="display:flex;gap:8px;">
         <input type="text" id="ing-input" placeholder="ej: pollo, zanahoria..." style="flex:1;padding:11px 14px;border:1.5px solid #F0E8E0;border-radius:10px;font-size:14px;outline:none;" onkeydown="if(event.key==='Enter'||event.key===',')agregarIngrediente()" />
@@ -417,7 +417,7 @@
     <button class="bn-item active" id="bn-inicio" onclick="showPage('inicio')"><span class="icon">🏠</span><span class="label">Inicio</span></button>
     <button class="bn-item" id="bn-calendario" onclick="showPage('calendario')"><span class="icon">📅</span><span class="label">Calendario</span></button>
     <button class="bn-item" id="bn-recetas" onclick="showPage('recetas')"><span class="icon">🥗</span><span class="label">Recetas</span></button>
-    <button class="bn-item" id="bn-buscador" onclick="showPage('buscador')"><span class="icon">🔎</span><span class="label">¿Qué preparo?</span></button>
+    <button class="bn-item" id="bn-buscador" onclick="showPage('buscador')"><span class="icon">🔎</span><span class="label">Búsqueda</span></button>
     <button class="bn-item" id="bn-lista" onclick="showPage('lista')"><span class="icon">🛒</span><span class="label">Compras</span></button>
   </nav>
 </div>
