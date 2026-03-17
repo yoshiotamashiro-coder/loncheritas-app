@@ -1165,15 +1165,38 @@
     if(!ingredientesSeleccionados.length) return;
     const c = document.getElementById('resultados-buscador');
 
+    // Normalizar texto: quitar tildes, plurales simples, minúsculas
+    function normalizar(txt) {
+      return txt.toLowerCase()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // quitar tildes
+        .replace(/huevos/g,'huevo')
+        .replace(/zanahorias/g,'zanahoria')
+        .replace(/tomates/g,'tomate')
+        .replace(/platanos/g,'platano')
+        .replace(/manzanas/g,'manzana')
+        .replace(/fresas/g,'fresa')
+        .replace(/almendras/g,'almendra')
+        .replace(/lentejas/g,'lenteja')
+        .replace(/cdas/g,'cda')
+        .replace(/cditas/g,'cdita')
+        .replace(/tazas/g,'taza')
+        .replace(/s\b/g, ''); // quitar 's' final para plurales generales
+    }
+
     // Para cada receta calcular coincidencias
     const resultados = todasLasRecetas.map(r => {
-      const ingReceta = r.ingredientes.map(i => i.toLowerCase());
-      const tienes = ingredientesSeleccionados.filter(ing =>
-        ingReceta.some(ir => ir.includes(ing))
-      );
-      const falta = r.ingredientes.filter(ir =>
-        !ingredientesSeleccionados.some(ing => ir.toLowerCase().includes(ing))
-      );
+      const ingReceta = r.ingredientes.map(i => normalizar(i));
+      const tienes = ingredientesSeleccionados.filter(ing => {
+        const ingNorm = normalizar(ing);
+        return ingReceta.some(ir => ir.includes(ingNorm) || ingNorm.includes(ir.split(' ')[0]));
+      });
+      const falta = r.ingredientes.filter(ir => {
+        const irNorm = normalizar(ir);
+        return !ingredientesSeleccionados.some(ing => {
+          const ingNorm = normalizar(ing);
+          return irNorm.includes(ingNorm) || ingNorm.includes(irNorm.split(' ')[0]);
+        });
+      });
       return { receta: r, tienes, falta, score: tienes.length };
     })
     .filter(r => r.score > 0)
