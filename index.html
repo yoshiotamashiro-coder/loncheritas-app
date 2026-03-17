@@ -168,7 +168,7 @@
     .toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); background: #2D2D2D; color: white; padding: 10px 20px; border-radius: 20px; font-size: 13px; font-weight: 500; z-index: 999; opacity: 0; transition: opacity 0.3s; pointer-events: none; white-space: nowrap; }
     .toast.show { opacity: 1; }
 
-    .logro-banner { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.65); z-index: 1000; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.4s; pointer-events: none; }
+    .logro-banner { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.65); z-index: 9999; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.4s; pointer-events: none; }
     .logro-banner.show { opacity: 1; pointer-events: all; }
     .logro-banner-card { background: white; border-radius: 24px; padding: 36px 28px; text-align: center; max-width: 300px; width: 90%; transform: scale(0.8); transition: transform 0.4s; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
     .logro-banner.show .logro-banner-card { transform: scale(1); }
@@ -364,7 +364,7 @@
     <div class="greeting"><h1>🛒 Lista de compras</h1><p>Ingredientes para toda la semana</p></div>
     <div class="lista-header">
       <h3>Semana completa</h3>
-      <p>Basada en tu calendario semanal</p>
+      <p id="lista-header-info">Basada en tu calendario semanal</p>
       <div class="hijos-selector" style="margin-top:12px;padding:0;border:none;background:transparent;">
         <span>Hijos:</span>
         <button class="hijos-btn" onclick="cambiarHijos(-1)">−</button>
@@ -806,14 +806,23 @@
   let logrosYaObtenidos = [];
 
   function mostrarLogroBanner(logro) {
+    const bannerEl = document.getElementById('logro-banner');
+    if(!bannerEl) return;
     document.getElementById('lb-emoji').textContent = logro.emoji;
     document.getElementById('lb-nombre').textContent = logro.nombre;
     document.getElementById('lb-desc').textContent = logro.desc;
-    document.getElementById('logro-banner').classList.add('show');
+    bannerEl.style.display = 'flex';
+    bannerEl.style.opacity = '0';
+    setTimeout(() => { bannerEl.style.opacity = '1'; }, 50);
+    bannerEl.style.pointerEvents = 'all';
   }
 
   function cerrarLogroBanner() {
-    document.getElementById('logro-banner').classList.remove('show');
+    const bannerEl = document.getElementById('logro-banner');
+    if(!bannerEl) return;
+    bannerEl.style.opacity = '0';
+    bannerEl.style.pointerEvents = 'none';
+    setTimeout(() => { bannerEl.style.display = 'none'; }, 400);
   }
 
   function verificarLogros(data) {
@@ -970,15 +979,81 @@
     renderListaCompras();
   }
 
+  // Parser inteligente de cantidades
+  function parsearCantidad(texto) {
+    // Detectar fracciones como 1/2, 3/4
+    const fracMatch = texto.match(/^(\d+)\/(\d+)/);
+    if(fracMatch) return { valor: parseInt(fracMatch[1]) / parseInt(fracMatch[2]), tipo: 'fraccion', original: fracMatch[0] };
+    // Detectar número entero o decimal al inicio
+    const numMatch = texto.match(/^(\d+\.?\d*)/);
+    if(numMatch) return { valor: parseFloat(numMatch[1]), tipo: 'entero', original: numMatch[1] };
+    return null;
+  }
+
+  function multiplicarIngrediente(ing, factor) {
+    if(factor === 1) return ing;
+    // Ingredientes que no se multiplican (sin cantidad específica)
+    const sinCantidad = ['sal', 'pimienta', 'canela', 'orégano', 'vainilla', 'aceite', 'achiote', 'ajo', 'hielo', 'agua'];
+    const ingLower = ing.toLowerCase();
+    if(sinCantidad.some(s => ingLower.startsWith(s) || ingLower.includes('al gusto') || ingLower.includes('al gusto') || ingLower.includes('opcional'))) return ing;
+
+    const parsed = parsearCantidad(ing.trim());
+    if(!parsed) return ing; // No tiene número al inicio, no multiplicar
+
+    const nuevoValor = parsed.valor * factor;
+    let textoNuevo;
+
+    if(parsed.tipo === 'fraccion') {
+      // Convertir resultado de fracción a texto legible
+      if(Number.isInteger(nuevoValor)) {
+        textoNuevo = nuevoValor.toString();
+      } else {
+        // Buscar fracción más cercana
+        const entero = Math.floor(nuevoValor);
+        const decimal = nuevoValor - entero;
+        let fracStr = '';
+        if(Math.abs(decimal - 0.25) < 0.05) fracStr = '1/4';
+        else if(Math.abs(decimal - 0.5) < 0.05) fracStr = '1/2';
+        else if(Math.abs(decimal - 0.75) < 0.05) fracStr = '3/4';
+        else if(Math.abs(decimal - 0.33) < 0.05) fracStr = '1/3';
+        else if(Math.abs(decimal - 0.67) < 0.05) fracStr = '2/3';
+        else fracStr = decimal.toFixed(1).replace('0.', '');
+        textoNuevo = entero > 0 ? `${entero} ${fracStr}` : fracStr;
+      }
+    } else {
+      textoNuevo = Number.isInteger(nuevoValor) ? nuevoValor.toString() : nuevoValor.toFixed(1);
+    }
+
+    return ing.replace(parsed.original, textoNuevo);
+  }
+
   function renderListaCompras() {
     if(!todasLasRecetas.length)return;
+    checksLista = {}; // Reset checks cuando cambia la lista
+
+    // Recolectar ingredientes de todas las recetas del calendario multiplicados por hijos
     const map={};
     Object.values(calendarioSemanal).forEach(r=>{
       if(!r)return;
-      r.ingredientes.forEach(ing=>{ const k=ing.toLowerCase().trim(); if(!map[k])map[k]={nombre:ing}; });
+      r.ingredientes.forEach(ing=>{
+        const ingMultiplicado = multiplicarIngrediente(ing, numHijos);
+        const k = ing.toLowerCase().trim(); // key original para deduplicar
+        if(!map[k]) map[k] = { nombre: ingMultiplicado, original: ing };
+        else {
+          // Si el ingrediente ya existe, intentar sumar cantidades
+          const parsed1 = parsearCantidad(map[k].nombre.trim());
+          const parsed2 = parsearCantidad(ingMultiplicado.trim());
+          if(parsed1 && parsed2 && parsed1.tipo === parsed2.tipo) {
+            const suma = parsed1.valor + parsed2.valor;
+            const sumaTexto = Number.isInteger(suma) ? suma.toString() : suma.toFixed(1);
+            map[k].nombre = map[k].nombre.replace(parsed1.original, sumaTexto);
+          }
+        }
+      });
     });
+
     const grupos={'🥩 Proteínas':[],'🥦 Verduras y frutas':[],'🌾 Harinas y cereales':[],'🥚 Huevos y lácteos':[],'🍯 Otros':[]};
-    const kw={proteinas:['pollo','carne','pavo','atún','lentejas','pescado'],verduras:['zanahoria','espinaca','brócoli','brocoli','manzana','plátano','platano','fresa','mango','beterraga','papa','palta','tomate','apio','cebolla'],harinas:['harina','avena','arroz','pan','tortilla','maicena','fécula','quinua','kiwicha'],lacteos:['leche','yogurt','queso','mantequilla']};
+    const kw={proteinas:['pollo','carne','pavo','atún','lentejas','pescado'],verduras:['zanahoria','espinaca','brócoli','brocoli','manzana','plátano','platano','fresa','mango','beterraga','papa','palta','tomate','apio','cebolla'],harinas:['harina','avena','arroz','pan','tortilla','maicena','fécula','quinua','kiwicha'],lacteos:['leche','yogurt','queso','mantequilla','huevo']};
     Object.values(map).forEach(item=>{
       const n=item.nombre.toLowerCase();
       if(kw.lacteos.some(k=>n.includes(k))) grupos['🥚 Huevos y lácteos'].push(item);
@@ -987,6 +1062,11 @@
       else if(kw.harinas.some(k=>n.includes(k))) grupos['🌾 Harinas y cereales'].push(item);
       else grupos['🍯 Otros'].push(item);
     });
+
+    const totalItems = Object.values(grupos).reduce((acc, v) => acc + v.length, 0);
+    const headerInfo = document.getElementById('lista-header-info');
+    if(headerInfo) headerInfo.textContent = totalItems + ' ingredientes para ' + numHijos + ' ' + (numHijos === 1 ? 'hijo' : 'hijos') + ' — semana completa';
+
     document.getElementById('lista-ingredientes').innerHTML=Object.entries(grupos).filter(([,v])=>v.length>0).map(([cat,items])=>`
       <div class="categoria-lista">
         <div class="cat-titulo">${cat}</div>
