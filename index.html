@@ -536,7 +536,11 @@
     userPreparadas = perfil.recetasPreparadas || 0;
     userCalendario = perfil.calendario || {};
     // Cargar logros ya obtenidos para no mostrar el banner de nuevo
-    logrosYaObtenidos = LOGROS_DEF.filter(l => l.req(perfil)).map(l => l.id);
+    console.log('mostrarApp - perfil.recetasPreparadas:', perfil.recetasPreparadas, '| perfil.favoritas:', perfil.favoritas);
+    // Solo marcar como obtenidos los logros que YA tenía ANTES de esta sesión
+    // Guardamos en Firestore los logros obtenidos para no perderlos
+    logrosYaObtenidos = perfil.logrosObtenidos || LOGROS_DEF.filter(l => l.req(perfil)).map(l => l.id);
+    console.log('logrosYaObtenidos iniciales:', logrosYaObtenidos);
     // Guardar nivel actual para detectar subidas
     nivelAnterior = getNivel(calcXP(perfil)).nivel;
 
@@ -831,20 +835,22 @@
   }
 
   function verificarLogros(data) {
-    console.log('verificarLogros llamado. recetasPreparadas:', data.recetasPreparadas, 'logrosYaObtenidos:', logrosYaObtenidos);
-    // Verificar logros nuevos
+    console.log('verificarLogros. recetasPreparadas:', data.recetasPreparadas, '| logrosYaObtenidos:', logrosYaObtenidos);
     const nuevosLogros = LOGROS_DEF.filter(l => {
       const cumple = l.req(data);
       const yaObtenido = logrosYaObtenidos.includes(l.id);
       console.log('Logro:', l.id, '| cumple:', cumple, '| yaObtenido:', yaObtenido);
       return !yaObtenido && cumple;
     });
-    console.log('Nuevos logros a mostrar:', nuevosLogros.map(l => l.id));
-    nuevosLogros.forEach((l, i) => {
-      logrosYaObtenidos.push(l.id);
-      console.log('Programando banner para:', l.id, 'en', 500 + (i * 3000), 'ms');
-      setTimeout(() => mostrarLogroBanner(l), 500 + (i * 3000));
-    });
+    console.log('Nuevos logros:', nuevosLogros.map(l => l.id));
+    if(nuevosLogros.length > 0) {
+      nuevosLogros.forEach((l, i) => {
+        logrosYaObtenidos.push(l.id);
+        setTimeout(() => mostrarLogroBanner(l), 500 + (i * 3000));
+      });
+      // Guardar logros en Firestore para persistir entre sesiones
+      guardarEnFirestore({ logrosObtenidos: logrosYaObtenidos });
+    }
     // Verificar subida de nivel
     const xp = calcXP(data);
     const nivelActual = getNivel(xp).nivel;
