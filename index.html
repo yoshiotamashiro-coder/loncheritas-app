@@ -7,198 +7,8 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #FFF8F0; color: #2D2D2D; min-height: 100vh; }
-    .auth-screen { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; background: linear-gradient(160deg, #FFF0E8 0%, #FFF8F0 60%); }
-    .auth-screen.hidden { display: none; }
-    .auth-logo { font-size: 60px; margin-bottom: 6px; }
-    .auth-titulo { font-size: 26px; font-weight: 700; color: #2D2D2D; margin-bottom: 4px; }
-    .auth-sub { font-size: 13px; color: #999; margin-bottom: 28px; text-align: center; line-height: 1.5; }
-    .auth-card { background: white; border-radius: 20px; padding: 24px 20px; width: 100%; max-width: 380px; box-shadow: 0 4px 24px rgba(255,107,53,0.1); border: 1px solid #EBEBEB; }
-    .auth-card h2 { font-size: 18px; font-weight: 700; margin-bottom: 18px; }
-    .input-group { margin-bottom: 14px; }
-    .input-group label { font-size: 11px; font-weight: 600; color: #999; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 5px; }
-    .input-group input { width: 100%; padding: 12px 14px; border: 1.5px solid #EBEBEB; border-radius: 10px; font-size: 15px; outline: none; transition: border-color 0.2s; background: #FAFAFA; }
-    .input-group input:focus { border-color: #2D2D2D; background: white; }
-    .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .btn-primary { width: 100%; background: #FF6B35; color: white; border: none; border-radius: 12px; padding: 14px; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 6px; }
-    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
-    .btn-secondary { width: 100%; background: white; color: #FF6B35; border: 1.5px solid #FF6B35; border-radius: 12px; padding: 13px; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 10px; }
-    .auth-msg { border-radius: 10px; padding: 12px; font-size: 13px; margin-top: 12px; text-align: center; display: none; line-height: 1.5; }
-    .auth-msg.error { background: #FFF0F0; border: 1px solid #FFD0D0; color: #C0392B; }
-    .divider { display: flex; align-items: center; gap: 10px; margin: 16px 0; }
-    .divider hr { flex: 1; border: none; border-top: 1px solid #F0E8E0; }
-    .divider span { font-size: 12px; color: #CCC; }
-    .auth-footer { margin-top: 20px; font-size: 12px; color: #BBB; text-align: center; max-width: 320px; line-height: 1.5; }
-    .pendiente-container { max-width: 340px; width: 100%; text-align: center; }
-    .pendiente-steps { background: white; border-radius: 20px; padding: 28px 24px; box-shadow: 0 4px 24px rgba(255,107,53,0.1); border: 1px solid #EBEBEB; margin-bottom: 20px; }
-    .step { display: flex; align-items: center; gap: 14px; padding: 14px 0; border-bottom: 1px solid #F5EDE8; text-align: left; }
-    .step:last-child { border-bottom: none; padding-bottom: 0; }
-    .step-icon { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
-    .step-icon.done { background: #F0FFF4; }
-    .step-icon.active { background: #FFF0E8; animation: pulse 1.5s ease-in-out infinite; }
-    .step-icon.waiting { background: #F5F5F5; }
-    @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.1)} }
-    .step-info h4 { font-size: 14px; font-weight: 600; }
-    .step-info p { font-size: 12px; color: #888; margin-top: 2px; }
-    .pendiente-nota { font-size: 12px; color: #AAA; line-height: 1.6; margin-bottom: 20px; }
 
-    #pantalla-app { display: none; }
-    .nav { background: #FF6B35; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(255,107,53,0.3); }
-    .nav-logo { font-size: 20px; font-weight: 700; color: white; }
-    .nav-user { background: rgba(255,255,255,0.2); color: white; border-radius: 20px; padding: 6px 14px; font-size: 13px; font-weight: 600; cursor: pointer; border: 1px solid rgba(255,255,255,0.4); }
-    .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; border-top: 1px solid #F0E8E0; z-index: 100; box-shadow: 0 -2px 12px rgba(0,0,0,0.08); }
-    .bn-item { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 10px 0 8px; cursor: pointer; border: none; background: transparent; gap: 3px; }
-    .bn-item .icon { font-size: 22px; }
-    .bn-item .label { font-size: 10px; font-weight: 500; color: #B0A098; }
-    .bn-item.active .label { color: #FF6B35; }
-    .page { display: none; padding: 20px 16px 90px; }
-    .page.active { display: block; }
-    .loading { text-align: center; padding: 40px 20px; color: #888; font-size: 14px; }
-    .loading-spinner { width: 32px; height: 32px; border: 3px solid #F0E8E0; border-top-color: #FF6B35; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 12px; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .greeting { margin-bottom: 20px; }
-    .greeting h1 { font-size: 22px; font-weight: 700; }
-    .greeting p { font-size: 14px; color: #888; margin-top: 4px; }
-    .nivel-card { background: linear-gradient(135deg, #2D2D2D, #444); border-radius: 16px; padding: 16px; color: white; margin-bottom: 20px; display: flex; align-items: center; gap: 14px; }
-    .nivel-emoji { font-size: 40px; }
-    .nivel-info h3 { font-size: 16px; font-weight: 700; }
-    .nivel-info p { font-size: 12px; opacity: 0.85; margin-top: 2px; }
-    .nivel-bar-wrap { margin-top: 8px; background: rgba(255,255,255,0.3); border-radius: 10px; height: 6px; width: 140px; }
-    .nivel-bar { background: #4CAF50; border-radius: 10px; height: 6px; transition: width 0.5s; }
-    .section-title { font-size: 11px; font-weight: 700; color: #999; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; }
-    .quick-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
-    .quick-card { background: white; border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 6px; cursor: pointer; border: 1.5px solid #EBEBEB; transition: transform 0.15s; }
-    .quick-card:active { transform: scale(0.97); }
-    .quick-card .q-icon { font-size: 28px; }
-    .quick-card .q-title { font-size: 14px; font-weight: 600; }
-    .quick-card .q-sub { font-size: 11px; color: #AAA; }
-    .receta-hoy { background: white; border-radius: 16px; padding: 16px; border: 1.5px solid #EBEBEB; margin-bottom: 20px; }
-    .rh-tag { display: inline-block; background: #E8F5E8; color: #2E7D32; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-bottom: 10px; }
-    .receta-hoy h3 { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
-    .receta-hoy p { font-size: 13px; color: #888; }
-    .rh-meta { display: flex; gap: 12px; margin-top: 10px; flex-wrap: wrap; }
-    .rh-meta span { font-size: 12px; color: #666; }
-    .stats-mini { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 20px; }
-    .stat-mini { background: white; border-radius: 12px; padding: 12px 8px; text-align: center; border: 1.5px solid #EBEBEB; }
-    .stat-mini .sn { font-size: 22px; font-weight: 700; color: #2D2D2D; }
-    .stat-mini .sl { font-size: 10px; color: #888; margin-top: 2px; }
-    .search-bar { background: white; border: 1.5px solid #EBEBEB; border-radius: 12px; padding: 12px 16px; font-size: 14px; width: 100%; margin-bottom: 16px; outline: none; }
-    .filtros { display: flex; gap: 8px; margin-bottom: 16px; overflow-x: auto; padding-bottom: 4px; }
-    .filtro-btn { background: white; border: 1.5px solid #EBEBEB; border-radius: 20px; padding: 6px 14px; font-size: 12px; font-weight: 500; white-space: nowrap; cursor: pointer; color: #666; }
-    .filtro-btn.active { background: #2D2D2D; border-color: #2D2D2D; color: white; }
-    .receta-list { display: flex; flex-direction: column; gap: 12px; }
-    .receta-card { background: white; border-radius: 14px; padding: 14px; border: 1.5px solid #EBEBEB; display: flex; align-items: center; gap: 12px; cursor: pointer; position: relative; }
-    .rc-emoji { font-size: 36px; flex-shrink: 0; }
-    .rc-info { flex: 1; }
-    .rc-info h4 { font-size: 15px; font-weight: 600; }
-    .rc-info p { font-size: 12px; color: #888; margin-top: 2px; }
-    .rc-meta { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; }
-    .rc-tag { font-size: 10px; background: #F5F0FF; color: #6B35FF; padding: 2px 8px; border-radius: 10px; font-weight: 500; }
-    .rc-tag.salada { background: #E8F5E8; color: #2E7D32; }
-    .rc-tag.gomita { background: #EEF0FB; color: #3F51B5; }
-    .rc-fav { font-size: 18px; cursor: pointer; padding: 4px; flex-shrink: 0; opacity: 0.7; }
-    .detalle-back { display: flex; align-items: center; gap: 8px; cursor: pointer; color: #2D2D2D; font-size: 14px; font-weight: 600; margin-bottom: 20px; }
-    .detalle-header { background: white; border-radius: 16px; padding: 20px; margin-bottom: 16px; border: 1.5px solid #EBEBEB; text-align: center; }
-    .detalle-emoji { font-size: 64px; margin-bottom: 12px; }
-    .detalle-header h2 { font-size: 20px; font-weight: 700; }
-    .detalle-badges { display: flex; justify-content: center; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
-    .detalle-badge { font-size: 12px; background: #F5F5F5; color: #555; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
-    .detalle-section { background: white; border-radius: 14px; padding: 16px; margin-bottom: 12px; border: 1.5px solid #EBEBEB; }
-    .detalle-section h3 { font-size: 14px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; }
-    .ingrediente-item { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 0.5px solid #F5EDE8; font-size: 14px; }
-    .ingrediente-item:last-child { border-bottom: none; }
-    .ing-dot { width: 8px; height: 8px; background: #4CAF50; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
-    .paso-item { display: flex; gap: 12px; padding: 10px 0; border-bottom: 0.5px solid #F5EDE8; }
-    .paso-item:last-child { border-bottom: none; }
-    .paso-num { width: 24px; height: 24px; background: #2D2D2D; color: white; border-radius: 50%; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .paso-text { font-size: 14px; line-height: 1.5; padding-top: 3px; }
-    .detalle-acciones { display: flex; gap: 10px; margin-top: 4px; }
-    .btn-preparar { flex: 1; background: #FF6B35; color: white; border: none; border-radius: 14px; padding: 15px; font-size: 15px; font-weight: 600; cursor: pointer; }
-    .btn-fav-detalle { background: white; border: 1.5px solid #EBEBEB; border-radius: 14px; padding: 15px 18px; font-size: 20px; cursor: pointer; }
-    .hijos-selector { display: flex; align-items: center; gap: 12px; background: white; padding: 14px 16px; border-radius: 14px; border: 1.5px solid #EBEBEB; margin-bottom: 16px; }
-    .hijos-selector span { font-size: 13px; color: #666; }
-    .hijos-btn { background: #FF6B35; color: white; border: none; border-radius: 8px; width: 30px; height: 30px; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-    .hijos-num { font-size: 20px; font-weight: 700; min-width: 24px; text-align: center; }
-    .cal-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
-    .cal-day-card { background: white; border-radius: 14px; padding: 14px; border: 1.5px solid #EBEBEB; display: flex; align-items: center; gap: 12px; }
-    .cal-day-card.today { border-color: #2D2D2D; background: #F8F8F8; }
-    .cal-day-name { font-size: 11px; font-weight: 700; color: #AAA; text-transform: uppercase; min-width: 32px; }
-    .cal-day-card.today .cal-day-name { color: #2D2D2D; font-weight: 800; }
-    .cal-receta-info { flex: 1; }
-    .cal-receta-nombre { font-size: 14px; font-weight: 600; }
-    .cal-receta-meta { font-size: 11px; color: #AAA; margin-top: 2px; }
-    .cal-emoji { font-size: 28px; }
-    .cal-change-btn { font-size: 11px; color: #555; font-weight: 600; border: 1px solid #EBEBEB; border-radius: 8px; background: #F8F8F8; cursor: pointer; padding: 4px 8px; }
-    .btn-generar-lista { width: 100%; background: #FF6B35; color: white; border: none; border-radius: 14px; padding: 16px; font-size: 15px; font-weight: 600; cursor: pointer; }
-    .lista-header { background: white; border-radius: 16px; padding: 16px; margin-bottom: 16px; border: 1.5px solid #EBEBEB; }
-    .lista-header h3 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
-    .lista-header p { font-size: 13px; color: #888; }
-    .categoria-lista { margin-bottom: 16px; }
-    .cat-titulo { font-size: 12px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; padding-left: 4px; }
-    .item-compra { background: white; border-radius: 10px; padding: 12px 14px; display: flex; align-items: center; gap: 10px; margin-bottom: 6px; border: 1.5px solid #EBEBEB; }
-    .item-check { width: 20px; height: 20px; border-radius: 6px; border: 2px solid #DDD; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; }
-    .item-check.checked { background: #2D2D2D; border-color: #2D2D2D; color: white; }
-    .item-nombre { flex: 1; font-size: 14px; }
-    .item-nombre.tachado { text-decoration: line-through; color: #CCC; }
-    .export-btns { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
-    .exp-btn { background: white; border: 1.5px solid #EBEBEB; border-radius: 12px; padding: 14px 16px; display: flex; align-items: center; gap: 12px; cursor: pointer; font-size: 14px; font-weight: 500; }
-    .exp-btn .eb-icon { font-size: 22px; }
-    .exp-btn.primary { background: #2D2D2D; border-color: #2D2D2D; color: white; }
-    .perfil-header { text-align: center; padding: 20px 0; margin-bottom: 16px; }
-    .avatar { font-size: 56px; margin-bottom: 8px; }
-    .perfil-nombre { font-size: 20px; font-weight: 700; }
-    .perfil-email-txt { font-size: 13px; color: #888; margin-top: 4px; }
-    .btn-salir { width: 100%; background: white; color: #555; border: 1.5px solid #EBEBEB; border-radius: 12px; padding: 13px; font-size: 14px; font-weight: 600; cursor: pointer; margin-bottom: 20px; }
-    .nivel-grande { background: linear-gradient(135deg, #2D2D2D, #444); border-radius: 20px; padding: 20px; color: white; text-align: center; margin-bottom: 20px; }
-    .nivel-grande h3 { font-size: 18px; font-weight: 700; margin-top: 8px; }
-    .nivel-grande p { font-size: 13px; opacity: 0.85; margin-top: 4px; }
-    .xp-bar-wrap { background: rgba(255,255,255,0.3); border-radius: 10px; height: 8px; margin-top: 12px; }
-    .xp-bar-fill { background: #4CAF50; border-radius: 10px; height: 8px; transition: width 0.5s; }
-    .xp-label { font-size: 11px; opacity: 0.8; margin-top: 6px; }
-    .stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 20px; }
-    .stat-card { background: white; border-radius: 14px; padding: 14px; text-align: center; border: 1.5px solid #EBEBEB; }
-    .stat-card .s-num { font-size: 24px; font-weight: 700; color: #2D2D2D; }
-    .stat-card .s-label { font-size: 11px; color: #888; margin-top: 2px; }
-    .logros-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 20px; }
-    .logro { background: white; border-radius: 14px; padding: 14px 10px; text-align: center; border: 1.5px solid #EBEBEB; }
-    .logro .l-emoji { font-size: 28px; }
-    .logro .l-nombre { font-size: 11px; font-weight: 600; margin-top: 4px; }
-    .logro .l-desc { font-size: 10px; color: #AAA; margin-top: 2px; }
-    .logro.bloqueado { opacity: 0.4; filter: grayscale(1); }
-    .favoritas-empty { text-align: center; padding: 30px 20px; color: #AAA; font-size: 14px; }
-    .toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); background: #2D2D2D; color: white; padding: 10px 20px; border-radius: 20px; font-size: 13px; font-weight: 500; z-index: 999; opacity: 0; transition: opacity 0.3s; pointer-events: none; white-space: nowrap; }
-    .toast.show { opacity: 1; }
-
-    .logro-banner { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.65); z-index: 9999; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.4s; pointer-events: none; }
-    .logro-banner.show { opacity: 1; pointer-events: all; }
-    .logro-banner-card { background: white; border-radius: 24px; padding: 36px 28px; text-align: center; max-width: 300px; width: 90%; transform: scale(0.8); transition: transform 0.4s; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
-    .logro-banner.show .logro-banner-card { transform: scale(1); }
-    @keyframes bounce2 { 0%,100%{transform:scale(1)} 50%{transform:scale(1.25)} }
-    .logro-banner-emoji { font-size: 72px; margin-bottom: 12px; display: block; animation: bounce2 0.5s ease 0.3s both; }
-    .logro-banner-tag { background: #FFF0E8; color: #FF6B35; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; display: inline-block; margin-bottom: 10px; text-transform: uppercase; }
-    .logro-banner h2 { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
-    .logro-banner p { font-size: 14px; color: #888; margin-bottom: 20px; }
-    .logro-banner-btn { background: #FF6B35; color: white; border: none; border-radius: 12px; padding: 13px 32px; font-size: 15px; font-weight: 700; cursor: pointer; }
-    .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 500; display: none; align-items: flex-end; }
-    .modal-overlay.show { display: flex; }
-    .modal-sheet { background: white; border-radius: 20px 20px 0 0; width: 100%; max-height: 82vh; display: flex; flex-direction: column; }
-    .modal-header { padding: 16px 20px; border-bottom: 1px solid #F0E8E0; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
-    .modal-header h3 { font-size: 16px; font-weight: 700; }
-    .modal-close { font-size: 24px; cursor: pointer; color: #AAA; border: none; background: transparent; }
-    .modal-search { padding: 12px 16px; border-bottom: 1px solid #F0E8E0; flex-shrink: 0; }
-    .modal-search input { width: 100%; padding: 10px 14px; border: 1.5px solid #EBEBEB; border-radius: 10px; font-size: 14px; outline: none; }
-    .modal-search input:focus { border-color: #2D2D2D; }
-    .modal-list { overflow-y: auto; padding: 8px 12px 20px; }
-    .modal-receta-item { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 12px; cursor: pointer; }
-    .modal-receta-item:active { background: #FFF0E8; }
-    .mri-emoji { font-size: 28px; flex-shrink: 0; }
-    .mri-info h4 { font-size: 14px; font-weight: 600; }
-    .mri-info p { font-size: 12px; color: #888; margin-top: 2px; }
-    .mri-cat { font-size: 10px; background: #FFF0E8; color: #FF6B35; padding: 2px 8px; border-radius: 10px; font-weight: 500; display: inline-block; margin-top: 3px; }
-    .mri-cat.salada { background: #E8F5E8; color: #2E7D32; }
-    .mri-cat.gomita { background: #EEF0FB; color: #3F51B5; }
-    .cal-semana-label { font-size: 12px; color: #888; margin-bottom: 14px; background: white; border-radius: 10px; padding: 8px 14px; border: 1px solid #EBEBEB; display: inline-block; }
-
-    /* SPLASH SCREEN */
+    /* SPLASH */
     #splash-screen { position:fixed; top:0; left:0; right:0; bottom:0; background:linear-gradient(160deg,#FF6B35,#FF8C5A); z-index:99999; display:flex; flex-direction:column; align-items:center; justify-content:center; transition:opacity 0.6s; }
     #splash-screen.fade-out { opacity:0; pointer-events:none; }
     .splash-logo { font-size:80px; margin-bottom:16px; animation: splashBounce 0.8s ease; }
@@ -209,7 +19,21 @@
     .splash-bar { height:4px; background:white; border-radius:4px; animation:splashLoad 1.8s ease forwards; }
     @keyframes splashLoad { 0%{width:0%} 100%{width:100%} }
 
-    /* SKELETON LOADING */
+    /* APP SHELL */
+    #app { display:none; }
+    .nav { background: #FF6B35; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(255,107,53,0.3); }
+    .nav-logo { font-size: 18px; font-weight: 700; color: white; }
+    .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; border-top: 1px solid #F0E8E0; z-index: 100; box-shadow: 0 -2px 12px rgba(0,0,0,0.08); }
+    .bn-item { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 10px 0 8px; cursor: pointer; border: none; background: transparent; gap: 3px; }
+    .bn-item .icon { font-size: 22px; }
+    .bn-item .label { font-size: 10px; font-weight: 500; color: #B0A098; }
+    .bn-item.active .label { color: #FF6B35; }
+
+    /* PAGES */
+    .page { display: none; padding: 20px 16px 90px; }
+    .page.active { display: block; }
+
+    /* SKELETON */
     .skeleton { background:linear-gradient(90deg,#F0E8E0 25%,#FFF0E8 50%,#F0E8E0 75%); background-size:200% 100%; animation:shimmer 1.2s infinite; border-radius:8px; }
     @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
     .skeleton-card { background:white; border-radius:14px; padding:14px; border:1.5px solid #F0E8E0; display:flex; align-items:center; gap:12px; margin-bottom:12px; }
@@ -218,80 +42,108 @@
     .skeleton-line { height:12px; }
     .skeleton-line.short { width:60%; }
 
-    /* ONBOARDING */
-    #onboarding-screen { position:fixed; top:0; left:0; right:0; bottom:0; background:#FFF8F0; z-index:9998; display:none; flex-direction:column; }
-    #onboarding-screen.show { display:flex; }
-    .ob-slides { flex:1; display:flex; overflow:hidden; }
-    .ob-slides-inner { display:flex; transition:transform 0.4s ease; height:100%; }
-    .ob-slide { min-width:100vw; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:40px 32px; text-align:center; flex-shrink:0; }
-    .ob-icon { font-size:80px; margin-bottom:20px; }
-    .ob-titulo { font-size:24px; font-weight:700; color:#2D2D2D; margin-bottom:12px; line-height:1.3; }
-    .ob-desc { font-size:15px; color:#666; line-height:1.6; max-width:320px; }
-    .ob-footer { padding:24px 32px 40px; display:flex; flex-direction:column; align-items:center; gap:16px; }
-    .ob-dots { display:flex; gap:8px; }
-    .ob-dot { width:8px; height:8px; border-radius:50%; background:#F0E8E0; transition:background 0.3s,width 0.3s; }
-    .ob-dot.active { background:#FF6B35; width:24px; border-radius:4px; }
-    .ob-btn-next { background:#FF6B35; color:white; border:none; border-radius:14px; padding:15px 40px; font-size:16px; font-weight:700; cursor:pointer; width:100%; max-width:320px; }
-    .ob-btn-skip { background:transparent; border:none; color:#AAA; font-size:13px; cursor:pointer; }
+    /* INICIO */
+    .greeting { margin-bottom: 20px; }
+    .greeting h1 { font-size: 22px; font-weight: 700; }
+    .greeting p { font-size: 14px; color: #888; margin-top: 4px; }
+    .stats-mini { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; margin-bottom: 20px; }
+    .stat-mini { background: white; border-radius: 12px; padding: 14px 10px; text-align: center; border: 1.5px solid #EBEBEB; }
+    .stat-mini .sn { font-size: 24px; font-weight: 700; color: #FF6B35; }
+    .stat-mini .sl { font-size: 11px; color: #888; margin-top: 3px; }
+    .section-title { font-size: 11px; font-weight: 700; color: #999; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; }
+    .quick-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
+    .quick-card { background: white; border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 6px; cursor: pointer; border: 1.5px solid #EBEBEB; transition: transform 0.15s; }
+    .quick-card:active { transform: scale(0.97); }
+    .quick-card .q-icon { font-size: 28px; }
+    .quick-card .q-title { font-size: 14px; font-weight: 600; }
+    .quick-card .q-sub { font-size: 11px; color: #AAA; }
+    .receta-hoy { background: white; border-radius: 16px; padding: 16px; border: 1.5px solid #EBEBEB; margin-bottom: 20px; }
+    .rh-tag { display: inline-block; background: #FFF0E8; color: #FF6B35; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-bottom: 10px; }
+    .receta-hoy h3 { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+    .receta-hoy p { font-size: 13px; color: #888; }
+    .rh-meta { display: flex; gap: 12px; margin-top: 10px; flex-wrap: wrap; }
+    .rh-meta span { font-size: 12px; color: #666; }
 
-    /* REDUCED ORANGE - new accent colors */
-    .badge-dulce { background:#FFF0E8; color:#E8621A; }
-    .badge-salada { background:#E8F5E8; color:#2E7D32; }
-    .badge-gomita { background:#EEF0FB; color:#3F51B5; }
-    .badge-bebida { background:#E3F2FD; color:#1565C0; }
+    /* RECETAS */
+    .search-bar { background: white; border: 1.5px solid #EBEBEB; border-radius: 12px; padding: 12px 16px; font-size: 14px; width: 100%; margin-bottom: 16px; outline: none; transition: border-color 0.2s; }
+    .search-bar:focus { border-color: #2D2D2D; }
+    .filtros { display: flex; gap: 8px; margin-bottom: 16px; overflow-x: auto; padding-bottom: 4px; }
+    .filtro-btn { background: white; border: 1.5px solid #EBEBEB; border-radius: 20px; padding: 6px 14px; font-size: 12px; font-weight: 500; white-space: nowrap; cursor: pointer; color: #666; transition: all 0.15s; }
+    .filtro-btn.active { background: #2D2D2D; border-color: #2D2D2D; color: white; }
+    .receta-list { display: flex; flex-direction: column; gap: 12px; }
+    .receta-card { background: white; border-radius: 14px; padding: 14px; border: 1.5px solid #EBEBEB; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: transform 0.12s; }
+    .receta-card:active { transform: scale(0.98); }
+    .rc-emoji { font-size: 36px; flex-shrink: 0; }
+    .rc-info { flex: 1; }
+    .rc-info h4 { font-size: 15px; font-weight: 600; }
+    .rc-info p { font-size: 12px; color: #888; margin-top: 2px; }
+    .rc-meta { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; }
+    .rc-tag { font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: 500; }
+    .rc-tag.dulce { background: #FFF0E8; color: #E8621A; }
+    .rc-tag.salada { background: #E8F5E8; color: #2E7D32; }
+    .rc-tag.gomita { background: #EEF0FB; color: #3F51B5; }
+    .rc-tag.rapida { background: #FFF9E8; color: #F59E0B; }
+    .rc-arrow { font-size: 18px; color: #CCC; flex-shrink: 0; }
+    .no-resultados { text-align: center; padding: 40px 20px; color: #AAA; }
+    .no-resultados .nr-emoji { font-size: 48px; margin-bottom: 12px; }
+    .no-resultados p { font-size: 14px; }
 
-    /* COMING SOON */
-    .coming-soon-card { background:white; border-radius:16px; padding:20px; border:1.5px dashed #F0E8E0; margin-bottom:12px; text-align:center; cursor:pointer; }
-    .coming-soon-lock { font-size:36px; margin-bottom:8px; }
-    .coming-soon-titulo { font-size:16px; font-weight:700; color:#2D2D2D; margin-bottom:4px; }
-    .coming-soon-desc { font-size:13px; color:#AAA; margin-bottom:12px; }
-    .coming-soon-badge { display:inline-block; background:#F5F5F5; color:#888; font-size:11px; font-weight:600; padding:4px 12px; border-radius:20px; }
+    /* DETALLE */
+    .detalle-back { display: flex; align-items: center; gap: 8px; cursor: pointer; color: #2D2D2D; font-size: 14px; font-weight: 600; margin-bottom: 20px; }
+    .detalle-header { background: white; border-radius: 16px; padding: 20px; margin-bottom: 16px; border: 1.5px solid #EBEBEB; text-align: center; }
+    .detalle-emoji { font-size: 64px; margin-bottom: 12px; }
+    .detalle-header h2 { font-size: 20px; font-weight: 700; }
+    .detalle-badges { display: flex; justify-content: center; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+    .detalle-badge { font-size: 12px; background: #F5F5F5; color: #555; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+    .detalle-section { background: white; border-radius: 14px; padding: 16px; margin-bottom: 12px; border: 1.5px solid #EBEBEB; }
+    .detalle-section h3 { font-size: 13px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; }
+    .ingrediente-item { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 0.5px solid #F5EDE8; font-size: 14px; }
+    .ingrediente-item:last-child { border-bottom: none; }
+    .ing-dot { width: 8px; height: 8px; background: #4CAF50; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+    .paso-item { display: flex; gap: 12px; padding: 10px 0; border-bottom: 0.5px solid #F5EDE8; }
+    .paso-item:last-child { border-bottom: none; }
+    .paso-num { width: 24px; height: 24px; background: #2D2D2D; color: white; border-radius: 50%; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .paso-text { font-size: 14px; line-height: 1.5; padding-top: 3px; }
 
-    /* BANNER ROTATIVO ORDER BUMPS */
-    .ob-banner-wrap { margin-bottom: 20px; position: relative; overflow: hidden; border-radius: 16px; }
-    .ob-banner-slides { display: flex; transition: transform 0.5s ease; }
-    .ob-banner-slide { min-width: 100%; border-radius: 16px; padding: 18px 20px; display: flex; align-items: center; gap: 14px; cursor: pointer; }
-    .ob-banner-slide.esp { background: linear-gradient(135deg, #FF6B35, #FF8C5A); }
-    .ob-banner-slide.prot { background: linear-gradient(135deg, #2E7D32, #43A047); }
-    .ob-banner-slide.est { background: linear-gradient(135deg, #1565C0, #1E88E5); }
-    .ob-banner-icon { font-size: 40px; flex-shrink: 0; }
-    .ob-banner-info { flex: 1; }
-    .ob-banner-tag { font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
-    .ob-banner-titulo { font-size: 15px; font-weight: 700; color: white; margin-bottom: 3px; }
-    .ob-banner-desc { font-size: 12px; color: rgba(255,255,255,0.85); }
-    .ob-banner-arrow { font-size: 20px; color: rgba(255,255,255,0.8); flex-shrink: 0; }
-    .ob-banner-dots { display: flex; justify-content: center; gap: 6px; margin-top: 8px; }
-    .ob-banner-dot { width: 6px; height: 6px; border-radius: 50%; background: #EBEBEB; transition: background 0.3s; }
-    .ob-banner-dot.active { background: #FF6B35; }
+    /* BUSCADOR */
+    .buscador-box { background: white; border-radius: 16px; padding: 16px; border: 1.5px solid #F0E8E0; margin-bottom: 16px; }
+    .buscador-box p { font-size: 13px; color: #888; margin-bottom: 12px; }
+    .tags-wrap { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; min-height: 20px; }
+    .ing-tag { background: #FFF0E8; color: #FF6B35; border: 1px solid #FFD4B8; border-radius: 20px; padding: 6px 12px; font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 6px; }
+    .ing-tag-x { cursor: pointer; font-size: 16px; line-height: 1; }
+    .ing-input-row { display: flex; gap: 8px; }
+    .ing-input { flex: 1; padding: 11px 14px; border: 1.5px solid #F0E8E0; border-radius: 10px; font-size: 14px; outline: none; transition: border-color 0.2s; }
+    .ing-input:focus { border-color: #FF6B35; }
+    .ing-add-btn { background: #FF6B35; color: white; border: none; border-radius: 10px; padding: 11px 16px; font-size: 14px; font-weight: 700; cursor: pointer; }
+    .btn-buscar-ing { width: 100%; background: #2D2D2D; color: white; border: none; border-radius: 12px; padding: 13px; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 12px; display: none; }
+    .btn-limpiar-ing { width: 100%; background: white; color: #888; border: 1.5px solid #F0E8E0; border-radius: 12px; padding: 11px; font-size: 13px; cursor: pointer; margin-top: 8px; display: none; }
+    .resultado-card { background: white; border-radius: 14px; padding: 16px; margin-bottom: 12px; border: 1.5px solid #F0E8E0; cursor: pointer; }
+    .resultado-card:active { transform: scale(0.98); }
+    .rc-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .rc-score { background: #FFF0E8; color: #FF6B35; border-radius: 20px; padding: 4px 10px; font-size: 12px; font-weight: 700; white-space: nowrap; }
+    .rc-score.completo { background: #F0FFF4; color: #2E7D32; }
+    .rc-ingredientes-info p { font-size: 11px; font-weight: 700; margin-bottom: 4px; }
+    .rc-ingredientes-info p.tienes-lbl { color: #2E7D32; }
+    .rc-ingredientes-info p.falta-lbl { color: #FF6B35; }
+    .tags-mini { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
+    .tag-mini { border-radius: 10px; padding: 2px 8px; font-size: 11px; }
+    .tag-mini.tienes { background: #F0FFF4; color: #2E7D32; }
+    .tag-mini.falta { background: #FFF0E8; color: #FF6B35; }
+    .completo-txt { font-size: 12px; color: #2E7D32; font-weight: 600; }
 
-    /* ACADEMIA */
-    .leccion-card { background: white; border-radius: 14px; padding: 16px; border: 1.5px solid #EBEBEB; margin-bottom: 12px; display: flex; align-items: center; gap: 14px; cursor: pointer; transition: transform 0.15s; }
-    .leccion-card:active { transform: scale(0.98); }
-    .leccion-card.completada { border-color: #4CAF50; background: #F9FFF9; }
-    .leccion-num { width: 44px; height: 44px; border-radius: 50%; background: #F5F5F5; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
-    .leccion-card.completada .leccion-num { background: #4CAF50; }
-    .leccion-info { flex: 1; }
-    .leccion-titulo { font-size: 15px; font-weight: 600; color: #2D2D2D; }
-    .leccion-desc { font-size: 12px; color: #888; margin-top: 3px; }
-    .leccion-xp { font-size: 11px; color: #FF6B35; font-weight: 600; margin-top: 4px; }
-    .leccion-arrow { font-size: 18px; color: #CCC; }
-    .leccion-body { background: white; border-radius: 14px; padding: 20px; border: 1.5px solid #EBEBEB; margin-bottom: 14px; }
-    .leccion-body h3 { font-size: 15px; font-weight: 700; color: #2D2D2D; margin-bottom: 10px; margin-top: 16px; }
-    .leccion-body h3:first-child { margin-top: 0; }
-    .leccion-body p { font-size: 14px; color: #555; line-height: 1.6; margin-bottom: 10px; }
-    .leccion-tip { background: #FFF8F0; border-left: 3px solid #FF6B35; border-radius: 0 10px 10px 0; padding: 12px 14px; margin: 12px 0; font-size: 13px; color: #555; line-height: 1.5; }
-    .leccion-factor { background: #F8F8F8; border-radius: 12px; padding: 14px; margin-bottom: 10px; display: flex; gap: 12px; align-items: flex-start; }
-    .leccion-factor-icon { font-size: 24px; flex-shrink: 0; }
-    .leccion-factor h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
-    .leccion-factor p { font-size: 13px; color: #666; margin: 0; }
-    .btn-completar-leccion { width: 100%; background: #FF6B35; color: white; border: none; border-radius: 14px; padding: 16px; font-size: 15px; font-weight: 700; cursor: pointer; margin-top: 8px; }
-    .btn-ya-completada { width: 100%; background: #4CAF50; color: white; border: none; border-radius: 14px; padding: 16px; font-size: 15px; font-weight: 600; cursor: default; margin-top: 8px; }
+    /* TOAST */
+    .toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); background: #2D2D2D; color: white; padding: 10px 20px; border-radius: 20px; font-size: 13px; font-weight: 500; z-index: 999; opacity: 0; transition: opacity 0.3s; pointer-events: none; white-space: nowrap; }
+    .toast.show { opacity: 1; }
+
+    /* LOADING */
+    .loading { text-align: center; padding: 40px 20px; color: #888; font-size: 14px; }
+    .loading-spinner { width: 32px; height: 32px; border: 3px solid #F0E8E0; border-top-color: #FF6B35; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 12px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
   </style>
 </head>
 <body>
 
-
-<!-- SPLASH SCREEN -->
+<!-- SPLASH -->
 <div id="splash-screen">
   <div class="splash-logo">🍱</div>
   <div class="splash-titulo">Loncheritas Inteligentes</div>
@@ -299,211 +151,60 @@
   <div class="splash-bar-wrap"><div class="splash-bar"></div></div>
 </div>
 
-<!-- ONBOARDING -->
-<div id="onboarding-screen">
-  <div style="display:flex;justify-content:flex-end;padding:16px 20px 0;">
-    <button class="ob-btn-skip" onclick="saltarOnboarding()">Saltar</button>
-  </div>
-  <div class="ob-slides" id="ob-slides-container">
-  <div class="ob-slides-inner" id="ob-slides">
-    <div class="ob-slide">
-      <div class="ob-icon">🍱</div>
-      <div class="ob-titulo">¡Bienvenida a Loncheritas Inteligentes!</div>
-      <div class="ob-desc">Tu asistente de loncheras saludables. Te ayudamos a planificar, preparar y organizar las loncheras de tus hijos de forma fácil y nutritiva.</div>
-    </div>
-    <div class="ob-slide">
-      <div class="ob-icon">🥗</div>
-      <div class="ob-titulo">100 recetas saludables</div>
-      <div class="ob-desc">Sin gluten, sin azúcar refinada, sin colorantes artificiales. Dulces, saladas, gomitas y bebidas — todas pensadas para niños de 2 a 5 años.</div>
-    </div>
-    <div class="ob-slide">
-      <div class="ob-icon">📅</div>
-      <div class="ob-titulo">Planifica tu semana</div>
-      <div class="ob-desc">Asigna una receta a cada día de la semana. Toca "Cambiar" para elegir de la lista completa de recetas y organiza toda la semana en minutos.</div>
-    </div>
-    <div class="ob-slide">
-      <div class="ob-icon">🔎</div>
-      <div class="ob-titulo">Búsqueda Inteligente</div>
-      <div class="ob-desc">Dinos qué tienes en casa y te decimos qué lonchera puedes preparar — y qué te falta comprar. Hasta 5 ingredientes disponibles.</div>
-    </div>
-    <div class="ob-slide">
-      <div class="ob-icon">🛒</div>
-      <div class="ob-titulo">Lista de compras automática</div>
-      <div class="ob-desc">Basada en tu calendario semanal. Las cantidades se ajustan automáticamente al número de hijos. Compártela por WhatsApp en un toque.</div>
-    </div>
-    <div class="ob-slide">
-      <div class="ob-icon">⭐</div>
-      <div class="ob-titulo">Sube de nivel y gana logros</div>
-      <div class="ob-desc">Cada receta preparada te da +5 XP. Sube de nivel, desbloquea logros y accede a contenido exclusivo. ¡A por el nivel Súper Mamá! 👑</div>
-    </div>
-  </div>
-  </div>
-  <div class="ob-footer">
-    <div class="ob-dots" id="ob-dots">
-      <div class="ob-dot active"></div>
-      <div class="ob-dot"></div>
-      <div class="ob-dot"></div>
-      <div class="ob-dot"></div>
-      <div class="ob-dot"></div>
-      <div class="ob-dot"></div>
-    </div>
-    <button class="ob-btn-next" id="ob-btn-next" onclick="siguienteSlide()">Siguiente →</button>
-  </div>
-</div>
-
 <div class="toast" id="toast"></div>
 
-
-
-<!-- MODAL SELECTOR RECETA -->
-<div class="modal-overlay" id="modal-receta" onclick="cerrarModalReceta()">
-  <div class="modal-sheet" onclick="event.stopPropagation()">
-    <div class="modal-header">
-      <h3 id="modal-dia-titulo">Elegir receta</h3>
-      <button class="modal-close" onclick="cerrarModalReceta()">×</button>
-    </div>
-    <div class="modal-search">
-      <input type="text" placeholder="🔍 Buscar receta..." oninput="filtrarModalRecetas(this.value)" id="modal-search-input" />
-    </div>
-    <div class="modal-list" id="modal-receta-list"></div>
-  </div>
-</div>
-
-
-<!-- LOGIN -->
-<div id="pantalla-login" class="auth-screen">
-  <div class="auth-logo">🍱</div>
-  <div class="auth-titulo">Loncheritas Inteligentes</div>
-  <div class="auth-sub">Loncheras inteligentes para tus hijos</div>
-  <div class="auth-card">
-    <h2>Iniciar sesión</h2>
-    <div class="input-group"><label>Correo electrónico</label><input type="email" id="login-email" placeholder="tu@email.com" /></div>
-    <div class="input-group"><label>Contraseña</label><input type="password" id="login-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')iniciarSesion()" /></div>
-    <button class="btn-primary" id="btn-login" onclick="iniciarSesion()">Entrar a la app →</button>
-    <div class="divider"><hr/><span>¿Primera vez?</span><hr/></div>
-    <button class="btn-secondary" onclick="mostrarRegistro()">🌟 ¡Soy nueva mamita! Registrarme</button>
-    <div class="auth-msg error" id="login-error"></div>
-  </div>
-  <div style="margin-top:16px;text-align:center;max-width:320px;">
-    <p style="font-size:12px;color:#AAA;margin-bottom:8px;">¿Aún no tienes acceso? Adquiere el producto en Hotmart y luego regístrate arriba.</p>
-    <button onclick="window.open('https://hotmart.com/tu-link-aqui','_blank')" style="background:white;color:#FF6B35;border:1.5px solid #FF6B35;border-radius:12px;padding:11px 20px;font-size:13px;font-weight:600;cursor:pointer;width:100%;">🛒 Comprar acceso en Hotmart →</button>
-  </div>
-  <div class="auth-footer">¿Problemas? Escríbenos a soporte.loncheritas@gmail.com</div>
-</div>
-
-<!-- REGISTRO -->
-<div id="pantalla-registro" class="auth-screen hidden">
-  <div class="auth-logo">🌟</div>
-  <div class="auth-titulo">¡Bienvenida!</div>
-  <div class="auth-sub">Usa el mismo correo con el que compraste en Hotmart</div>
-  <div class="auth-card">
-    <h2>Crear mi cuenta</h2>
-    <div class="input-row">
-      <div class="input-group"><label>Nombre</label><input type="text" id="reg-nombre" placeholder="María" /></div>
-      <div class="input-group"><label>Apellido</label><input type="text" id="reg-apellido" placeholder="García" /></div>
-    </div>
-    <div class="input-group"><label>Correo (el mismo de tu compra en Hotmart)</label><input type="email" id="reg-email" placeholder="tu@email.com" /></div>
-    <div class="input-group"><label>Confirmar correo</label><input type="email" id="reg-email2" placeholder="tu@email.com" /></div>
-    <div class="input-group"><label>Contraseña (mínimo 6 caracteres)</label><input type="password" id="reg-pass" placeholder="••••••••" /></div>
-    <button class="btn-primary" id="btn-registro" onclick="registrarUsuario()">Crear mi cuenta</button>
-    <button class="btn-secondary" onclick="mostrarLogin()">← Ya tengo cuenta</button>
-    <div class="auth-msg error" id="reg-error"></div>
-  </div>
-  <div class="auth-footer">Tu acceso será activado luego de verificar tu compra en Hotmart.</div>
-</div>
-
-<!-- PENDIENTE -->
-<div id="pantalla-pendiente" class="auth-screen hidden">
-  <div class="auth-logo">⏳</div>
-  <div class="auth-titulo">¡Registro recibido!</div>
-  <div class="auth-sub">Estamos validando tu acceso</div>
-  <div class="pendiente-container">
-    <div class="pendiente-steps">
-      <div class="step"><div class="step-icon done">✅</div><div class="step-info"><h4>Registro completado</h4><p>Tu cuenta fue creada exitosamente</p></div></div>
-      <div class="step"><div class="step-icon active">🔍</div><div class="step-info"><h4>Validando tu compra en Hotmart</h4><p id="pendiente-email-txt" style="word-break:break-all;color:#FF6B35;font-weight:600;"></p></div></div>
-      <div class="step"><div class="step-icon waiting">🔒</div><div class="step-info"><h4>Acceso pendiente</h4><p>Te notificaremos cuando esté listo</p></div></div>
-    </div>
-    <div class="pendiente-nota">Esta pantalla se actualizará automáticamente cuando tu acceso sea aprobado. No necesitas recargar la página. 🙌</div>
-    <button class="btn-secondary" onclick="cerrarSesionPendiente()">← Volver al inicio de sesión</button>
-  </div>
-</div>
-
 <!-- APP -->
-<div id="pantalla-app">
+<div id="app">
   <nav class="nav">
     <div class="nav-logo">🍱 Loncheritas Inteligentes</div>
-    <button class="nav-user" onclick="showPage('perfil')">👤 <span id="nav-nombre">Mamá</span></button>
   </nav>
 
   <!-- INICIO -->
   <div class="page active" id="page-inicio">
-    <div class="greeting"><h1 id="saludo-nombre">¡Hola! 👋</h1><p id="fecha-texto">Cargando...</p></div>
-    <div class="nivel-card">
-      <div class="nivel-emoji" id="nivel-emoji">🌱</div>
-      <div class="nivel-info">
-        <h3 id="nivel-titulo">Nivel 1 — Mamá Principiante</h3>
-        <p id="nivel-xp-txt">0 XP</p>
-        <div class="nivel-bar-wrap"><div class="nivel-bar" id="nivel-bar" style="width:0%"></div></div>
-      </div>
+    <div class="greeting">
+      <h1 id="saludo-texto">¡Buenos días! 👋</h1>
+      <p id="fecha-texto">Cargando...</p>
     </div>
     <div class="stats-mini">
-      <div class="stat-mini"><div class="sn" id="total-recetas">...</div><div class="sl">Recetas totales</div></div>
-      <div class="stat-mini"><div class="sn" id="stat-preparadas">0</div><div class="sl">Preparadas</div></div>
-      <div class="stat-mini"><div class="sn" id="stat-favoritas">0</div><div class="sl">Favoritas</div></div>
+      <div class="stat-mini"><div class="sn" id="stat-total">...</div><div class="sl">Recetas disponibles</div></div>
+      <div class="stat-mini"><div class="sn">✅</div><div class="sl">Acceso libre, sin registro</div></div>
     </div>
     <p class="section-title">Accesos rápidos</p>
     <div class="quick-grid">
-      <div class="quick-card" onclick="showPage('calendario')"><span class="q-icon">📅</span><span class="q-title">Calendario</span><span class="q-sub">Plan semanal</span></div>
-      <div class="quick-card" onclick="showPage('academia')"><span class="q-icon">🎓</span><span class="q-title">Academia</span><span class="q-sub">5 lecciones</span></div>
-      <div class="quick-card" onclick="showPage('recetas')"><span class="q-icon">🥗</span><span class="q-title">Recetas</span><span class="q-sub" id="sub-recetas">Ver todas</span></div>
-      <div class="quick-card" onclick="showPage('lista')"><span class="q-icon">🛒</span><span class="q-title">Lista de compras</span><span class="q-sub">Generar lista</span></div>
-      <div class="quick-card" onclick="showPage('buscador')"><span class="q-icon">🔎</span><span class="q-title">Búsqueda Inteligente</span><span class="q-sub">Busca por ingredientes</span></div>
-    </div>
-    <p class="section-title">Contenido exclusivo</p>
-    <div class="ob-banner-wrap">
-      <div class="ob-banner-slides" id="ob-banner-slides">
-        <div class="ob-banner-slide esp" onclick="showToast('¡Próximamente disponible! 🔜')">
-          <div class="ob-banner-icon">🎉</div>
-          <div class="ob-banner-info">
-            <div class="ob-banner-tag">✨ Próximamente</div>
-            <div class="ob-banner-titulo">Loncheras Especiales</div>
-            <div class="ob-banner-desc">Navidad · Día del niño · Pascuas · Fiestas Patrias</div>
-          </div>
-          <div class="ob-banner-arrow">›</div>
-        </div>
-        <div class="ob-banner-slide prot" onclick="showToast('¡Próximamente disponible! 🔜')">
-          <div class="ob-banner-icon">🥩</div>
-          <div class="ob-banner-info">
-            <div class="ob-banner-tag">✨ Próximamente</div>
-            <div class="ob-banner-titulo">Loncheras Proteicas</div>
-            <div class="ob-banner-desc">Alto contenido proteico para el desarrollo de tus hijos</div>
-          </div>
-          <div class="ob-banner-arrow">›</div>
-        </div>
-        <div class="ob-banner-slide est" onclick="showToast('¡Próximamente disponible! 🔜')">
-          <div class="ob-banner-icon">🌿</div>
-          <div class="ob-banner-info">
-            <div class="ob-banner-tag">✨ Próximamente</div>
-            <div class="ob-banner-titulo">Loncheras Estacionales</div>
-            <div class="ob-banner-desc">Recetas para cada estación del año</div>
-          </div>
-          <div class="ob-banner-arrow">›</div>
-        </div>
+      <div class="quick-card" onclick="showPage('recetas')">
+        <span class="q-icon">🥗</span>
+        <span class="q-title">Recetas</span>
+        <span class="q-sub" id="quick-sub-recetas">Ver todas</span>
       </div>
-      <div class="ob-banner-dots">
-        <div class="ob-banner-dot active" id="obd-0"></div>
-        <div class="ob-banner-dot" id="obd-1"></div>
-        <div class="ob-banner-dot" id="obd-2"></div>
+      <div class="quick-card" onclick="showPage('buscador')">
+        <span class="q-icon">🔎</span>
+        <span class="q-title">Búsqueda Inteligente</span>
+        <span class="q-sub">Por ingredientes</span>
+      </div>
+      <div class="quick-card" onclick="filtrarYIr('dulces')">
+        <span class="q-icon">🍰</span>
+        <span class="q-title">Dulces</span>
+        <span class="q-sub">Sin azúcar refinada</span>
+      </div>
+      <div class="quick-card" onclick="filtrarYIr('saladas')">
+        <span class="q-icon">🥗</span>
+        <span class="q-title">Saladas</span>
+        <span class="q-sub">Nutritivas y ricas</span>
       </div>
     </div>
     <p class="section-title">Lonchera sugerida para hoy</p>
-    <div class="receta-hoy" id="receta-hoy-card"><div class="loading"><div class="loading-spinner"></div>Cargando...</div></div>
+    <div class="receta-hoy" id="receta-hoy-card">
+      <div class="loading"><div class="loading-spinner"></div>Cargando...</div>
+    </div>
   </div>
 
   <!-- RECETAS -->
   <div class="page" id="page-recetas">
-    <div class="greeting"><h1>🥗 Recetas</h1><p id="sub-total-recetas">Cargando...</p></div>
-    <input class="search-bar" type="text" placeholder="🔍  Buscar receta o ingrediente..." oninput="buscarRecetas(this.value)" id="search-input" style="outline:none;" onfocus="this.style.borderColor='#2D2D2D'" onblur="this.style.borderColor='#EBEBEB'" />
+    <div class="greeting">
+      <h1>🥗 Recetas</h1>
+      <p id="sub-total-recetas">Cargando...</p>
+    </div>
+    <input class="search-bar" type="text" id="search-input" placeholder="🔍  Buscar receta o ingrediente..." oninput="buscarRecetas(this.value)" />
     <div class="filtros">
       <button class="filtro-btn active" onclick="filtrar(this,'todas')">Todas</button>
       <button class="filtro-btn" onclick="filtrar(this,'dulces')">🍰 Dulces</button>
@@ -512,11 +213,10 @@
       <button class="filtro-btn" onclick="filtrar(this,'rapidas')">⚡ Rápidas</button>
     </div>
     <div class="receta-list" id="lista-recetas">
-  <div class="skeleton-card"><div class="skeleton skeleton-emoji"></div><div class="skeleton-info"><div class="skeleton skeleton-line"></div><div class="skeleton skeleton-line short"></div></div></div>
-  <div class="skeleton-card"><div class="skeleton skeleton-emoji"></div><div class="skeleton-info"><div class="skeleton skeleton-line"></div><div class="skeleton skeleton-line short"></div></div></div>
-  <div class="skeleton-card"><div class="skeleton skeleton-emoji"></div><div class="skeleton-info"><div class="skeleton skeleton-line"></div><div class="skeleton skeleton-line short"></div></div></div>
-  <div class="skeleton-card"><div class="skeleton skeleton-emoji"></div><div class="skeleton-info"><div class="skeleton skeleton-line"></div><div class="skeleton skeleton-line short"></div></div></div>
-</div>
+      <div class="skeleton-card"><div class="skeleton skeleton-emoji"></div><div class="skeleton-info"><div class="skeleton skeleton-line"></div><div class="skeleton skeleton-line short"></div></div></div>
+      <div class="skeleton-card"><div class="skeleton skeleton-emoji"></div><div class="skeleton-info"><div class="skeleton skeleton-line"></div><div class="skeleton skeleton-line short"></div></div></div>
+      <div class="skeleton-card"><div class="skeleton skeleton-emoji"></div><div class="skeleton-info"><div class="skeleton skeleton-line"></div><div class="skeleton skeleton-line short"></div></div></div>
+    </div>
   </div>
 
   <!-- DETALLE -->
@@ -525,880 +225,224 @@
     <div id="detalle-contenido"></div>
   </div>
 
-  <!-- FAVORITAS -->
-  <div class="page" id="page-favoritas">
-    <div class="greeting"><h1>❤️ Mis favoritas</h1><p id="sub-favoritas-page">0 recetas guardadas</p></div>
-    <div class="receta-list" id="lista-favoritas"><div class="favoritas-empty">Aún no tienes favoritas.<br>Toca ❤️ en cualquier receta para guardarla.</div></div>
-  </div>
-
-  <!-- BUSCADOR POR INGREDIENTES -->
+  <!-- BUSCADOR -->
   <div class="page" id="page-buscador">
-    <div class="greeting"><h1>🔎 Búsqueda Inteligente</h1><p>Dinos qué tienes en casa y te decimos qué preparar</p></div>
-    <div style="background:white;border-radius:16px;padding:16px;border:1.5px solid #F0E8E0;margin-bottom:16px;">
-      <p style="font-size:13px;color:#888;margin-bottom:12px;">Ingresa hasta 5 ingredientes que tienes disponibles:</p>
-      <div id="ingredientes-tags" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;min-height:36px;"></div>
-      <div style="display:flex;gap:8px;">
-        <input type="text" id="ing-input" placeholder="ej: pollo, zanahoria..." style="flex:1;padding:11px 14px;border:1.5px solid #F0E8E0;border-radius:10px;font-size:14px;outline:none;" onkeydown="if(event.key==='Enter'||event.key===',')agregarIngrediente()" />
-        <button onclick="agregarIngrediente()" style="background:#FF6B35;color:white;border:none;border-radius:10px;padding:11px 16px;font-size:14px;font-weight:600;cursor:pointer;">+</button>
+    <div class="greeting">
+      <h1>🔎 Búsqueda Inteligente</h1>
+      <p>Dinos qué tienes en casa</p>
+    </div>
+    <div class="buscador-box">
+      <p>Ingresa hasta 5 ingredientes disponibles:</p>
+      <div class="tags-wrap" id="ingredientes-tags"></div>
+      <div class="ing-input-row">
+        <input type="text" id="ing-input" class="ing-input" placeholder="ej: pollo, zanahoria..." onkeydown="if(event.key==='Enter'||event.key===',')agregarIngrediente()" />
+        <button class="ing-add-btn" onclick="agregarIngrediente()">+</button>
       </div>
-      <button onclick="buscarPorIngredientes()" id="btn-buscar-ing" style="width:100%;background:#FF6B35;color:white;border:none;border-radius:12px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;margin-top:12px;display:none;">🔍 Ver recetas posibles</button>
-      <button onclick="limpiarBuscador()" style="width:100%;background:white;color:#888;border:1.5px solid #F0E8E0;border-radius:12px;padding:11px;font-size:13px;cursor:pointer;margin-top:8px;display:none;" id="btn-limpiar-ing">Limpiar búsqueda</button>
+      <button class="btn-buscar-ing" id="btn-buscar-ing" onclick="buscarPorIngredientes()">🔍 Ver recetas posibles</button>
+      <button class="btn-limpiar-ing" id="btn-limpiar-ing" onclick="limpiarBuscador()">Limpiar búsqueda</button>
     </div>
     <div id="resultados-buscador"></div>
-  </div>
-
-  <!-- ACADEMIA -->
-  <div class="page" id="page-academia">
-    <div class="greeting"><h1>🎓 Academia</h1><p>El sistema completo para loncheras inteligentes</p></div>
-    <div style="background:linear-gradient(135deg,#2D2D2D,#444);border-radius:16px;padding:18px;color:white;margin-bottom:20px;display:flex;align-items:center;gap:14px;">
-      <div style="font-size:40px;">📚</div>
-      <div>
-        <div style="font-size:16px;font-weight:700;margin-bottom:4px;">Sistema de Lonchera Inteligente</div>
-        <div style="font-size:12px;opacity:0.85;">5 lecciones · Incluido con tu acceso · +10 XP por lección</div>
-        <div style="margin-top:8px;background:rgba(255,255,255,0.2);border-radius:10px;height:5px;">
-          <div id="academia-progreso-bar" style="background:#4CAF50;border-radius:10px;height:5px;width:0%;transition:width 0.5s;"></div>
-        </div>
-        <div id="academia-progreso-txt" style="font-size:11px;opacity:0.7;margin-top:4px;">0 de 5 lecciones completadas</div>
-      </div>
-    </div>
-    <div id="lista-lecciones"></div>
-  </div>
-
-  <!-- LECCION DETALLE -->
-  <div class="page" id="page-leccion">
-    <div class="detalle-back" onclick="volverDeLeccion()">← Volver a Academia</div>
-    <div id="leccion-contenido"></div>
-  </div>
-
-  <!-- CALENDARIO -->
-  <div class="page" id="page-calendario">
-    <div class="greeting"><h1>📅 Calendario semanal</h1><p id="cal-semana-desc">Planifica la semana de tus hijos</p></div>
-    <div class="cal-semana-label" id="cal-semana-label">Cargando fechas...</div>
-    <div class="hijos-selector">
-      <span>Número de hijos:</span>
-      <button class="hijos-btn" onclick="cambiarHijos(-1)">−</button>
-      <span class="hijos-num" id="num-hijos">2</span>
-      <button class="hijos-btn" onclick="cambiarHijos(1)">+</button>
-      <span style="font-size:12px;color:#888;" id="txt-loncheras">= 10 loncheras/semana</span>
-    </div>
-    <p class="section-title">Esta semana</p>
-    <div class="cal-grid" id="cal-grid"><div class="loading"><div class="loading-spinner"></div>Cargando...</div></div>
-    <button class="btn-generar-lista" onclick="showPage('lista')">🛒 Generar lista de compras</button>
-  </div>
-
-  <!-- LISTA -->
-  <div class="page" id="page-lista">
-    <div class="greeting"><h1>🛒 Lista de compras</h1><p>Ingredientes para toda la semana</p></div>
-    <div class="lista-header">
-      <h3>Semana completa</h3>
-      <p id="lista-header-info">Basada en tu calendario semanal</p>
-      <div class="hijos-selector" style="margin-top:12px;padding:0;border:none;background:transparent;">
-        <span>Hijos:</span>
-        <button class="hijos-btn" onclick="cambiarHijos(-1)">−</button>
-        <span class="hijos-num" id="num-hijos2">2</span>
-        <button class="hijos-btn" onclick="cambiarHijos(1)">+</button>
-        <span style="font-size:12px;color:#888;" id="txt-total-lista">= 10 loncheras</span>
-      </div>
-    </div>
-    <div id="lista-ingredientes"><div class="loading"><div class="loading-spinner"></div>Generando lista...</div></div>
-    <div class="export-btns">
-      <button class="exp-btn primary" onclick="exportarWhatsApp()"><span class="eb-icon">💬</span> Compartir por WhatsApp</button>
-      <button class="exp-btn" onclick="copiarLista()"><span class="eb-icon">📋</span> Copiar como notas</button>
-      <button class="exp-btn" onclick="alert('PDF próximamente')"><span class="eb-icon">📄</span> Exportar como PDF</button>
-    </div>
-  </div>
-
-  <!-- PERFIL -->
-  <div class="page" id="page-perfil">
-    <div class="perfil-header">
-      <div class="avatar">👩</div>
-      <div class="perfil-nombre" id="perfil-nombre-txt">Mamá Loncherita</div>
-      <div class="perfil-email-txt" id="perfil-email-txt"></div>
-    </div>
-    <button class="btn-salir" onclick="cerrarSesion()">🚪 Cerrar sesión</button>
-    <div class="nivel-grande">
-      <div style="font-size:48px" id="perfil-nivel-emoji">🌱</div>
-      <h3 id="perfil-nivel-titulo">Nivel 1 — Principiante</h3>
-      <p id="perfil-xp-txt">0 de 50 XP para el siguiente nivel</p>
-      <div class="xp-bar-wrap"><div class="xp-bar-fill" id="perfil-xp-bar" style="width:0%"></div></div>
-      <p class="xp-label">+5 XP por cada receta preparada</p>
-    </div>
-    <p class="section-title">Mis estadísticas</p>
-    <div class="stats-row">
-      <div class="stat-card"><div class="s-num" id="perfil-stat-prep">0</div><div class="s-label">Recetas preparadas</div></div>
-      <div class="stat-card"><div class="s-num" id="perfil-stat-fav">0</div><div class="s-label">Favoritas</div></div>
-      <div class="stat-card"><div class="s-num" id="perfil-stat-xp">0</div><div class="s-label">XP total</div></div>
-    </div>
-    <p class="section-title">Mis logros</p>
-    <div class="logros-grid" id="logros-grid"></div>
   </div>
 
   <nav class="bottom-nav">
     <button class="bn-item active" id="bn-inicio" onclick="showPage('inicio')"><span class="icon">🏠</span><span class="label">Inicio</span></button>
     <button class="bn-item" id="bn-recetas" onclick="showPage('recetas')"><span class="icon">🥗</span><span class="label">Recetas</span></button>
     <button class="bn-item" id="bn-buscador" onclick="showPage('buscador')"><span class="icon">🔎</span><span class="label">Búsqueda</span></button>
-    <button class="bn-item" id="bn-academia" onclick="showPage('academia')"><span class="icon">🎓</span><span class="label">Academia</span></button>
-    <button class="bn-item" id="bn-perfil" onclick="showPage('perfil')"><span class="icon">⭐</span><span class="label">Perfil</span></button>
   </nav>
 </div>
 
-<script type="module">
-  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-  import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
-  import { getFirestore, doc, setDoc, updateDoc, onSnapshot, getDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyCBgGw5NkDF68jOZG6s941v8glpUTJ03rA",
-    authDomain: "loncheritas-app.firebaseapp.com",
-    projectId: "loncheritas-app",
-    storageBucket: "loncheritas-app.firebasestorage.app",
-    messagingSenderId: "745464448000",
-    appId: "1:745464448000:web:4a6945a25cd896776004e5"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
-
-  window._auth = auth;
-  window._db = db;
-  window._signIn = signInWithEmailAndPassword;
-  window._createUser = createUserWithEmailAndPassword;
-  window._signOut = signOut;
-  window._updateProfile = updateProfile;
-  window._doc = doc;
-  window._setDoc = setDoc;
-  window._updateDoc = updateDoc;
-  window._onSnapshot = onSnapshot;
-  iniciarSplash();
-  window._getDoc = getDoc;
-
-  let unsubscribeAuth = null;
-
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      if (unsubscribeAuth) unsubscribeAuth();
-      unsubscribeAuth = onSnapshot(doc(db, 'usuarios', user.uid), (snap) => {
-        if (snap.exists()) {
-          const data = snap.data();
-          if (data.aprobado === true) {
-            mostrarApp(user, data);
-          } else {
-            ocultarTodo();
-            document.getElementById('pantalla-pendiente').classList.remove('hidden');
-            document.getElementById('pendiente-email-txt').textContent = user.email;
-          }
-        } else {
-          mostrarApp(user, { nombre: 'Mamá', apellido: '', favoritas: [], recetasPreparadas: 0, calendario: {} });
-        }
-      });
-    } else {
-      if (unsubscribeAuth) { unsubscribeAuth(); unsubscribeAuth = null; }
-      ocultarTodo();
-      document.getElementById('pantalla-login').classList.remove('hidden');
-    }
-  });
-</script>
-
 <script>
-  // ===== SPLASH & ONBOARDING =====
-  let obSlideActual = 0;
-  const OB_TOTAL = 6;
+  // ─── ESTADO GLOBAL ───────────────────────────────────────────────
+  let todasLasRecetas = [];
+  let recetasFiltradas = [];
+  let filtroActivo = 'todas';
+  let paginaAnterior = 'recetas';
+  let ingredientesSeleccionados = [];
 
-  function iniciarSplash() {
+  // ─── SPLASH ──────────────────────────────────────────────────────
+  setTimeout(() => {
+    const splash = document.getElementById('splash-screen');
+    splash.classList.add('fade-out');
     setTimeout(() => {
-      const splash = document.getElementById('splash-screen');
-      splash.classList.add('fade-out');
-      setTimeout(() => { splash.style.display = 'none'; }, 600);
-    }, 2200);
-  }
+      splash.style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+      cargarRecetas();
+    }, 600);
+  }, 2200);
 
-  function siguienteSlide() {
-    if(obSlideActual < OB_TOTAL - 1) {
-      obSlideActual++;
-      actualizarOnboarding();
-    } else {
-      finalizarOnboarding();
-    }
-  }
-
-  function saltarOnboarding() { finalizarOnboarding(); }
-
-  function actualizarOnboarding() {
-    const slides = document.getElementById('ob-slides');
-    slides.style.transform = `translateX(-${obSlideActual * 100}vw)`;
-    document.querySelectorAll('.ob-dot').forEach((d,i) => d.classList.toggle('active', i === obSlideActual));
-    const btn = document.getElementById('ob-btn-next');
-    btn.textContent = obSlideActual === OB_TOTAL - 1 ? '¡Empezar ahora! 🚀' : 'Siguiente →';
-  }
-
-  async function finalizarOnboarding() {
-    document.getElementById('onboarding-screen').classList.remove('show');
-    if(currentUid) await guardarEnFirestore({ onboardingVisto: true });
-  }
-
-  function mostrarOnboardingSeNecesario(perfil) {
-    if(!perfil.onboardingVisto) {
-      setTimeout(() => {
-        document.getElementById('onboarding-screen').classList.add('show');
-      }, 300);
-    }
-  }
-
-  let currentUser = null;
-  let currentUid = null;
-  let todasLasRecetas = [], recetasFiltradas = [];
-  let numHijos = 2, calendarioSemanal = {}, checksLista = {}, paginaAnterior = 'recetas';
-  let userFavoritas = [], userPreparadas = 0, userCalendario = {};
-  let logrosYaObtenidos = [];
-  let nivelAnterior = 1;
-  const DIAS_CORTOS = ['LUN','MAR','MIÉ','JUE','VIE'];
-  const DIAS_NOMBRES = ['Lunes','Martes','Miércoles','Jueves','Viernes'];
-  const CLAVES_DIAS = ['lunes','martes','miercoles','jueves','viernes'];
-  const MESES = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
-
-  function getSemanaActual() {
-    const hoy = new Date();
-    const diaSemana = hoy.getDay(); // 0=dom, 1=lun...6=sab
-    // Sab(6) o Dom(0) -> mostrar semana SIGUIENTE
-    const offset = (diaSemana === 0 || diaSemana === 6) ? 1 : 0;
-    const lunes = new Date(hoy);
-    // Calcular lunes de la semana actual
-    const diffToLunes = (diaSemana === 0 ? -6 : 1 - diaSemana) + (offset * 7);
-    lunes.setDate(hoy.getDate() + diffToLunes);
-    const viernes = new Date(lunes);
-    viernes.setDate(lunes.getDate() + 4);
-    return { lunes, viernes, esProximaSemana: offset === 1 };
-  }
-
-  function getFechasDias() {
-    const { lunes } = getSemanaActual();
-    return CLAVES_DIAS.map((_, i) => {
-      const d = new Date(lunes);
-      d.setDate(lunes.getDate() + i);
-      return d;
-    });
-  }
-
-  // NIVELES
-  const NIVELES = [
-    { min:0, max:49, nivel:1, titulo:'Mamá Principiante', emoji:'🌱' },
-    { min:50, max:149, nivel:2, titulo:'Mamá Cocinera', emoji:'👩‍🍳' },
-    { min:150, max:299, nivel:3, titulo:'Mamá Experta', emoji:'⭐' },
-    { min:300, max:499, nivel:4, titulo:'Mamá Chef', emoji:'🏆' },
-    { min:500, max:99999, nivel:5, titulo:'Súper Mamá', emoji:'👑' }
-  ];
-
-  const LOGROS_DEF = [
-    { id:'primera', emoji:'🥇', nombre:'Primera receta', desc:'Preparaste tu primera receta', req: d => d.recetasPreparadas >= 1 },
-    { id:'cinco', emoji:'🍽️', nombre:'5 recetas', desc:'Preparaste 5 recetas', req: d => d.recetasPreparadas >= 5 },
-    { id:'diez', emoji:'👩‍🍳', nombre:'Chef Loncherita', desc:'Preparaste 10 recetas', req: d => d.recetasPreparadas >= 10 },
-    { id:'fav1', emoji:'❤️', nombre:'Primera favorita', desc:'Guardaste tu primera favorita', req: d => (d.favoritas||[]).length >= 1 },
-    { id:'fav5', emoji:'💕', nombre:'Colección', desc:'5 recetas favoritas', req: d => (d.favoritas||[]).length >= 5 },
-    { id:'nivel2', emoji:'🌟', nombre:'Nivel 2', desc:'Alcanzaste nivel 2', req: d => calcXP(d) >= 50 },
-  ];
-
-  function calcXP(data) { return (data.recetasPreparadas || 0) * 5 + ((data.favoritas||[]).length) * 2 + ((data.leccionesCompletadas||[]).length) * 10; }
-
-  function getNivel(xp) { return NIVELES.find(n => xp >= n.min && xp <= n.max) || NIVELES[0]; }
-
-  function ocultarTodo() {
-    ['pantalla-login','pantalla-registro','pantalla-pendiente'].forEach(id => document.getElementById(id).classList.add('hidden'));
-    document.getElementById('pantalla-app').style.display = 'none';
-  }
-
-  function mostrarLogin() { ocultarTodo(); document.getElementById('pantalla-login').classList.remove('hidden'); }
-  function mostrarRegistro() { ocultarTodo(); document.getElementById('pantalla-registro').classList.remove('hidden'); }
-
-  function mostrarApp(user, perfil) {
-    currentUser = user;
-    currentUid = user.uid;
-    userFavoritas = perfil.favoritas || [];
-    userPreparadas = perfil.recetasPreparadas || 0;
-    userCalendario = perfil.calendario || {};
-    // Cargar logros ya obtenidos para no mostrar el banner de nuevo
-    // Solo marcar como obtenidos los logros que YA tenía ANTES de esta sesión
-    // Guardamos en Firestore los logros obtenidos para no perderlos
-    logrosYaObtenidos = perfil.logrosObtenidos || LOGROS_DEF.filter(l => l.req(perfil)).map(l => l.id);
-    leccionesCompletadas = perfil.leccionesCompletadas || [];
-    // Guardar nivel actual para detectar subidas
-    nivelAnterior = getNivel(calcXP(perfil)).nivel;
-
-    ocultarTodo();
-    document.getElementById('pantalla-app').style.display = 'block';
-
-    const nombre = perfil.nombre || 'Mamá';
-    document.getElementById('saludo-nombre').textContent = '¡Hola, ' + nombre + '! 👋';
-    document.getElementById('nav-nombre').textContent = nombre;
-    document.getElementById('perfil-nombre-txt').textContent = nombre + ' ' + (perfil.apellido || '');
-    document.getElementById('perfil-email-txt').textContent = user.email;
-
-    actualizarUI(perfil);
-    mostrarOnboardingSeNecesario(perfil);
-    cargarRecetas();
-    setTimeout(() => iniciarBannerRotativo(), 500);
-  }
-
-  function actualizarUI(data) {
-    const xp = calcXP(data);
-    const nivel = getNivel(xp);
-    const pct = Math.min(100, Math.round(((xp - nivel.min) / (nivel.max - nivel.min + 1)) * 100));
-
-    // Nivel card inicio
-    document.getElementById('nivel-emoji').textContent = nivel.emoji;
-    document.getElementById('nivel-titulo').textContent = 'Nivel ' + nivel.nivel + ' — ' + nivel.titulo;
-    document.getElementById('nivel-xp-txt').textContent = xp + ' XP';
-    document.getElementById('nivel-bar').style.width = pct + '%';
-
-    // Stats inicio
-    document.getElementById('stat-preparadas').textContent = data.recetasPreparadas || 0;
-    document.getElementById('stat-favoritas').textContent = (data.favoritas||[]).length;
-    const subFavEl = document.getElementById('sub-favoritas');
-    if(subFavEl) subFavEl.textContent = (data.favoritas||[]).length + ' guardadas';
-
-    // Perfil
-    document.getElementById('perfil-nivel-emoji').textContent = nivel.emoji;
-    document.getElementById('perfil-nivel-titulo').textContent = 'Nivel ' + nivel.nivel + ' — ' + nivel.titulo;
-    document.getElementById('perfil-xp-txt').textContent = xp + ' de ' + (nivel.max+1) + ' XP para el siguiente nivel';
-    document.getElementById('perfil-xp-bar').style.width = pct + '%';
-    document.getElementById('perfil-stat-prep').textContent = data.recetasPreparadas || 0;
-    document.getElementById('perfil-stat-fav').textContent = (data.favoritas||[]).length;
-    document.getElementById('perfil-stat-xp').textContent = xp;
-
-    // Logros
-    const logrosGrid = document.getElementById('logros-grid');
-    logrosGrid.innerHTML = LOGROS_DEF.map(l => {
-      const desbloqueado = l.req(data);
-      return `<div class="logro ${desbloqueado?'':'bloqueado'}">
-        <div class="l-emoji">${l.emoji}</div>
-        <div class="l-nombre">${l.nombre}</div>
-        <div class="l-desc">${l.desc}</div>
-      </div>`;
-    }).join('');
-  }
-
-  async function guardarEnFirestore(campos) {
-    if(!currentUid) return;
-    try { await window._updateDoc(window._doc(window._db,'usuarios',currentUid), campos); } catch(e) { console.error(e); }
-  }
-
-  async function iniciarSesion() {
-    const email = document.getElementById('login-email').value.trim();
-    const pass = document.getElementById('login-pass').value;
-    const errEl = document.getElementById('login-error');
-    const btn = document.getElementById('btn-login');
-    errEl.style.display = 'none';
-    if(!email||!pass){errEl.textContent='Ingresa tu email y contraseña.';errEl.style.display='block';return;}
-    btn.disabled=true; btn.textContent='Verificando...';
-    try { await window._signIn(window._auth,email,pass); }
-    catch(e) { errEl.textContent='Email o contraseña incorrectos.'; errEl.style.display='block'; btn.disabled=false; btn.textContent='Entrar a la app →'; }
-  }
-
-  async function registrarUsuario() {
-    const nombre=document.getElementById('reg-nombre').value.trim();
-    const apellido=document.getElementById('reg-apellido').value.trim();
-    const email=document.getElementById('reg-email').value.trim().toLowerCase();
-    const email2=document.getElementById('reg-email2').value.trim().toLowerCase();
-    const pass=document.getElementById('reg-pass').value;
-    const errEl=document.getElementById('reg-error');
-    const btn=document.getElementById('btn-registro');
-    errEl.style.display='none';
-    if(!nombre||!apellido){errEl.textContent='Ingresa tu nombre y apellido.';errEl.style.display='block';return;}
-    if(!email){errEl.textContent='Ingresa tu correo.';errEl.style.display='block';return;}
-    if(email!==email2){errEl.textContent='Los correos no coinciden.';errEl.style.display='block';return;}
-    if(pass.length<6){errEl.textContent='La contraseña debe tener al menos 6 caracteres.';errEl.style.display='block';return;}
-    btn.disabled=true; btn.textContent='Creando tu cuenta...';
-    try {
-      const cred=await window._createUser(window._auth,email,pass);
-      await window._updateProfile(cred.user,{displayName:nombre+' '+apellido});
-      await window._setDoc(window._doc(window._db,'usuarios',cred.user.uid),{
-        nombre,apellido,email,aprobado:false,
-        fechaRegistro:new Date().toISOString(),
-        uid:cred.user.uid,
-        favoritas:[],recetasPreparadas:0,calendario:{}
-      });
-    } catch(e) {
-      btn.disabled=false; btn.textContent='Crear mi cuenta';
-      errEl.textContent=e.code==='auth/email-already-in-use'?'Este email ya tiene cuenta. Inicia sesión.':'Error al crear la cuenta.';
-      errEl.style.display='block';
-    }
-  }
-
-  async function cerrarSesion() { await window._signOut(window._auth); }
-  async function cerrarSesionPendiente() { await window._signOut(window._auth); }
-
-  // APP
+  // ─── CARGA DE RECETAS ────────────────────────────────────────────
   async function cargarRecetas() {
     try {
-      const resp=await fetch('recetas.json');
-      const data=await resp.json();
-      todasLasRecetas=data.recetas;
-      recetasFiltradas=[...todasLasRecetas];
+      const resp = await fetch('recetas.json');
+      const data = await resp.json();
+      todasLasRecetas = data.recetas;
+      recetasFiltradas = [...todasLasRecetas];
       inicializar();
-    } catch(e){console.error(e);}
+    } catch(e) {
+      console.error('Error cargando recetas:', e);
+      document.getElementById('lista-recetas').innerHTML =
+        '<div class="no-resultados"><div class="nr-emoji">⚠️</div><p>No se pudo cargar recetas.json</p></div>';
+    }
   }
 
   function inicializar() {
-    const total=todasLasRecetas.length;
-    document.getElementById('total-recetas').textContent=total;
-    document.getElementById('sub-recetas').textContent=total+' disponibles';
-    document.getElementById('sub-total-recetas').textContent=total+' recetas disponibles';
-    const ahora=new Date();
-    const f=ahora.toLocaleDateString('es-PE',{weekday:'long',day:'numeric',month:'long'});
-    document.getElementById('fecha-texto').textContent=f.charAt(0).toUpperCase()+f.slice(1)+' · Lima';
-    // Sugerencia del día — cambia cada día del año
-    const seed = ahora.getFullYear() * 10000 + (ahora.getMonth()+1) * 100 + ahora.getDate();
-    const idxHoy = seed % total;
-    renderRecetaHoy(todasLasRecetas[idxHoy]);
+    const total = todasLasRecetas.length;
+
+    // Stats inicio
+    document.getElementById('stat-total').textContent = total;
+    document.getElementById('quick-sub-recetas').textContent = total + ' disponibles';
+    document.getElementById('sub-total-recetas').textContent = total + ' recetas disponibles';
+
+    // Saludo y fecha
+    const ahora = new Date();
+    const hora = ahora.getHours();
+    const saludo = hora < 12 ? '¡Buenos días! 👋' : hora < 19 ? '¡Buenas tardes! 👋' : '¡Buenas noches! 👋';
+    document.getElementById('saludo-texto').textContent = saludo;
+    const f = ahora.toLocaleDateString('es-PE', { weekday:'long', day:'numeric', month:'long' });
+    document.getElementById('fecha-texto').textContent = f.charAt(0).toUpperCase() + f.slice(1) + ' · Lima';
+
+    // Sugerida del día (cambia cada día)
+    const seed = ahora.getFullYear() * 10000 + (ahora.getMonth() + 1) * 100 + ahora.getDate();
+    renderRecetaHoy(todasLasRecetas[seed % total]);
+
     renderRecetas(todasLasRecetas);
-    cargarCalendario();
-    renderListaCompras();
-    renderFavoritas();
   }
 
+  // ─── NAVEGACIÓN ──────────────────────────────────────────────────
   function showPage(name) {
-    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-    document.querySelectorAll('.bn-item').forEach(b=>b.classList.remove('active'));
-    document.getElementById('page-'+name).classList.add('active');
-    const bn=document.getElementById('bn-'+name);
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.bn-item').forEach(b => b.classList.remove('active'));
+    document.getElementById('page-' + name).classList.add('active');
+    const bn = document.getElementById('bn-' + name);
     if(bn) bn.classList.add('active');
-    window.scrollTo(0,0);
-    if(name==='favoritas') renderFavoritas();
-    if(name==='academia') renderAcademia();
+    window.scrollTo(0, 0);
+  }
+
+  function filtrarYIr(categoria) {
+    // Activar filtro y navegar a recetas
+    filtroActivo = categoria;
+    recetasFiltradas = todasLasRecetas.filter(r => r.categoria === categoria);
+    document.getElementById('search-input').value = '';
+    showPage('recetas');
+    // Marcar botón correcto
+    setTimeout(() => {
+      document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('active'));
+      const map = { dulces: 1, saladas: 2, gomitas: 3 };
+      const btns = document.querySelectorAll('.filtro-btn');
+      if(btns[map[categoria]]) btns[map[categoria]].classList.add('active');
+      renderRecetas(recetasFiltradas);
+    }, 0);
   }
 
   function showToast(msg) {
-    const t=document.getElementById('toast');
-    t.textContent=msg; t.classList.add('show');
-    setTimeout(()=>t.classList.remove('show'),2500);
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
   }
 
+  // ─── INICIO ──────────────────────────────────────────────────────
   function renderRecetaHoy(r) {
-    document.getElementById('receta-hoy-card').innerHTML=`
+    if(!r) return;
+    document.getElementById('receta-hoy-card').innerHTML = `
       <span class="rh-tag">✨ Sugerida para hoy</span>
       <h3>${r.emoji} ${r.nombre}</h3>
-      <p>${r.ingredientes.slice(0,3).join(', ')}...</p>
-      <div class="rh-meta"><span>⏱️ ${r.tiempo_min} min</span><span>🍳 ${r.metodo}</span></div>
+      <p>${r.ingredientes.slice(0, 3).join(', ')}...</p>
+      <div class="rh-meta">
+        <span>⏱️ ${r.tiempo_min} min</span>
+        <span>🍳 ${r.metodo}</span>
+      </div>
       <button onclick="verDetalle('${r.id}','inicio')" style="margin-top:12px;width:100%;background:#FF6B35;color:white;border:none;border-radius:10px;padding:10px;font-size:13px;font-weight:600;cursor:pointer;">Ver receta completa →</button>
     `;
   }
 
-  function esFavorita(id) { return userFavoritas.includes(id); }
-
+  // ─── RECETAS ─────────────────────────────────────────────────────
   function renderRecetas(lista) {
-    const c=document.getElementById('lista-recetas');
-    if(!lista.length){c.innerHTML='<div style="text-align:center;padding:40px;color:#AAA">🔍 No se encontraron recetas</div>';return;}
-    c.innerHTML=lista.map(r=>`
-      <div class="receta-card">
-        <span class="rc-emoji" onclick="verDetalle('${r.id}','recetas')">${r.emoji}</span>
-        <div class="rc-info" onclick="verDetalle('${r.id}','recetas')" style="cursor:pointer">
-          <h4>${r.nombre}</h4>
-          <p>${r.metodo} · ${r.tiempo_min} min</p>
-          <div class="rc-meta">
-            <span class="rc-tag ${r.categoria==='saladas'?'salada':r.categoria==='gomitas'?'gomita':''}">${r.categoria==='dulces'?'🍰 Dulce':r.categoria==='saladas'?'🥗 Salada':'🍬 Gomita'}</span>
-            ${r.tiempo_min<=15?'<span class="rc-tag">⚡ Rápida</span>':''}
-          </div>
-        </div>
-        <span class="rc-fav" onclick="toggleFavorita('${r.id}')">${esFavorita(r.id)?'❤️':'🤍'}</span>
-      </div>
-    `).join('');
-  }
-
-  async function toggleFavorita(id) {
-    const idx=userFavoritas.indexOf(id);
-    if(idx>=0) { userFavoritas.splice(idx,1); showToast('Eliminada de favoritas'); }
-    else { userFavoritas.push(id); showToast('❤️ Añadida a favoritas'); }
-    document.getElementById('stat-favoritas').textContent=userFavoritas.length;
-    document.getElementById('sub-favoritas').textContent=userFavoritas.length+' guardadas';
-    document.getElementById('perfil-stat-fav').textContent=userFavoritas.length;
-    renderRecetas(recetasFiltradas);
-    await guardarEnFirestore({favoritas:userFavoritas});
-    const snap = await window._getDoc(window._doc(window._db,'usuarios',currentUid));
-    if(snap.exists()) {
-      const data = snap.data();
-      actualizarUI(data);
-      verificarLogros(data);
+    const c = document.getElementById('lista-recetas');
+    if(!lista.length) {
+      c.innerHTML = `<div class="no-resultados"><div class="nr-emoji">🔍</div><p>No se encontraron recetas</p></div>`;
+      return;
     }
-  }
-
-  function renderFavoritas() {
-    const c=document.getElementById('lista-favoritas');
-    const lista=todasLasRecetas.filter(r=>userFavoritas.includes(r.id));
-    document.getElementById('sub-favoritas-page').textContent=lista.length+' recetas guardadas';
-    if(!lista.length){c.innerHTML='<div class="favoritas-empty">Aún no tienes favoritas.<br>Toca ❤️ en cualquier receta para guardarla.</div>';return;}
-    c.innerHTML=lista.map(r=>`
-      <div class="receta-card">
-        <span class="rc-emoji" onclick="verDetalle('${r.id}','favoritas')">${r.emoji}</span>
-        <div class="rc-info" onclick="verDetalle('${r.id}','favoritas')" style="cursor:pointer">
-          <h4>${r.nombre}</h4>
-          <p>${r.metodo} · ${r.tiempo_min} min</p>
-          <div class="rc-meta">
-            <span class="rc-tag ${r.categoria==='saladas'?'salada':r.categoria==='gomitas'?'gomita':''}">${r.categoria==='dulces'?'🍰 Dulce':r.categoria==='saladas'?'🥗 Salada':'🍬 Gomita'}</span>
+    c.innerHTML = lista.map(r => {
+      const catClass = r.categoria === 'saladas' ? 'salada' : r.categoria === 'gomitas' ? 'gomita' : 'dulce';
+      const catLabel = r.categoria === 'dulces' ? '🍰 Dulce' : r.categoria === 'saladas' ? '🥗 Salada' : '🍬 Gomita';
+      return `
+        <div class="receta-card" onclick="verDetalle('${r.id}','recetas')">
+          <span class="rc-emoji">${r.emoji}</span>
+          <div class="rc-info">
+            <h4>${r.nombre}</h4>
+            <p>${r.metodo} · ${r.tiempo_min} min</p>
+            <div class="rc-meta">
+              <span class="rc-tag ${catClass}">${catLabel}</span>
+              ${r.tiempo_min <= 15 ? '<span class="rc-tag rapida">⚡ Rápida</span>' : ''}
+            </div>
           </div>
-        </div>
-        <span class="rc-fav" onclick="toggleFavorita('${r.id}')">❤️</span>
-      </div>
-    `).join('');
+          <span class="rc-arrow">›</span>
+        </div>`;
+    }).join('');
   }
 
-  function filtrar(btn,tipo) {
-    document.querySelectorAll('.filtro-btn').forEach(b=>b.classList.remove('active'));
+  function filtrar(btn, tipo) {
+    document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    document.getElementById('search-input').value='';
-    if(tipo==='todas') recetasFiltradas=[...todasLasRecetas];
-    else if(tipo==='rapidas') recetasFiltradas=todasLasRecetas.filter(r=>r.tiempo_min<=15);
-    else recetasFiltradas=todasLasRecetas.filter(r=>r.categoria===tipo);
+    filtroActivo = tipo;
+    document.getElementById('search-input').value = '';
+    recetasFiltradas = tipo === 'todas'
+      ? [...todasLasRecetas]
+      : tipo === 'rapidas'
+        ? todasLasRecetas.filter(r => r.tiempo_min <= 15)
+        : todasLasRecetas.filter(r => r.categoria === tipo);
     renderRecetas(recetasFiltradas);
   }
 
   function buscarRecetas(q) {
-    const query=q.toLowerCase();
-    if(!query){renderRecetas(recetasFiltradas);return;}
-    renderRecetas(recetasFiltradas.filter(r=>r.nombre.toLowerCase().includes(query)||r.ingredientes.some(i=>i.toLowerCase().includes(query))));
+    const query = q.toLowerCase();
+    if(!query) { renderRecetas(recetasFiltradas); return; }
+    renderRecetas(recetasFiltradas.filter(r =>
+      r.nombre.toLowerCase().includes(query) ||
+      r.ingredientes.some(i => i.toLowerCase().includes(query))
+    ));
   }
 
-  function verDetalle(id,desde) {
-    paginaAnterior=desde;
-    const r=todasLasRecetas.find(r=>r.id===id);
-    if(!r)return;
-    const fav=esFavorita(r.id);
-    document.getElementById('detalle-contenido').innerHTML=`
+  // ─── DETALLE ─────────────────────────────────────────────────────
+  function verDetalle(id, desde) {
+    paginaAnterior = desde;
+    const r = todasLasRecetas.find(r => r.id === id);
+    if(!r) return;
+    const catClass = r.categoria === 'saladas' ? 'salada' : r.categoria === 'gomitas' ? 'gomita' : 'dulce';
+    const catLabel = r.categoria === 'dulces' ? '🍰 Dulce' : r.categoria === 'saladas' ? '🥗 Salada' : '🍬 Gomita';
+    document.getElementById('detalle-contenido').innerHTML = `
       <div class="detalle-header">
         <div class="detalle-emoji">${r.emoji}</div>
         <h2>${r.nombre}</h2>
         <div class="detalle-badges">
-          <span class="detalle-badge">${r.categoria==='dulces'?'🍰 Dulce':r.categoria==='saladas'?'🥗 Salada':'🍬 Gomita'}</span>
+          <span class="detalle-badge">${catLabel}</span>
           <span class="detalle-badge">⏱️ ${r.tiempo_min} min</span>
           <span class="detalle-badge">🍳 ${r.metodo}</span>
-          <span class="detalle-badge">${r.dificultad==='fácil'?'🟢 Fácil':r.dificultad==='media'?'🟡 Media':'🔴 Difícil'}</span>
+          <span class="detalle-badge">${r.dificultad === 'fácil' ? '🟢 Fácil' : r.dificultad === 'media' ? '🟡 Media' : '🔴 Difícil'}</span>
         </div>
       </div>
       <div class="detalle-section">
         <h3>🛒 Ingredientes</h3>
-        ${r.ingredientes.map(i=>`<div class="ingrediente-item"><div class="ing-dot"></div><span>${i}</span></div>`).join('')}
+        ${r.ingredientes.map(i => `<div class="ingrediente-item"><div class="ing-dot"></div><span>${i}</span></div>`).join('')}
       </div>
       <div class="detalle-section">
         <h3>👩‍🍳 Preparación paso a paso</h3>
-        ${r.pasos.map((p,i)=>`<div class="paso-item"><div class="paso-num">${i+1}</div><div class="paso-text">${p}</div></div>`).join('')}
-      </div>
-      <div class="detalle-acciones">
-        <button class="btn-preparar" onclick="marcarPreparada('${r.id}')">✅ ¡La preparé!</button>
-        <button class="btn-fav-detalle" id="btn-fav-det" onclick="toggleFavoritaDetalle('${r.id}')">${fav?'❤️':'🤍'}</button>
+        ${r.pasos.map((p, i) => `<div class="paso-item"><div class="paso-num">${i + 1}</div><div class="paso-text">${p}</div></div>`).join('')}
       </div>
     `;
     showPage('detalle');
   }
 
-  function mostrarLogroBanner(logro) {
-    try {
-      const bannerEl = document.getElementById('logro-banner');
-      document.getElementById('lb-emoji').textContent = logro.emoji;
-      document.getElementById('lb-nombre').textContent = logro.nombre;
-      document.getElementById('lb-desc').textContent = logro.desc;
-      bannerEl.style.display = 'flex';
-    } catch(e) { console.error('Banner error:', e); }
-  }
+  function volverDeDetalle() { showPage(paginaAnterior); }
 
-  function mostrarNivelBanner(nivel) {
-    const bannerEl = document.getElementById('nivel-banner');
-    if(!bannerEl) return;
-    document.getElementById('nb-emoji').textContent = nivel.emoji;
-    document.getElementById('nb-titulo').textContent = 'Nivel ' + nivel.nivel + ' — ' + nivel.titulo;
-    document.getElementById('nb-desc').textContent = '¡Felicitaciones! Has alcanzado un nuevo nivel.';
-    bannerEl.style.display = 'flex';
-  }
-
-  function cerrarNivelBanner() {
-    const bannerEl = document.getElementById('nivel-banner');
-    if(bannerEl) bannerEl.style.display = 'none';
-  }
-
-  function cerrarLogroBanner() {
-    const bannerEl = document.getElementById('logro-banner');
-    if(bannerEl) bannerEl.style.display = 'none';
-  }
-
-  function verificarLogros(data) {
-    const nuevosLogros = LOGROS_DEF.filter(l => {
-      const cumple = l.req(data);
-      const yaObtenido = logrosYaObtenidos.includes(l.id);
-      return !yaObtenido && cumple;
-    });
-    if(nuevosLogros.length > 0) {
-      nuevosLogros.forEach((l, i) => {
-        logrosYaObtenidos.push(l.id);
-        setTimeout(() => mostrarLogroBanner(l), 500 + (i * 3000));
-      });
-      // Guardar logros en Firestore para persistir entre sesiones
-      guardarEnFirestore({ logrosObtenidos: logrosYaObtenidos });
-    }
-    // Verificar subida de nivel
-    const xp = calcXP(data);
-    const nivelActual = getNivel(xp).nivel;
-    if(nivelActual > nivelAnterior) {
-      nivelAnterior = nivelActual;
-      const delay = 500 + (nuevosLogros.length * 3000);
-      setTimeout(() => mostrarNivelBanner(getNivel(xp)), delay);
-    }
-  }
-
-  async function marcarPreparada(id) {
-    userPreparadas++;
-    await guardarEnFirestore({recetasPreparadas: userPreparadas});
-    // Leer datos frescos de Firestore
-    const snap = await window._getDoc(window._doc(window._db,'usuarios',currentUid));
-    if(snap.exists()) {
-      const data = snap.data();
-      actualizarUI(data);
-      verificarLogros(data);
-      const xp = calcXP(data);
-      showToast('🎉 +5 XP — Total: ' + xp + ' XP');
-    }
-  }
-
-  async function toggleFavoritaDetalle(id) {
-    await toggleFavorita(id);
-    const fav=esFavorita(id);
-    const btn=document.getElementById('btn-fav-det');
-    if(btn) btn.textContent=fav?'❤️':'🤍';
-  }
-
-  function volverDeDetalle(){showPage(paginaAnterior);}
-
-  // CALENDARIO
-  function cargarCalendario() {
-    if(Object.keys(userCalendario).length > 0) {
-      CLAVES_DIAS.forEach(d=>{
-        if(userCalendario[d]) {
-          const r=todasLasRecetas.find(r=>r.id===userCalendario[d]);
-          if(r) calendarioSemanal[d]=r;
-        }
-      });
-    } else {
-      generarCalendarioDefault();
-      return;
-    }
-    renderCalendario();
-  }
-
-  function generarCalendarioDefault() {
-    const saladas=todasLasRecetas.filter(r=>r.categoria==='saladas');
-    CLAVES_DIAS.forEach((d,i)=>{calendarioSemanal[d]=saladas[i%saladas.length];});
-    guardarCalendario();
-    renderCalendario();
-  }
-
-  function guardarCalendario() {
-    const cal={};
-    CLAVES_DIAS.forEach(d=>{ if(calendarioSemanal[d]) cal[d]=calendarioSemanal[d].id; });
-    guardarEnFirestore({calendario:cal});
-    userCalendario=cal;
-  }
-
-  function renderCalendario() {
-    const hoy = new Date();
-    const hoyStr = hoy.toDateString();
-    const { lunes, viernes, esProximaSemana } = getSemanaActual();
-    const fechas = getFechasDias();
-
-    // Update semana label
-    const labelEl = document.getElementById('cal-semana-label');
-    const descEl = document.getElementById('cal-semana-desc');
-    if(labelEl) {
-      labelEl.textContent = (esProximaSemana ? 'Proxima semana: ' : 'Semana actual: ') +
-        lunes.getDate() + ' ' + MESES[lunes.getMonth()] + ' - ' +
-        viernes.getDate() + ' ' + MESES[viernes.getMonth()];
-    }
-    if(descEl && esProximaSemana) descEl.textContent = 'Planifica la semana entrante';
-
-    document.getElementById('cal-grid').innerHTML=CLAVES_DIAS.map((d,i)=>{
-      const r=calendarioSemanal[d];
-      const esHoy = fechas[i].toDateString() === hoyStr;
-      const diaNum = fechas[i].getDate();
-      const mesStr = MESES[fechas[i].getMonth()];
-      return `<div class="cal-day-card ${esHoy?'today':''}">
-        <div style="display:flex;flex-direction:column;align-items:center;min-width:36px;">
-          <div class="cal-day-name">${DIAS_CORTOS[i]}</div>
-          <div style="font-size:11px;color:#AAA;margin-top:2px;">${diaNum} ${mesStr}</div>
-        </div>
-        <div class="cal-emoji">${r?r.emoji:'➕'}</div>
-        <div class="cal-receta-info">
-          <div class="cal-receta-nombre">${r?r.nombre:'Sin asignar'}</div>
-          <div class="cal-receta-meta">${r?r.tiempo_min+' min · '+r.metodo:'Toca para agregar'}</div>
-        </div>
-        <button class="cal-change-btn" onclick="cambiarRecetaDia('${d}')">Cambiar</button>
-      </div>`;
-    }).join('');
-    renderListaCompras();
-  }
-
-  let diaSeleccionado = null;
-  let modalRecetasFiltradas = [];
-
-  function cambiarRecetaDia(dia) {
-    diaSeleccionado = dia;
-    const diaIndex = CLAVES_DIAS.indexOf(dia);
-    document.getElementById('modal-dia-titulo').textContent = 'Receta para el ' + DIAS_NOMBRES[diaIndex];
-    document.getElementById('modal-search-input').value = '';
-    modalRecetasFiltradas = [...todasLasRecetas];
-    renderModalRecetas(modalRecetasFiltradas);
-    document.getElementById('modal-receta').classList.add('show');
-  }
-
-  function renderModalRecetas(lista) {
-    const c = document.getElementById('modal-receta-list');
-    c.innerHTML = lista.map(r => `
-      <div class="modal-receta-item" onclick="seleccionarRecetaCalendario('${r.id}')">
-        <span class="mri-emoji">${r.emoji}</span>
-        <div class="mri-info">
-          <h4>${r.nombre}</h4>
-          <p>${r.metodo} · ${r.tiempo_min} min</p>
-          <span class="mri-cat ${r.categoria==='saladas'?'salada':r.categoria==='gomitas'?'gomita':''}">${r.categoria==='dulces'?'🍰 Dulce':r.categoria==='saladas'?'🥗 Salada':'🍬 Gomita'}</span>
-        </div>
-      </div>
-    `).join('');
-  }
-
-  function filtrarModalRecetas(q) {
-    const query = q.toLowerCase();
-    if(!query) { renderModalRecetas(todasLasRecetas); return; }
-    renderModalRecetas(todasLasRecetas.filter(r => r.nombre.toLowerCase().includes(query) || r.ingredientes.some(i => i.toLowerCase().includes(query))));
-  }
-
-  function seleccionarRecetaCalendario(id) {
-    if(!diaSeleccionado) return;
-    calendarioSemanal[diaSeleccionado] = todasLasRecetas.find(r => r.id === id);
-    guardarCalendario();
-    renderCalendario();
-    cerrarModalReceta();
-    showToast('✅ Receta actualizada');
-  }
-
-  function cerrarModalReceta() {
-    document.getElementById('modal-receta').classList.remove('show');
-    diaSeleccionado = null;
-  }
-
-  function cambiarHijos(delta) {
-    numHijos=Math.max(1,Math.min(6,numHijos+delta));
-    ['num-hijos','num-hijos2'].forEach(id=>document.getElementById(id).textContent=numHijos);
-    document.getElementById('txt-loncheras').textContent='= '+(numHijos*5)+' loncheras/semana';
-    document.getElementById('txt-total-lista').textContent='= '+(numHijos*5)+' loncheras';
-    renderListaCompras();
-  }
-
-  // Parser inteligente de cantidades
-  function parsearCantidad(texto) {
-    // Detectar fracciones como 1/2, 3/4
-    const fracMatch = texto.match(/^(\d+)\/(\d+)/);
-    if(fracMatch) return { valor: parseInt(fracMatch[1]) / parseInt(fracMatch[2]), tipo: 'fraccion', original: fracMatch[0] };
-    // Detectar número entero o decimal al inicio
-    const numMatch = texto.match(/^(\d+\.?\d*)/);
-    if(numMatch) return { valor: parseFloat(numMatch[1]), tipo: 'entero', original: numMatch[1] };
-    return null;
-  }
-
-  function multiplicarIngrediente(ing, factor) {
-    if(factor === 1) return ing;
-    // Ingredientes que no se multiplican (sin cantidad específica)
-    const sinCantidad = ['sal', 'pimienta', 'canela', 'orégano', 'vainilla', 'aceite', 'achiote', 'ajo', 'hielo', 'agua'];
-    const ingLower = ing.toLowerCase();
-    if(sinCantidad.some(s => ingLower.startsWith(s) || ingLower.includes('al gusto') || ingLower.includes('al gusto') || ingLower.includes('opcional'))) return ing;
-
-    const parsed = parsearCantidad(ing.trim());
-    if(!parsed) return ing; // No tiene número al inicio, no multiplicar
-
-    const nuevoValor = parsed.valor * factor;
-    let textoNuevo;
-
-    if(parsed.tipo === 'fraccion') {
-      // Convertir resultado de fracción a texto legible
-      if(Number.isInteger(nuevoValor)) {
-        textoNuevo = nuevoValor.toString();
-      } else {
-        // Buscar fracción más cercana
-        const entero = Math.floor(nuevoValor);
-        const decimal = nuevoValor - entero;
-        let fracStr = '';
-        if(Math.abs(decimal - 0.25) < 0.05) fracStr = '1/4';
-        else if(Math.abs(decimal - 0.5) < 0.05) fracStr = '1/2';
-        else if(Math.abs(decimal - 0.75) < 0.05) fracStr = '3/4';
-        else if(Math.abs(decimal - 0.33) < 0.05) fracStr = '1/3';
-        else if(Math.abs(decimal - 0.67) < 0.05) fracStr = '2/3';
-        else fracStr = decimal.toFixed(1).replace('0.', '');
-        textoNuevo = entero > 0 ? `${entero} ${fracStr}` : fracStr;
-      }
-    } else {
-      textoNuevo = Number.isInteger(nuevoValor) ? nuevoValor.toString() : nuevoValor.toFixed(1);
-    }
-
-    return ing.replace(parsed.original, textoNuevo);
-  }
-
-  function renderListaCompras() {
-    if(!todasLasRecetas.length)return;
-    checksLista = {}; // Reset checks cuando cambia la lista
-
-    // Recolectar ingredientes de todas las recetas del calendario multiplicados por hijos
-    const map={};
-    Object.values(calendarioSemanal).forEach(r=>{
-      if(!r)return;
-      r.ingredientes.forEach(ing=>{
-        const ingMultiplicado = multiplicarIngrediente(ing, numHijos);
-        const k = ing.toLowerCase().trim(); // key original para deduplicar
-        if(!map[k]) map[k] = { nombre: ingMultiplicado, original: ing };
-        else {
-          // Si el ingrediente ya existe, intentar sumar cantidades
-          const parsed1 = parsearCantidad(map[k].nombre.trim());
-          const parsed2 = parsearCantidad(ingMultiplicado.trim());
-          if(parsed1 && parsed2 && parsed1.tipo === parsed2.tipo) {
-            const suma = parsed1.valor + parsed2.valor;
-            const sumaTexto = Number.isInteger(suma) ? suma.toString() : suma.toFixed(1);
-            map[k].nombre = map[k].nombre.replace(parsed1.original, sumaTexto);
-          }
-        }
-      });
-    });
-
-    const grupos={'🥩 Proteínas':[],'🥦 Verduras y frutas':[],'🌾 Harinas y cereales':[],'🥚 Huevos y lácteos':[],'🍯 Otros':[]};
-    const kw={proteinas:['pollo','carne','pavo','atún','lentejas','pescado'],verduras:['zanahoria','espinaca','brócoli','brocoli','manzana','plátano','platano','fresa','mango','beterraga','papa','palta','tomate','apio','cebolla'],harinas:['harina','avena','arroz','pan','tortilla','maicena','fécula','quinua','kiwicha'],lacteos:['leche','yogurt','queso','mantequilla','huevo']};
-    Object.values(map).forEach(item=>{
-      const n=item.nombre.toLowerCase();
-      if(kw.lacteos.some(k=>n.includes(k))) grupos['🥚 Huevos y lácteos'].push(item);
-      else if(kw.proteinas.some(k=>n.includes(k))) grupos['🥩 Proteínas'].push(item);
-      else if(kw.verduras.some(k=>n.includes(k))) grupos['🥦 Verduras y frutas'].push(item);
-      else if(kw.harinas.some(k=>n.includes(k))) grupos['🌾 Harinas y cereales'].push(item);
-      else grupos['🍯 Otros'].push(item);
-    });
-
-    const totalItems = Object.values(grupos).reduce((acc, v) => acc + v.length, 0);
-    const headerInfo = document.getElementById('lista-header-info');
-    if(headerInfo) headerInfo.textContent = totalItems + ' ingredientes para ' + numHijos + ' ' + (numHijos === 1 ? 'hijo' : 'hijos') + ' — semana completa';
-
-    document.getElementById('lista-ingredientes').innerHTML=Object.entries(grupos).filter(([,v])=>v.length>0).map(([cat,items])=>`
-      <div class="categoria-lista">
-        <div class="cat-titulo">${cat}</div>
-        ${items.map((item,i)=>{ const k=cat+i; const ch=checksLista[k];
-          return `<div class="item-compra">
-            <div class="item-check ${ch?'checked':''}" onclick="toggleCheck('${k}',this,document.getElementById('ing-${k}'))">${ch?'✓':''}</div>
-            <span class="item-nombre ${ch?'tachado':''}" id="ing-${k}">${item.nombre}</span>
-          </div>`;
-        }).join('')}
-      </div>
-    `).join('');
-  }
-
-  function toggleCheck(k,el,nEl){ checksLista[k]=!checksLista[k]; el.classList.toggle('checked',checksLista[k]); el.innerHTML=checksLista[k]?'✓':''; if(nEl)nEl.classList.toggle('tachado',checksLista[k]); }
-
-  // ===== BUSCADOR POR INGREDIENTES =====
-  let ingredientesSeleccionados = [];
-
+  // ─── BUSCADOR POR INGREDIENTES ───────────────────────────────────
   function agregarIngrediente() {
     if(ingredientesSeleccionados.length >= 5) { showToast('Máximo 5 ingredientes'); return; }
     const input = document.getElementById('ing-input');
-    const valor = input.value.trim().toLowerCase().replace(',','');
+    const valor = input.value.trim().toLowerCase().replace(',', '');
     if(!valor) return;
-    if(ingredientesSeleccionados.includes(valor)) { input.value=''; return; }
+    if(ingredientesSeleccionados.includes(valor)) { input.value = ''; return; }
     ingredientesSeleccionados.push(valor);
     input.value = '';
     input.focus();
@@ -1408,55 +452,46 @@
   function renderTags() {
     const c = document.getElementById('ingredientes-tags');
     c.innerHTML = ingredientesSeleccionados.map((ing, i) => `
-      <div style="background:#FFF0E8;color:#FF6B35;border:1px solid #FFD4B8;border-radius:20px;padding:6px 12px;font-size:13px;font-weight:500;display:flex;align-items:center;gap:6px;">
+      <div class="ing-tag">
         ${ing}
-        <span onclick="quitarIngrediente(${i})" style="cursor:pointer;font-size:16px;line-height:1;color:#FF6B35;">×</span>
+        <span class="ing-tag-x" onclick="quitarIngrediente(${i})">×</span>
       </div>
     `).join('');
     const btnBuscar = document.getElementById('btn-buscar-ing');
     const btnLimpiar = document.getElementById('btn-limpiar-ing');
-    if(btnBuscar) btnBuscar.style.display = ingredientesSeleccionados.length > 0 ? 'block' : 'none';
-    if(btnLimpiar) btnLimpiar.style.display = ingredientesSeleccionados.length > 0 ? 'block' : 'none';
-  }
-
-  function quitarIngrediente(i) {
-    ingredientesSeleccionados.splice(i, 1);
-    renderTags();
+    btnBuscar.style.display = ingredientesSeleccionados.length > 0 ? 'block' : 'none';
+    btnLimpiar.style.display = ingredientesSeleccionados.length > 0 ? 'block' : 'none';
     if(ingredientesSeleccionados.length === 0) {
       document.getElementById('resultados-buscador').innerHTML = '';
     }
   }
 
+  function quitarIngrediente(i) {
+    ingredientesSeleccionados.splice(i, 1);
+    renderTags();
+  }
+
   function limpiarBuscador() {
     ingredientesSeleccionados = [];
     renderTags();
-    document.getElementById('resultados-buscador').innerHTML = '';
     document.getElementById('ing-input').value = '';
+    document.getElementById('resultados-buscador').innerHTML = '';
+  }
+
+  function normalizar(txt) {
+    return txt.toLowerCase()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/huevos/g,'huevo').replace(/zanahorias/g,'zanahoria')
+      .replace(/tomates/g,'tomate').replace(/platanos/g,'platano')
+      .replace(/manzanas/g,'manzana').replace(/fresas/g,'fresa')
+      .replace(/almendras/g,'almendra').replace(/lentejas/g,'lenteja')
+      .replace(/s\b/g, '');
   }
 
   function buscarPorIngredientes() {
     if(!ingredientesSeleccionados.length) return;
     const c = document.getElementById('resultados-buscador');
 
-    // Normalizar texto: quitar tildes, plurales simples, minúsculas
-    function normalizar(txt) {
-      return txt.toLowerCase()
-        .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // quitar tildes
-        .replace(/huevos/g,'huevo')
-        .replace(/zanahorias/g,'zanahoria')
-        .replace(/tomates/g,'tomate')
-        .replace(/platanos/g,'platano')
-        .replace(/manzanas/g,'manzana')
-        .replace(/fresas/g,'fresa')
-        .replace(/almendras/g,'almendra')
-        .replace(/lentejas/g,'lenteja')
-        .replace(/cdas/g,'cda')
-        .replace(/cditas/g,'cdita')
-        .replace(/tazas/g,'taza')
-        .replace(/s\b/g, ''); // quitar 's' final para plurales generales
-    }
-
-    // Para cada receta calcular coincidencias
     const resultados = todasLasRecetas.map(r => {
       const ingReceta = r.ingredientes.map(i => normalizar(i));
       const tienes = ingredientesSeleccionados.filter(ing => {
@@ -1476,271 +511,38 @@
     .sort((a, b) => b.score - a.score);
 
     if(!resultados.length) {
-      c.innerHTML = `<div style="text-align:center;padding:40px 20px;color:#AAA;">
-        <div style="font-size:48px;margin-bottom:12px;">🤔</div>
-        <p style="font-size:14px;">No encontramos recetas con esos ingredientes.<br>Prueba con otros ingredientes.</p>
-      </div>`;
+      c.innerHTML = `<div class="no-resultados"><div class="nr-emoji">🤔</div><p>No encontramos recetas con esos ingredientes.<br>Prueba con otros.</p></div>`;
       return;
     }
 
     c.innerHTML = `
-      <p style="font-size:13px;color:#888;margin-bottom:12px;font-weight:500;">${resultados.length} recetas posibles con tus ingredientes:</p>
-      ${resultados.map(({receta: r, tienes, falta}) => `
-        <div style="background:white;border-radius:14px;padding:16px;margin-bottom:12px;border:1.5px solid #F0E8E0;" onclick="verDetalle('${r.id}','buscador')" >
-          <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;cursor:pointer;">
-            <span style="font-size:36px;">${r.emoji}</span>
-            <div style="flex:1;">
-              <h4 style="font-size:15px;font-weight:600;">${r.nombre}</h4>
-              <p style="font-size:12px;color:#888;margin-top:2px;">${r.metodo} · ${r.tiempo_min} min</p>
+      <p style="font-size:13px;color:#888;margin-bottom:12px;font-weight:500;">${resultados.length} recetas con tus ingredientes:</p>
+      ${resultados.map(({ receta: r, tienes, falta }) => {
+        const completo = falta.length === 0;
+        return `
+          <div class="resultado-card" onclick="verDetalle('${r.id}','buscador')">
+            <div class="rc-top">
+              <span style="font-size:36px;">${r.emoji}</span>
+              <div style="flex:1;">
+                <h4 style="font-size:15px;font-weight:600;">${r.nombre}</h4>
+                <p style="font-size:12px;color:#888;margin-top:2px;">${r.metodo} · ${r.tiempo_min} min</p>
+              </div>
+              <span class="rc-score ${completo ? 'completo' : ''}">${tienes.length}/${ingredientesSeleccionados.length} ✓</span>
             </div>
-            <div style="background:${tienes.length === ingredientesSeleccionados.length ? '#F0FFF4' : '#FFF0E8'};color:${tienes.length === ingredientesSeleccionados.length ? '#2E7D32' : '#FF6B35'};border-radius:20px;padding:4px 10px;font-size:12px;font-weight:700;white-space:nowrap;">
-              ${tienes.length}/${ingredientesSeleccionados.length} ✓
+            <div class="rc-ingredientes-info">
+              ${tienes.length > 0 ? `
+                <p class="tienes-lbl">✅ Ya tienes:</p>
+                <div class="tags-mini">${tienes.map(t => `<span class="tag-mini tienes">${t}</span>`).join('')}</div>
+              ` : ''}
+              ${falta.length > 0 ? `
+                <p class="falta-lbl">🛒 Te falta:</p>
+                <div class="tags-mini">${falta.map(f => `<span class="tag-mini falta">${f}</span>`).join('')}</div>
+              ` : `<p class="completo-txt">🎉 ¡Tienes todo para prepararla!</p>`}
             </div>
-          </div>
-          ${tienes.length > 0 ? `
-          <div style="margin-bottom:8px;">
-            <p style="font-size:11px;font-weight:700;color:#2E7D32;margin-bottom:4px;">✅ Ya tienes:</p>
-            <div style="display:flex;flex-wrap:wrap;gap:4px;">
-              ${tienes.map(t => `<span style="background:#F0FFF4;color:#2E7D32;border-radius:10px;padding:2px 8px;font-size:11px;">${t}</span>`).join('')}
-            </div>
-          </div>` : ''}
-          ${falta.length > 0 ? `
-          <div>
-            <p style="font-size:11px;font-weight:700;color:#FF6B35;margin-bottom:4px;">🛒 Te falta comprar:</p>
-            <div style="display:flex;flex-wrap:wrap;gap:4px;">
-              ${falta.map(f => `<span style="background:#FFF0E8;color:#FF6B35;border-radius:10px;padding:2px 8px;font-size:11px;">${f}</span>`).join('')}
-            </div>
-          </div>` : '<p style="font-size:12px;color:#2E7D32;font-weight:600;">🎉 ¡Tienes todo para prepararla!</p>'}
-        </div>
-      `).join('')}
+          </div>`;
+      }).join('')}
     `;
   }
-
-
-  // ===== ACADEMIA =====
-  const LECCIONES = [
-    {
-      id: 'L1',
-      emoji: '🧠',
-      titulo: '¿Por qué dice "No me gusta"?',
-      desc: 'La biología detrás del rechazo alimentario',
-      xp: 10,
-      contenido: [
-        { tipo: 'intro', texto: 'Cuando tu hijo rechaza un alimento, su cerebro está haciendo exactamente lo que se supone que tiene que hacer. No está siendo difícil — está respondiendo a un instinto muy antiguo.' },
-        { tipo: 'titulo', texto: 'La neofobia alimentaria' },
-        { tipo: 'parrafo', texto: 'Los niños pequeños son especialmente sensibles a lo nuevo porque su sistema nervioso está en pleno desarrollo. Esto tiene un nombre científico — neofobia alimentaria — y es completamente normal.' },
-        { tipo: 'tip', texto: '💡 Un alimento puede necesitar entre 10 y 15 exposiciones antes de ser aceptado. ¡Paciencia! Cada intento cuenta.' },
-        { tipo: 'titulo', texto: 'Tres cosas clave para recordar' },
-        { tipo: 'factor', emoji: '🔬', titulo: 'Es instinto natural', desc: 'El cerebro del niño desconfía de lo nuevo como mecanismo de protección. Es biología, no rebeldía.' },
-        { tipo: 'factor', emoji: '🔁', titulo: 'La repetición es necesaria', desc: 'Un alimento puede necesitar hasta 15 exposiciones antes de ser aceptado. La paciencia es tu mejor herramienta.' },
-        { tipo: 'factor', emoji: '💚', titulo: 'No es personal', desc: 'No rechaza tu comida. Rechaza lo desconocido. Son dos cosas muy distintas.' },
-        { tipo: 'tip', texto: '"El rechazo no es rebeldía. Es falta de estrategia. Y la estrategia se aprende."' },
-      ]
-    },
-    {
-      id: 'L2',
-      emoji: '👀',
-      titulo: 'Los 4 factores del rechazo',
-      desc: 'Textura, color, presentación y presión',
-      xp: 10,
-      contenido: [
-        { tipo: 'intro', texto: 'No todos los rechazos son iguales. Hay cuatro factores que, una vez que los conoces, los empiezas a ver en todas partes — y puedes empezar a hacer cambios que marcan una gran diferencia.' },
-        { tipo: 'factor', emoji: '🤲', titulo: 'Textura', desc: 'El factor más subestimado. Crujiente, blando, pegajoso... cada niño tiene umbrales sensoriales distintos. No es capricho, es sensorial.' },
-        { tipo: 'factor', emoji: '🌈', titulo: 'Color', desc: 'El verde asusta. Las mezclas confunden. La comida visualmente reconocible y atractiva gana siempre.' },
-        { tipo: 'factor', emoji: '🍽️', titulo: 'Presentación', desc: 'Cuando todo está mezclado, los niños no saben qué están comiendo. La separación importa. Un plato con compartimentos puede cambiarlo todo.' },
-        { tipo: 'factor', emoji: '😰', titulo: 'Presión', desc: 'Cuando sienten que "tienen" que comer algo, su cuerpo se pone en alerta. El estrés bloquea el apetito. Menos presión = más aceptación.' },
-        { tipo: 'tip', texto: '💡 La textura es el factor más sorprendente: muchas veces el niño no rechaza el alimento, sino cómo está cocinado. ¡Prueba diferentes métodos de preparación!' },
-        { tipo: 'titulo', texto: 'Texturas problemáticas más comunes' },
-        { tipo: 'parrafo', texto: 'Viscoso o pegajoso, blando en exceso, crujiente inesperado y mezcla de texturas son las cuatro categorías que más generan rechazo. Identificar cuál afecta a tu hijo es el primer paso.' },
-      ]
-    },
-    {
-      id: 'L3',
-      emoji: '🔄',
-      titulo: '¿Quisquilloso o rechazo aprendido?',
-      desc: 'Cómo identificar y romper el ciclo',
-      xp: 10,
-      contenido: [
-        { tipo: 'intro', texto: 'Esta es quizás la distinción más liberadora: hay una diferencia enorme entre un niño con sensibilidad real y uno que ha aprendido que rechazar la comida tiene consecuencias interesantes.' },
-        { tipo: 'titulo', texto: 'Niño con sensibilidad real' },
-        { tipo: 'parrafo', texto: 'Rechaza por textura, color o sensación física. El rechazo es consistente sin importar quién esté presente. Puede aceptar el mismo alimento cocinado de forma diferente.' },
-        { tipo: 'titulo', texto: 'Niño con rechazo aprendido' },
-        { tipo: 'parrafo', texto: 'El rechazo varía según el contexto. Come bien en el colegio pero en casa rechaza todo. El rechazo se acompaña de llanto, negociación o rabietas. Hay un patrón de "premio" asociado.' },
-        { tipo: 'tip', texto: '💡 La buena noticia: el rechazo aprendido se puede desaprender. Empieza por cambiar la dinámica en la mesa, no el menú.' },
-        { tipo: 'titulo', texto: 'Cómo romper el ciclo' },
-        { tipo: 'factor', emoji: '🚫', titulo: 'Elimina las negociaciones', desc: 'Cuando cada rechazo es "premiado" con la alternativa favorita, el niño aprende a usar el rechazo como herramienta.' },
-        { tipo: 'factor', emoji: '😌', titulo: 'Neutraliza la emoción', desc: 'La comida no debe ser un campo de poder. La mesa debe ser un lugar tranquilo, sin expectativas ni presión.' },
-        { tipo: 'factor', emoji: '🔁', titulo: 'Exposición sin presión', desc: 'Ofrece sin obligar. Que el alimento esté en el plato ya es una exposición válida, aunque no lo pruebe.' },
-      ]
-    },
-    {
-      id: 'L4',
-      emoji: '⏱️',
-      titulo: 'Loncheras en 15 minutos',
-      desc: 'Batch cooking y organización semanal',
-      xp: 10,
-      contenido: [
-        { tipo: 'intro', texto: 'Cuando tienes el batch cooking hecho y tu fórmula base clara, preparar la lonchera se convierte en algo tan automático como preparar un café. Sin pensar. Sin improvisar. Sin estrés.' },
-        { tipo: 'titulo', texto: 'La fórmula base' },
-        { tipo: 'factor', emoji: '🥩', titulo: 'Proteína', desc: 'Pollo, huevo, atún, legumbres. Base nutricional de cada lonchera.' },
-        { tipo: 'factor', emoji: '🌾', titulo: 'Cereal', desc: 'Arroz, avena, pan sin gluten, quinua. Energía sostenida para el día.' },
-        { tipo: 'factor', emoji: '🥦', titulo: 'Vegetal', desc: 'Zanahoria, brócoli, espinaca. Un color en cada lonchera.' },
-        { tipo: 'titulo', texto: 'Los 15 minutos paso a paso' },
-        { tipo: 'parrafo', texto: 'Min 1-3: Saca los recipientes preparados. Min 4-8: Porciona y coloca en la lonchera. Min 9-12: Añade snack y nota de amor. Min 13-15: ¡Listo! Lonchera nutritiva ensamblada.' },
-        { tipo: 'tip', texto: '📊 Según la Academy of Nutrition and Dietetics, las familias que planifican sus comidas semanalmente consumen un 28% más de frutas y vegetales.' },
-        { tipo: 'titulo', texto: 'Snacks sin cocción para el último momento' },
-        { tipo: 'parrafo', texto: 'Frutas enteras, miniporción de queso, frutos rojos lavados, yogur natural, frutos secos y crackers integrales. Todos listos para meter directamente en la lonchera.' },
-      ]
-    },
-    {
-      id: 'L5',
-      emoji: '✅',
-      titulo: 'Técnicas de aceptación',
-      desc: 'Exposición progresiva y trucos creativos',
-      xp: 10,
-      contenido: [
-        { tipo: 'intro', texto: '¿Tu hijo hace caras cada vez que aparece algo nuevo? Hay formas sencillas, probadas y sin drama para que poco a poco vaya abriendo su mundo de sabores.' },
-        { tipo: 'factor', emoji: '🤏', titulo: 'Porciones pequeñas', desc: 'Coloca tres o cuatro trocitos del alimento nuevo al lado de su favorito. No digas nada. Deja que esté ahí. Eso ya es un gran primer paso.' },
-        { tipo: 'factor', emoji: '🍝', titulo: 'Combinar con favoritos', desc: 'Espinaca en su pasta favorita, zanahoria en salsa de tomate. No para ocultar, sino para presentar integrado en algo familiar.' },
-        { tipo: 'factor', emoji: '👁️', titulo: 'Exposición progresiva', desc: 'Ver, tocar, oler... antes de comer. El 89% de los niños acepta un alimento nuevo cuando se introduce sin presión.' },
-        { tipo: 'factor', emoji: '🔄', titulo: 'Transformar lo rechazado', desc: 'El brócoli al vapor puede ser raro, pero asado con queso se convierte en otra experiencia. Mismo alimento, otra presentación.' },
-        { tipo: 'titulo', texto: 'Trucos creativos para incluir verduras' },
-        { tipo: 'parrafo', texto: 'Smoothie verde con plátano y mango, salsa "secreta" con zanahoria y calabacín, muffins de verdura, cremas de colores con calabaza o beterraga.' },
-        { tipo: 'tip', texto: '"La aceptación no siempre ocurre en un bocado... pero sí ocurre cuando lo hacemos de forma amable, gradual y divertida."' },
-      ]
-    }
-  ];
-
-  let leccionActual = null;
-  let leccionesCompletadas = [];
-
-  function renderAcademia() {
-    const c = document.getElementById('lista-lecciones');
-    if(!c) return;
-    c.innerHTML = LECCIONES.map(l => {
-      const completada = leccionesCompletadas.includes(l.id);
-      return `<div class="leccion-card ${completada?'completada':''}" onclick="verLeccion('${l.id}')">
-        <div class="leccion-num">${completada ? '✓' : l.emoji}</div>
-        <div class="leccion-info">
-          <div class="leccion-titulo">${l.titulo}</div>
-          <div class="leccion-desc">${l.desc}</div>
-          <div class="leccion-xp">${completada ? '✅ Completada' : '+'+l.xp+' XP al completar'}</div>
-        </div>
-        <div class="leccion-arrow">›</div>
-      </div>`;
-    }).join('');
-
-    const pct = Math.round((leccionesCompletadas.length / LECCIONES.length) * 100);
-    const bar = document.getElementById('academia-progreso-bar');
-    const txt = document.getElementById('academia-progreso-txt');
-    if(bar) bar.style.width = pct + '%';
-    if(txt) txt.textContent = leccionesCompletadas.length + ' de ' + LECCIONES.length + ' lecciones completadas';
-  }
-
-  function verLeccion(id) {
-    leccionActual = LECCIONES.find(l => l.id === id);
-    if(!leccionActual) return;
-    const completada = leccionesCompletadas.includes(id);
-    const c = document.getElementById('leccion-contenido');
-
-    let html = `<div style="background:linear-gradient(135deg,#2D2D2D,#444);border-radius:16px;padding:20px;color:white;margin-bottom:20px;text-align:center;">
-      <div style="font-size:56px;margin-bottom:8px;">${leccionActual.emoji}</div>
-      <h2 style="font-size:18px;font-weight:700;margin-bottom:4px;">${leccionActual.titulo}</h2>
-      <p style="font-size:12px;opacity:0.8;">+${leccionActual.xp} XP · Academia Loncheritas Inteligentes</p>
-    </div>`;
-
-    html += '<div class="leccion-body">';
-    leccionActual.contenido.forEach(item => {
-      if(item.tipo === 'intro') html += `<p style="font-size:15px;color:#444;line-height:1.7;font-style:italic;">${item.texto}</p>`;
-      else if(item.tipo === 'titulo') html += `<h3>${item.texto}</h3>`;
-      else if(item.tipo === 'parrafo') html += `<p>${item.texto}</p>`;
-      else if(item.tipo === 'tip') html += `<div class="leccion-tip">${item.texto}</div>`;
-      else if(item.tipo === 'factor') html += `<div class="leccion-factor"><div class="leccion-factor-icon">${item.emoji}</div><div><h4>${item.titulo}</h4><p>${item.desc}</p></div></div>`;
-    });
-    html += '</div>';
-
-    if(completada) {
-      html += `<button class="btn-ya-completada">✅ Lección completada</button>`;
-    } else {
-      html += `<button class="btn-completar-leccion" onclick="completarLeccion('${id}')">✅ Marcar como completada · +${leccionActual.xp} XP</button>`;
-    }
-
-    c.innerHTML = html;
-    showPage('leccion');
-  }
-
-  async function completarLeccion(id) {
-    if(leccionesCompletadas.includes(id)) return;
-    leccionesCompletadas.push(id);
-    const xpLeccion = LECCIONES.find(l => l.id === id)?.xp || 10;
-    userPreparadas; // keep existing
-    await guardarEnFirestore({ leccionesCompletadas, recetasPreparadas: userPreparadas });
-    showToast('🎓 +' + xpLeccion + ' XP — Lección completada');
-    const snap = await window._getDoc(window._doc(window._db,'usuarios',currentUid));
-    if(snap.exists()) { actualizarUI(snap.data()); verificarLogros(snap.data()); }
-    // Update button
-    const btn = document.querySelector('.btn-completar-leccion');
-    if(btn) { btn.textContent = '✅ Lección completada'; btn.className = 'btn-ya-completada'; btn.onclick = null; }
-    renderAcademia();
-  }
-
-  function volverDeLeccion() {
-    showPage('academia');
-    renderAcademia();
-  }
-
-  // ===== BANNER ROTATIVO =====
-  let bannerActual = 0;
-  const BANNER_TOTAL = 3;
-
-  function iniciarBannerRotativo() {
-    setInterval(() => {
-      bannerActual = (bannerActual + 1) % BANNER_TOTAL;
-      const slides = document.getElementById('ob-banner-slides');
-      if(slides) {
-        slides.style.transform = `translateX(-${bannerActual * 100}%)`;
-        for(let i = 0; i < BANNER_TOTAL; i++) {
-          const dot = document.getElementById('obd-' + i);
-          if(dot) dot.classList.toggle('active', i === bannerActual);
-        }
-      }
-    }, 4000);
-  }
-
-  function exportarWhatsApp(){
-    let t='🍱 *Lista de compras Loncheritas Inteligentes*\n👧 '+numHijos+' hijos\n\n';
-    document.querySelectorAll('.categoria-lista').forEach(c=>{ t+='*'+c.querySelector('.cat-titulo').textContent+'*\n'; c.querySelectorAll('.item-nombre').forEach(i=>{t+='• '+i.textContent+'\n';}); t+='\n'; });
-    t+='_Generado con Loncheritas Inteligentes 🍱_';
-    window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank');
-  }
-
-  function copiarLista(){
-    let t='🍱 Lista de compras Loncheritas\n\n';
-    document.querySelectorAll('.categoria-lista').forEach(c=>{ t+=c.querySelector('.cat-titulo').textContent+'\n'; c.querySelectorAll('.item-nombre').forEach(i=>{t+='☐ '+i.textContent+'\n';}); t+='\n'; });
-    navigator.clipboard.writeText(t).then(()=>showToast('✅ Lista copiada'));
-  }
 </script>
-
-<!-- LOGRO BANNER - fuera de todo, al final del body -->
-<div id="logro-banner" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);z-index:99999;align-items:center;justify-content:center;" onclick="cerrarLogroBanner()">
-  <div onclick="event.stopPropagation()" style="background:white;border-radius:24px;padding:36px 28px;text-align:center;max-width:300px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.4);">
-    <div id="lb-emoji" style="font-size:72px;margin-bottom:12px;">🏆</div>
-    <div style="background:#FFF0E8;color:#FF6B35;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;display:inline-block;margin-bottom:10px;text-transform:uppercase;">Logro desbloqueado</div>
-    <h2 id="lb-nombre" style="font-size:20px;font-weight:700;margin-bottom:6px;color:#2D2D2D;"></h2>
-    <p id="lb-desc" style="font-size:14px;color:#888;margin-bottom:20px;"></p>
-    <button onclick="cerrarLogroBanner()" style="background:#FF6B35;color:white;border:none;border-radius:12px;padding:13px 32px;font-size:15px;font-weight:700;cursor:pointer;">¡Genial! 🎉</button>
-  </div>
-</div>
-
-<!-- NIVEL BANNER -->
-<div id="nivel-banner" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);z-index:99999;align-items:center;justify-content:center;" onclick="cerrarNivelBanner()">
-  <div onclick="event.stopPropagation()" style="background:linear-gradient(135deg,#FF6B35,#FF8C5A);border-radius:24px;padding:36px 28px;text-align:center;max-width:300px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.4);">
-    <div id="nb-emoji" style="font-size:72px;margin-bottom:12px;">⭐</div>
-    <div style="background:rgba(255,255,255,0.25);color:white;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;display:inline-block;margin-bottom:10px;text-transform:uppercase;">¡Subiste de nivel!</div>
-    <h2 id="nb-titulo" style="font-size:22px;font-weight:700;margin-bottom:6px;color:white;"></h2>
-    <p id="nb-desc" style="font-size:14px;color:rgba(255,255,255,0.85);margin-bottom:20px;"></p>
-    <button onclick="cerrarNivelBanner()" style="background:white;color:#FF6B35;border:none;border-radius:12px;padding:13px 32px;font-size:15px;font-weight:700;cursor:pointer;">¡Vamos! 💪</button>
-  </div>
-</div>
 </body>
 </html>
